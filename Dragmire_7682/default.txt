@@ -1,0 +1,155 @@
+##########################################################################
+#
+# Ashita v4 Default Script
+#
+# This script is executed at the start of the game to allow for the user
+# to configure their game instance automatically. Use this script to load
+# plugins, addons or adjust different settings as you see fit.
+#
+# File Syntax:
+#
+#  - Comments start with '#'.
+#  - Commands start with '/'.
+#
+##########################################################################
+
+##########################################################################
+#
+# Horizon Launcher Controlled Plugins and Addons
+#
+##########################################################################
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+#
+# --HORIZON_PLUGINS_START--
+/load addons
+/load screenshot
+/load HardwareMouse
+/load LegacyAC
+/load Minimap
+/load thirdparty
+# --HORIZON_PLUGINS_STOP--
+#
+# --HORIZON_ADDONS_START--
+/addon load dynamic_entity_renamer
+/addon load allmaps
+/addon load Checker
+/addon load distance
+/addon load enternity
+/addon load equipmon
+/addon load fps
+/addon load instantah
+/addon load Logs
+/addon load luashitacast
+/addon load macrofix
+/addon load timestamp
+/addon load tparty
+/addon load HXUI
+/addon load TargetLines
+# --HORIZON_ADDONS_STOP--
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+##########################################################################
+
+##########################################################################
+#
+# Custom user plugins and addons
+# Please be sure to review our approved list: https://horizonxi.com/addons
+#
+#########################################################################
+
+
+
+
+##########################################################################
+#
+# Horizon Launcher Controlled Keybinds and Alias
+#
+##########################################################################
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+#
+# --HORIZON_KEYBINDS_START--
+/bind insert /ashita
+/bind SYSRQ /screenshot hide
+/bind ^v /paste
+/bind F11 /ambient
+/bind F12 /fps
+/bind ^F1 /ta <a10>
+/bind ^F2 /ta <a11>
+/bind ^F3 /ta <a12>
+/bind ^F4 /ta <a13>
+/bind ^F5 /ta <a14>
+/bind ^F6 /ta <a15>
+/bind !F1 /ta <a20>
+/bind !F2 /ta <a21>
+/bind !F3 /ta <a22>
+/bind !F4 /ta <a23>
+/bind !F5 /ta <a24>
+/bind !F6 /ta <a25>
+
+# --HORIZON_KEYBINDS_STOP--
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+##########################################################################
+
+##########################################################################
+#
+# Custom user keybinds and aliases
+#
+#########################################################################
+
+
+
+
+##########################################################################
+#
+# Plugin and Addon Configurations
+#
+# Use this section to configure loaded plugins, addons and Ashita.
+#
+# Important: The wait here is required! If you remove it, addons will not
+# see any commands inside of this file!
+#
+################### DO NOT TOUCH THIS WAIT LINE ##########################
+/wait 3
+##########################################################################
+
+
+##########################################################################
+#
+# Horizon Launcher Controlled Settings
+#
+##########################################################################
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+#
+# --HORIZON_SETTINGS_START--
+/ambient 255 255 255
+
+# --HORIZON_SETTINGS_STOP--
+#
+# DO NOT TOUCH THIS BLOCK OR THE FILE WILL BE OVERRIDDEN - LAUNCHER EDITS ONLY
+##########################################################################
+
+##########################################################################
+#
+# Custom user settings
+#
+#########################################################################
+/addon load mobdb
+/addon load luashitacast
+/addon load treasurepool
+/addon load chains
+/addon load balloon
+/addon load parse
+/addon load points
+/addon load fishaid
+/addon load meteorologist
+/addon load zonename
+/addon load mipmap
+/addon load ttimers
+/addon load xivparty
+/addon load petinfo
+
+/fps 2

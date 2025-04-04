@@ -187,7 +187,6 @@ local sets = {
 
     WeaponSkillLight_Priority = { -- Evisc
         Head = {'Panther Mask'},
-        Neck = {'Light Gorget'},
     },
 
     TH_Priority = {
@@ -201,30 +200,6 @@ local sets = {
         Hands = 'Hecatomb Mittens',
         Legs = 'Homam Cosciales',
         Feet = 'Hct. Leggings',
-    },
-
-    StyleLock2 = {
-        Head = 'Panther Mask',
-        Body = 'Blue Cotehardie',
-        Hands = 'Dusk Gloves',
-        Legs = 'Raven Hose',
-        --Feet = 'Dusk Ledelsens',
-    },
-
-    StyleLockHydra = {
-        Head = 'Optical Hat',
-        Body = 'Hydra Jupon',
-        Hands = 'Andvaranauts',
-        Legs = 'Hydra Tights',
-        Feet = 'Hydra Spats'
-    },
-
-    StyleLockAF = {
-        Head = 'Rogue\'s Bonnet',
-        Body = 'Rogue\'s Vest',
-        Hands = 'Rogue\'s Armlets',
-        Legs = 'Rogue\'s Culottes',
-        Feet = 'Rogue\'s Poulaines',
     },
 
     IdleTown_Priority = {

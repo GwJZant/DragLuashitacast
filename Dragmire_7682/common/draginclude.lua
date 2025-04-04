@@ -525,7 +525,7 @@ function draginclude.HandleCommand(args)
             gFunc.Message('Nude');
 
             for i = 5,16,1 do
-                if i ~= 6 then
+                if i ~= 10 then -- 10 = neck
                     gEquip.UnequipSlot(i);
                     gState.Disabled[i] = true;
                 end
@@ -622,7 +622,7 @@ function draginclude.HandleDrgCoreCommands(args)
 end
 
 --Iterates all valid items, passing them through the items table
-function draginclude.CheckItems(checkStorage)
+function draginclude.CheckItems()
     local items = {};
     for _,container in ipairs(gSettings.EquipBags) do
         local available = gData.GetContainerAvailable(container);
@@ -632,13 +632,7 @@ function draginclude.CheckItems(checkStorage)
                 local containerItem = inventoryManager:GetContainerItem(container, index);
                 local item = resourceManager:GetItemById(containerItem.Id);
                 if containerItem ~= nil and containerItem.Count > 0 and containerItem.Id > 0 then
-                    if container == 2 and checkStorage == true then
-                        table.insert(items, item.Name[1]);
-                    elseif container == 2 and checkStorage == false then
-
-                    else
-                        table.insert(items, item.Name[1]);
-                    end
+                    table.insert(items, item.Name[1]);
                 end
             end
         end
@@ -879,7 +873,7 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     local paralyzed = false;
     local blinded = false;
     local songBuffActive = false;
-    local items = draginclude.CheckItems(false);
+    local items = draginclude.CheckItems();
 
     if StatusArmorSwapSettings == nil then
         StatusArmorSwapSettings = draginclude.statusArmorSwapsDefault;

@@ -88,7 +88,7 @@ local sets = {
     Engaged_Priority = {
         Head = {'Panther Mask'}, --2%
         Ear1 = {'Merman\'s Earring'},
-        Ear2 = {'Novia Earring'},
+        Ear2 = {'Brutal Earring'},
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
         Back = {'Forager\'s Mantle'},
@@ -99,7 +99,7 @@ local sets = {
 
     EngagedNIN_Priority = {
         Head = {'Panther Mask'}, --2%
-        Ear1 = {'Novia Earring'},
+        Ear1 = {'Brutal Earring'},
         Ear2 = {'Stealth Earring'},
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%

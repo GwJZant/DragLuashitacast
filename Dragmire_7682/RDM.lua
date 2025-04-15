@@ -440,6 +440,16 @@ local sets = {
         Legs = {'Duelist\'s Tights'},
     },
 
+    WSEnergyDrain_Priority = { -- MND
+        Body = {'Errant Hpl.'},
+        Hands = {'Devotee\'s Mitts'},
+        Ring2 = {'Sapphire Ring'},
+        Back = {'Rainbow Cape'},
+        Waist = {'Duelist\'s Belt'},
+        Legs = {'Errant Slops'},
+        Feet = {'Dls. Boots +1'},
+    },
+
     StealthEarring_Priority = {
         Ear1 = {'Stealth Earring'},
     },
@@ -595,6 +605,8 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Aspir" <stnpc>');
     elseif (args[1] == 'bind') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Bind" <stnpc>');
+    elseif (args[1] == 'sleepga') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleepga" <stnpc>');
     elseif (args[1] == 'sleep') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleep" <stnpc>');
     end
@@ -612,11 +624,11 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         gFunc.LockStyle(sets.StyleLockSummer2);
 
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-
             -- BST Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd Charm ');
@@ -627,7 +639,19 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Stay ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
-        elseif player.SubJob == 'BLM' or player.SubJob == 'DRK' then
+        elseif player.SubJob == 'BLM' then
+            -- RDM Core Commands
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd drain ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
+        elseif player.SubJob == 'DRK' then
             -- RDM Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
@@ -649,9 +673,6 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
-        else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
         end
 
 
@@ -684,11 +705,7 @@ profile.HandleDefault = function()
     -- Forward slash toggle between Default and Evasion
     if draginclude.dragSettings.TpVariant == 1 then
 
-        if player.MP < 450 then
-            gFunc.EquipSet(sets.DefaultLowMP);
-        else
-            gFunc.EquipSet(sets.Default);
-        end
+        gFunc.EquipSet(sets.Default);
 
         if player.Status == 'Idle' then
             gFunc.EquipSet(sets.Idle);
@@ -719,11 +736,7 @@ profile.HandleDefault = function()
 
     elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
 
-        if player.MP < 450 then
-            gFunc.EquipSet(sets.DefaultLowMP);
-        else
-            gFunc.EquipSet(sets.Default);
-        end
+        gFunc.EquipSet(sets.Default);
 
         if player.Status == 'Resting' then
             gFunc.EquipSet(sets.Idle);
@@ -889,8 +902,10 @@ profile.HandleWeaponskill = function()
 
     gFunc.Message(action.Name);
 
-    if string.contains(action.Name, 'Evisceration') then
+    if action.Name == 'Evisceration' then
         gFunc.EquipSet(sets.WeaponSkillEvis);
+    elseif action.Name == 'Energy Drain' then
+        gFunc.EquipSet(sets.WSEnergyDrain);
     end
 
     draginclude.HandleWeaponSkill(action);

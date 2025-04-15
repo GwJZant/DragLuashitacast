@@ -289,6 +289,11 @@ local sets = {
         Feet = {'Elder\'s Sandals'},
     },
 
+    DarkSkill_Priority = {
+        Body = {'Nashira Manteel'}, -- +5
+        Hands = {'Crimson Fng. Gnt.'}, -- +10
+    },
+
     MNDEnfeeb_Priority = {
         Head = {'Duelist\'s Chapeau'},
         Ear1 = {'Loquac. Earring'},
@@ -347,17 +352,9 @@ local sets = {
     },
 
     MNDHealing_Priority = {
-        --Head = {'Warlock\'s Chapeau'},
-        --Ear1 = {'Loquac. Earring'},
         Ear2 = {'Novia Earring'},
-        --Neck = {'Healing Torque'},
-        Body = {'Nashira Manteel', 'Errant Hpl.'},
-        --Hands = {'Devotee\'s Mitts'}, 
-        --Ring2 = {'Sapphire Ring'},
-        --Waist = {'Duelist\'s Belt'},
-        --Back = {'Rainbow Cape'},
-        Legs = {'Warlock\'s Tights'},
-        Feet = {'Dls. Boots +1'},
+        Body = {'Nashira Manteel'},
+        Waist = {'Sonic Belt'},
     },
 
     SpellHaste_Priority = {
@@ -830,14 +827,16 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Skill == 'Ninjutsu' then
         gFunc.EquipSet(sets.SpellHasteUtsu);
-    elseif spell.Skill == 'Enfeebling Magic' then
+    elseif spell.Skill == 'Enfeebling Magic' and spell.Name ~= 'Dia' and spell.Name ~= 'Dia II' then -- Dia and Dia II need zero gearswap
         if spell.Type == 'White Magic' then
             gFunc.EquipSet(sets.MNDEnfeeb);
+
+            equipObiIfApplicable(spell.Element);
         elseif spell.Type == 'Black Magic' then
             gFunc.EquipSet(sets.INTEnfeebSkill);
-        end
 
-        equipObiIfApplicable(spell.Element);
+            equipObiIfApplicable(spell.Element);
+        end
     elseif spell.Skill == 'Enhancing Magic' then
         if (spell.Name == 'Refresh' or spell.Name == 'Haste') then
 
@@ -852,6 +851,8 @@ profile.HandleMidcast = function()
             elseif spell.Name == 'Haste' and player.MP >= 50 then
                 gFunc.EquipSet(sets.DilationRingRefreshHaste);
             end
+        elseif string.contains(spell.Name, 'Bar') then -- Barspells need raw Enhancing Skill
+            gFunc.EquipSet(sets.EnhancingSkill);
         end
     elseif spell.Skill == 'Healing Magic'  then
         local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);
@@ -875,11 +876,13 @@ profile.HandleMidcast = function()
         end
 
         equipObiIfApplicable(spell.Element);
-    elseif spell.Skill == 'Dark Magic' then
+    elseif spell.Skill == 'Dark Magic' and spell.Name ~= 'Bio' then -- Bio needs zero gearswap
 
         if spell.Name == 'Drain' or spell.Name == 'Aspir' then
             gFunc.EquipSet(sets.INTDark);
             gFunc.EquipSet(sets.OverlordsRingDrainAspir);
+        elseif spell.Name == 'Bio II' then -- Bio needs raw Dark Skill
+            gFunc.EquipSet(sets.DarkSkill);
         else
             gFunc.EquipSet(sets.INTDarkAcc);
         end

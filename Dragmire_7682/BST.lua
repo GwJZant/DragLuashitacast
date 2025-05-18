@@ -4,10 +4,10 @@ draginclude = gFunc.LoadFile('common\\draginclude.lua');
 -- START SETTINGS
 local Settings = {
     -- Default settings for jug/food preferences
-    -- LullabyMelodia SaberFamiliar CourierCarrie
+    -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.VoraciousAudrey, draginclude.JugPetConfig.CourierCarrie},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.VoraciousAudrey, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.MiteFamiliar},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -22,9 +22,6 @@ local Settings = {
     },
     -- Used for handling Priority gear swapping
     CurrentLevel = 0,
-    -- Used for weapon swapping commands
-    SetRuneAxes = false,
-    SetMartialTemp = false,
 };
 -- END SETTINGS
 
@@ -40,7 +37,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring', 'Bastokan Ring'},
         Back = {'Boxer\'s Mantle',},
-        Waist = {'Sonic Belt', 'Ryl.Kgt. Belt'},
+        Waist = {'Swift Belt', 'Ryl.Kgt. Belt'},
         Legs = {'Byakko\'s Haidate', 'Elder\'s Braguette'},
         Feet = {'Monster Gaiters', 'Elder\'s Sandals'},
     },
@@ -56,7 +53,7 @@ local sets = {
         Ring1 = {'Jelly Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'},
+        Waist = {'Swift Belt'},
         Legs = {'Byakko\'s Haidate'},
         Feet = {'Hct. Leggings'},
     },
@@ -66,11 +63,11 @@ local sets = {
         Head = {'Panther Mask'}, --2%
         Ear1 = {'Beastly Earring', 'Dodge Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
-        Body = {'Kirin\'s Osode'},
+        Body = {'Scorpion Harness'},
         Hands = {'Dusk Gloves'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Byakko\'s Haidate'}, --5%
         Feet = {'Dusk Ledelsens'}, --2%
     },
@@ -91,7 +88,7 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {'Loquac. Earring'},
-        Body = {'Kirin\'s Osode', 'Elder\'s Surcoat',},
+        Body = {'Elder\'s Surcoat',},
         Hands = {'Elder\'s Bracers'},
         Ring1 = {},
         Ring2 = {},
@@ -158,6 +155,11 @@ local sets = {
         Ear2 = {'Loquac. Earring'},
     },
 
+    Stoneskin_Priority = {
+        Ring1 = {'Sapphire Ring'}, -- +4 MND
+        Waist = {'Ryl.Kgt. Belt'}, -- +2 MND
+    },
+
     Enhancing_Priority = {
         Neck = {'Enhancing Torque'},
     },
@@ -166,7 +168,7 @@ local sets = {
         
     },
 
-    WeaponsTPNIN_Priority = {
+    WeaponsTPNIN_Priority = {   
         Main = {'Martial Axe'},
         Sub = {'Temperance Axe'},
     },
@@ -202,12 +204,11 @@ local sets = {
 
     StyleLockGeneric = {
         --Head = 'Zoolater Hat',
-        Head = 'Genbu\'s Kabuto',
-        --Body = 'Hecatomb Harness',
-        Body = 'Kirin\'s Osode',
-        Hands = 'Dusk Gloves',
+        Head = 'President. Hairpin',
+        Body = 'Hecatomb Harness',
+        Hands = 'Hecatomb Mittens',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Suzaku\'s Sune-Ate',
+        Feet = 'Hct. Leggings',
     },
 
     StyleLockRSE = {
@@ -246,7 +247,7 @@ local sets = {
 
     -- Uses Relic body to remove status ailments
     RewardSTATUS_Priority = { -- MND
-        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         --Head = {'Beast Helm'},
         Hands = {'Ogre Gloves'},
         Body = {'Mst. Jackcoat +1'},
@@ -256,10 +257,10 @@ local sets = {
 
     -- Uses Kirin's Osode to maximize healing, does not remove status ailments
     RewardHP_Priority = { -- MND
-        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         --Head = {'Beast Helm'},
         Hands = {'Ogre Gloves'},
-        Body = {'Kirin\'s Osode'},
+        Body = {'Mst. Jackcoat +1'},
         Waist = {'Ryl.Kgt. Belt'},
         Feet = {'Monster Gaiters', 'Beast Gaiters'},
     },
@@ -272,8 +273,8 @@ local sets = {
     Charm_Priority = {
         Head = {'Monster Helm', 'Beast Helm'},
         Neck = {'Temperance Torque'},
-        Ear1 = {'Beastly Earring'},
-        Body = {'Kirin\'s Osode'},        
+        --Ear1 = {'Beastly Earring'},
+        Body = {'Mst. Jackcoat +1'},        
         Hands = {'Monster Gloves', 'Beast Gloves'},
         --Waist = {'Monster Belt'},
         Feet = {'Monster Gaiters', 'Beast Gaiters'},
@@ -321,9 +322,6 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd RewardHP ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind +0 /lac fwd RewardSTATUS ');
-
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /rune /lac fwd RuneAxes ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tp /lac fwd MartialTemp ');
 end
 
 profile.OnUnload = function()
@@ -350,14 +348,6 @@ profile.HandleCommand = function(args)
 
         sets.Call.Ammo = Settings.JugPetSettings.DefaultJugs[Settings.JugPetSettings.CurrentJug].DefaultJug;
         gFunc.Message('Current Jug: ' .. Settings.JugPetSettings.DefaultJugs[Settings.JugPetSettings.CurrentJug].Name); --display the set
-    elseif (args[1] == 'RuneAxes') then
-        gFunc.Message('RuneAxes');
-
-        Settings.SetRuneAxes = true;
-    elseif (args[1] == 'MartialTemp') then
-        gFunc.Message('MartialTemp');
-
-        Settings.SetMartialTemp = true;
     end
 end
 
@@ -479,29 +469,14 @@ profile.HandleDefault = function()
 
     -- Check if my pet is readying a Ready/Sic move
     if (pet ~= nil) then
+        if player.Status ~= 'Engaged' and pet.Status == 'Engaged' then
+            gFunc.EquipSet(sets.PetAcc);
+        end
+
         if (petAction ~= nil) then
             HandlePetAction(petAction);
             return;
         end
-    end
-
-    -- Check if we've used the /tp or /rune commands and to put on their respective sets if so
-    if Settings.SetMartialTemp == true then
-        if player.SubJob == 'NIN' then
-            gFunc.EquipSet(sets.WeaponsTPNIN);
-        else
-            gFunc.EquipSet(sets.WeaponsTP);
-        end
-
-        Settings.SetMartialTemp = false;
-    elseif Settings.SetRuneAxes == true then
-        if player.SubJob == 'NIN' then
-            gFunc.EquipSet(sets.WeaponsGaudyNIN);
-        else
-            gFunc.EquipSet(sets.WeaponsGaudy);
-        end
-        
-        Settings.SetRuneAxes = false
     end
 
     -- Equip Gaudy Harness if a Rune Axe is in hand and we have less than 50 mp
@@ -560,14 +535,14 @@ profile.HandleMidcast = function()
 
     gFunc.Message('Midcast');
 
-    if spell.Skill == 'Enhancing Magic' then
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
+    elseif spell.Name == 'Stoneskin' then
+        gFunc.EquipSet(sets.Stoneskin);
+    elseif spell.Skill == 'Enhancing Magic' then
         gFunc.EquipSet(sets.Enhancing);
-
-        if spell.Name == 'Invisible' then
-            gFunc.EquipSet(sets.Invisible);
-        elseif spell.Name == 'Sneak' then
-            gFunc.EquipSet(sets.Sneak);
-        end
     elseif spell.Skill == 'Healing Magic' then
         gFunc.EquipSet(sets.Healing);
     end

@@ -2,13 +2,6 @@ local profile = {};
 draginclude = gFunc.LoadFile('common\\draginclude.lua');
 
 local Settings = {
-    -- Default settings for jug/food preferences
-    DragoonSettings = {
-        HealingBreathHPPDrachen = 50,
-        HealingBreathHPPThreshold = 33,
-        HealingBreathMessageFrequency = 2,
-        HealingMessageTimeToNotify = 0
-    },
     LateInitialized = {
         Initialized = false,
         TimeToUse = 0,
@@ -23,7 +16,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Tiphia Sting', 'Happy Egg'},
-        Head = {'Optical Hat', 'Emperor Hairpin', 'Shep. Bonnet'},
+        Head = {'Ace\'s Helm', 'Emperor Hairpin', 'Shep. Bonnet'},
         Neck = {'Love Torque', 'Peacock Amulet',},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
@@ -32,7 +25,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle', 'Amemet Mantle', 'Nomad\'s Mantle',},
-        Waist = {'Sonic Belt'},
+        Waist = {'Swift Belt'},
         Legs = {'Drn. Brais +1', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras', 'Elder\'s Sandals'},
     },
@@ -46,7 +39,7 @@ local sets = {
         Body = {'Wym. Mail +1'}, -- +2%
         Hands = {'Homam Manopolas'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras'}, --3%
     },
@@ -62,7 +55,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'},
+        Waist = {'Swift Belt'},
         Legs = {'Homam Cosciales', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras'},
     },
@@ -71,7 +64,7 @@ local sets = {
         Ear2 = {'Ethereal Earring'},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring'},
-        Waist = {'Sonic Belt'},
+        Waist = {'Swift Belt'},
     },
 
     PDT_Priority = {
@@ -107,23 +100,25 @@ local sets = {
     },
 
     WeaponSkill_Priority = {
-        Ammo = {'Tiphia Sting'},
-        Head = {'Ace\'s Helm'},
-        Neck = {'Peacock Amulet'},
-        Ear1 = {'Beastly Earring',},
-        Ear2 = {'Brutal Earring'},
-        Body = {'Hecatomb Harness'},
-        Hands = {'Wyrm Fng.Gnt.'},
-        Ring1 = {'Rajas Ring'},
-        Ring2 = {'Toreador\'s Ring'},
-        Back = {'Forager\'s Mantle'},
-        Waist = {'Warwolf Belt'},
-        Legs = {'Barone Cosciales'},
-        Feet = {'Hct. Leggings'},
+        Ammo = {'Tiphia Sting'}, -- ATT+4, ACC+2
+        Head = {'Ace\'s Helm'}, -- STR+4, ACC+7
+        Neck = {'Love Torque'}, -- SKILL+7, DEX+5
+        Ear1 = {'Beastly Earring',}, -- SKILL+5
+        Ear2 = {'Brutal Earring'}, -- DA+
+        Body = {'Hecatomb Harness'}, -- STR+12, ACC+10
+        Hands = {'Hecatomb Mittens'}, -- STR+7, DEX+4
+        Ring1 = {'Rajas Ring'}, -- STR+5, DEX+5
+        Ring2 = {'Flame Ring'}, -- STR+5
+        Back = {'Forager\'s Mantle'}, -- STR+3, ATT+15
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5
+        Legs = {'Barone Cosciales'}, -- STR+2, ATT+6
+        Feet = {'Hct. Leggings'}, --STR+6, DEX+3
     },
 
     WeaponSkillPenta_Priority = {
-        Waist = {'Wyrm Belt'},
+        Hands = {'Wyrm Fng.Gnt.'}, -- ACC+5
+        Legs = {'Drn. Brais +1'}, -- ACC+9
+        Ring2 = {'Toreador\'s Ring'}, -- ACC+7
     },
 
     WeaponSkillLight_Priority = {
@@ -147,7 +142,7 @@ local sets = {
     },
 
     StyleLock = {
-        Main = 'Relic Lance',
+        Main = 'Dynamis Lance',
         Head = 'Ace\'s Helm',
         Body = 'Hecatomb Harness',
         Hands = 'Homam Manopolas',
@@ -242,7 +237,7 @@ local sets = {
         Ring1 = {'Jelly Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'},
+        Waist = {'Swift Belt'},
         Legs = {'Crimson Cuisses'},
         Feet = {'Homam Gambieras'},
     },
@@ -274,16 +269,6 @@ local function HandlePetAction(PetAction, subjob)
         gFunc.EquipSet(sets.BreathBonusHealing);
     else
         gFunc.EquipSet(sets.BreathBonusElemental);
-    end
-end
-
-local function CheckHealingBreath()
-    local timestamp = os.time();
-    local pet = gData.GetPet();
-
-    if pet ~= nil and Settings.DragoonSettings.HealingMessageTimeToNotify ~= 0 and timestamp >= Settings.DragoonSettings.HealingMessageTimeToNotify then
-        gFunc.Message('Healing Breath is ONLINE');
-        Settings.DragoonSettings.HealingMessageTimeToNotify = 0;
     end
 end
 
@@ -376,33 +361,6 @@ profile.HandleDefault = function()
         end
     end
 
-    -- Checking if Healing Breath is online
-    if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' or player.SubJob == 'SMN' then
-        for index = 0, gData.GetParty().Count - 1, 1 do -- Party index 0-5 is 6 main party members (0 is you)
-
-            if index > 5 then -- Healing Breath doesn't work on Alliance members outside your party so stop counting
-                break;
-            end
-
-            local hpp = party:GetMemberHPPercent(index);
-            local partyMemberZone = party:GetMemberZone(index);
-
-            --gFunc.Message(index);
-            --gFunc.Message(hpp);
-
-            -- Party Members outside the zone count as having 0 HP so we need to make sure we check only within current zone
-            if Settings.CurrentLevel >= 60 and hpp ~= 0 and hpp < Settings.DragoonSettings.HealingBreathHPPDrachen and myZone == partyMemberZone then
-                if Settings.DragoonSettings.HealingMessageTimeToNotify == 0 then
-                    Settings.DragoonSettings.HealingMessageTimeToNotify = timestamp + Settings.DragoonSettings.HealingBreathMessageFrequency;
-                end
-            elseif hpp ~= 0 and hpp <= Settings.DragoonSettings.HealingBreathHPPThreshold and myZone == partyMemberZone then
-                if Settings.DragoonSettings.HealingMessageTimeToNotify == 0 then
-                    Settings.DragoonSettings.HealingMessageTimeToNotify = timestamp + Settings.DragoonSettings.HealingBreathMessageFrequency;
-                end
-            end
-        end
-    end
-
     if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
         if player.MP <= 75 then
             gFunc.EquipSet(sets.Default);
@@ -459,8 +417,6 @@ profile.HandleDefault = function()
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
         gFunc.EquipSet(sets.IdleTown);
     end
-
-    CheckHealingBreath();
 
     draginclude.HandleDefault();
     draginclude.CheckSkillingVariant();

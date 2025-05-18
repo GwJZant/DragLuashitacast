@@ -34,7 +34,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring', 'Woodsman Ring'},
         Back = {'Boxer\'s Mantle', 'Trimmer\'s Mantle'},
-        Waist = {'Sonic Belt', 'Swift Belt'},
+        Waist = {'Swift Belt', 'Swift Belt'},
         Legs = {'Homam Cosciales', 'Raven Hose', 'Elder\'s Braguette'},
         Feet = {'Trotter Boots'},
     },
@@ -50,7 +50,7 @@ local sets = {
         Head = {'Rogue\'s Bonnet'},
         Neck = {'Peacock Amulet'},
         Ear2 = {'Phantom Earring'},
-        Body = {'Blue Cotehardie'},
+        Body = {'Elder\'s Surcoat'},
         Hands = {'Elder\'s Bracers'},
         Ring1 = {'Diamond Ring'},
         Ring2 = {'Diamond Ring'},
@@ -92,7 +92,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -104,7 +104,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -116,7 +116,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -128,7 +128,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -146,7 +146,7 @@ local sets = {
         Head = {'Panther Mask'}, --2%
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
-        Waist = {'Sonic Belt'}, --6%
+        Waist = {'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -176,17 +176,21 @@ local sets = {
         Neck = {'Love Torque'},
         Ear1 = {'Merman\'s Earring'},
         Ear2 = {'Ethereal Earring'},
+        Body = {'Hecatomb Harness', 'Scorpion Harness'},
         Hands = {'Hecatomb Mittens', 'Rogue\'s Armlets'},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring'},
-        Body = {'Hecatomb Harness', 'Scorpion Harness'},
         Back = {'Forager\'s Mantle'},
         Waist = {'Warwolf Belt', 'Ryl.Kgt. Belt'},
         Feet = {'Hct. Leggings', 'Rogue\'s Poulaines'},
     },
 
-    WeaponSkillLight_Priority = { -- Evisc
+    WeaponSkillEvis_Priority = {
         Head = {'Panther Mask'},
+    },
+
+    WeaponSkillSharkBite_Priority = {
+        Ring2 = {'Flame Ring'},
     },
 
     TH_Priority = {
@@ -284,7 +288,7 @@ local sets = {
 
     HpDown_Priority = {
         Neck = {'Star Necklace'}, -- -15
-        Body = {'Blue Cotehardie'}, -- -40
+        --Body = {'Blue Cotehardie'}, -- -40
         Hands = {'Thief\'s Kote'},
         Ring1 = {'Ether Ring'}, -- -35
         Ring2 = {'Astral Ring'}, -- -25
@@ -455,9 +459,9 @@ profile.HandleDefault = function()
         end
     end
 
-    if (player.SubJob == 'BLM' or player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'SMN') and player.MP < 41 then
-        gFunc.EquipSet(sets.BlueCotehardie);
-    end
+    --if (player.SubJob == 'BLM' or player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'SMN') and player.MP < 41 then
+        --gFunc.EquipSet(sets.BlueCotehardie);
+    --end
 
     if (pet ~= nil) then
         if (petAction ~= nil) then
@@ -499,7 +503,6 @@ profile.HandleAbility = function()
         gFunc.EquipSet(sets.Flee);
     elseif string.match(ability.Name, 'Steal') then
         gFunc.EquipSet(sets.Steal);
-
     elseif string.match(ability.Name, 'Mug') then
 
     elseif string.match(ability.Name, 'Bully') then
@@ -571,7 +574,9 @@ profile.HandleWeaponskill = function()
     gFunc.EquipSet(sets.WS);
 
     if string.contains(action.Name, 'Evisceration') then
-        gFunc.EquipSet(sets.WeaponSkillLight);
+        gFunc.EquipSet(sets.WeaponSkillEvis);
+    elseif string.contains(action.Name, 'Shark Bite') then
+        gFunc.EquipSet(sets.WeaponSkillSharkBite);
     end
 
     if Settings.LockTH or (not isTargetTagged()) then

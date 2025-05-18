@@ -24,35 +24,35 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Duelist\'s Chapeau', 'Egg Helm'},
-        Neck = {'Uggalepih Pendant', 'Peacock Amulet'},
-        Ear1 = {'Loquac. Earring', 'Dodge Earring'},
-        Ear2 = {'Novia Earring', 'Phantom Earring', },
-        Body = {'Wlk. Tabard +1', 'Elder\'s Surcoat'},
-        Hands = {'Zenith Mitts', 'Elder\'s Bracers'},
-        Ring1 = {'Ether Ring', 'Astral Ring'},
-        Ring2 = {'Astral Ring'},
-        Back = {'Rainbow Cape', 'Trimmer\'s Mantle'},
-        Waist = {'Hierarch Belt', 'Ryl. Kgt. Belt'},
-        Legs = {'Crimson Cuisses', 'Elder\'s Braguette'},
-        Feet = {'Dls. Boots +1', 'Elder\'s Sandals'},
+        Ammo = {{Name = 'Hedgehog Bomb', Priority = 100}, {Name = 'Phtm. Tathlum', Priority = 100}, 'Fortune Egg'},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}, 'Egg Helm'},
+        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}, {Name = 'Peacock Amulet', Priority = 0}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Novia Earring', Priority = 0}, {Name = 'Phantom Earring', Priority = 100}, },
+        Body = {{Name = 'Wlk. Tabard +1', Priority = 100}, {Name = 'Elder\'s Surcoat', Priority = 100}},
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
+        Ring1 = {{Name = 'Ether Ring', Priority = 100}, {Name = 'Astral Ring', Priority = 100}},
+        Ring2 = {{Name = 'Astral Ring', Priority = 100}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}, 'Trimmer\'s Mantle'},
+        Waist = {{Name = 'Hierarch Belt', Priority = 100}, {Name = 'Ryl. Kgt. Belt', Priority = 0}},
+        Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
     DefaultLowMP_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Duelist\'s Chapeau', 'Egg Helm'},
-        Neck = {'Uggalepih Pendant', 'Peacock Amulet'},
-        Ear1 = {'Ethereal Earring', 'Dodge Earring'},
-        Ear2 = {'Novia Earring', 'Phantom Earring'},
-        Body = {'Scorpion Harness', 'Elder\'s Surcoat'},
-        Hands = {'Duelist\'s Gloves', 'Elder\'s Bracers', 'Battle Gloves'},
-        Ring1 = {'Diamond Ring'},
-        Ring2 = {'Diamond Ring'},
-        Back = {'Rainbow Cape'},
-        Waist = {'Ryl.Kgt. Belt'},
-        Legs = {'Crimson Cuisses', 'Elder\'s Braguette'},
-        Feet = {'Dls. Boots +1', 'Elder\'s Sandals'},
+        Ammo = {{Name = 'Hedgehog Bomb', Priority = 100}, {Name = 'Phtm. Tathlum', Priority = 100}, 'Fortune Egg'},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}, 'Egg Helm'},
+        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}, {Name = 'Peacock Amulet', Priority = 0}},
+        Ear1 = {{Name = 'Ethereal Earring', Priority = 0}},
+        Ear2 = {{Name = 'Novia Earring', Priority = 0}, {Name = 'Phantom Earring', Priority = 100}},
+        Body = {{Name = 'Scorpion Harness', Priority = 0}, {Name = 'Elder\'s Surcoat', Priority = 100}},
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
+        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Waist = {{Name = 'Ryl.Kgt. Belt', Priority = 0}},
+        Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
     Idle_Priority = {
@@ -60,8 +60,8 @@ local sets = {
     },
 
     Engaged_Priority = {
-        Head = {'Optical Hat'},
-        Body = {'Nashira Manteel', 'Scorpion Harness'},
+        Head = {{Name = 'Optical Hat', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Scorpion Harness', Priority = 0}},
     },
 
     Evasion_Priority = { --EVA, AGI
@@ -91,81 +91,81 @@ local sets = {
     },
 
     MeleeEngagedAcc_Priority = {
-        Ammo = {'Tiphia Sting'},
-        Head = {'Optical Hat'},
-        Neck = {'Peacock Amulet'},
-        Ear1 = {'Ethereal Earring'},
-        Ear2 = {'Brutal Earring'},
-        Body = {'Scorpion Harness'},
-        Hands = {'Dusk Gloves'}, --3% Haste
-        Ring1 = {'Rajas Ring'},
-        Ring2 = {'Toreador\'s Ring'},
-        Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6% Haste
-        Legs = {'Duelist\'s Tights', 'Elder\'s Braguette'},
-        Feet = {'Dusk Ledelsens'}, --2% Haste
+        Ammo = {{Name = 'Tiphia Sting', Priority = 0}},
+        Head = {{Name = 'Optical Hat', Priority = 0}},
+        Neck = {{Name = 'Peacock Amulet', Priority = 0}},
+        Ear1 = {{Name = 'Ethereal Earring', Priority = 0}},
+        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
+        Body = {{Name = 'Scorpion Harness', Priority = 0}},
+        Hands = {{Name = 'Dusk Gloves', Priority = 0}}, --3% Haste
+        Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
+        Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
+        Back = {{Name = 'Forager\'s Mantle', Priority = 0}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}}, --6% Haste
+        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
 
     MeleeEngaged_Priority = {
-        Ammo = {'Tiphia Sting'},
-        Head = {'Nashira Turban'}, --2% Haste
-        Neck = {'Peacock Amulet'},
-        Ear1 = {'Merman\'s Earring'},
-        Ear2 = {'Brutal Earring'},
-        Body = {'Nashira Manteel'}, --3% Haste
-        Hands = {'Dusk Gloves'}, --3% Haste
-        Ring1 = {'Rajas Ring'},
-        Ring2 = {'Toreador\'s Ring'},
-        Back = {'Forager\'s Mantle'},
-        Waist = {'Sonic Belt'}, --6% Haste
-        Legs = {'Nashira Seraweels', 'Duelist\'s Tights', 'Elder\'s Braguette'}, --2% Haste
-        Feet = {'Dusk Ledelsens'}, --2% Haste
+        Ammo = {{Name = 'Tiphia Sting', Priority = 0}},
+        Head = {{Name = 'Nashira Turban', Priority = 0}}, --2% Haste
+        Neck = {{Name = 'Peacock Amulet', Priority = 0}},
+        Ear1 = {{Name = 'Merman\'s Earring', Priority = 0}},
+        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}}, --3% Haste
+        Hands = {{Name = 'Dusk Gloves', Priority = 0}}, --3% Haste
+        Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
+        Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
+        Back = {{Name = 'Forager\'s Mantle', Priority = 0}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}}, --6% Haste
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}}, --2% Haste
+        Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
 
     IdleTown_Priority = {
-        Ammo = {'Hedgehog Bomb'},
-        Head = {'Duelist\'s Chapeau'},
-        Neck = {'Uggalepih Pendant'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Novia Earring'},
-        Body = {'Nashira Manteel'},
-        Hands = {'Zenith Mitts'},
-        Ring1 = {'Dilation Ring'},
-        Ring2 = {'Overlord\'s Ring'},
-        Back = {'Empwr. Mantle'},
-        Waist = {'Sonic Belt'},
-        Legs = {'Crimson Cuisses'},
-        Feet = {'Dls. Boots +1'},
+        Ammo = {{Name = 'Hedgehog Bomb', Priority = 100}},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Novia Earring', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
+        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
+        Ring2 = {{Name = 'Overlord\'s Ring', Priority = 0}},
+        Back = {{Name = 'Empwr. Mantle', Priority = 100}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Legs = {{Name = 'Crimson Cuisses', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     IdleTownNIN_Priority = {
-        Ammo = {'Tiphia Sting'},
-        Head = {'Duelist\'s Chapeau'},
-        Neck = {'Uggalepih Pendant'},
-        Ear1 = {'Stealth Earring'},
-        Ear2 = {'Brutal Earring'},
-        Body = {'Nashira Manteel'},
-        Hands = {'Zenith Mitts'},
-        Ring1 = {'Dilation Ring'},
-        Ring2 = {'Overlord\'s Ring'},
-        Back = {'Empwr. Mantle'},
-        Waist = {'Sonic Belt'},
-        Legs = {'Crimson Cuisses'},
-        Feet = {'Dls. Boots +1'},
+        Ammo = {{Name = 'Tiphia Sting', Priority = 0}},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}},
+        Ear1 = {{Name = 'Stealth Earring', Priority = 0}},
+        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
+        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
+        Ring2 = {{Name = 'Overlord\'s Ring', Priority = 0}},
+        Back = {{Name = 'Empwr. Mantle', Priority = 100}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Legs = {{Name = 'Crimson Cuisses', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     StyleLock2 = {
-        Head = 'Duelist\'s Chapeau',
+        Head = {Name = 'Duelist\'s Chapeau', Priority = 100},
         Body = 'Goblin Suit',
-        Legs = 'Elder\'s Braguette',
+        Legs = {Name = 'Elder\'s Braguette', Priority = 100},
     },
 
     StyleLockCool = {
         Main = 'Dark Staff',
-        Head = 'Nashira Turban',
-        Body = 'Nashira Manteel',
-        Hands = 'Crimson Fng. Gnt.',
-        Legs = 'Nashira Seraweels',
+        Head = {Name = 'Nashira Turban', Priority = 0},
+        Body = {Name = 'Nashira Manteel', Priority = 0},
+        Hands = {Name = 'Crimson Fng. Gnt.', Priority = 99},
+        Legs = {Name = 'Nashira Seraweels', Priority = 0},
         Feet = 'Hydra Spats',
     },
 
@@ -173,15 +173,15 @@ local sets = {
         Main = 'Dark Staff',
         Head = 'Hydra Cap',
         Body = 'Hydra Jupon',
-        Hands = 'Crimson Fng. Gnt.',
+        Hands = {Name = 'Crimson Fng. Gnt.', Priority = 99},
         Legs = 'Hydra Tights',
         Feet = 'Hydra Spats',
     },
 
     StyleLockAF = {
         Main = 'Fire Staff',
-        Head = 'Warlock\'s Chapeau',
-        Body = 'Wlk. Tabard +1',
+        Head = {Name = 'Warlock\'s Chapeau', Priority = 100},
+        Body = {Name = 'Wlk. Tabard +1', Priority = 100},
         Hands = 'Warlock\'s Gloves',
         Legs = 'Warlock\'s Tights',
         Feet = 'Warlock\'s Boots',
@@ -189,15 +189,15 @@ local sets = {
 
     StyleLockRelic = {
         Main = 'Dark Staff',
-        Head = 'Duelist\'s Chapeau',
-        Body = 'Duelist\'s Tabard',
-        Hands = 'Duelist\'s Gloves',
-        Legs = 'Duelist\'s Tights',
+        Head = {Name = 'Duelist\'s Chapeau', Priority = 100},
+        Body = {Name = 'Duelist\'s Tabard', Priority = 100},
+        Hands = {Name = 'Duelist\'s Gloves', Priority = 100},
+        Legs = {Name = 'Duelist\'s Tights', Priority = 100},
         Feet = 'Duelist\'s Boots',
     },
 
     StyleLockSummer = {
-        Main = 'Apollo\'s Staff',
+        Main = 'Light Staff',
         Head = 'President. Hairpin',
         Body = 'Elder Gilet +1',
         --Hands = 'Scp. Gauntlets',
@@ -206,7 +206,7 @@ local sets = {
     },
 
     StyleLockSummer2 = {
-        Main = 'Apollo\'s Staff',
+        Main = 'Light Staff',
         Head = 'Snowman Cap',
         Body = 'Elder Gilet +1',
         --Hands = 'Scp. Gauntlets',
@@ -215,7 +215,7 @@ local sets = {
     },
 
     StyleLockWinter = {
-        Main = 'Apollo\'s Staff',
+        Main = 'Light Staff',
         Head = 'Dream Cap +1',
         Body = 'Dream Robe +1',
         Hands = 'Dream Mittens +1',
@@ -224,160 +224,168 @@ local sets = {
     },
 
     Precast_Priority = {
-        Head = {'Warlock\'s Chapeau'},
-        Ear1 = {'Loquac. Earring'},
-        Body = {'Duelist\'s Tabard'},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Body = {{Name = 'Duelist\'s Tabard', Priority = 100}},
     },
 
     INTElementalAcc_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Warlock\'s Chapeau'},
-        Neck = {'Elemental Torque'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Moldavite Earring'},
-        Body = {'Nashira Manteel'},
-        Hands = {'Errant Cuffs'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Duelist\'s Tights'},
-        Feet = {'Dls. Boots +1'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Elemental Torque', Priority = 0}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Hands = {{Name = 'Errant Cuffs', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     INTElementalPotency_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Warlock\'s Chapeau'},
-        Neck = {'Philomath Stole'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Moldavite Earring'},
-        Body = {'Errant Hpl.'},
-        Hands = {'Zenith Mitts'},
-        Ring1 = {'Diamond Ring'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Errant slops'},
-        Feet = {'Dls. Boots +1'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Philomath Stole', Priority = 0}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}},
+        Body = {{Name = 'Errant Hpl.', Priority = 0}},
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
+        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     INTDarkAcc_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Warlock\'s Chapeau'},
-        Neck = {'Philomath Stole'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Body = {'Nashira Manteel', 'Errant Hpl.'},
-        Hands = {'Crimson Fng. Gnt.', 'Errant Cuffs'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Errant slops'},
-        Feet = {'Elder\'s Sandals'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Philomath Stole', Priority = 0}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Errant Hpl.', Priority = 0}},
+        Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
     INTDark_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Nashira Turban', 'Warlock\'s Chapeau'},
-        Neck = {'Philomath Stole'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Body = {'Nashira Manteel', 'Errant Hpl.'},
-        Hands = {'Crimson Fng. Gnt.', 'Errant Cuffs'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Errant slops'},
-        Feet = {'Elder\'s Sandals'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Nashira Turban', Priority = 0}, {Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Neck = {{Name = 'Philomath Stole', Priority = 0}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Errant Hpl.', Priority = 0}},
+        Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
     DarkSkill_Priority = {
-        Body = {'Nashira Manteel'}, -- +5
-        Hands = {'Crimson Fng. Gnt.'}, -- +10
+        Body = {{Name = 'Nashira Manteel', Priority = 0}}, -- +5
+        Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}}, -- +10
+        Legs = {{Name = 'Zenith Slacks', Priority = 100}},
     },
 
     MNDEnfeeb_Priority = {
-        Head = {'Duelist\'s Chapeau'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Geist Earring'},
-        Neck = {'Enfeebling Torque'},
-        Body = {'Wlk. Tabard +1'},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
+        Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
         Hands = {'Devotee\'s Mitts'}, 
         Ring2 = {'Sapphire Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Nashira Seraweels', 'Errant slops'},
-        Feet = {'Dls. Boots +1'},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     INTEnfeebSkill_Priority = { -- Enfeeb Skill > INT
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Duelist\'s Chapeau'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Neck = {'Enfeebling Torque'},
-        Body = {'Wlk. Tabard +1'},
-        Hands = {'Duelist\'s Gloves'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Nashira Seraweels', 'Errant slops'},
-        Feet = {'Elder\'s Sandals'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
+        Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
+        Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
     INTEnfeeb_Priority = { -- INT
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Warlock\'s Chapeau'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Neck = {'Philomath Stole'},
-        Body = {'Errant Hpl.'},
-        Hands = {'Duelist\'s Gloves'},
-        Ring1 = {'Diamond Ring'},
-        Ring2 = {'Diamond Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Back = {'Rainbow Cape'},
-        Legs = {'Errant Slops', 'Elder\'s Braguette'},
-        Feet = {'Elder\'s Sandals'},
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
+        Neck = {{Name = 'Philomath Stole', Priority = 0}},
+        Body = {{Name = 'Errant Hpl.', Priority = 0}},
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
+        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Legs = {{Name = 'Errant slops', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
     MNDEnhancing_Priority = {
         Neck = {'Enhancing Torque'},
-        Hands = {'Duelist\'s Gloves'},
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
         Legs = {'Warlock\'s Tights'},
     },
 
     INTEnhancing_Priority = {
         Neck = {'Enhancing Torque'},
-        Hands = {'Duelist\'s Gloves'},
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
         Legs = {'Warlock\'s Tights'},
     },
 
+    -- Before: ((256/5) + 40) == 91
+    -- After: ((293/5) + 40) == 98
+    EnhancingSkill_Priority = {
+        Neck = {'Enhancing Torque'}, -- +7
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}}, -- +15
+        Legs = {'Warlock\'s Tights'}, -- +15
+    },
+
     MNDHealing_Priority = {
-        Ear2 = {'Novia Earring'},
-        Body = {'Nashira Manteel'},
-        Waist = {'Sonic Belt'},
+        Ear2 = {{Name = 'Novia Earring', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}},
     },
 
     SpellHaste_Priority = {
-        Body = {'Nashira Manteel'},
-        Hands = {'Dusk Gloves'},
-        Waist = {'Sonic Belt'},
-        --Feet = {'Dusk Ledelsens'},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Hands = {{Name = 'Dusk Gloves', Priority = 0}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        --Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
     SpellHasteUtsu_Priority = {        
-        Body = {'Nashira Manteel'},
-        Hands = {'Dusk Gloves'},
-        Waist = {'Sonic Belt'},
-        Feet = {'Dusk Ledelsens'},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}},
+        Hands = {{Name = 'Dusk Gloves', Priority = 0}},
+        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
 
     OverlordsRingDrainAspir_Priority = {
-        Ring1 = {'Overlord\'s Ring'}
+        Ring1 = {{Name = 'Overlord\'s Ring', Priority = 0}}
     },
 
     DilationRingRefreshHaste_Priority = {
-        Ring1 = {'Dilation Ring'},
+        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
     },
 
     Fire_Priority = {
@@ -405,7 +413,7 @@ local sets = {
     },
 
     Light_Priority = {
-        Main = {'Apollo\'s Staff'},
+        Main = {'Light Staff'},
     },
 
     Dark_Priority = {
@@ -414,41 +422,41 @@ local sets = {
 
     RestingMP_Priority = {
         Main = {'Dark Staff'},
-        Head = {'Duelist\'s Chapeau'},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
         Ear2 = {'Relaxing Earring'},
-        Body = {'Wlk. Tabard +1', 'Errant Hpl.'},
-        Waist = {'Duelist\'s Belt'},
+        Body = {{Name = 'Wlk. Tabard +1', Priority = 100}, {Name = 'Errant Hpl.', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
     },
 
     Resting_Priority = {
-        Head = {'Duelist\'s Chapeau'},
+        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
         Ear2 = {'Relaxing Earring'},
-        Body = {'Wlk. Tabard +1', 'Errant Hpl.'},
-        Waist = {'Duelist\'s Belt'},
+        Body = {{Name = 'Wlk. Tabard +1', Priority = 100}, {Name = 'Errant Hpl.', Priority = 0}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
     },
 
     UglyPP_Priority = {
-        Neck = {'Uggalepih Pendant'},
+        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}},
     },
 
     WeaponSkillEvis_Priority = {
         Neck = {'Light Gorget'},
-        Waist = {'Warwolf Belt', 'Ryl.Kgt. Belt'},
-        Legs = {'Duelist\'s Tights'},
+        Waist = {'Warwolf Belt', {Name = 'Ryl.Kgt. Belt', Priority = 0}},
+        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}},
     },
 
     WSEnergyDrain_Priority = { -- MND
-        Body = {'Errant Hpl.'},
+        Body = {{Name = 'Errant Hpl.', Priority = 0}},
         Hands = {'Devotee\'s Mitts'},
         Ring2 = {'Sapphire Ring'},
-        Back = {'Rainbow Cape'},
-        Waist = {'Duelist\'s Belt'},
-        Legs = {'Errant Slops'},
-        Feet = {'Dls. Boots +1'},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     StealthEarring_Priority = {
-        Ear1 = {'Stealth Earring'},
+        Ear1 = {{Name = 'Stealth Earring', Priority = 0}},
     },
 
     PetReadyDefault = {
@@ -461,28 +469,28 @@ local sets = {
 
     Reward_Priority = { -- MND
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
-        Body = {'Errant Hpl.'},
+        Body = {{Name = 'Errant Hpl.', Priority = 0}},
         Hands = {'Ogre Gloves'},
-        Back = {'Rainbow Cape'},
+        Back = {{Name = 'Rainbow Cape', Priority = 100}},
         Ring2 = {'Sapphire Ring'},
-        Waist = {'Duelist\'s Belt'},
-        Legs = {'Errant Slops'},
-        Feet = {'Dls. Boots +1'},
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
+        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
     Charm_Priority = {
         --Neck = {'Flower Necklace'},
-        Body = {'Elder\'s Surcoat',},
+        Body = {{Name = 'Elder\'s Surcoat', Priority = 100},},
         Back = {'Trimmer\'s Mantle'},
-        Legs = {'Elder\'s Braguette'},
+        Legs = {{Name = 'Elder\'s Braguette', Priority = 100}},
     },
 
     CharmStaff_Priority = {
-        Main = {'Apollo\'s Staff'},
+        Main = {'Light Staff'},
         --Neck = {'Flower Necklace'},
-        Body = {'Elder\'s Surcoat',},
+        Body = {{Name = 'Elder\'s Surcoat', Priority = 100},},
         Back = {'Trimmer\'s Mantle'},
-        Legs = {'Elder\'s Braguette'},
+        Legs = {{Name = 'Elder\'s Braguette', Priority = 100}},
     },
 
     Sneak = {
@@ -827,7 +835,7 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Skill == 'Ninjutsu' then
         gFunc.EquipSet(sets.SpellHasteUtsu);
-    elseif spell.Skill == 'Enfeebling Magic' and spell.Name ~= 'Dia' and spell.Name ~= 'Dia II' then -- Dia and Dia II need zero gearswap
+    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
         if spell.Type == 'White Magic' then
             gFunc.EquipSet(sets.MNDEnfeeb);
 
@@ -879,7 +887,7 @@ profile.HandleMidcast = function()
     elseif spell.Skill == 'Dark Magic' and spell.Name ~= 'Bio' then -- Bio needs zero gearswap
 
         if spell.Name == 'Drain' or spell.Name == 'Aspir' then
-            gFunc.EquipSet(sets.INTDark);
+            gFunc.EquipSet(sets.DarkSkill);
             gFunc.EquipSet(sets.OverlordsRingDrainAspir);
         elseif spell.Name == 'Bio II' then -- Bio needs raw Dark Skill
             gFunc.EquipSet(sets.DarkSkill);

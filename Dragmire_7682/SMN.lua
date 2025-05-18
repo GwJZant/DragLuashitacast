@@ -47,6 +47,31 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
+    MeleeEngagedAvatar_Priority = { -- 7% Haste + Support
+        Ammo = {'Hedgehog Bomb'},
+        Head = {'Nashira Turban'}, -- 2%
+        Neck = {'Temp. Torque'},
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Beastly Earring'},
+        Body = {'Nashira Manteel'}, -- 3%
+        Hands = {'Summoner\'s Brcr.'},
+        Ring1 = {'Evoker\'s Ring'},
+        Ring2 = {'Toreador\'s Ring'},
+        Legs = {'Nashira Seraweels'}, -- 2%
+        Feet = {'Summoner\'s Pgch.'},
+    },
+
+    MeleeEngaged_Priority = { -- 7% Haste + Support
+        Ammo = {'Hedgehog Bomb'},
+        Head = {'Nashira Turban'}, -- 2%
+        Neck = {'Temp. Torque'},
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Beastly Earring'},
+        Body = {'Nashira Manteel'}, -- 3%
+        Ring2 = {'Toreador\'s Ring'},
+        Legs = {'Nashira Seraweels'}, -- 2%
+    },
+
     BPDelay_Priority = {
         Head = {'Summoner\'s Horn'}, -- -3
         Body = {'Yinyang Robe', 'Austere Robe'}, -- -5
@@ -94,13 +119,28 @@ local sets = {
     };
 
     PetMAB_Priority = {
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'},
+        Head = {'Shep. Bonnet'},
         Neck = {'Smn. Torque'},
         Ear2 = {'Beastly Earring'},
         Hands = {'Summoner\'s Brcr.'},
         Ring1 = {'Evoker\'s Ring'},
         Legs = {'Evoker\'s Spats'},
         Feet = {'Austere Sabots'}
+    },
+
+    WeaponSkillSpiritTaker_Priority = { -- INT +42, MND +23, Acc -5
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Summoner\'s Horn'}, -- INT +3
+        Neck = {'Temp. Torque'}, -- Staff Skill +7
+        Ear1 = {'Phantom Earring'}, -- INT +1
+        Ear2 = {'Brutal Earring'}, -- DA +1%
+        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
+        Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
     },
 
     IdleTown_Priority = {
@@ -191,7 +231,7 @@ local sets = {
     },
 
     Light_Priority = {
-        Main = {'Apollo\'s Staff'},
+        Main = {'Light Staff'},
     },
 
     Dark_Priority = {
@@ -314,7 +354,7 @@ local SmnConfig = {
             Name = 'Fenrir',
             Rage1 = 'Moonlit Charge',
             Rage2 = 'Crescent Fang',
-            Rage3 = '',
+            Rage3 = 'Eclipse Bite',
             Rage4 = '',
             AstralFlow = 'Howling Moon',
             Ward1 = 'Lunar Cry',
@@ -578,7 +618,7 @@ local function HandleSmnCoreCommands(args)
 end
 
 --Bloodpact Lists. I have flaming crush in the PhysicalBP list which may not be optimal
-local MagicBP = T{'Meteorite','Stone II','Stone IV','Geocrush','Water II','Water IV','Grand Fall','Aero II','Aero IV','Wind Blade','Fire II','Fire IV','Meteor Strike','Burning Strike','Blizzard II','Blizzard IV','Heavenly Strike','Thunder II','Thunder IV','Thunderstorm','Thunderspark'};
+local MagicBP = T{'Nether Blast', 'Meteorite','Stone II','Stone IV','Geocrush','Water II','Water IV','Grand Fall','Aero II','Aero IV','Wind Blade','Fire II','Fire IV','Meteor Strike','Burning Strike','Blizzard II','Blizzard IV','Heavenly Strike','Thunder II','Thunder IV','Thunderstorm','Thunderspark'};
 local PhysBP = T{'Poison Nails','Moonlit Charge','Somnolence','Punch','Rock Throw','Barracuda Dive','Claw','Axe Kick','Shock Strike','Camisado','Regal Scratch','Crescent Fang','Rock Buster','Tail Whip','Double Punch','Megalith Throw','Double Slap','Eclipse Bite','Flaming Crush','Mountain Buster','Spinning Dive','Predator Claws','Rush','Chaotic Strike'};
 local BuffBP = T{'Shining Ruby','Aerial Armor','Frost Armor','Rolling Thunder','Crimson Howl','Lightning Armor','Ecliptic Growl','Glittering Ruby','Earthen Ward','Spring Water','Hastega','Noctoshield','Ecliptic Howl','Dream Shroud'};
 local DebuffBP = T{'Luncar Cry','Mewing Lullaby','Nightmare','Lunar Roar','Slowga','Ultimate Terror','Sleepga','Eerie Eye'};
@@ -699,8 +739,14 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         gFunc.LockStyle(sets.StyleLock);
 
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 2');
+        if player.SubJob == 'THF' then
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+        else
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 2');
+        end
+        
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -771,7 +817,7 @@ profile.HandleDefault = function()
                 elseif pet.Name == 'Shiva' then
                     gFunc.EquipSet(sets.Ice);
                 elseif pet.Name == 'Ramuh' then
-                    gFunc.EquipSet(sets.Lightning);
+                    gFunc.EquipSet(sets.Thunder);
                 elseif pet.Name == 'Fenrir' then
                     gFunc.EquipSet(sets.Dark);
                 elseif pet.Name == 'Diabolos' then
@@ -815,16 +861,20 @@ profile.HandleDefault = function()
             return;
         end
 
-        if pet.Name == 'Carbuncle' then
-            gFunc.Equip('Hands', 'Carbuncle Mitts');
-        end
-
-        if player.HPP < 75 then
-           gFunc.EquipSet(sets.ConjurersRing);
+        if player.Status == 'Engaged' then
+            gFunc.EquipSet(sets.MeleeEngagedAvatar);
         end
 
         CheckSummonersDoublet();
         CheckSummonersHorn();
+
+        if pet.Name == 'Carbuncle' then
+            gFunc.Equip('Hands', 'Carbuncle Mitts');
+        end
+    else
+        if player.Status == 'Engaged' then
+            gFunc.EquipSet(sets.MeleeEngaged);
+        end
     end
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
@@ -879,6 +929,10 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
+
+    if action.Name == 'Spirit Taker' then
+        gFunc.EquipSet(sets.WeaponSkillSpiritTaker);
+    end
 end
 
 return profile;

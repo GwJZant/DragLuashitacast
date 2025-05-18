@@ -71,9 +71,7 @@ draginclude.childSets = T{
 };
 
 draginclude.statusArmorSwapsDefault = T{
-    MelodyEarring = false,
     OpoopoNecklace = false,
-    FenrirsEarring = false,
     PresidentialHairpin = true,
 };
 
@@ -245,23 +243,6 @@ draginclude.dragSettings = {
     FishingVariant = 1,
     IsNude = false,
     RewardType = 'HP', -- HP/STATUS
-    ExpRingSettings = {
-        UseRing = false,
-        Offset = 15,
-        TimeToUse = 0,
-        RingName = 'Chariot Band',
-    },
-    TavRingSettings = {
-        UseRing = false,
-        Offset = 35,
-        TimeToUse = 0,
-    },
-    ReraiseSettings = {
-        UseReraise = false,
-        Offset = 35,
-        TimeToUse = 0,
-        ItemName = 'Reraise Gorget',
-    },
 };
 
 draginclude.TpVariantTable = { -- cycle through with /lac fwd tpset
@@ -280,7 +261,7 @@ local skillToTorque = {
     [2] = 'Love Torque',
 --    [3] = 'Fortitude Torque',
 --    [4] = 'Prudence Torque',
---    [5] = 'Temp. Torque',
+    [5] = 'Temp. Torque',
 --    [6] = 'Fortitude Torque',
 --    [7] = 'Justice Torque',
     [8] = 'Love Torque',
@@ -360,7 +341,7 @@ function draginclude.SetNumpadCommands()
     --send_command('bind ^f8 gs c cycle RewardMode') ctrl f8
     --send_command('bind !f8 gs c cycle CorrelationMode') alt f8
     -- Define forward slash command
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind NUMPAD/ /lac fwd TpVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind \\ /lac fwd TpVariant ');
 
     -- Define forward slash command
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd SkillingVariant ');
@@ -368,9 +349,6 @@ function draginclude.SetNumpadCommands()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
     --AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
-
-    --Define Windows + 8 commandNU
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD8 /lac fwd ExpRing ');
 end
 
 function draginclude.OnUnload()
@@ -434,31 +412,6 @@ function draginclude.HandleCommand(args)
         end
 
         gFunc.Message('Skilling Set: ' .. draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant]); --display the set
-    elseif (args[1] == 'ExpRing') then
-
-        -- Put on Exp Ring for long enough to activate
-        gFunc.LockSet(draginclude.sets.EXPRing, 20);
-        draginclude.dragSettings.ExpRingSettings.UseRing = true;
-        draginclude.dragSettings.ExpRingSettings.TimeToUse = timestamp + draginclude.dragSettings.ExpRingSettings.Offset;
-
-        gFunc.Message('ExpRing');
-    elseif (args[1] == 'Tav') then
-
-        -- Put on Exp Ring for long enough to activate
-        gFunc.LockSet(draginclude.sets.Tav, 40);
-        draginclude.dragSettings.TavRingSettings.UseRing = true;
-        draginclude.dragSettings.TavRingSettings.TimeToUse = timestamp + draginclude.dragSettings.TavRingSettings.Offset;
-
-        gFunc.Message('Tav');
-    elseif (args[1] == 'Reraise') then
-
-        -- Put on Exp Ring for long enough to activate
-        -- gFunc.LockSet(draginclude.sets.ReraiseEarring, 45);
-        gFunc.LockSet(draginclude.sets.ReraiseGorget, 45);
-        draginclude.dragSettings.ReraiseSettings.UseReraise = true;
-        draginclude.dragSettings.ReraiseSettings.TimeToUse = timestamp + draginclude.dragSettings.ReraiseSettings.Offset;
-
-        gFunc.Message('Reraise');
     elseif (args[1] == 'zoneinfo') then
         local zone = gData.GetEnvironment();
         local zoneId = AshitaCore:GetMemoryManager():GetParty():GetMemberZone(0);
@@ -744,28 +697,10 @@ function draginclude.RelicCheck()
     gFunc.Message('bynes: [' .. byneCount +  redeemedByneCount .. '/' .. requiredByneCount .. '] | coins: [' .. pieceCount + redeemedPieceCount .. '/' .. requiredPieceCount .. '] | shells: [' .. shellCount + redeemedShellCount .. '/' .. requiredShellCount .. ']');
 end
 
---Equips Melody Earring when level >= 52 and player has song buff
-local function CheckEquipMelodyEarring(level, songBuffActive, items)
-    if songBuffActive == true and level >= 52 and has_value(items, 'Melody Earring') then 
-        gFunc.Equip('Ear1', 'Melody Earring');
-
-        if value_count(items, 'Melody Earring') > 1 then
-            gFunc.Equip('Ear2', 'Melody Earring');
-        end
-    end
-end
-
 --Equips Opo-Opo necklace when level is > 61 and player is asleep
 local function CheckEquipOpoOpoNecklace(level, asleep, items)
     if asleep == true and level >= 61 and  has_value(items, 'Opo-opo Necklace') then
         gFunc.Equip('Neck', 'Opo-opo Necklace');
-    end
-end
-
---Equips Fenrir's Earring when level is >= 70 and is daytime
-local function CheckEquipFenrirsEarring(level, items)
-    if isDaytime() and level >= 70 and has_value(items, 'Fenrir\'s Earring') then
-        gFunc.Equip('Ear2', 'Fenrir\'s Earring');
     end
 end
 
@@ -780,9 +715,6 @@ end
 
 -- Put at the end of your job's HandleDefault
 function draginclude.HandleDefault(settings)
-    draginclude.CheckDoExpRing();
-    draginclude.CheckDoTavRing();
-    draginclude.CheckDoReraiseEarring();
     draginclude.CheckAketon();
     draginclude.CheckVirtueStone();
     dragdisplay.Update(settings);
@@ -889,23 +821,11 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     end
 
     if player.Status == 'Engaged' then
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
-
-        if StatusArmorSwapSettings.FenrirsEarring == true then
-            CheckEquipFenrirsEarring(level, items);
-        end
-
 	--Resting Section
     elseif (player.Status == 'Resting') then
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
 
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
@@ -917,16 +837,9 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
 
 	--Idle Section
 	else
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
 
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
-        end
-
-        if StatusArmorSwapSettings.FenrirsEarring == true then
-            CheckEquipFenrirsEarring(level, items);
         end
 
         if StatusArmorSwapSettings.PresidentialHairpin == true then
@@ -942,36 +855,6 @@ end
 
 function draginclude.HandleWeaponSkill(weaponSkill)
     AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
-end
-
---Marks a flag to use EXP Ring
-function draginclude.CheckDoExpRing()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.ExpRingSettings.UseRing == true and timestamp > draginclude.dragSettings.ExpRingSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. draginclude.dragSettings.ExpRingSettings.RingName .. '" <me>');
-        draginclude.dragSettings.ExpRingSettings.UseRing = false;
-    end
-end
-
---Marks a flag to use Tav Ring
-function draginclude.CheckDoTavRing()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.TavRingSettings.UseRing == true and timestamp > draginclude.dragSettings.TavRingSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "Tavnazian Ring" <me>');
-        draginclude.dragSettings.TavRingSettings.UseRing = false;
-    end
-end
-
---Marks a flag to use EXP Ring
-function draginclude.CheckDoReraiseEarring()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.ReraiseSettings.UseReraise == true and timestamp > draginclude.dragSettings.ReraiseSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. draginclude.dragSettings.ReraiseSettings.ItemName .. '" <me>');
-        draginclude.dragSettings.ReraiseSettings.UseReraise = false;
-    end
 end
 
 function draginclude.HandleItem(item)

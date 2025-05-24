@@ -30,6 +30,7 @@ local sets = {
     },
 
     AvatarEngaged_Priority = { -- Perp Down + Pet Accuracy
+        Ammo = {'Hedgehog Bomb'},
         Head = {'Shep. Bonnet'}, -- Pet Acc
         Ear2 = {'Beastly Earring'}, -- Pet Acc
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
@@ -39,6 +40,7 @@ local sets = {
     },
 
     AvatarEngagedCarby_Priority = { -- Perp Down + Pet Accuracy
+        Ammo = {'Hedgehog Bomb'},
         Head = {'Shep. Bonnet'}, -- Pet Acc
         Ear2 = {'Beastly Earring'}, -- Pet Acc
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
@@ -48,7 +50,7 @@ local sets = {
     },
 
     MeleeEngagedAvatar_Priority = { -- 7% Haste + Support
-        Ammo = {'Hedgehog Bomb'},
+        Ammo = {'Tiphia Sting'},
         Head = {'Nashira Turban'}, -- 2%
         Neck = {'Temp. Torque'},
         Ear1 = {'Novia Earring'},
@@ -57,18 +59,20 @@ local sets = {
         Hands = {'Summoner\'s Brcr.'},
         Ring1 = {'Evoker\'s Ring'},
         Ring2 = {'Toreador\'s Ring'},
+        Waist = {'Swift Belt'}, -- +4
         Legs = {'Nashira Seraweels'}, -- 2%
         Feet = {'Summoner\'s Pgch.'},
     },
 
     MeleeEngaged_Priority = { -- 7% Haste + Support
-        Ammo = {'Hedgehog Bomb'},
+        Ammo = {'Tiphia Sting'},
         Head = {'Nashira Turban'}, -- 2%
         Neck = {'Temp. Torque'},
         Ear1 = {'Novia Earring'},
         Ear2 = {'Beastly Earring'},
         Body = {'Nashira Manteel'}, -- 3%
         Ring2 = {'Toreador\'s Ring'},
+        Waist = {'Swift Belt'}, -- 4%
         Legs = {'Nashira Seraweels'}, -- 2%
     },
 
@@ -96,7 +100,7 @@ local sets = {
         Ear2 = {'Beastly Earring'},
         Body = {'Summoner\'s Doublet'},
         Hands = {'Summoner\'s Brcr.'},
-        --Legs = {'Penance Slops'},
+        Legs = {'Penance Slops'},
         Feet = {'Austere Sabots'}
     };
 
@@ -114,7 +118,7 @@ local sets = {
         Head = {'Evoker\'s Horn'},
         Neck = {'Smn. Torque'},
         Hands = {'Summoner\'s Brcr.'},
-        --Legs = {'Penance Slops'},
+        Legs = {'Penance Slops'},
         Feet = {'Austere Sabots'}
     };
 
@@ -149,13 +153,13 @@ local sets = {
         Body = {'Yinyang Robe'},
         Hands = {'Zenith Mitts'},
         Ring1 = {'Evoker\'s Ring'},
-        --Legs = {'Penance Slops'},
+        Legs = {'Penance Slops'},
         Feet = {'Rostrum Pumps'}
     },
 
     StyleLock = {
         Main = 'Wind Staff',
-        Head = 'Nashira Turban',
+        Head = 'Zenith Crown',
         Body = 'Nashira Manteel',
         Hands = 'Zenith Mitts',
         Legs = 'Zenith Slacks',

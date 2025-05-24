@@ -20,6 +20,7 @@ local Settings = {
     CurrentRanged = 'Crossbow',
     LockTH = false,
     LockTH2 = false,
+    LockGilfinder = false,
 };
 
 local sets = {
@@ -155,6 +156,10 @@ local sets = {
         Body = {'Blue Cotehardie'},
     },
 
+    Gilfinder_Priority = {
+        Hands = {'Andvaranauts'},
+    },
+
     CrossbowBolt_Priority = {
         Ammo = {'Crossbow Bolt'},
     },
@@ -201,7 +206,7 @@ local sets = {
     StyleLock = {
         Head = 'Assassin\'s Bonnet',
         Body = 'Hecatomb Harness',
-        Hands = 'Hecatomb Mittens',
+        Hands = 'Andvaranauts',
         Legs = 'Homam Cosciales',
         Feet = 'Hct. Leggings',
     },
@@ -325,7 +330,8 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /ungur /lac fwd ungur ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /crossbow /lac fwd crossbow ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /th /lac fwd th ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /th2 /lac fwd th2 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /th2 /lac fwd th2 ');    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /gilfinder /lac fwd gilfinder ');
 end
 
 profile.OnUnload = function()
@@ -357,6 +363,10 @@ profile.HandleCommand = function(args)
         Settings.LockTH2 = not Settings.LockTH2;
 
         gFunc.Message('th2 ' .. tostring(Settings.LockTH2));
+    elseif (args[1] == 'gilfinder') then
+        Settings.LockGilfinder = not Settings.LockGilfinder;
+
+        gFunc.Message('LockGilfinder ' .. tostring(Settings.LockGilfinder));
     elseif (args[1] == 'lowhp') then
         gFunc.LockSet(sets.HpDown, 10);
     elseif (args[1] == 'stealhp') then
@@ -487,6 +497,8 @@ profile.HandleDefault = function()
     if Settings.LockTH or (player.Status == 'Engaged' and not isTargetTagged()) then
         gFunc.EquipSet(sets.TH);
         --gFunc.Message('TH Engaged');
+    elseif Settings.LockGilfinder then
+        gFunc.EquipSet(sets.Gilfinder);
     end
 end
 

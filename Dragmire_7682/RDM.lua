@@ -72,12 +72,12 @@ local sets = {
 
     MeleeWeapons_Priority = {
         Main = {'Joyeuse'},
-        Sub = {'Nms. Shield +1'},
+        Sub = {'Genbu\'s Shield'},
     },
 
     MeleeWeaponsDagger_Priority = {
         Main = {'Blau Dolch'},
-        Sub = {'Nms. Shield +1'},
+        Sub = {'Genbu\'s Shield'},
     },
 
     MeleeWeaponsNIN_Priority = {
@@ -155,33 +155,33 @@ local sets = {
     },
 
     StyleLock2 = {
-        Head = {Name = 'Duelist\'s Chapeau', Priority = 100},
+        Head = 'Duelist\'s Chapeau',
         Body = 'Goblin Suit',
-        Legs = {Name = 'Elder\'s Braguette', Priority = 100},
+        Legs = 'Elder\'s Braguette',
     },
 
     StyleLockCool = {
-        Main = 'Dark Staff',
-        Head = {Name = 'Nashira Turban', Priority = 0},
-        Body = {Name = 'Nashira Manteel', Priority = 0},
-        Hands = {Name = 'Crimson Fng. Gnt.', Priority = 99},
-        Legs = {Name = 'Nashira Seraweels', Priority = 0},
-        Feet = 'Hydra Spats',
+        Main = 'Wind Staff',
+        Head = 'Zenith Crown',
+        Body = 'Nashira Manteel',
+        Hands = 'Zenith Mitts',
+        Legs = 'Zenith Slacks',
+        Feet = 'Dream Boots +1',
     },
 
     StyleLockHydra = {
         Main = 'Dark Staff',
         Head = 'Hydra Cap',
         Body = 'Hydra Jupon',
-        Hands = {Name = 'Crimson Fng. Gnt.', Priority = 99},
+        Hands = 'Crimson Fng. Gnt.',
         Legs = 'Hydra Tights',
         Feet = 'Hydra Spats',
     },
 
     StyleLockAF = {
         Main = 'Fire Staff',
-        Head = {Name = 'Warlock\'s Chapeau', Priority = 100},
-        Body = {Name = 'Wlk. Tabard +1', Priority = 100},
+        Head = 'Warlock\'s Chapeau',
+        Body = 'Wlk. Tabard +1',
         Hands = 'Warlock\'s Gloves',
         Legs = 'Warlock\'s Tights',
         Feet = 'Warlock\'s Boots',
@@ -189,10 +189,10 @@ local sets = {
 
     StyleLockRelic = {
         Main = 'Dark Staff',
-        Head = {Name = 'Duelist\'s Chapeau', Priority = 100},
-        Body = {Name = 'Duelist\'s Tabard', Priority = 100},
-        Hands = {Name = 'Duelist\'s Gloves', Priority = 100},
-        Legs = {Name = 'Duelist\'s Tights', Priority = 100},
+        Head = 'Duelist\'s Chapeau',
+        Body = 'Duelist\'s Tabard',
+        Hands = 'Duelist\'s Gloves',
+        Legs = 'Duelist\'s Tights',
         Feet = 'Duelist\'s Boots',
     },
 
@@ -295,6 +295,18 @@ local sets = {
         Legs = {{Name = 'Zenith Slacks', Priority = 100}},
     },
 
+    MND_Priority = { -- MND +30 (95 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*95 - 190 = 351 (350 cap)
+        Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- FC
+        Body = {{Name = 'Errant Hpl.', Priority = 100}}, -- MND +10
+        Hands = {{Name = 'Devotee\'s Mitts', Priority = 100}}, -- MND +5
+        Ring2 = {{Name = 'Sapphire Ring', Priority = 0}}, -- MND +4
+        Back = {{Name = 'Rainbow Cape', Priority = 100}}, -- MND +3
+        --Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- MND +4
+        --Legs = {{Name = 'Errant slops', Priority = 0}}, -- MND +7
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- MND +5
+    },
+
     MNDEnfeeb_Priority = {
         Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
@@ -340,9 +352,9 @@ local sets = {
     },
 
     MNDEnhancing_Priority = {
-        Neck = {'Enhancing Torque'},
-        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
-        Legs = {'Warlock\'s Tights'},
+        Neck = {'Enhancing Torque'}, -- +7
+        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}}, -- +15
+        Legs = {'Warlock\'s Tights'}, -- +15
     },
 
     INTEnhancing_Priority = {
@@ -627,7 +639,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockSummer2);
+        gFunc.LockStyle(sets.StyleLockCool);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
@@ -670,6 +682,15 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         elseif player.SubJob == 'WHM' then
             -- RDM Core Commands
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
+        else
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
@@ -833,6 +854,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
+    elseif spell.Name == 'Stoneskin' then
+        gFunc.EquipSet(sets.MND);
     elseif spell.Skill == 'Ninjutsu' then
         gFunc.EquipSet(sets.SpellHasteUtsu);
     elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
@@ -860,7 +883,7 @@ profile.HandleMidcast = function()
                 gFunc.EquipSet(sets.DilationRingRefreshHaste);
             end
         elseif string.contains(spell.Name, 'Bar') then -- Barspells need raw Enhancing Skill
-            gFunc.EquipSet(sets.EnhancingSkill);
+            gFunc.EquipSet(sets.EnhancingSkill); -- +98 Resist
         end
     elseif spell.Skill == 'Healing Magic'  then
         local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);

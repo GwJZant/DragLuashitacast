@@ -29,7 +29,7 @@ draginclude.sets = T{
     },
     Fishing = { -- this set is meant as a default set for fishing, equip using /fishset
         Range = 'Comp. Fishing Rod',
-        Ammo = 'Slice of Bluetail',
+        Ammo = 'Sinking Minnow',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
@@ -37,7 +37,7 @@ draginclude.sets = T{
     },
     Fishing2 = { -- this set is meant as a default set for fishing, equip using /fishset
         Range = 'Halcyon Rod',
-        Ammo = 'Fly Lure',
+        Ammo = 'Meatball',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',

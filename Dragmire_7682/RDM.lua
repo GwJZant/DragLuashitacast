@@ -357,10 +357,28 @@ local sets = {
         Legs = {'Warlock\'s Tights'}, -- +15
     },
 
-    INTEnhancing_Priority = {
-        Neck = {'Enhancing Torque'},
-        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
-        Legs = {'Warlock\'s Tights'},
+    -- This set plus the Spikes set below let Blaze Spikes proc for 19 unresisted damage. Removing anything in either set now drops Blaze Spikes down to 16
+    INTEnhancing_Priority = { -- INT +39 (106 total)
+        --Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Zenith Crown'}, -- INT +3
+        Neck = {'Enhancing Torque'}, -- Enhancing +7
+        Ear2 = {'Phantom Earring'}, -- INT +1
+        Body = {'Errant Hpl.'}, -- INT +10
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3
+        --Waist = {'Duelist\'s Belt'}, -- INT +4
+        Legs = {'Errant Slops'}, -- INT +7
+        Feet = {'Elder\'s Sandals'}, -- INT +2
+    },
+
+    Spikes_Priority = { -- Relic legs, MAB +23 (28 native, 51 total)
+        Neck = {'Uggalepih Pendant'}, -- MAB +8 (conditional but im a galka so lets be real here)
+        Ear2 = {'Moldavite Earring'}, -- MAB +5
+        Hands = {'Zenith Mitts'}, -- MAB +5
+        Legs = {'Duelist\'s Tights'}, -- Spikes+
+        Feet = {'Dls. Boots +1'}, -- MAB +5
     },
 
     -- Before: ((256/5) + 40) == 91
@@ -626,6 +644,14 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleepga" <stnpc>');
     elseif (args[1] == 'sleep') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleep" <stnpc>');
+    elseif (args[1] == 'icespikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Ice Spikes" <me>');
+    elseif (args[1] == 'blazespikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blaze Spikes" <me>');
+    elseif (args[1] == 'phalanx') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
+    elseif (args[1] == 'blink') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blink" <me>');
     end
 
     draginclude.HandleCommand(args, sets);
@@ -662,8 +688,11 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd blazespikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd drain ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
@@ -674,8 +703,11 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd blazespikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd drain ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
@@ -686,8 +718,11 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd blazespikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         else
@@ -695,8 +730,11 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd blazespikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         end
@@ -714,6 +752,7 @@ profile.HandleDefault = function()
     local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    local spikes = gData.GetBuffCount('Blaze Spikes') + gData.GetBuffCount('Shock Spikes') + gData.GetBuffCount('Ice Spikes');
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.EvaluateLevels(profile.Sets, myLevel);
@@ -747,6 +786,10 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.MeleeWeaponsNIN);
             else
                 gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
+
+                if player.Status == 'Engaged' then
+                    gFunc.Equip('Neck', 'Love Torque');
+                end
             end
 
             if player.Status == 'Engaged' then
@@ -757,7 +800,15 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.MeleeWeapons);
             else
                 gFunc.EquipSet(sets.MeleeWeaponsDagger);
+
+                if player.Status == 'Engaged' then
+                    gFunc.Equip('Neck', 'Love Torque');
+                end
             end
+        end
+
+        if spikes > 0 then
+            gFunc.EquipSet(sets.Spikes);
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
@@ -770,6 +821,10 @@ profile.HandleDefault = function()
         elseif player.Status == 'Idle' then
             gFunc.EquipSet(sets.Idle);
             gFunc.EquipSet(sets.Earth);
+        end
+
+        if spikes > 0 then
+            gFunc.EquipSet(sets.Spikes);
         end
     end
 
@@ -856,6 +911,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
         gFunc.EquipSet(sets.MND);
+    elseif string.contains(spell.Name, 'Spikes') then
+        gFunc.EquipSet(sets.INTEnhancing);
     elseif spell.Skill == 'Ninjutsu' then
         gFunc.EquipSet(sets.SpellHasteUtsu);
     elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap

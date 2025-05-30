@@ -27,17 +27,17 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- this set is meant as a default set for fishing, equip using /fishset
-        Range = 'Comp. Fishing Rod',
-        Ammo = 'Sinking Minnow',
+    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+        Range = 'Lu Shang\'s F. Rod',
+        Ammo = 'Shrimp Lure',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing2 = { -- this set is meant as a default set for fishing, equip using /fishset
-        Range = 'Halcyon Rod',
-        Ammo = 'Meatball',
+    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+        Range = 'Lu Shang\'s F. Rod',
+        Ammo = 'Sinking Minnow',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
@@ -339,28 +339,34 @@ end
 --Binds default custom commands
 function draginclude.SetNumpadCommands()
     --send_command('bind ^f8 gs c cycle RewardMode') ctrl f8
-    --send_command('bind !f8 gs c cycle CorrelationMode') alt f8
-    -- Define forward slash command
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind \\ /lac fwd TpVariant ');
+    --send_command('bind !f8 gs c cycle CorrelationMode') alt f8    
 
-    -- Define forward slash command
+    -- Define commands
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind \\ /lac fwd TpVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind NUMPAD/ /lac fwd TpVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd SkillingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /zoneinfo /lac fwd zoneinfo ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
-    --AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
 end
 
 function draginclude.OnUnload()
     dragdisplay.Unload();
+
+    -- Only need to unload things that aren't used in draginclude as they contain job-specific commands
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 1');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 2');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 3');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 4');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 5');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +5');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 6');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 7');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +7');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 8');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +8');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 9');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 0');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind @NUMPAD5');

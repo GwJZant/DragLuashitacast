@@ -442,11 +442,11 @@ function dragdisplay.Initialize()
         elseif Sub == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   4: Sic   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
         elseif Main == 'RDM' and Sub == 'BLM' then
-            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity 5. Stoneskin 6. Silence 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
+            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
         elseif Main == 'RDM' and Sub == 'DRK' then
-            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity 5. Stoneskin 6. Silence 7. Drain 8. Aspir 9. Bind 0. Sleep';
+            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Bind 0. Sleep';
         elseif Main == 'RDM' and Sub == 'WHM' then
-            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity 5. Stoneskin 6. Silence 7. N/A 8. N/A 9. Bind 0. Sleep';
+            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. N/A 8. N/A 9. Bind 0. Sleep';
         end
 
         dragdisplay.FontObject.text = display;

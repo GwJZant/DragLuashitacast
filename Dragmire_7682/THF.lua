@@ -134,6 +134,21 @@ local sets = {
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
 
+    SA_Priority = { -- DEX > Attack > STR
+        Head = {'Assassin\'s Bonnet'}, -- DEX +5
+        Neck = {'Love Torque'}, -- DEX +5
+        Ear1 = {'Merman\'s Earring'}, -- Attack +6
+        Ear2 = {'Brutal Earring'}, -- DA +5%
+        Body = {'Rapparee Harness'}, -- Haste +4%, Need a Dragon Harness
+        Hands = {'Dusk Gloves'}, -- Attack +5
+        Ring1 = {'Rajas Ring'}, -- DEX +5
+        Ring2 = {'Flame Ring'}, -- STR +5
+        Back = {'Forager\'s Mantle'}, -- Attack +15, STR +3
+        Waist = {'Warwolf Belt'}, -- DEX +5, STR +5
+        Legs = {'Homam Cosciales'}, -- Haste +3%, Get dusk legs
+        Feet = {'Rogue\'s Poulaines'}, -- DEX +3
+    },
+
     MP_Priority = {
         Body = {'Elder\'s Surcoat'},
         Hands = {'Elder\'s Bracers'},
@@ -233,9 +248,9 @@ local sets = {
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
     },
 
-    Charm_Priority = { -- CHR +17 & Charm +5
+    Charm_Priority = { -- CHR +15 & Charm +5
         Head = {'Panther Mask'}, -- CHR +5
-        Ear2 = {'Beastly Earring'}, -- CHR +2
+        Ear2 = {'Ethereal Earring'}, -- Nothing; keeps Beastly Earring off
         Neck = {'Temp. Torque'}, -- CHR +5
         Body = {'Elder\'s Surcoat'}, -- CHR +1
         Waist = {'Ryl.Kgt. Belt'}, -- CHR +2
@@ -415,6 +430,7 @@ profile.HandleDefault = function()
     local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    local sa = gData.GetBuffCount('Sneak Attack');
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.Message('Syncing Gear - Lv. ' .. myLevel);
@@ -443,12 +459,16 @@ profile.HandleDefault = function()
         if player.SubJob == 'NIN' then
             gFunc.EquipSet(sets.DefaultNIN);
         end
-
+        
         if player.Status == 'Engaged' then
             if player.SubJob == 'NIN' then
                 gFunc.EquipSet(sets.EngagedNIN);
             else
                 gFunc.EquipSet(sets.Engaged);
+            end
+
+            if sa == 1 then
+                gFunc.EquipSet(sets.SA);
             end
         end
     elseif draginclude.dragSettings.TpVariant == 2 then
@@ -465,6 +485,10 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.EngagedEvasionNIN);
             else
                 gFunc.EquipSet(sets.EngagedEvasion);
+            end
+
+            if sa == 1 then
+                gFunc.EquipSet(sets.SA);
             end
         end
     end

@@ -155,6 +155,16 @@ local sets = {
         Ear2 = {'Loquac. Earring'},
     },
 
+    SpellHaste_Priority = { -- 19% Haste
+        Head = {'Panther Mask'}, --2%
+        Ear2 = {'Loquac. Earring'},
+        Hands = {'Dusk Gloves'}, --3%
+        Ring2 = {'Blitz Ring'}, --1%
+        Waist = {'Swift Belt'}, --6%
+        Legs = {'Byakko\'s Haidate'}, --5%
+        Feet = {'Dusk Ledelsens'}, --2%
+    },
+
     Stoneskin_Priority = {
         Ring1 = {'Sapphire Ring'}, -- +4 MND
         Waist = {'Ryl.Kgt. Belt'}, -- +2 MND
@@ -535,16 +545,14 @@ profile.HandleMidcast = function()
 
     gFunc.Message('Midcast');
 
+    gFunc.EquipSet(sets.SpellHaste);
+
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
-        gFunc.EquipSet(sets.Stoneskin);
-    elseif spell.Skill == 'Enhancing Magic' then
-        gFunc.EquipSet(sets.Enhancing);
-    elseif spell.Skill == 'Healing Magic' then
-        gFunc.EquipSet(sets.Healing);
+        gFunc.EquipSet(sets.Stoneskin); 
     end
 end
 

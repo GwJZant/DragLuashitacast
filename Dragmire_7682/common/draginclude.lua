@@ -453,7 +453,7 @@ function draginclude.HandleCommand(args)
         elseif zoneId == 159 then -- Temple of Uggalepih
             message = message .. ' | Sozu Sarberry 1hr {10%}';
         elseif zoneId == 176 then -- Sea Serpent Grotto
-            message = message .. ' | Sea Hog 1hr {10%} - Wuur 2hr {10%} - Masan 4hr {10%} [16m repops]';
+            message = message .. ' | Sea Hog 1hr {10%} - Wuur 2hr {10%} - Voll 2hr {10%} - Masan 4hr {10%} [16m repops]';
         elseif zoneId == 220 then -- Ship to Selbina
             message = message .. ' - No Pirates';
         elseif zoneId == 221 then -- Ship to Mhaura
@@ -686,7 +686,7 @@ function draginclude.RelicCheck()
     local shellCount = 0;
 
     local redeemedByneCount = 1600; -- Stage 3
-    local redeemedPieceCount = 0;
+    local redeemedPieceCount = 6100; -- Stage 4
     local redeemedShellCount = 400; -- Stage 2
 
     local requiredByneCount = 1600;

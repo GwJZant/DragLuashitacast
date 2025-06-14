@@ -67,6 +67,21 @@ local sets = {
         Waist = {'Swift Belt'},
     },
 
+    Tank_Priority = {
+        Ammo = {'Happy Egg'},
+        Head = {'Optical Hat'}, -- Evasion +10
+        Ear1 = {'Novia Earring'}, -- Evasion +7
+        Ear2 = {'Ethereal Earring'}, -- Evasion +5 Converts 3% damage to MP
+        Body = {'Wym. Mail +1'}, -- Parrying Skill +15
+        Hands = {'Wyrm Fng.Gnt.'}, -- AGI +3
+        Ring1 = {}, -- Nothing useful
+        Ring2 = {'Jelly Ring'},
+        Back = {'Boxer\'s Mantle'}, -- Evasion Skill +10 Parrying Skill +10
+        Waist = {'Ryl.Kgt. Belt'}, -- AGI +2
+        Legs = {}, -- Nothing useful
+        Feet = {'Drn. Greaves +1'}, -- AGI +5
+    },
+
     PDT_Priority = {
         Ear1 = {'Loquac. Earring'},
         Ear2 = {'Ethereal Earring'},
@@ -121,9 +136,12 @@ local sets = {
         Ring2 = {'Toreador\'s Ring'}, -- ACC+7
     },
 
+    -- Wheeling Thrust: STR:80%
+    -- Geirskogul: STR: 30% DEX: 30% 
     WeaponSkillLight_Priority = {
         Neck = {'Light Gorget'},
     },
+
 
     Precast_Priority = {
 
@@ -141,6 +159,7 @@ local sets = {
         Feet = {'Homam Gambieras'},
     },
 
+    
     StyleLock = {
         Main = 'Dynamis Lance',
         Head = 'Ace\'s Helm',
@@ -193,17 +212,21 @@ local sets = {
         Body = {'Wyrm Mail +1'},
     },
 
-    Jump_Priority = { --VIT
+    Jump_Priority = { -- ACC
+        Head = {'Optical Hat'},
         Body = {'Barone Corazza'},
+        Ring2 = {'Toreador\'s Ring'},
         Waist = {'Wyrm Belt'},
         Legs = {'Barone Cosciales'},
         Feet = {'Drn. Greaves +1'},
     },
 
-    HighJump_Priority = { --VIT
+    HighJump_Priority = { -- ACC
+        Head = {'Optical Hat'},
         Body = {'Barone Corazza'},
         Waist = {'Wyrm Belt'},
-        Ring2 = {'Vaulter\'s Ring'},
+        --Ring2 = {'Vaulter\'s Ring'},
+        Ring2 = {'Toreador\'s Ring'},
         Legs = {'Barone Cosciales'},
         Feet = {'Drn. Greaves +1'},
     },
@@ -226,7 +249,7 @@ local sets = {
         Legs = {'Crimson Cuisses'},
     },
 
-    IdleTown_Priority = {
+    IdleTownMage_Priority = {
         Ammo = {'Tiphia Sting'},
         Head = {'Ace\'s Helm'},
         Neck = {'Love Torque'},
@@ -235,6 +258,22 @@ local sets = {
         Body = {'Wym. Mail +1'},
         Hands = {'Homam Manopolas'},
         Ring1 = {'Jelly Ring'},
+        Ring2 = {'Blitz Ring'},
+        Back = {'Forager\'s Mantle'},
+        Waist = {'Swift Belt'},
+        Legs = {'Crimson Cuisses'},
+        Feet = {'Homam Gambieras'},
+    },
+
+    IdleTown_Priority = {
+        Ammo = {'Tiphia Sting'},
+        Head = {'Ace\'s Helm'},
+        Neck = {'Love Torque'},
+        Ear1 = {'Brutal Earring'},
+        Ear2 = {'Beastly Earring'},
+        Body = {'Wym. Mail +1'},
+        Hands = {'Homam Manopolas'},
+        Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
         Waist = {'Swift Belt'},
@@ -324,7 +363,7 @@ local function LateInitialize()
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'PDT', 'MDT'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'Default', 'Tank'}, {'None', 'Field', 'Fishing'});
 end
 
 profile.OnUnload = function()
@@ -402,11 +441,8 @@ profile.HandleDefault = function()
     -- Forward slash toggle between Default and Evasion
     if draginclude.dragSettings.TpVariant == 1 then
         -- Nothing
-    elseif draginclude.dragSettings.TpVariant == 2 then --Use PDT set
-        gFunc.EquipSet(sets.PDT);
-
-    elseif draginclude.dragSettings.TpVariant == 3 then --Use MDT set
-        gFunc.EquipSet(sets.MDT);
+    elseif draginclude.dragSettings.TpVariant == 2 then --Use Tank set
+        gFunc.EquipSet(sets.Tank);
     end
 
     if (petAction ~= nil) then
@@ -415,7 +451,12 @@ profile.HandleDefault = function()
     end
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        gFunc.EquipSet(sets.IdleTown);
+        if player.SubJob == 'WHM' or player.SubJob == 'WHM' or player.SubJob == 'WHM' then
+            gFunc.EquipSet(sets.IdleTownMage);
+        else
+            gFunc.EquipSet(sets.IdleTown);
+        end
+        
     end
 
     draginclude.HandleDefault();
@@ -434,6 +475,8 @@ profile.HandleAbility = function()
         gFunc.EquipSet(sets.Jump);
     elseif string.match(ability.Name, 'Ancient Circle') then
         gFunc.EquipSet(sets.AncientCircle);
+    elseif string.match(ability.Name, 'Spirit Link') then
+        gFunc.EquipSet(sets.Resting);
     end
 end
 

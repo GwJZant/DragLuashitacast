@@ -273,7 +273,7 @@ local sets = {
     StealBig_Priority = { -- +11 Steal w/o Knife, +13 w/ Knife
         --Main = {'Btm. Knife'}, -- +2 Steal
         Sub = {'Ungur Boomerang'}, -- +8 HP
-        Head = {'Rogue\'s Bonnet'}, -- +1 +13 HP
+        Head = {'Rogue\'s Bonnet'}, -- +1 Steal +13 HP
         Ear1 = {'Physical Earring'}, -- +25 HP
         Ear2 = {'Physical Earring'}, -- +25 HP
         Body = {'Rogue\'s Vest'}, -- +20 HP
@@ -568,9 +568,7 @@ profile.HandleMidcast = function()
     elseif string.contains(spell.Name, 'Utsusemi') then
         gFunc.EquipSet(sets.Evasion);
         gFunc.EquipSet(sets.SpellHaste);
-    end
-
-    if Settings.LockTH or (not isTargetTagged()) then
+    elseif Settings.LockTH or (not isTargetTagged()) then
         gFunc.EquipSet(sets.TH);
     end
 end
@@ -592,7 +590,7 @@ profile.HandleMidshot = function()
 
     gFunc.EquipSet(sets.Evasion);
 
-    if Settings.CurrentRanged == 'Crossbow' and Settings.CurrentBolt == 'Bloody Bolt' then
+    if Settings.CurrentRanged == 'Crossbow' and (Settings.CurrentBolt == 'Bloody Bolt' or Settings.CurrentBolt == 'Sleep Bolt') then
         gFunc.EquipSet(sets.RangedINT);
     else
         gFunc.EquipSet(sets.RangedAcc);

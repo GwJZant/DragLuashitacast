@@ -860,7 +860,11 @@ function draginclude.HandleAbility(ability);
 end
 
 function draginclude.HandleWeaponSkill(weaponSkill)
-    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
+    if weaponSkill.Name == 'Geirskogul' then    
+        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
+    else
+        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
+    end 
 end
 
 function draginclude.HandleItem(item)

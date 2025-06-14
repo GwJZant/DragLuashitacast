@@ -86,7 +86,7 @@ local sets = {
     },
 
     MeleeWeaponsDaggerNIN_Priority = {
-        Main = {'Martial Knife'},
+        Main = {'Blau Dolch'},
         Sub = {'Joyeuse'},
     },
 
@@ -778,7 +778,8 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.Idle);
             gFunc.EquipSet(sets.Resting);
         elseif player.Status == 'Engaged' then
-            gFunc.EquipSet(sets.MeleeEngagedAcc);
+            --gFunc.EquipSet(sets.MeleeEngagedAcc);
+            gFunc.EquipSet(sets.MeleeEngaged);
         end
 
         if player.SubJob == 'NIN' then
@@ -787,9 +788,6 @@ profile.HandleDefault = function()
             else
                 gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
 
-                if player.Status == 'Engaged' then
-                    gFunc.Equip('Neck', 'Love Torque');
-                end
             end
 
             if player.Status == 'Engaged' then
@@ -800,10 +798,6 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.MeleeWeapons);
             else
                 gFunc.EquipSet(sets.MeleeWeaponsDagger);
-
-                if player.Status == 'Engaged' then
-                    gFunc.Equip('Neck', 'Love Torque');
-                end
             end
         end
 
@@ -947,7 +941,7 @@ profile.HandleMidcast = function()
         
         if spell.Name ~= 'Reraise' and spell.Name ~= 'Raise' and player.MPP < 80 then
             gFunc.EquipSet(sets.MNDHealing);
-        elseif spell.Name == 'Reraise' or spell.Name == 'Raise' and mpPercent < .66 then
+        elseif spell.Name == 'Raise' and mpPercent < .66 then
             gFunc.EquipSet(sets.SpellHaste);
         end
     elseif spell.Skill == 'Elemental Magic' then

@@ -17,8 +17,8 @@ local Settings = {
     },
     -- Settings to enable some unique armor swapping. See draginclude for full options available
     StatusArmorSwaps = {
-        OpoopoNecklace = true,
-        PresidentialHairpin = true,
+        OpoopoNecklace = false,
+        PresidentialHairpin = false,
     },
     -- Used for handling Priority gear swapping
     CurrentLevel = 0,
@@ -28,18 +28,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {},
+        Head = {'Brass Cap'},
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {},
-        Hands = {'Tarutaru Mitts'},
+        Body = {'Scale Mail'},
+        Hands = {'Ryl.Ftm. Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
         Back = {},
         Waist = {},
-        Legs = {'Tarutaru Braccae'},
-        Feet = {'Tarutaru Clomps'},
+        Legs = {'Brass Subligar'},
+        Feet = {'Brass Leggings'},
     },
 
     IdleTown_Priority = {
@@ -386,6 +386,11 @@ local sets = {
     },
 
     StyleLockGeneric = {
+        Head = 'Brass Cap',
+        Body = 'Scale Mail',
+        Hands = 'Ryl.Ftm. Gloves',
+        Legs = 'Brass Subligar',
+        Feet = 'Brass Leggings',
     },
 
     StyleLockRSE = {
@@ -419,7 +424,7 @@ local sets = {
 
     -- Uses Kirin's Osode to maximize healing, does not remove status ailments
     RewardHP_Priority = {
-        Ammo = {},
+        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
         Neck = {},
         Ear1 = {},

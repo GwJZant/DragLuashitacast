@@ -89,6 +89,14 @@ draginclude.JugPetConfig = {
         DefaultSpecial = 'Rage',
         DurationMinutes = 60,
     },
+    SheepFamiliar = {
+        Name = 'SheepFamiliar',
+        DefaultJug = 'Herbal Broth',
+        DefaultSTA = 'Lamb Chop',
+        DefaultAOE = 'Sheep Song',
+        DefaultSpecial = 'Rage',
+        DurationMinutes = 60,
+    },
     CourierCarrie = {
         Name = 'CourierCarrie',
         DefaultJug = 'Fish Oil Broth',

@@ -27,17 +27,17 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- this set is meant as a default set for fishing, equip using /fishset
-        Range = 'Comp. Fishing Rod',
-        Ammo = 'Slice of Bluetail',
+    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+        Range = 'Lu Shang\'s F. Rod',
+        Ammo = 'Shrimp Lure',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing2 = { -- this set is meant as a default set for fishing, equip using /fishset
-        Range = 'Halcyon Rod',
-        Ammo = 'Fly Lure',
+    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+        Range = 'Lu Shang\'s F. Rod',
+        Ammo = 'Sinking Minnow',
         Body = 'Angler\'s Tunica',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
@@ -71,56 +71,27 @@ draginclude.childSets = T{
 };
 
 draginclude.statusArmorSwapsDefault = T{
-    MelodyEarring = false,
     OpoopoNecklace = false,
-    FenrirsEarring = false,
     PresidentialHairpin = true,
-};
-
-draginclude.synthRecipes = T{
-    --Cooking
-    SlicedCod = {'Wind Crystal', 'Tiger Cod'}, -- Print
-    PickledHerring = {'Ice Crystal', 'Nosteau Herring', 'Dried Marjoram', 'Rock Salt'}, -- Print
-    EelKabob = {'Fire Crystal', 'Black Eel', 'Olive Oil'}, -- Print
-    YagudoDrink = {'Dark Crystal', 'Buburimu Grape', 'Yagudo Cherry'},
-    --Alchemy
-    Tsurara = {'Ice Crystal', 'Distilled Water', 'Rock Salt'},
-    PoisonDust = {'Lightng. Crystal', 'Yellow Globe'},
-    Mercury = {'Lightng. Crystal', 'Cobalt Jellyfish'},
-    PoisonPotion = {'Water Crystal', 'Mercury', 'Poison Dust'},
-    EchoDrop = {'Water Crystal', 'Distilled Water', 'Honey', 'Sage'},
-    BlindingPotion1 = {'Water Crystal', 'Crying Mustard', 'Poison Flour', 'Sleepshroom'},
-    BlindBoltheads = {'Wind Crystal', 'Bronze Ingot', 'Blinding Potion', 'Animal Glue'}, -- 14 Smithing
-    Potion = {'Water Crystal', 'Lizard Tail', 'Distilled Water', 'Sage'},
-    Vitriol = {'Water Crystal', 'Treant Bulb'},
-    AcidBoltHead = {'Wind Crystal', 'Vitriol', 'Bronze Ingot', 'Animal Glue'},
-    HolyWater = {'Light Crystal', 'Distilled Water'},
-    HolyBoltHead = {'Wind Crystal', 'Holy Water', 'Bronze Ingot'},
-    SleepingPotion = {'Water Crystal', 'Poison Flour', 'Sleepshroom', 'Chamomile'},
-    HiPotion = {'Water Crystal', 'Distilled Water', 'Malboro Vine', 'Sage'},
-    VenomDust = {'Lightng. Crystal', 'Scorpion Claw'},
-    VenomPotion = {'Water Crystal', 'Venom Dust', 'Mercury'},
-    --Smithing
-    BronzeIngot = {'Fire Crystal', 'Copper Ore', 'Tin Ore'},
-    BronzeSheet = {'Fire Crystal', 'Bronze Ingot'},
-    BronzeScales = {'Wind Crystal', 'Bronze Sheet'},
-    BronzeBoltheads = {'Wind Crystal', 'Bronze Ingot'},
 };
 
 --Haven't verified all these names, I couldn't find/l a list in another lua file so I looked at screenshots and see they're all just the wiki name with no spaces, so that's what I used
 draginclude.Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
 draginclude.JugPets = T{'HareFamiliar', 'SheepFamiliar', 'FlowerpotBill', 'TigerFamiliar', 'FlytrapFamiliar', 'LizardFamiliar', 'MayflyFamiliar', 'EftFamiliar', 'BeetleFamiliar', 'AntlionFamiliar', 'CrabFamiliar', 'MiteFamiliar', 'KeenearedSteffi', 'CourierCarrie', 'LullabyMelodia', 'FlowerpotBen', 'SaberSiravarde', 'FunguarFamiliar', 'ShellbusterOrob', 'ColdbloodComo', 'Homunculus', 'VoraciousAudrey', 'AmbusherAllie', 'PanzerGalahad', 'LifedrinkerLars', 'ChopsueyChucky', 'AmigoSabotender'};
-draginclude.BstPetAttack = T{'Foot Kick','Whirl Claws','Big Scissors','Tail Blow','Blockhead','Sensilla Blades','Tegmina Buffet','Lamb Chop','Sheep Charge','Pentapeck','Recoil Dive','Frogkick','Queasyshroom','Numbshroom','Shakeshroom','Nimble Snap','Cyclotail','Somersault','Tickling Tendrils','Sweeping Gouge','Grapple','Double Claw','Spinning Top','Suction','Tortoise Stomp','Power Attack','Rhino Attack','Razor Fang','Claw Cyclone','Crossthrash','Scythe Tail','Ripper Fang','Chomp Rush','Pecking Flurry','Sickle Slash','Mandibular Bite','Wing Slap','Beak Lunge','Head Butt','Wild Oats','Needle Shot','Disembowel','Extirpating Salvo','Mega Scissors','Back Heel','Hoof Volley','Fluid Toss','Fluid Spread'};
-draginclude.BstPetMagicAttack = T{'Gloom Spray','Fireball','Acid Spray','Molting Plumage','Cursed Sphere','Nectarous Deluge','Charged Whisker','Nepenthic Plunge'};
-draginclude.BstPetMagicAccuracy = T{'Toxic Spit','Acid Spray','Leaf Dagger','Venom Spray','Venom','Dark Spore','Sandblast','Dust Cloud','Stink Bomb','Slug Family','Intimidate','Gloeosuccus','Spider Web','Filamented Hold','Choke Breath','Blaster','Snow Cloud','Roar','Palsy Pollen','Spore','Brain Crush','Choke Breath','Silence Gas','Chaotic Eye','Sheep Song','Soporific','Predatory Glare','Sudden Lunge','Numbing Noise','Jettatura','Bubble Shower','Spoil','Scream','Noisome Powder','Acid Mist','Rhinowrecker','Swooping Frenzy','Venom Shower','Corrosive Ooze','Spiral Spin','Infrasonics','Hi-Freq Field','Purulent Ooze','Foul Waters','Sandpit','Infected Leech','Pestilent Plume'};
-draginclude.twoCharge = T{'Wild Carrot', 'Dream Flower', 'Roar', 'Gloeosuccus', 'Infrasonics', 'Toxic Spit', 'Hi-Freq Field', 'Sandpit', 'VenomSpray', 'Scissor Guard', 'Rage', 'Sheep Song', 'Filamented Hold', 'Numbshroom', 'Shakeshroom'};
-draginclude.threeCharge = T{'Sic', 'Bubble Curtain', 'Silence Gas', 'Dark Spore', '1000 Needles'};
 
 -- Can use these with JugPetSettings so you don't have to delete and re-find move names
 draginclude.JugPetConfig = {
     LullabyMelodia = {
         Name = 'LullabyMelodia',
         DefaultJug = 'S. Herbal Broth',
+        DefaultSTA = 'Lamb Chop',
+        DefaultAOE = 'Sheep Song',
+        DefaultSpecial = 'Rage',
+        DurationMinutes = 60,
+    },
+    SheepFamiliar = {
+        Name = 'SheepFamiliar',
+        DefaultJug = 'Herbal Broth',
         DefaultSTA = 'Lamb Chop',
         DefaultAOE = 'Sheep Song',
         DefaultSpecial = 'Rage',
@@ -278,30 +249,8 @@ draginclude.dragSettings = {
     TpVariant = 1,
     SkillingVariant = 1,
     FishingVariant = 1,
+    IsNude = false,
     RewardType = 'HP', -- HP/STATUS
-    LastSynthSettings = {
-        LastSynthEnabled = false,
-        TimeToUse = 0,
-        SynthRecipe = draginclude.synthRecipes.YagudoDrink,
-    },
-    ExpRingSettings = {
-        UseRing = false,
-        Offset = 15,
-        TimeToUse = 0,
-        RingName = 'Chariot Band',
-    },
-    TavRingSettings = {
-        UseRing = false,
-        Offset = 35,
-        TimeToUse = 0,
-    },
-    ReraiseSettings = {
-        UseReraise = false,
-        Offset = 35,
-        TimeToUse = 0,
-        ItemName = 'Reraise Gorget',
-    },
-    UseTorque = true,
 };
 
 draginclude.TpVariantTable = { -- cycle through with /lac fwd tpset
@@ -320,7 +269,7 @@ local skillToTorque = {
     [2] = 'Love Torque',
 --    [3] = 'Fortitude Torque',
 --    [4] = 'Prudence Torque',
---    [5] = 'Temp. Torque',
+    [5] = 'Temp. Torque',
 --    [6] = 'Fortitude Torque',
 --    [7] = 'Justice Torque',
     [8] = 'Love Torque',
@@ -398,30 +347,34 @@ end
 --Binds default custom commands
 function draginclude.SetNumpadCommands()
     --send_command('bind ^f8 gs c cycle RewardMode') ctrl f8
-    --send_command('bind !f8 gs c cycle CorrelationMode') alt f8
-    -- Define forward slash command
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind NUMPAD/ /lac fwd TpVariant ');
+    --send_command('bind !f8 gs c cycle CorrelationMode') alt f8    
 
-    -- Define forward slash command
+    -- Define commands
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind \\ /lac fwd TpVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind NUMPAD/ /lac fwd TpVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd SkillingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /zoneinfo /lac fwd zoneinfo ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
-    --AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
-
-    --Define Windows + 8 commandNU
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD8 /lac fwd ExpRing ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
 end
 
 function draginclude.OnUnload()
     dragdisplay.Unload();
+
+    -- Only need to unload things that aren't used in draginclude as they contain job-specific commands
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 1');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 2');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 3');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 4');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 5');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +5');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 6');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 7');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +7');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 8');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/unbind +8');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 9');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind 0');
     AshitaCore:GetChatManager():QueueCommand(-1,'/unbind @NUMPAD5');
@@ -473,31 +426,6 @@ function draginclude.HandleCommand(args)
         end
 
         gFunc.Message('Skilling Set: ' .. draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant]); --display the set
-    elseif (args[1] == 'ExpRing') then
-
-        -- Put on Exp Ring for long enough to activate
-        gFunc.LockSet(draginclude.sets.EXPRing, 20);
-        draginclude.dragSettings.ExpRingSettings.UseRing = true;
-        draginclude.dragSettings.ExpRingSettings.TimeToUse = timestamp + draginclude.dragSettings.ExpRingSettings.Offset;
-
-        gFunc.Message('ExpRing');
-    elseif (args[1] == 'Tav') then
-
-        -- Put on Exp Ring for long enough to activate
-        gFunc.LockSet(draginclude.sets.Tav, 40);
-        draginclude.dragSettings.TavRingSettings.UseRing = true;
-        draginclude.dragSettings.TavRingSettings.TimeToUse = timestamp + draginclude.dragSettings.TavRingSettings.Offset;
-
-        gFunc.Message('Tav');
-    elseif (args[1] == 'Reraise') then
-
-        -- Put on Exp Ring for long enough to activate
-        -- gFunc.LockSet(draginclude.sets.ReraiseEarring, 45);
-        gFunc.LockSet(draginclude.sets.ReraiseGorget, 45);
-        draginclude.dragSettings.ReraiseSettings.UseReraise = true;
-        draginclude.dragSettings.ReraiseSettings.TimeToUse = timestamp + draginclude.dragSettings.ReraiseSettings.Offset;
-
-        gFunc.Message('Reraise');
     elseif (args[1] == 'zoneinfo') then
         local zone = gData.GetEnvironment();
         local zoneId = AshitaCore:GetMemoryManager():GetParty():GetMemberZone(0);
@@ -533,7 +461,7 @@ function draginclude.HandleCommand(args)
         elseif zoneId == 159 then -- Temple of Uggalepih
             message = message .. ' | Sozu Sarberry 1hr {10%}';
         elseif zoneId == 176 then -- Sea Serpent Grotto
-            message = message .. ' | Sea Hog 1hr {10%} - Wuur 2hr {10%} - Masan 4hr {10%} [16m repops]';
+            message = message .. ' | Sea Hog 1hr {10%} - Wuur 2hr {10%} - Voll 2hr {10%} - Masan 4hr {10%} [16m repops]';
         elseif zoneId == 220 then -- Ship to Selbina
             message = message .. ' - No Pirates';
         elseif zoneId == 221 then -- Ship to Mhaura
@@ -551,6 +479,28 @@ function draginclude.HandleCommand(args)
         gFunc.Message(target.Type);
     elseif (args[1] == 'relic') then
         draginclude.RelicCheck();
+    elseif (args[1] == 'nude') then
+        if draginclude.dragSettings.IsNude then
+            gFunc.Message('Not nude');
+
+            for i = 5,16,1 do
+                gState.Disabled[i] = false;
+            end
+
+            draginclude.dragSettings.IsNude = false;
+        else
+            gFunc.Message('Nude');
+
+            for i = 5,16,1 do
+                if i ~= 10 then -- 10 = neck
+                    gEquip.UnequipSlot(i);
+                    gState.Disabled[i] = true;
+                end
+            end
+
+            draginclude.dragSettings.IsNude = true;
+        end
+        
     end
 end
 
@@ -639,7 +589,7 @@ function draginclude.HandleDrgCoreCommands(args)
 end
 
 --Iterates all valid items, passing them through the items table
-function draginclude.CheckItems(checkStorage)
+function draginclude.CheckItems()
     local items = {};
     for _,container in ipairs(gSettings.EquipBags) do
         local available = gData.GetContainerAvailable(container);
@@ -649,13 +599,7 @@ function draginclude.CheckItems(checkStorage)
                 local containerItem = inventoryManager:GetContainerItem(container, index);
                 local item = resourceManager:GetItemById(containerItem.Id);
                 if containerItem ~= nil and containerItem.Count > 0 and containerItem.Id > 0 then
-                    if container == 2 and checkStorage == true then
-                        table.insert(items, item.Name[1]);
-                    elseif container == 2 and checkStorage == false then
-
-                    else
-                        table.insert(items, item.Name[1]);
-                    end
+                    table.insert(items, item.Name[1]);
                 end
             end
         end
@@ -749,9 +693,9 @@ function draginclude.RelicCheck()
     local pieceCount = 0;
     local shellCount = 0;
 
-    local redeemedByneCount = 0;
-    local redeemedPieceCount = 0;
-    local redeemedShellCount = 0;
+    local redeemedByneCount = 1600; -- Stage 3
+    local redeemedPieceCount = 6100; -- Stage 4
+    local redeemedShellCount = 400; -- Stage 2
 
     local requiredByneCount = 1600;
     local requiredPieceCount = 6100;
@@ -767,28 +711,10 @@ function draginclude.RelicCheck()
     gFunc.Message('bynes: [' .. byneCount +  redeemedByneCount .. '/' .. requiredByneCount .. '] | coins: [' .. pieceCount + redeemedPieceCount .. '/' .. requiredPieceCount .. '] | shells: [' .. shellCount + redeemedShellCount .. '/' .. requiredShellCount .. ']');
 end
 
---Equips Melody Earring when level >= 52 and player has song buff
-local function CheckEquipMelodyEarring(level, songBuffActive, items)
-    if songBuffActive == true and level >= 52 and has_value(items, 'Melody Earring') then 
-        gFunc.Equip('Ear1', 'Melody Earring');
-
-        if value_count(items, 'Melody Earring') > 1 then
-            gFunc.Equip('Ear2', 'Melody Earring');
-        end
-    end
-end
-
 --Equips Opo-Opo necklace when level is > 61 and player is asleep
 local function CheckEquipOpoOpoNecklace(level, asleep, items)
     if asleep == true and level >= 61 and  has_value(items, 'Opo-opo Necklace') then
         gFunc.Equip('Neck', 'Opo-opo Necklace');
-    end
-end
-
---Equips Fenrir's Earring when level is >= 70 and is daytime
-local function CheckEquipFenrirsEarring(level, items)
-    if isDaytime() and level >= 70 and has_value(items, 'Fenrir\'s Earring') then
-        gFunc.Equip('Ear2', 'Fenrir\'s Earring');
     end
 end
 
@@ -803,11 +729,7 @@ end
 
 -- Put at the end of your job's HandleDefault
 function draginclude.HandleDefault(settings)
-    draginclude.CheckDoExpRing();
-    draginclude.CheckDoTavRing();
-    draginclude.CheckDoReraiseEarring();
     draginclude.CheckAketon();
-    --draginclude.CheckTorque();
     draginclude.CheckVirtueStone();
     dragdisplay.Update(settings);
 end
@@ -897,7 +819,7 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     local paralyzed = false;
     local blinded = false;
     local songBuffActive = false;
-    local items = draginclude.CheckItems(false);
+    local items = draginclude.CheckItems();
 
     if StatusArmorSwapSettings == nil then
         StatusArmorSwapSettings = draginclude.statusArmorSwapsDefault;
@@ -913,23 +835,11 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     end
 
     if player.Status == 'Engaged' then
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
-
-        if StatusArmorSwapSettings.FenrirsEarring == true then
-            CheckEquipFenrirsEarring(level, items);
-        end
-
 	--Resting Section
     elseif (player.Status == 'Resting') then
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
 
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
@@ -941,16 +851,9 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
 
 	--Idle Section
 	else
-        if StatusArmorSwapSettings.MelodyEarring == true then
-            CheckEquipMelodyEarring(level, songBuffActive, items);
-        end
 
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
-        end
-
-        if StatusArmorSwapSettings.FenrirsEarring == true then
-            CheckEquipFenrirsEarring(level, items);
         end
 
         if StatusArmorSwapSettings.PresidentialHairpin == true then
@@ -965,38 +868,11 @@ function draginclude.HandleAbility(ability);
 end
 
 function draginclude.HandleWeaponSkill(weaponSkill)
-    --draginclude.CheckTorque();
-    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
-end
-
---Marks a flag to use EXP Ring
-function draginclude.CheckDoExpRing()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.ExpRingSettings.UseRing == true and timestamp > draginclude.dragSettings.ExpRingSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. draginclude.dragSettings.ExpRingSettings.RingName .. '" <me>');
-        draginclude.dragSettings.ExpRingSettings.UseRing = false;
-    end
-end
-
---Marks a flag to use Tav Ring
-function draginclude.CheckDoTavRing()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.TavRingSettings.UseRing == true and timestamp > draginclude.dragSettings.TavRingSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "Tavnazian Ring" <me>');
-        draginclude.dragSettings.TavRingSettings.UseRing = false;
-    end
-end
-
---Marks a flag to use EXP Ring
-function draginclude.CheckDoReraiseEarring()
-    local timestamp = os.time();
-
-    if draginclude.dragSettings.ReraiseSettings.UseReraise == true and timestamp > draginclude.dragSettings.ReraiseSettings.TimeToUse then
-        AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. draginclude.dragSettings.ReraiseSettings.ItemName .. '" <me>');
-        draginclude.dragSettings.ReraiseSettings.UseReraise = false;
-    end
+    if weaponSkill.Name == 'Geirskogul' then    
+        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
+    else
+        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
+    end 
 end
 
 function draginclude.HandleItem(item)

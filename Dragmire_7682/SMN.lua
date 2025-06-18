@@ -257,6 +257,21 @@ local sets = {
     Invisible_Priority = {
         Hands = {'Dream Mittens +1'},
     },
+
+    -- MND +39 (111 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*111 - 190 = 255 (350 cap) Every MND is 3 points
+    Stoneskin_Priority = {
+        Main = {'Water Staff'}, -- MND +4
+        Head = {'Zenith Crown'}, -- MND +3
+        Neck = {'Enhancing Torque'}, -- Enhancing +7
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Loquac. Earring'},
+        Body = {'Errant Hpl.'}, -- MND +10
+        Hands = {'Devotee\'s Mitts'}, -- MND +5 
+        Ring2 = {'Sapphire Ring'}, -- MND +4
+        Back = {'Rainbow Cape'}, -- MND +3
+        Legs = {'Errant Slops'}, -- MND +7
+        Feet = {'Rostrum Pumps'}, -- MND +3
+    },
 };
 
 profile.Sets = sets;
@@ -920,6 +935,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
+    elseif spell.Name == 'Stoneskin' then
+        gFunc.EquipSet(sets.Stoneskin);
     end
 end
 

@@ -28,18 +28,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {'Brass Cap'},
-        Neck = {},
+        Head = {'Bone Mask +1'},
+        Neck = {'Beast Whistle'},
         Ear1 = {},
         Ear2 = {},
-        Body = {'Scale Mail'},
-        Hands = {'Ryl.Ftm. Gloves'},
+        Body = {'Beetle Harness +1'},
+        Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
-        Back = {},
+        Back = {'Nomad\'s Mantle'},
         Waist = {},
-        Legs = {'Brass Subligar'},
-        Feet = {'Brass Leggings'},
+        Legs = {'Ryl.Ftm. Trousers'},
+        Feet = {'Btl. Leggings +1'},
     },
 
     IdleTown_Priority = {
@@ -386,11 +386,11 @@ local sets = {
     },
 
     StyleLockGeneric = {
-        Head = 'Brass Cap',
-        Body = 'Scale Mail',
-        Hands = 'Ryl.Ftm. Gloves',
-        Legs = 'Brass Subligar',
-        Feet = 'Brass Leggings',
+        Head = 'Bone Mask +1',
+        Body = 'Beetle Harness +1',
+        Hands = 'Battle Gloves',
+        Legs = 'Ryl.Ftm. Trousers',
+        Feet = 'Beetle Leggings +1',
     },
 
     StyleLockRSE = {
@@ -407,7 +407,7 @@ local sets = {
 
     -- Uses Relic body to remove status ailments
     RewardSTATUS_Priority = {
-        Ammo = {},
+        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
         Neck = {},
         Ear1 = {},
@@ -447,7 +447,7 @@ local sets = {
     Charm_Priority = {
         Ammo = {},
         Head = {},
-        Neck = {},
+        Neck = {'Beast Whistle'}, -- CHR +2
         Ear1 = {},
         Ear2 = {},
         Body = {},
@@ -459,7 +459,6 @@ local sets = {
         Legs = {},
         Feet = {},
     },
-
 };
 
 profile.Sets = sets;

@@ -28,8 +28,8 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {'Bone Mask +1'},
-        Neck = {'Beast Whistle'},
+        Head = {'Centurion\'s Visor'},
+        Neck = {'Ryl.Sqr. Collar'},
         Ear1 = {},
         Ear2 = {},
         Body = {'Beetle Harness +1'},
@@ -386,7 +386,7 @@ local sets = {
     },
 
     StyleLockGeneric = {
-        Head = 'Bone Mask +1',
+        Head = 'Centurion\'s Visor',
         Body = 'Beetle Harness +1',
         Hands = 'Battle Gloves',
         Legs = 'Ryl.Ftm. Trousers',

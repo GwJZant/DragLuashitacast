@@ -11,6 +11,7 @@ local Settings = {
         PresidentialHairpin = true,
     },
     CurrentLevel = 0,
+    TankToggle = 0, -- 0 = DPS, 1 = Parrying/Evasion
 };
 
 local sets = {
@@ -67,7 +68,23 @@ local sets = {
         Waist = {'Swift Belt'},
     },
 
-    Tank_Priority = {
+    TankDPS_Priority = {
+        Ammo = {'Tiphia Sting', 'Happy Egg'},
+        Head = {'Ace\'s Helm', 'Shep. Bonnet'},
+        Neck = {'Love Torque', 'Peacock Amulet'},
+        Ear1 = {'Beastly Earring', 'Spike Earring'},
+        Ear2 = {'Ethereal Earring', 'Merman\'s Earring'},
+        Body = {'Wym. Mail +1', 'Elder\'s Surcoat'},
+        Hands = {'Homam Manopolas'},
+        Ring1 = {'Rajas Ring'},
+        Ring2 = {'Blitz Ring'},
+        Back = {'Forager\'s Mantle'},
+        Waist = {'Swift Belt'},
+        Legs = {'Homam Cosciales', 'Elder\'s Braguette'},
+        Feet = {'Homam Gambieras'},
+    },
+
+    TankStats_Priority = {
         Ammo = {'Happy Egg'},
         Head = {'Optical Hat'}, -- Evasion +10
         Ear1 = {'Novia Earring'}, -- Evasion +7
@@ -114,7 +131,7 @@ local sets = {
 
     },
 
-    WeaponSkill_Priority = {
+    WeaponSkill_Priority = { -- STR +49, DEX +22, ATT +25
         Ammo = {'Tiphia Sting'}, -- ATT+4, ACC+2
         Head = {'Ace\'s Helm'}, -- STR+4, ACC+7
         Neck = {'Love Torque'}, -- SKILL+7, DEX+5
@@ -142,6 +159,11 @@ local sets = {
         Neck = {'Light Gorget'},
     },
 
+    WeaponSkillGeirskogul_Priority = { -- STR +47, DEX +25, ATT +19
+        Neck = {'Light Gorget'},
+        Legs = {'Wyrm Brais'}, -- DEX +5
+    },
+
 
     Precast_Priority = {
 
@@ -161,7 +183,7 @@ local sets = {
 
     
     StyleLock = {
-        Main = 'Dynamis Lance',
+        Main = 'Gungnir',
         Head = 'Ace\'s Helm',
         Body = 'Hecatomb Harness',
         Hands = 'Homam Manopolas',
@@ -357,6 +379,8 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd SpiritLink ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd SteadyWing');
 
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tank /lac fwd TankToggle');
+
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
     end
@@ -373,6 +397,17 @@ end
 profile.HandleCommand = function(args)
     draginclude.HandleCommand(args, sets);
     draginclude.HandleDrgCoreCommands(args);
+
+    if args[1] == 'TankToggle' then
+
+        if Settings.TankToggle == 0 then
+            Settings.TankToggle = 1;
+        else
+            Settings.TankToggle = 0;
+        end
+
+        gFunc.Message('TankToggle ' .. Settings.TankToggle);
+    end
 end
 
 profile.HandleDefault = function()
@@ -441,8 +476,12 @@ profile.HandleDefault = function()
     -- Forward slash toggle between Default and Evasion
     if draginclude.dragSettings.TpVariant == 1 then
         -- Nothing
-    elseif draginclude.dragSettings.TpVariant == 2 then --Use Tank set
-        gFunc.EquipSet(sets.Tank);
+    elseif draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
+        if Settings.TankToggle == 0 then
+            gFunc.EquipSet(sets.TankDPS);
+        else
+            gFunc.EquipSet(sets.TankStats);
+        end
     end
 
     if (petAction ~= nil) then
@@ -524,16 +563,14 @@ profile.HandleWeaponskill = function()
 
     gFunc.Message(action.Name);
 
-    if player.SubJob ~= 'WHM' and player.SubJob ~= 'RDM' and player.SubJob ~= 'BLM' then
+    gFunc.EquipSet(sets.WeaponSkill);
 
-        gFunc.EquipSet(sets.WeaponSkill);
-
-        if string.contains(action.Name, 'Penta') then
-            gFunc.EquipSet(sets.WeaponSkillPenta);
-
-        elseif string.contains(action.Name, 'Wheeling') or string.contains(action.Name, 'Skewer') or string.contains(action.Name, 'Thunder') or string.contains(action.Name, 'Vorpal') then
-            gFunc.EquipSet(sets.WeaponSkillLight);
-        end
+    if action.Name == 'Penta Thrust' then
+        gFunc.EquipSet(sets.WeaponSkillPenta);
+    elseif action.Name == 'Geirskogul' then
+        gFunc.EquipSet(sets.WeaponSkillGeirskogul);
+    elseif string.contains(action.Name, 'Wheeling') or string.contains(action.Name, 'Skewer') or string.contains(action.Name, 'Thunder') or string.contains(action.Name, 'Vorpal') then
+        gFunc.EquipSet(sets.WeaponSkillLight);
     end
 
     draginclude.HandleWeaponSkill(action);

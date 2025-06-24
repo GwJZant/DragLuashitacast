@@ -20,6 +20,7 @@ local Settings = {
     ConvertMPNuke = 50,
     ConvertMPRefresh = 105,
     WeaponTypeToggle = false, -- true = Sword | false = dagger
+    PDT = false,
 };
 
 local sets = {
@@ -32,7 +33,7 @@ local sets = {
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}, {Name = 'Elder\'s Surcoat', Priority = 100}},
         Hands = {{Name = 'Zenith Mitts', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
         Ring1 = {{Name = 'Ether Ring', Priority = 100}, {Name = 'Astral Ring', Priority = 100}},
-        Ring2 = {{Name = 'Astral Ring', Priority = 100}},
+        Ring2 = {{Name = 'Jelly Ring', Priority = 0}},
         Back = {{Name = 'Rainbow Cape', Priority = 100}, 'Trimmer\'s Mantle'},
         Waist = {{Name = 'Hierarch Belt', Priority = 100}, {Name = 'Ryl. Kgt. Belt', Priority = 0}},
         Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
@@ -154,6 +155,39 @@ local sets = {
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
+    TankStaff_Priority = { -- PDT -43% or -48%
+        Main = {'Earth Staff'}, -- PDT -20%
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
+        Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- MP +30
+        Ear2 = {{Name = 'Ethereal Earring', Priority = 0}}, -- Convert 3% Damage to MP
+        Body = {{Name = 'Dst. Harness +1', Priority = 0}}, -- PDT -4%
+        Hands = {{Name = 'Dst. Mittens +1', Priority = 0}}, -- PDT -2%
+        Ring1 = {{Name = 'Ether Ring', Priority = 100}}, -- MP +30
+        Ring2 = {{Name = 'Jelly Ring', Priority = 0}}, -- PDT -5%
+        Back = {{Name = 'Cheviot Cape', Priority = 0}}, -- PDT -5% or -10%
+        Waist = {{Name = 'Hierarch Belt', Priority = 100}}, -- MP +48
+        Legs = {{Name = 'Dst. Subligar +1', Priority = 0}}, -- PDT -3%
+        Feet = {{Name = 'Dst. Leggings +1', Priority = 0}}, -- PDT -2%
+    },
+
+    TankShield_Priority = { -- PDT -33% or -38%
+        Main = {'Martial Knife'},
+        Sub = {'Genbu\'s Shield'}, -- PDT -10%
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
+        Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- MP +30
+        Ear2 = {{Name = 'Ethereal Earring', Priority = 0}}, -- Convert 3% Damage to MP
+        Body = {{Name = 'Dst. Harness +1', Priority = 0}}, -- PDT -4%
+        Hands = {{Name = 'Dst. Mittens +1', Priority = 0}}, -- PDT -2%
+        Ring1 = {{Name = 'Ether Ring', Priority = 100}}, -- MP +30
+        Ring2 = {{Name = 'Jelly Ring', Priority = 0}}, -- PDT -5%
+        Back = {{Name = 'Cheviot Cape', Priority = 0}}, -- PDT -5% or -10%
+        Waist = {{Name = 'Hierarch Belt', Priority = 100}}, -- MP +48
+        Legs = {{Name = 'Dst. Subligar +1', Priority = 0}}, -- PDT -3%
+        Feet = {{Name = 'Dst. Leggings +1', Priority = 0}}, -- PDT -2%
+    },
+
     StyleLock2 = {
         Head = 'Duelist\'s Chapeau',
         Body = 'Goblin Suit',
@@ -167,6 +201,15 @@ local sets = {
         Hands = 'Zenith Mitts',
         Legs = 'Zenith Slacks',
         Feet = 'Dream Boots +1',
+    },
+
+    StyleLockTank = {
+        Main = 'Earth Staff',
+        Head = 'Darksteel Cap +1',
+        Body = 'Dst. Harness +1',
+        Hands = 'Dst. Mittens +1',
+        Legs = 'Dst. Subligar +1',
+        Feet = 'Dst. Leggings +1',
     },
 
     StyleLockHydra = {
@@ -605,7 +648,8 @@ end
 profile.OnLoad = function()    
     draginclude.OnLoad(sets, {'Melee', 'Staff'}, {'None', 'Field', 'Fishing'});
 
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd pdt ');
 end
 
 profile.OnUnload = function()
@@ -621,6 +665,14 @@ profile.HandleCommand = function(args)
             gFunc.Message('WeaponTypeToggle SWORD');
         else
             gFunc.Message('WeaponTypeToggle DAGGER');
+        end
+    elseif (args[1] == 'pdt') then
+        Settings.PDT = not Settings.PDT;
+
+        if Settings.PDT then
+            gFunc.Message('PDT ON');
+        else
+            gFunc.Message('PDT OFF');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -665,7 +717,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockCool);
+        gFunc.LockStyle(sets.StyleLockTank);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
@@ -840,6 +892,14 @@ profile.HandleDefault = function()
     draginclude.HandleDefault();
     draginclude.CheckSkillingVariant();
     draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
+
+    if Settings.PDT then
+        if draginclude.dragSettings.TpVariant == 1 then
+            gFunc.EquipSet(sets.TankShield);
+        elseif draginclude.dragSettings.TpVariant == 2 then
+            gFunc.EquipSet(sets.TankStaff);
+        end
+    end
 end
 
 profile.HandleAbility = function()
@@ -933,7 +993,7 @@ profile.HandleMidcast = function()
             elseif spell.Name == 'Haste' and player.MP >= 50 then
                 gFunc.EquipSet(sets.DilationRingRefreshHaste);
             end
-        elseif string.contains(spell.Name, 'Bar') then -- Barspells need raw Enhancing Skill
+        elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
             gFunc.EquipSet(sets.EnhancingSkill); -- +98 Resist
         end
     elseif spell.Skill == 'Healing Magic'  then

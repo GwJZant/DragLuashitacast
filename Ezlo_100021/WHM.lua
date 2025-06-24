@@ -26,7 +26,7 @@ local sets = {
         Back = {''},
         Waist = {''},
         Legs = {'Windurstian Slops'},
-        Feet = {''},
+        Feet = {'Sandals'},
     },
 
     RestingMP_Priority = {
@@ -47,10 +47,10 @@ local sets = {
 
     StyleLock = {
         Head = '',
-        Body = '',
-        Hands = '',
-        Legs = '',
-        Feet = '',
+        Body = 'Ryl.Ftm. Tunic',
+        Hands = 'Battle Gloves',
+        Legs = 'Windurstian Slops',
+        Feet = 'Sandals',
     },
 
     PetReadyDefault = {

@@ -21,6 +21,7 @@ local Settings = {
     ConvertMPRefresh = 105,
     WeaponTypeToggle = false, -- true = Sword | false = dagger
     PDT = false,
+    FastCastValue = 0.42 -- 20% from traits 22% from gear listed in Precast set
 };
 
 local sets = {
@@ -40,35 +41,9 @@ local sets = {
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
-    DefaultLowMP_Priority = {
-        Ammo = {{Name = 'Hedgehog Bomb', Priority = 100}, {Name = 'Phtm. Tathlum', Priority = 100}, 'Fortune Egg'},
-        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}, 'Egg Helm'},
-        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}, {Name = 'Peacock Amulet', Priority = 0}},
-        Ear1 = {{Name = 'Ethereal Earring', Priority = 0}},
-        Ear2 = {{Name = 'Novia Earring', Priority = 0}, {Name = 'Phantom Earring', Priority = 100}},
-        Body = {{Name = 'Scorpion Harness', Priority = 0}, {Name = 'Elder\'s Surcoat', Priority = 100}},
-        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
-        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
-        Waist = {{Name = 'Ryl.Kgt. Belt', Priority = 0}},
-        Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
-        Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
-    },
-
-    Idle_Priority = {
-        --Body = {'Vermillion Cloak'},
-    },
-
     Engaged_Priority = {
         Head = {{Name = 'Optical Hat', Priority = 0}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Scorpion Harness', Priority = 0}},
-    },
-
-    Evasion_Priority = { --EVA, AGI
-        Head = {},
-        Neck = {},
-        Back = {},
     },
 
     MeleeWeapons_Priority = {
@@ -123,38 +98,6 @@ local sets = {
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
 
-    IdleTown_Priority = {
-        Ammo = {{Name = 'Hedgehog Bomb', Priority = 100}},
-        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
-        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}},
-        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
-        Ear2 = {{Name = 'Novia Earring', Priority = 0}},
-        Body = {{Name = 'Nashira Manteel', Priority = 0}},
-        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
-        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
-        Ring2 = {{Name = 'Overlord\'s Ring', Priority = 0}},
-        Back = {{Name = 'Empwr. Mantle', Priority = 100}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}},
-        Legs = {{Name = 'Crimson Cuisses', Priority = 0}},
-        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
-    },
-
-    IdleTownNIN_Priority = {
-        Ammo = {{Name = 'Tiphia Sting', Priority = 0}},
-        Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
-        Neck = {{Name = 'Uggalepih Pendant', Priority = 100}},
-        Ear1 = {{Name = 'Stealth Earring', Priority = 0}},
-        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
-        Body = {{Name = 'Nashira Manteel', Priority = 0}},
-        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
-        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
-        Ring2 = {{Name = 'Overlord\'s Ring', Priority = 0}},
-        Back = {{Name = 'Empwr. Mantle', Priority = 100}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}},
-        Legs = {{Name = 'Crimson Cuisses', Priority = 0}},
-        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
-    },
-
     TankStaff_Priority = { -- PDT -43% or -48%
         Main = {'Earth Staff'}, -- PDT -20%
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
@@ -172,7 +115,7 @@ local sets = {
     },
 
     TankShield_Priority = { -- PDT -33% or -38%
-        Main = {'Martial Knife'},
+        Main = {'Blau Dolch'},
         Sub = {'Genbu\'s Shield'}, -- PDT -10%
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
         Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
@@ -188,10 +131,13 @@ local sets = {
         Feet = {{Name = 'Dst. Leggings +1', Priority = 0}}, -- PDT -2%
     },
 
-    StyleLock2 = {
-        Head = 'Duelist\'s Chapeau',
-        Body = 'Goblin Suit',
-        Legs = 'Elder\'s Braguette',
+    -- Skill SIRD: 100 - [ (40 flat - level diff to the mob) * (your skill if you had it capped on the job at lvl 75 / your actual skill) then clamped to 100 if it exceeds 100 ]
+    SIRD_Priority = { -- 57% (77% w/ Aquaveil)
+        Main = {'Hermit\'s Wand'}, -- 25%
+        Sub = {'Genbu\'s Shield'}, -- PDT -10%
+        Head = {'Nashira Turban'}, -- 10%
+        Body = {'Wlk. Tabard +1'}, -- 12%
+        Waist = {'Druid\'s Rope'}, -- 10%
     },
 
     StyleLockCool = {
@@ -212,64 +158,10 @@ local sets = {
         Feet = 'Dst. Leggings +1',
     },
 
-    StyleLockHydra = {
-        Main = 'Dark Staff',
-        Head = 'Hydra Cap',
-        Body = 'Hydra Jupon',
-        Hands = 'Crimson Fng. Gnt.',
-        Legs = 'Hydra Tights',
-        Feet = 'Hydra Spats',
-    },
-
-    StyleLockAF = {
-        Main = 'Fire Staff',
-        Head = 'Warlock\'s Chapeau',
-        Body = 'Wlk. Tabard +1',
-        Hands = 'Warlock\'s Gloves',
-        Legs = 'Warlock\'s Tights',
-        Feet = 'Warlock\'s Boots',
-    },
-
-    StyleLockRelic = {
-        Main = 'Dark Staff',
-        Head = 'Duelist\'s Chapeau',
-        Body = 'Duelist\'s Tabard',
-        Hands = 'Duelist\'s Gloves',
-        Legs = 'Duelist\'s Tights',
-        Feet = 'Duelist\'s Boots',
-    },
-
-    StyleLockSummer = {
-        Main = 'Light Staff',
-        Head = 'President. Hairpin',
-        Body = 'Elder Gilet +1',
-        --Hands = 'Scp. Gauntlets',
-        Legs = 'Elder Trunks',
-        --Feet = 'Homam Gambieras',
-    },
-
-    StyleLockSummer2 = {
-        Main = 'Light Staff',
-        Head = 'Snowman Cap',
-        Body = 'Elder Gilet +1',
-        --Hands = 'Scp. Gauntlets',
-        Legs = 'Elder Trunks',
-        --Feet = 'Homam Gambieras',
-    },
-
-    StyleLockWinter = {
-        Main = 'Light Staff',
-        Head = 'Dream Cap +1',
-        Body = 'Dream Robe +1',
-        Hands = 'Dream Mittens +1',
-        Legs = 'Dream Trousers +1',
-        Feet = 'Dream Boots +1',
-    },
-
     Precast_Priority = {
-        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
-        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
-        Body = {{Name = 'Duelist\'s Tabard', Priority = 100}},
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}}, --10
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, --2
+        Body = {{Name = 'Duelist\'s Tabard', Priority = 100}}, --10
     },
 
     INTElementalAcc_Priority = {
@@ -532,14 +424,6 @@ local sets = {
         Ear1 = {{Name = 'Stealth Earring', Priority = 0}},
     },
 
-    PetReadyDefault = {
-
-    },
-
-    PetAttack = {
-
-    },
-
     Reward_Priority = { -- MND
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Body = {{Name = 'Errant Hpl.', Priority = 0}},
@@ -576,10 +460,6 @@ local sets = {
 };
 
 profile.Sets = sets;
-
-local function HandlePetAction(PetAction)
-    gFunc.EquipSet(sets.PetReadyDefault);
-end
 
 local ObiTable = {
     Fire = "Karin Obi",
@@ -700,6 +580,8 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Ice Spikes" <me>');
     elseif (args[1] == 'blazespikes') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blaze Spikes" <me>');
+    elseif (args[1] == 'shockspikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Shock Spikes" <me>');
     elseif (args[1] == 'phalanx') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
     elseif (args[1] == 'blink') then
@@ -782,7 +664,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd blazespikes ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd shockspikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
@@ -800,8 +682,6 @@ end
 profile.HandleDefault = function()
     local timestamp = os.time();
     local zone = gData.GetEnvironment();
-    local pet = gData.GetPet();
-    local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
     local spikes = gData.GetBuffCount('Blaze Spikes') + gData.GetBuffCount('Shock Spikes') + gData.GetBuffCount('Ice Spikes');
@@ -825,9 +705,8 @@ profile.HandleDefault = function()
         gFunc.EquipSet(sets.Default);
 
         if player.Status == 'Idle' then
-            gFunc.EquipSet(sets.Idle);
+            
         elseif player.Status == 'Resting' then
-            gFunc.EquipSet(sets.Idle);
             gFunc.EquipSet(sets.Resting);
         elseif player.Status == 'Engaged' then
             --gFunc.EquipSet(sets.MeleeEngagedAcc);
@@ -839,7 +718,6 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.MeleeWeaponsNIN);
             else
                 gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
-
             end
 
             if player.Status == 'Engaged' then
@@ -862,30 +740,13 @@ profile.HandleDefault = function()
         gFunc.EquipSet(sets.Default);
 
         if player.Status == 'Resting' then
-            gFunc.EquipSet(sets.Idle);
             gFunc.EquipSet(sets.RestingMP);
         elseif player.Status == 'Idle' then
-            gFunc.EquipSet(sets.Idle);
             gFunc.EquipSet(sets.Earth);
         end
 
         if spikes > 0 then
             gFunc.EquipSet(sets.Spikes);
-        end
-    end
-
-    if (pet ~= nil) then
-        if (petAction ~= nil) then
-            HandlePetAction(petAction);
-            return;
-        end
-    end
-
-    if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        if player.SubJob == 'NIN' then
-            --gFunc.EquipSet(sets.IdleTownNIN);
-        else
-            --gFunc.EquipSet(sets.IdleTown);
         end
     end
 
@@ -925,14 +786,28 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    local spell = gData.GetAction();
+    local player = gData.GetPlayer();
+    local action = gData.GetAction();
+    local castTime = action.CastTime;
+    local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
+    local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
+    local castDelay = ((castTime * (1 - Settings.FastCastValue)) / 1000) - minimumBuffer;
+    local chainspell = gData.GetBuffCount('Chainspell');
 
+    if chainspell == 0 and Settings.PDT then
+        if (castDelay >= packetDelay) then
+            gFunc.Message('Equipping Interim ' .. castDelay);
+            gFunc.SetMidDelay(castDelay);
+        end
+    end
+    
     gFunc.EquipSet(sets.Precast);
 end
 
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
     local player = gData.GetPlayer();
+    local chainspell = gData.GetBuffCount('Chainspell');
 
     Settings.SpellElement = spell.Element;
     gFunc.Message(spell.Name .. ' ' .. spell.Skill .. ' ' .. spell.Type .. ' ' .. spell.Element);
@@ -956,6 +831,14 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Light);
         elseif spell.Element == 'Dark' then
             gFunc.EquipSet(sets.Dark);
+        end
+    end
+
+    if chainspell == 0 and Settings.PDT then
+        if draginclude.dragSettings.TpVariant == 1 then
+            draginclude.SetupInterimEquipSet(sets.TankShield);
+        elseif draginclude.dragSettings.TpVariant == 2 then
+            draginclude.SetupInterimEquipSet(sets.TankStaff);
         end
     end
 

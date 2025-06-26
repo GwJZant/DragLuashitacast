@@ -100,10 +100,14 @@ local sets = {
     },
 
     PDT_Priority = {
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Ethereal Earring'},
-        Ring2 = {'Jelly Ring'},
+        Head = {'Darksteel Cap +1'}, -- PDT -2%
+        --Ear1 = {'Loquac. Earring'},
+        --Ear2 = {'Ethereal Earring'},
+        Hands = {'Dst. Mittens +1'}, -- PDT -2%
+        Ring2 = {'Jelly Ring'}, -- PDT -5%
         Back = {'Boxer\'s Mantle'},
+        Legs = {'Dst. Subligar +1'}, -- PDT -3%
+        Feet = {'Dst. Leggings +1'}, -- PDT -2%
     },
 
     MDT_Priority = {
@@ -216,6 +220,24 @@ local sets = {
         Hands = 'Elder\'s Bracers',
         Legs = 'Elder\'s Braguette',
         Feet = 'Elder\'s Sandals'
+    },
+
+    StyleLockTank = {
+        Main = 'Gungnir',
+        Head = 'Darksteel Cap +1',
+        Body = 'Dst. Harness +1',
+        Hands = 'Dst. Mittens +1',
+        Legs = 'Dst. Subligar +1',
+        Feet = 'Dst. Leggings +1',
+    },
+
+    StyleLockSummer = {
+        Main = 'Gungnir',
+        Head = 'Ace\'s Helm',
+        Body = 'Elder Gilet +1',
+        --Hands = 'Scp. Gauntlets',
+        Legs = 'Elder Trunks',
+        --Feet = 'Homam Gambieras',
     },
 
     BreathBonusHealing_Priority = {
@@ -477,11 +499,12 @@ profile.HandleDefault = function()
     if draginclude.dragSettings.TpVariant == 1 then
         -- Nothing
     elseif draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
-        if Settings.TankToggle == 0 then
-            gFunc.EquipSet(sets.TankDPS);
-        else
-            gFunc.EquipSet(sets.TankStats);
-        end
+        --if Settings.TankToggle == 0 then
+        --    gFunc.EquipSet(sets.TankDPS);
+        --else
+        --    gFunc.EquipSet(sets.TankStats);
+        --end
+        gFunc.EquipSet(sets.PDT);
     end
 
     if (petAction ~= nil) then
@@ -491,9 +514,9 @@ profile.HandleDefault = function()
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
         if player.SubJob == 'WHM' or player.SubJob == 'WHM' or player.SubJob == 'WHM' then
-            gFunc.EquipSet(sets.IdleTownMage);
+            --gFunc.EquipSet(sets.IdleTownMage);
         else
-            gFunc.EquipSet(sets.IdleTown);
+            --gFunc.EquipSet(sets.IdleTown);
         end
         
     end

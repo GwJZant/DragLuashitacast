@@ -27,7 +27,7 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Shrimp Lure',
         Body = 'Angler\'s Tunica',
@@ -35,7 +35,7 @@ draginclude.sets = T{
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Sinking Minnow',
         Body = 'Angler\'s Tunica',
@@ -342,6 +342,13 @@ function draginclude.OnLoad(sets, tpVariantTable, skillingVariantTable)
         draginclude.SkillingVariantTable[k] = v;
         print('[' .. k .. ', ' .. v .. ']');
     end
+end
+
+function draginclude.SetupInterimEquipSet(set)
+    local environment = gData.GetEnvironment();
+    local action = gData.GetAction();
+
+    gFunc.InterimEquipSet(set);
 end
 
 --Binds default custom commands
@@ -747,6 +754,23 @@ function draginclude.CheckVirtueStone()
                 gFunc.Equip('Ammo', 'Virtue Stone');
             end
         end
+    end
+end
+
+function draginclude.HandlePrecast(fastCastValue)
+    local player = gData.GetPlayer();
+    local action = gData.GetAction();
+    local castTime = action.CastTime;
+    local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
+    local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
+    local castDelay = ((castTime * (1 - fastCastValue)) / 1000) - minimumBuffer;
+
+    if (player.SubJob == "RDM") then
+        fastCastValue = fastCastValue + 0.15 -- Fast Cast Trait
+    end
+
+    if (castDelay >= packetDelay) then
+        gFunc.SetMidDelay(castDelay);
     end
 end
 

@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.SheepFamiliar},
+        DefaultJugs = {draginclude.JugPetConfig.SheepFamiliar, draginclude.JugPetConfig.CourierCarrie},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -32,14 +32,14 @@ local sets = {
         Neck = {'Ryl.Sqr. Collar'},
         Ear1 = {},
         Ear2 = {},
-        Body = {'Beetle Harness +1'},
+        Body = {'Wonder Kaftan', 'Beetle Harness +1'},
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
         Back = {'Nomad\'s Mantle'},
         Waist = {},
-        Legs = {'Ryl.Ftm. Trousers'},
-        Feet = {'Btl. Leggings +1'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
+        Feet = {'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
     IdleTown_Priority = {
@@ -154,20 +154,20 @@ local sets = {
         Feet = {},
     },
 
-    WeaponSkill_Priority = {
+    WeaponSkill_Priority = { -- STR, DEX
         Ammo = {},
         Head = {},
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
+        Body = {'Wonder Kaftan'},
+        Hands = {'Wonder Mitts'},
+        Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
         Back = {},
         Waist = {},
-        Legs = {},
-        Feet = {},
+        Legs = {'Wonder Braccae'},
+        Feet = {'Wonder Clomps'},
     },
 
     WeaponSkillLight_Priority = {
@@ -387,10 +387,10 @@ local sets = {
 
     StyleLockGeneric = {
         Head = 'Centurion\'s Visor',
-        Body = 'Beetle Harness +1',
-        Hands = 'Battle Gloves',
-        Legs = 'Ryl.Ftm. Trousers',
-        Feet = 'Beetle Leggings +1',
+        Body = 'Wonder Kaftan',
+        Hands = 'Wonder Mitts',
+        Legs = 'Wonder Braccae',
+        Feet = 'Wonder Clomps',
     },
 
     StyleLockRSE = {

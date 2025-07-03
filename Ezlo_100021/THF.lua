@@ -30,14 +30,14 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {'Beetle Harness +1'},
+        Body = {'Beetle Harness +1', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
         Back = {'Nomad\'s Mantle'},
         Waist = {},
-        Legs = {'Ryl.Ftm. Trousers'},
-        Feet = {'Btl. Leggings +1'},
+        Legs = {'Ryl.Ftm. Trousers', 'Windurstian Slops'},
+        Feet = {'Btl. Leggings +1', 'Tarutaru Clomps'},
     },
 
     RangedAcc_Priority = {

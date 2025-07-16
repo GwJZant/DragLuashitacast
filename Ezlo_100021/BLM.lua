@@ -20,13 +20,13 @@ local sets = {
         Ear1 = {''},
         Ear2 = {''},
         Body = {'Ryl.Ftm. Tunic'},
-        Hands = {''},
+        Hands = {'Wonder Mitts'},
         Ring1 = {'Eremite\'s Ring'},
         Ring2 = {'Eremite\'s Ring'},
         Back = {''},
         Waist = {''},
         Legs = {'Windurstian Slops'},
-        Feet = {'Sandals'},
+        Feet = {'Wonder Clomps'},
     },
 
     RestingMP_Priority = {

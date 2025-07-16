@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.SheepFamiliar, draginclude.JugPetConfig.CourierCarrie},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -28,18 +28,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {'Centurion\'s Visor'},
+        Head = {'Alumine Salade'},
         Neck = {'Ryl.Sqr. Collar'},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {'Wonder Kaftan', 'Beetle Harness +1'},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Alumine Haubert', 'Wonder Kaftan', 'Beetle Harness +1'},
         Hands = {'Battle Gloves'},
-        Ring1 = {'San d\'Orian Ring'},
-        Ring2 = {},
+        Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Sniper\'s Ring'},
         Back = {'Nomad\'s Mantle'},
-        Waist = {},
-        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
-        Feet = {'Wonder Clomps', 'Btl. Leggings +1'},
+        Waist = {'Tilt Belt'},
+        Legs = {'Alumine Brayettes', 'Wonder Braccae', 'Ryl.Ftm. Trousers'},
+        Feet = {'Alumine Sollerets', 'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
     IdleTown_Priority = {
@@ -115,7 +115,7 @@ local sets = {
         Body = {},
         Hands = {},
         Ring1 = {},
-        Ring2 = {},
+        Ring2 = {'Ether Ring'},
         Back = {},
         Waist = {},
         Legs = {},
@@ -156,17 +156,17 @@ local sets = {
 
     WeaponSkill_Priority = { -- STR, DEX
         Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {'Wonder Kaftan'},
+        Head = {'Alumine Salade'},
+        Neck = {'Ryl.Sqr. Collar'},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Alumine Haubert', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
-        Ring1 = {'San d\'Orian Ring'},
-        Ring2 = {},
+        Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Sniper\'s Ring'},
         Back = {},
-        Waist = {},
-        Legs = {'Wonder Braccae'},
+        Waist = {'Tilt Belt'},
+        Legs = {'Alumine Brayettes', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
     },
 
@@ -386,11 +386,11 @@ local sets = {
     },
 
     StyleLockGeneric = {
-        Head = 'Centurion\'s Visor',
-        Body = 'Wonder Kaftan',
+        Head = 'Alumine Salade',
+        Body = 'Alumine Haubert',
         Hands = 'Wonder Mitts',
-        Legs = 'Wonder Braccae',
-        Feet = 'Wonder Clomps',
+        Legs = 'Alumine Brayettes',
+        Feet = 'Wonder Sollerets',
     },
 
     StyleLockRSE = {
@@ -412,13 +412,13 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {},
+        Body = {'Wonder Kaftan'},
         Hands = {},
         Ring1 = {},
         Ring2 = {},
         Back = {},
         Waist = {},
-        Legs = {},
+        Legs = {'Wonder Braccae'},
         Feet = {},
     },
 
@@ -429,13 +429,13 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {},
+        Body = {'Wonder Kaftan'},
         Hands = {},
         Ring1 = {},
         Ring2 = {},
         Back = {},
         Waist = {},
-        Legs = {},
+        Legs = {'Wonder Braccae'},
         Feet = {},
     },
 
@@ -447,7 +447,7 @@ local sets = {
     Charm_Priority = {
         Ammo = {},
         Head = {},
-        Neck = {'Beast Whistle'}, -- CHR +2
+        Neck = {}, -- CHR +2
         Ear1 = {},
         Ear2 = {},
         Body = {},
@@ -468,7 +468,7 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'PetAcc', 'Evasion'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'Default', 'PDT'}, {'None', 'Field', 'Fishing'});
 
     -- BST Core Commands
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
@@ -587,7 +587,7 @@ profile.HandleDefault = function()
         end
         
         if player.SubJob == 'WHM' or player.SubJob == 'RDM' then
-            if player.MP >= 70 and player.Status ~= 'Engaged' then
+            if player.MP >= 100 and player.Status ~= 'Engaged' then
                 gFunc.EquipSet(sets.MP);
             elseif player.MP < 50 then
                 gFunc.EquipSet(sets.Gaudy);
@@ -602,19 +602,8 @@ profile.HandleDefault = function()
             end
         end
 
-    -- 2 = Pet Accuracy
+    -- 2 = Evasion (I never use this one)
     elseif draginclude.dragSettings.TpVariant == 2 then 
-        if player.SubJob == 'WHM' or player.SubJob == 'RDM' then
-            gFunc.EquipSet(sets.PetAccWHM);
-
-            if player.Status == 'Resting' then
-                gFunc.EquipSet(sets.Relaxing);
-            end
-        else
-            gFunc.EquipSet(sets.PetAcc);
-        end
-    -- 3 = Evasion (I never use this one)
-    elseif draginclude.dragSettings.TpVariant == 3 then 
         if player.SubJob == 'WHM' or player.SubJob == 'RDM' then
             gFunc.EquipSet(sets.EvasionWHM);
 
@@ -638,16 +627,6 @@ profile.HandleDefault = function()
         end
     end
 
-    -- Equip Gaudy Harness if a Rune Axe is in hand and we have less than 50 mp
-    if ((mainWeapon ~= nil and mainWeapon.Name == 'Rune Axe') or (subWeapon ~= nil and subWeapon.Name == 'Rune Axe')) and player.MP < 50 and player.Status == 'Engaged' then
-        gFunc.EquipSet(sets.Gaudy);
-    end
-
-    -- Put town gear on
-    if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        gFunc.EquipSet(sets.IdleTown);
-    end
-
     draginclude.HandleDefault(Settings.JugPetSettings);
     draginclude.CheckSkillingVariant();
     draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
@@ -657,7 +636,6 @@ profile.HandleAbility = function()
     local pet = gData.GetPet();
     local ability = gData.GetAction();
 
-    --gFunc.EvaluateLevels(profile.Sets, Settings.CurrentLevel);
     gFunc.Message(ability.Name);
 
     if string.match(ability.Name, 'Call Beast') then

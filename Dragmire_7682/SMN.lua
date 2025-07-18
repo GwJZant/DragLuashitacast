@@ -10,6 +10,7 @@ local Settings = {
 
     },
     CurrentLevel = 0,
+    CutHP = false,
 };
 
 local sets = {
@@ -147,6 +148,22 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
     },
 
+    CutHP_Priority = { -- INT +42, MND +23, Acc -5
+        Ammo = {'Happy Egg'}, -- INT +2
+        Head = {'Nashira Turban'}, -- INT +3
+        Neck = {'Temp. Torque'}, -- Staff Skill +7
+        Ear1 = {'Beastly Earring'}, -- INT +1
+        Ear2 = {'Brutal Earring'}, -- DA +1%
+        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Waist = {'Swift Belt'},
+        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
+        Feet = {'Austere Sabots'}, -- INT +3, MND +3
+    },
+
     IdleTown_Priority = {
         Head = {'Nashira Turban'},
         Ear1 = {'Novia Earring'},
@@ -167,12 +184,12 @@ local sets = {
     },
 
     StyleLock2 = {
-        Head = 'Evoker\'s Horn',
+        Head = 'Summoner\'s Horn',
         Body = 'Goblin Suit',
         --Body = 'Eerie Cloak',
         --Body = 'Errant Hpl.',
         --Hands = 'Zenith Mitts',
-        Legs = 'Penance Slops',
+        --Legs = 'Penance Slops',
         --Feet = 'Austere Sabots',
     },
 
@@ -739,6 +756,9 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
+
+    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /cuthp /lac fwd cuthp ');
 end
 
 profile.OnUnload = function()
@@ -746,6 +766,13 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
+
+    if (args[1] == 'cuthp') then
+        Settings.CutHP = not Settings.CutHP;
+
+        gFunc.Message('CutHP ' .. tostring(Settings.CutHP));
+    end
+
     draginclude.HandleCommand(args, sets);
     HandleSmnCoreCommands(args);
 end
@@ -756,7 +783,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLock2);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
@@ -898,6 +925,10 @@ profile.HandleDefault = function()
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
         gFunc.EquipSet(sets.IdleTown);
+    end
+
+    if Settings.CutHP then
+        gFunc.EquipSet(sets.CutHP);
     end
 
     draginclude.HandleDefault();

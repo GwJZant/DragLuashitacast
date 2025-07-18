@@ -234,9 +234,9 @@ local sets = {
     StyleLockSummer = {
         Main = 'Gungnir',
         Head = 'Ace\'s Helm',
-        Body = 'Elder Gilet +1',
+        Body = 'Goblin Suit',
         --Hands = 'Scp. Gauntlets',
-        Legs = 'Elder Trunks',
+        --Legs = 'Elder Trunks',
         --Feet = 'Homam Gambieras',
     },
 
@@ -257,8 +257,10 @@ local sets = {
     },
 
     Jump_Priority = { -- ACC
-        Head = {'Optical Hat'},
+        Head = {'Ace\'s Helm'},
+        Neck = {'Peacock Amulet'},
         Body = {'Barone Corazza'},
+        Hands = {'Hecatomb Mittens'},
         Ring2 = {'Toreador\'s Ring'},
         Waist = {'Wyrm Belt'},
         Legs = {'Barone Cosciales'},
@@ -266,8 +268,10 @@ local sets = {
     },
 
     HighJump_Priority = { -- ACC
-        Head = {'Optical Hat'},
+        Head = {'Ace\'s Helm'},
+        Neck = {'Peacock Amulet'},
         Body = {'Barone Corazza'},
+        Hands = {'Hecatomb Mittens'},
         Waist = {'Wyrm Belt'},
         --Ring2 = {'Vaulter\'s Ring'},
         Ring2 = {'Toreador\'s Ring'},
@@ -325,6 +329,17 @@ local sets = {
         Feet = {'Homam Gambieras'},
     },
 
+    Charm_Priority = { -- CHR +15 & Charm +5
+        --Head = {'Panther Mask'}, -- CHR +5
+        Ear1 = {'Brutal Earring'}, -- Nothing; keeps Beastly Earring off
+        Ear2 = {'Ethereal Earring'}, -- Nothing; keeps Beastly Earring off
+        Neck = {'Temp. Torque'}, -- CHR +5
+        Body = {'Elder\'s Surcoat'}, -- CHR +1
+        Waist = {'Ryl.Kgt. Belt'}, -- CHR +2
+        Back = {'Trimmer\'s Mantle'}, -- Charm +5
+        Legs = {'Elder\'s Braguette'}, -- CHR +2
+    },
+
     EXPRing = {
         Ring1 = 'Emperor Band',
     },
@@ -361,7 +376,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockSummer);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -539,6 +554,8 @@ profile.HandleAbility = function()
         gFunc.EquipSet(sets.AncientCircle);
     elseif string.match(ability.Name, 'Spirit Link') then
         gFunc.EquipSet(sets.Resting);
+    elseif string.match(ability.Name, 'Charm') then
+        gFunc.EquipSet(sets.Charm);
     end
 end
 

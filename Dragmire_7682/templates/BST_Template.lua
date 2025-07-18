@@ -495,10 +495,6 @@ profile.LateInitialize = function()
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
         gFunc.LockStyle(sets.StyleLockGeneric);
 
-        -- Change this to match where you have your BST macro book
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 9');
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 3');
-
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
     end

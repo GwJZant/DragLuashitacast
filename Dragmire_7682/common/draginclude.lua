@@ -362,6 +362,7 @@ function draginclude.SetNumpadCommands()
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /zoneinfo /lac fwd zoneinfo ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /petinfo /lac fwd petinfo ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
@@ -484,6 +485,10 @@ function draginclude.HandleCommand(args)
         local target = gData.GetTarget();
 
         gFunc.Message(target.Type);
+    elseif (args[1] == 'petinfo') then
+        local pet = gData.GetPet();
+
+        gFunc.Message(pet.Name .. ' HPP: ' .. pet.HPP .. '%');
     elseif (args[1] == 'relic') then
         draginclude.RelicCheck();
     elseif (args[1] == 'nude') then

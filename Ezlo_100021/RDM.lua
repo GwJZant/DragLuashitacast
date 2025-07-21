@@ -14,19 +14,19 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Morion Tathlum'},
-        Head = {'Lgn. Circlet'},
-        Neck = {'Black Neckerchief'},
-        Ear1 = {''},
-        Ear2 = {''},
-        Body = {'Seer\'s Tunic'},
-        Hands = {'Wonder Mitts'},
-        Ring1 = {'Eremite\'s Ring'},
+        Ammo = {''},
+        Head = {'Centurion\'s Visor'},
+        Neck = {''},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Wonder Kaftan', 'Beetle Harness +1', 'Tarutaru Kaftan'},
+        Hands = {'Battle Gloves', 'Tarutaru Mitts'},
+        Ring1 = {'San d\'Orian Ring'},
         Ring2 = {'Eremite\'s Ring'},
-        Back = {''},
+        Back = {'Nomad\'s Mantle'},
         Waist = {''},
-        Legs = {'Seer\'s Slacks'},
-        Feet = {'Wonder Clomps'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers', 'Tarutaru Braccae'},
+        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     RestingMP_Priority = {

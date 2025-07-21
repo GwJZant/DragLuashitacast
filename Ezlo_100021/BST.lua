@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.SaberFamiliar},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -28,7 +28,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {'Alumine Salade'},
+        Head = {'Alumine Salade', 'Centurion\'s Visor'},
         Neck = {'Ryl.Sqr. Collar'},
         Ear1 = {'Beetle Earring +1'},
         Ear2 = {'Beetle Earring +1'},
@@ -37,7 +37,7 @@ local sets = {
         Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Nomad\'s Mantle'},
-        Waist = {'R.K. Belt +1', 'Tilt Belt'},
+        Waist = {'R.K. Belt +1', 'Life Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae', 'Ryl.Ftm. Trousers'},
         Feet = {'Alumine Sollerets', 'Wonder Clomps', 'Btl. Leggings +1'},
     },
@@ -69,7 +69,7 @@ local sets = {
         Ring1 = {},
         Ring2 = {},
         Back = {},
-        Waist = {'Tilt Belt'},
+        Waist = {'Life Belt'},
         Legs = {},
         Feet = {},
     },
@@ -165,7 +165,7 @@ local sets = {
         Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {},
-        Waist = {'R.K. Belt +1', 'Tilt Belt'},
+        Waist = {'R.K. Belt +1', 'Life Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
     },

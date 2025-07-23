@@ -14,9 +14,9 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {''},
+        Ammo = {'Morion Tathlum'},
         Head = {''},
-        Neck = {''},
+        Neck = {'Black Neckerchief'},
         Ear1 = {''},
         Ear2 = {''},
         Body = {'Ryl.Ftm. Tunic'},

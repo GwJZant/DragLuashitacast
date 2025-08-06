@@ -393,6 +393,12 @@ local sets = {
         Feet = 'Wonder Sollerets',
     },
 
+    StyleLockSummer = {
+        Head = 'Emperor Hairpin',
+        Body = 'Wonder Maillot +1',
+        Legs = 'Taru Trunks +1',
+    },
+
     StyleLockRSE = {
     },
 
@@ -407,7 +413,7 @@ local sets = {
 
     -- Uses Relic body to remove status ailments
     RewardSTATUS_Priority = {
-        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta','Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
         Neck = {},
         Ear1 = {},
@@ -419,12 +425,12 @@ local sets = {
         Back = {},
         Waist = {'R.K. Belt +1'},
         Legs = {'Wonder Braccae'},
-        Feet = {},
+        Feet = {'Beast Gaiters'},
     },
 
     -- Uses Kirin's Osode to maximize healing, does not remove status ailments
     RewardHP_Priority = {
-        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta','Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
         Neck = {},
         Ear1 = {},
@@ -436,7 +442,7 @@ local sets = {
         Back = {},
         Waist = {'R.K. Belt +1'},
         Legs = {'Wonder Braccae'},
-        Feet = {},
+        Feet = {'Beast Gaiters'},
     },
 
     Call_Priority = { -- Default Jug
@@ -519,11 +525,7 @@ profile.LateInitialize = function()
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
-        if player.SubJob ~= 'WHM' then
-            gFunc.LockStyle(sets.StyleLockGeneric);
-        else
-            gFunc.LockStyle(sets.StyleLockGeneric);
-        end
+        gFunc.LockStyle(sets.StyleLockSummer);
 
         --[[ Set you job macro defaults here]]
         if player.SubJob == 'NIN' then

@@ -12,8 +12,8 @@ local Settings = {
         TimeToUse = 0,
     },
     StatusArmorSwaps = {
-        OpoopoNecklace = true,
-        PresidentialHairpin = true,
+        OpoopoNecklace = false,
+        PresidentialHairpin = false,
     },
     CurrentLevel = 0,
     CurrentBolt = 'Crossbow Bolt',
@@ -30,14 +30,14 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {'Beetle Harness +1', 'Tarutaru Kaftan'},
+        Body = {'Wonder Kaftan', 'Beetle Harness +1', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
         Back = {'Nomad\'s Mantle'},
         Waist = {},
-        Legs = {'Ryl.Ftm. Trousers', 'Windurstian Slops'},
-        Feet = {'Btl. Leggings +1', 'Tarutaru Clomps'},
+        Legs = {'Wonder Trousers', 'Ryl.Ftm. Trousers'},
+        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     RangedAcc_Priority = {

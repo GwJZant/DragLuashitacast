@@ -15,18 +15,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Morion Tathlum'},
-        Head = {''},
+        Head = {'Emperor Hairpin'},
         Neck = {'Black Neckerchief'},
-        Ear1 = {''},
-        Ear2 = {''},
-        Body = {'Ryl.Ftm. Tunic'},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
-        Back = {''},
-        Waist = {''},
-        Legs = {'Windurstian Slops'},
-        Feet = {'Sandals'},
+        Back = {},
+        Waist = {},
+        Legs = {'Tarutaru Braccae'},
+        Feet = {'Tarutaru Clomps'},
     },
 
     RestingMP_Priority = {

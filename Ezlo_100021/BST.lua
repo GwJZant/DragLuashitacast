@@ -164,7 +164,7 @@ local sets = {
         Hands = {'Wonder Mitts'},
         Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
-        Back = {},
+        Back = {'Amemet Mantle'},
         Waist = {'R.K. Belt +1', 'Life Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
@@ -474,7 +474,7 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'PDT'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'Default', 'PDT'}, {'None', 'Field'});
 
     -- BST Core Commands
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');

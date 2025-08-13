@@ -170,20 +170,20 @@ local sets = {
         Feet = {'Wonder Clomps'},
     },
 
-    WeaponSkillLight_Priority = {
+    WeaponSkillRampage_Priority = {
         Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
-        Waist = {},
-        Legs = {},
-        Feet = {},
+        Head = {'Alumine Salade'},
+        Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
+        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
+        Body = {'Scorpion Harness', 'Wonder Kaftan'},
+        Hands = {'Battle Gloves'},
+        Ring1 = {'Sniper\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Sniper\'s Ring'},
+        Back = {'Amemet Mantle'},
+        Waist = {'Life Belt'},
+        Legs = {'Alumine Brayettes', 'Wonder Braccae'},
+        Feet = {'Wonder Clomps'},
     },
 
     Gaudy_Priority = {
@@ -192,7 +192,7 @@ local sets = {
         Neck = {},
         Ear1 = {},
         Ear2 = {},
-        Body = {},
+        Body = {'Black Cotehardie'},
         Hands = {},
         Ring1 = {},
         Ring2 = {},
@@ -591,7 +591,7 @@ profile.HandleDefault = function()
         if player.SubJob == 'WHM' or player.SubJob == 'RDM' then
             if player.MP >= 100 and player.Status ~= 'Engaged' then
                 gFunc.EquipSet(sets.MP);
-            elseif player.MP < 50 then
+            elseif player.MP < 25 then
                 gFunc.EquipSet(sets.Gaudy);
             end
 
@@ -699,8 +699,8 @@ profile.HandleWeaponskill = function()
 
     gFunc.EquipSet(sets.WeaponSkill);
 
-    if string.contains(action.Name, 'Decimation') or string.contains(action.Name, 'Mistral') or string.contains(action.Name, 'Vorpal') then
-        gFunc.EquipSet(sets.WeaponSkillLight);
+    if action.Name == 'Rampage' then
+        gFunc.EquipSet(sets.WeaponSkillRampage);
     end
 
     draginclude.HandleWeaponSkill(action);

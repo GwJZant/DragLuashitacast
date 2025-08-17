@@ -23,10 +23,10 @@ local sets = {
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
-        Back = {},
+        Back = {'Trimmer\'s Mantle'},
         Waist = {},
-        Legs = {'Tarutaru Braccae'},
-        Feet = {'Tarutaru Clomps'},
+        Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
+        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     RestingMP_Priority = {
@@ -46,11 +46,11 @@ local sets = {
     },
 
     StyleLock = {
-        Head = '',
-        Body = 'Ryl.Ftm. Tunic',
+        Head = 'Emperor Hairpin',
+        Body = 'Seer\'s Tunic',
         Hands = 'Battle Gloves',
-        Legs = 'Windurstian Slops',
-        Feet = 'Sandals',
+        Legs = 'Seer\'s Slacks',
+        Feet = 'Wonder Clomps',
     },
 
     PetReadyDefault = {
@@ -62,7 +62,7 @@ local sets = {
     },
 
     Reward_Priority = { -- MND
-        Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Food Beta'},
     },
 
     Charm_Priority = {
@@ -75,7 +75,7 @@ local sets = {
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
-        Back = {''},
+        Back = {'Trimmer\'s Mantle'},
         Waist = {''},
         Legs = {''},
         Feet = {''},

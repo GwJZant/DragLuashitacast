@@ -101,7 +101,7 @@ local sets = {
 
     PDT_Priority = {
         Head = {'Darksteel Cap +1'}, -- PDT -2%
-        --Ear1 = {'Loquac. Earring'},
+        Ear1 = {'Brutal Earring'},
         Ear2 = {'Ethereal Earring'},
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
         Ring2 = {'Jelly Ring'}, -- PDT -5%
@@ -231,6 +231,15 @@ local sets = {
         Feet = 'Dst. Leggings +1',
     },
 
+    StyleLockUgly = {
+        Main = 'Gungnir',
+        Head = 'Shep. Bonnet',
+        Body = 'Elder\'s Surcoat',
+        Hands = 'Ostreger Mitts',
+        Legs = 'Barone Cosciales',
+        Feet = 'Dst. Leggings +1',
+    },
+
     StyleLockSummer = {
         Main = 'Gungnir',
         Head = 'Ace\'s Helm',
@@ -273,7 +282,7 @@ local sets = {
         Body = {'Barone Corazza'},
         Hands = {'Hecatomb Mittens'},
         Waist = {'Wyrm Belt'},
-        --Ring2 = {'Vaulter\'s Ring'},
+        Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring'},
         Legs = {'Barone Cosciales'},
         Feet = {'Drn. Greaves +1'},
@@ -555,7 +564,7 @@ profile.HandleAbility = function()
     elseif string.match(ability.Name, 'Spirit Link') then
         gFunc.EquipSet(sets.Resting);
     elseif string.match(ability.Name, 'Charm') then
-        gFunc.EquipSet(sets.Charm);
+        gFunc.LockSet(sets.Charm, 1);
     end
 end
 

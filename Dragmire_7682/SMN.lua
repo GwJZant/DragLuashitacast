@@ -326,7 +326,7 @@ local SmnConfig = {
             Rage1 = 'Rock Throw',
             Rage2 = 'Rock Buster',
             Rage3 = 'Megalith Throw',
-            Rage4 = '',
+            Rage4 = 'Mountain Buster',
             AstralFlow = 'Earthen Fury',
             Ward1 = 'Earthen Ward',
             Ward2 = '',
@@ -837,7 +837,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.HMP);
         -- Idle Section
         else
-
+            
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --Use weapon swaps set
@@ -848,28 +848,28 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.HMP);
             gFunc.EquipSet(sets.Dark);
         -- Idle Section
-        else
-            if (pet ~= nil) then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.Light);
-                elseif pet.Name == 'Titan' then
-                    gFunc.EquipSet(sets.Earth);
-                elseif pet.Name == 'Garuda' then
-                    gFunc.EquipSet(sets.Wind);
-                elseif pet.Name == 'Ifrit' then
-                    gFunc.EquipSet(sets.Fire);
-                elseif pet.Name == 'Leviathan' then
-                    gFunc.EquipSet(sets.Water);
-                elseif pet.Name == 'Shiva' then
-                    gFunc.EquipSet(sets.Ice);
-                elseif pet.Name == 'Ramuh' then
-                    gFunc.EquipSet(sets.Thunder);
-                elseif pet.Name == 'Fenrir' then
-                    gFunc.EquipSet(sets.Dark);
-                elseif pet.Name == 'Diabolos' then
-                    gFunc.EquipSet(sets.Dark);
-                end
+        elseif (pet ~= nil) then
+            if pet.Name == 'Carbuncle' or pet.Name == 'LightSpirit' then
+                gFunc.EquipSet(sets.Light);
+            elseif pet.Name == 'Titan' or pet.Name == 'EarthSpirit' then
+                gFunc.EquipSet(sets.Earth);
+            elseif pet.Name == 'Garuda' or pet.Name == 'AirSpirit' then
+                gFunc.EquipSet(sets.Wind);
+            elseif pet.Name == 'Ifrit' or pet.Name == 'FireSpirit' then
+                gFunc.EquipSet(sets.Fire);
+            elseif pet.Name == 'Leviathan'  or pet.Name == 'WaterSpirit' then
+                gFunc.EquipSet(sets.Water);
+            elseif pet.Name == 'Shiva'  or pet.Name == 'IceSpirit' then
+                gFunc.EquipSet(sets.Ice);
+            elseif pet.Name == 'Ramuh'  or pet.Name == 'ThunderSpirit' then
+                gFunc.EquipSet(sets.Thunder);
+            elseif pet.Name == 'Fenrir'  or pet.Name == 'DarkSpirit' then
+                gFunc.EquipSet(sets.Dark);
+            elseif pet.Name == 'Diabolos' then
+                gFunc.EquipSet(sets.Dark);
             end
+        else
+            gFunc.EquipSet(sets.Earth);
         end
     end
 

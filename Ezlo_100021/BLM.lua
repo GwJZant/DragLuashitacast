@@ -204,7 +204,7 @@ profile.HandleAbility = function()
     if string.match(ability.Name, 'Reward') then
         gFunc.EquipSet(sets.Reward);
     elseif string.match(ability.Name, 'Charm') then
-        gFunc.EquipSet(sets.Charm);
+        gFunc.LockSet(sets.Charm, 1);
     elseif string.match(ability.Name, 'Fight') then
         -- Fight set
     elseif string.match(ability.Name, 'Sic') then

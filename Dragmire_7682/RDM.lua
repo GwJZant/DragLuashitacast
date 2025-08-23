@@ -528,8 +528,9 @@ end
 profile.OnLoad = function()    
     draginclude.OnLoad(sets, {'Melee', 'Staff'}, {'None', 'Field', 'Fishing'});
 
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd pdt ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
 end
 
 profile.OnUnload = function()
@@ -586,6 +587,26 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
     elseif (args[1] == 'blink') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blink" <me>');
+    elseif (args[1] == 'enspell') then
+        local environment = gData.GetEnvironment();
+        local dayElement = environment.DayElement;
+        local spellName = 'Enthunder';
+
+        if dayElement == 'Wind' then
+            spellName = 'Enaero';
+        elseif dayElement == 'Ice' then
+            spellName = 'Enblizzard';
+        elseif dayElement == 'Fire' then
+            spellName = 'Enfire';
+        elseif dayElement == 'Earth' then
+            spellName = 'Enstone';
+        elseif dayElement == 'Thunder' then
+            spellName = 'Enthunder';
+        elseif dayElement == 'Water' then
+            spellName = 'Enwater';
+        end
+
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
 
     draginclude.HandleCommand(args, sets);
@@ -772,9 +793,9 @@ profile.HandleAbility = function()
     elseif string.match(ability.Name, 'Charm') then
 
         if draginclude.dragSettings.TpVariant == 1 then
-            gFunc.EquipSet(sets.Charm);
+            gFunc.LockSet(sets.Charm, 1);
         elseif draginclude.dragSettings.TpVariant == 2 then
-            gFunc.EquipSet(sets.CharmStaff);
+            gFunc.LockSet(sets.CharmStaff, 1);
         end
     elseif string.match(ability.Name, 'Convert') then
         gFunc.LockSet(sets.Default, 15); -- Wear High MP set for 15 seconds so it doesn't get chopped down by gearswaps
@@ -794,14 +815,16 @@ profile.HandlePrecast = function()
     local castDelay = ((castTime * (1 - Settings.FastCastValue)) / 1000) - minimumBuffer;
     local chainspell = gData.GetBuffCount('Chainspell');
 
-    if chainspell == 0 and Settings.PDT then
-        if (castDelay >= packetDelay) then
-            gFunc.Message('Equipping Interim ' .. castDelay);
-            gFunc.SetMidDelay(castDelay);
+    if chainspell == 0 then
+        gFunc.EquipSet(sets.Precast);
+
+        if Settings.PDT then
+            if (castDelay >= packetDelay) then
+                gFunc.Message('Equipping Interim ' .. castDelay);
+                gFunc.SetMidDelay(castDelay);
+            end
         end
     end
-    
-    gFunc.EquipSet(sets.Precast);
 end
 
 profile.HandleMidcast = function()

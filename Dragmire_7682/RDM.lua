@@ -20,6 +20,7 @@ local Settings = {
     ConvertMPNuke = 50,
     ConvertMPRefresh = 105,
     WeaponTypeToggle = false, -- true = Sword | false = dagger
+    MartialKnife = false,
     PDT = false,
     FastCastValue = 0.42 -- 20% from traits 22% from gear listed in Precast set
 };
@@ -63,6 +64,11 @@ local sets = {
 
     MeleeWeaponsDaggerNIN_Priority = {
         Main = {'Blau Dolch'},
+        Sub = {'Joyeuse'},
+    },
+
+    MeleeWeaponsDaggerNINMartial_Priority = {
+        Main = {'Martial Knife'},
         Sub = {'Joyeuse'},
     },
 
@@ -529,6 +535,7 @@ profile.OnLoad = function()
     draginclude.OnLoad(sets, {'Melee', 'Staff'}, {'None', 'Field', 'Fishing'});
 
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /martial /lac fwd Martial ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd pdt ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
 end
@@ -554,6 +561,14 @@ profile.HandleCommand = function(args)
             gFunc.Message('PDT ON');
         else
             gFunc.Message('PDT OFF');
+        end
+    elseif (args[1] == 'Martial') then
+        Settings.MartialKnife = not Settings.MartialKnife;
+
+        if Settings.MartialKnife then
+            gFunc.Message('MartialKnife ON');
+        else
+            gFunc.Message('MartialKnife OFF');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -684,6 +699,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +3 /lac fwd enspell ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd shockspikes ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
@@ -738,7 +754,12 @@ profile.HandleDefault = function()
             if Settings.WeaponTypeToggle then
                 gFunc.EquipSet(sets.MeleeWeaponsNIN);
             else
-                gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
+                if Settings.MartialKnife then
+                    gFunc.EquipSet(sets.MeleeWeaponsDaggerNINMartial);
+                else
+                    gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
+                end
+                
             end
 
             if player.Status == 'Engaged' then

@@ -193,12 +193,13 @@ local sets = {
         --Feet = 'Austere Sabots',
     },
 
-    StyleLockAF = {
-        Head = 'Evoker\'s Horn',
-        Body = 'Summoner\'s Dblt.',
-        Hands = 'Evoker\'s Bracers',
-        Legs = 'Summoner\'s Spats',
-        Feet = 'Summoner\'s Pgch.',
+    StyleLockHydra = {
+        Main = 'Fire Staff',
+        Head = 'Hydra Cap',
+        Body = 'Hydra Jupon',
+        Hands = 'Summoner\'s Brcr.',
+        Legs = 'Hydra Hose',
+        Feet = 'Hydra Boots',
     },
 
     StyleLockSummer = {
@@ -783,7 +784,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock2);
+        gFunc.LockStyle(sets.StyleLockHydra);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');

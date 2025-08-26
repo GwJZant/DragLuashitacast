@@ -105,7 +105,7 @@ local sets = {
     },
 
     TankStaff_Priority = { -- PDT -43% or -48%
-        Main = {'Earth Staff'}, -- PDT -20%
+        --Main = {'Earth Staff'}, -- PDT -20%
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
         Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- MP +30
@@ -121,8 +121,8 @@ local sets = {
     },
 
     TankShield_Priority = { -- PDT -33% or -38%
-        Main = {'Blau Dolch'},
-        Sub = {'Genbu\'s Shield'}, -- PDT -10%
+        --Main = {'Blau Dolch'},
+        --Sub = {'Genbu\'s Shield'}, -- PDT -10%
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
         Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- MP +30
@@ -416,10 +416,11 @@ local sets = {
         Legs = {{Name = 'Duelist\'s Tights', Priority = 100}},
     },
 
-    WSEnergyDrain_Priority = { -- MND
-        Body = {{Name = 'Errant Hpl.', Priority = 0}},
-        Hands = {'Devotee\'s Mitts'},
-        Ring2 = {'Sapphire Ring'},
+    WSEnergySteal_Priority = { -- MND
+        Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
+        Body = {{Name = 'Errant Hpl.', Priority = 0}}, -- MND +10
+        Hands = {'Devotee\'s Mitts'}, -- MND +5
+        Ring2 = {'Sapphire Ring'}, -- MND +4
         Back = {{Name = 'Rainbow Cape', Priority = 100}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Legs = {{Name = 'Errant slops', Priority = 0}},
@@ -605,21 +606,41 @@ profile.HandleCommand = function(args)
     elseif (args[1] == 'enspell') then
         local environment = gData.GetEnvironment();
         local dayElement = environment.DayElement;
-        local spellName = 'Enthunder';
+        local weatherElement = environment.WeatherElement;
+        local isDoubleWeather = string.find(environment.Weather, "x2");
+        local spellName = 'Enblizzard';
 
-        if dayElement == 'Wind' then
-            spellName = 'Enaero';
-        elseif dayElement == 'Ice' then
-            spellName = 'Enblizzard';
-        elseif dayElement == 'Fire' then
-            spellName = 'Enfire';
-        elseif dayElement == 'Earth' then
-            spellName = 'Enstone';
-        elseif dayElement == 'Thunder' then
-            spellName = 'Enthunder';
-        elseif dayElement == 'Water' then
-            spellName = 'Enwater';
+        if isDoubleWeather or dayElement == 'Light' or dayElement == 'Dark' then
+            if weatherElement == 'Wind' then
+                spellName = 'Enaero';
+            elseif weatherElement == 'Ice' then
+                spellName = 'Enblizzard';
+            elseif weatherElement == 'Fire' then
+                spellName = 'Enfire';
+            elseif weatherElement == 'Earth' then
+                spellName = 'Enstone';
+            elseif weatherElement == 'Thunder' then
+                spellName = 'Enthunder';
+            elseif weatherElement == 'Water' then
+                spellName = 'Enwater';
+            end
+        else
+            if dayElement == 'Wind' then
+                spellName = 'Enaero';
+            elseif dayElement == 'Ice' then
+                spellName = 'Enblizzard';
+            elseif dayElement == 'Fire' then
+                spellName = 'Enfire';
+            elseif dayElement == 'Earth' then
+                spellName = 'Enstone';
+            elseif dayElement == 'Thunder' then
+                spellName = 'Enthunder';
+            elseif dayElement == 'Water' then
+                spellName = 'Enwater';
+            end
         end
+
+        
 
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
@@ -922,6 +943,8 @@ profile.HandleMidcast = function()
             end
         elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
             gFunc.EquipSet(sets.EnhancingSkill); -- +98 Resist
+        elseif string.contains(spell.Name, 'En') then
+            equipObiIfApplicable(spell.Element);
         end
     elseif spell.Skill == 'Healing Magic'  then
         local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);
@@ -976,8 +999,8 @@ profile.HandleWeaponskill = function()
 
     if action.Name == 'Evisceration' then
         gFunc.EquipSet(sets.WeaponSkillEvis);
-    elseif action.Name == 'Energy Drain' then
-        gFunc.EquipSet(sets.WSEnergyDrain);
+    elseif action.Name == 'Energy Steal' then
+        gFunc.EquipSet(sets.WSEnergySteal);
     end
 
     draginclude.HandleWeaponSkill(action);

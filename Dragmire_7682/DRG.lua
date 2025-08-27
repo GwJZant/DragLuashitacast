@@ -35,12 +35,12 @@ local sets = {
 
     },
 
-    Engaged_Priority = { --22% Haste (Missing: Dusk Gloves +1(1%))
+    Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
         Hands = {'Homam Manopolas'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Swift Belt'}, --4%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras'}, --3%
     },

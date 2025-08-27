@@ -76,8 +76,8 @@ local sets = {
         Ammo = {{Name = 'Tiphia Sting', Priority = 0}},
         Head = {{Name = 'Optical Hat', Priority = 0}},
         Neck = {{Name = 'Peacock Amulet', Priority = 0}},
-        Ear1 = {{Name = 'Ethereal Earring', Priority = 0}},
-        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
+        Ear1 = {{Name = 'Merman\'s Earring', Priority = 0}},
+        Ear2 = {{Name = 'Ethereal Earring', Priority = 0}},
         Body = {{Name = 'Scorpion Harness', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}}, --3% Haste
         Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
@@ -93,7 +93,7 @@ local sets = {
         Head = {{Name = 'Nashira Turban', Priority = 0}}, --2% Haste
         Neck = {{Name = 'Peacock Amulet', Priority = 0}},
         Ear1 = {{Name = 'Merman\'s Earring', Priority = 0}},
-        Ear2 = {{Name = 'Brutal Earring', Priority = 0}},
+        Ear2 = {{Name = 'Ethereal Earring', Priority = 0}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}}, --3% Haste
         Hands = {{Name = 'Dusk Gloves', Priority = 0}}, --3% Haste
         Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
@@ -168,6 +168,24 @@ local sets = {
         Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}}, --10
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, --2
         Body = {{Name = 'Duelist\'s Tabard', Priority = 100}}, --10
+    },
+
+    CureCheat_Priority = { -- HP Down
+        Head = {{Name = 'Zenith Crown', Priority = 100}}, -- 50 HP-
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}}, -- 50 HP-
+        Ring1 = {{Name = 'Ether Ring', Priority = 100}}, -- 30 HP-
+        Legs = {{Name = 'Zenith Slacks', Priority = 100}}, -- 50 HP-
+    },
+
+    CureCheatUp_Priority = { -- HP Up
+        Ear1 = {'Ethereal Earring'}, -- HP 15+
+        Body = {'Scorpion Harness'}, -- HP 15+
+        Hands = {'Dusk Gloves'}, -- HP 20+
+        Ring1 = {'Bomb Queen Ring'}, -- HP 75+
+        Ring2 = {'Bloodbead Ring'}, -- HP 50+
+        Back = {'Rainbow Cape'}, -- HP 9+
+        Legs = {'Crimson Cuisses'}, -- HP 25+
+        Feet = {'Dusk Ledelsens'}, -- HP 25+
     },
 
     INTElementalAcc_Priority = {
@@ -315,6 +333,14 @@ local sets = {
     },
 
     Spikes_Priority = { -- Relic legs, MAB +23 (28 native, 51 total)
+        Neck = {'Uggalepih Pendant'}, -- MAB +8 (conditional but im a galka so lets be real here)
+        Ear2 = {'Moldavite Earring'}, -- MAB +5
+        Hands = {'Zenith Mitts'}, -- MAB +5
+        --Legs = {'Duelist\'s Tights'}, -- Spikes+
+        Feet = {'Dls. Boots +1'}, -- MAB +5
+    },
+
+    SpikesEngaged_Priority = { -- Relic legs, MAB +23 (28 native, 51 total)
         Neck = {'Uggalepih Pendant'}, -- MAB +8 (conditional but im a galka so lets be real here)
         Ear2 = {'Moldavite Earring'}, -- MAB +5
         Hands = {'Zenith Mitts'}, -- MAB +5
@@ -795,7 +821,11 @@ profile.HandleDefault = function()
         end
 
         if spikes > 0 then
-            gFunc.EquipSet(sets.Spikes);
+            if player.Status == 'Engaged' then
+                gFunc.EquipSet(sets.SpikesEngaged);
+            else
+                gFunc.EquipSet(sets.Spikes);
+            end
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
@@ -809,7 +839,11 @@ profile.HandleDefault = function()
         end
 
         if spikes > 0 then
-            gFunc.EquipSet(sets.Spikes);
+            if player.Status == 'Engaged' then
+                gFunc.EquipSet(sets.SpikesEngaged);
+            else
+                gFunc.EquipSet(sets.Spikes);
+            end
         end
     end
 
@@ -851,6 +885,7 @@ end
 profile.HandlePrecast = function()
     local player = gData.GetPlayer();
     local action = gData.GetAction();
+    local target = gData.GetActionTarget();
     local castTime = action.CastTime;
     local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
     local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
@@ -859,6 +894,11 @@ profile.HandlePrecast = function()
 
     if chainspell == 0 then
         gFunc.EquipSet(sets.Precast);
+
+        if target.Name == player.Name and action.Name == 'Cure IV' or action.Name == 'Cure III' then
+            gFunc.Message('hi');
+            gFunc.EquipSet(sets.CureCheat);
+        end
 
         if Settings.PDT then
             if (castDelay >= packetDelay) then
@@ -872,6 +912,7 @@ end
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
     local player = gData.GetPlayer();
+    local target = gData.GetActionTarget();
     local chainspell = gData.GetBuffCount('Chainspell');
 
     Settings.SpellElement = spell.Element;
@@ -946,13 +987,18 @@ profile.HandleMidcast = function()
         elseif string.contains(spell.Name, 'En') then
             equipObiIfApplicable(spell.Element);
         end
-    elseif spell.Skill == 'Healing Magic'  then
-        local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);
+    elseif spell.Skill == 'Healing Magic' then
+        if target.Name == player.Name and spell.Name == 'Cure IV' or spell.Name == 'Cure III' then
+            gFunc.Message('hi2');
+            gFunc.EquipSet(sets.CureCheatUp);
+        else
+            local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);
         
-        if spell.Name ~= 'Reraise' and spell.Name ~= 'Raise' and player.MPP < 80 then
-            gFunc.EquipSet(sets.MNDHealing);
-        elseif spell.Name == 'Raise' and mpPercent < .66 then
-            gFunc.EquipSet(sets.SpellHaste);
+            if spell.Name ~= 'Reraise' and spell.Name ~= 'Raise' and player.MPP < 80 then
+                gFunc.EquipSet(sets.MNDHealing);
+            elseif spell.Name == 'Raise' and mpPercent < .66 then
+                gFunc.EquipSet(sets.SpellHaste);
+            end
         end
     elseif spell.Skill == 'Elemental Magic' then
         if spell.Name == 'Drown' or spell.Name == 'Frost' or spell.Name == 'Choke' or spell.Name == 'Rasp' or spell.Name == 'Shock' or spell.Name == 'Burn' then

@@ -24,7 +24,7 @@ local sets = {
         Hands = {'Zenith Mitts', 'Elder\'s Bracers', 'Carbuncle Mitts'},
         Ring1 = {'Evoker\'s Ring', 'Astral Ring'},
         Ring2 = {'Ether Ring', 'Astral Ring'},
-        Back = {'Summoner\'s Cape'},
+        Back = {'Summoner\'s Cape', 'Trimmer\'s Mantle'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Baron\'s Slops', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Elder\'s Sandals', 'Dream Boots +1'},
@@ -101,7 +101,7 @@ local sets = {
         Ear2 = {'Beastly Earring'},
         Body = {'Summoner\'s Doublet'},
         Hands = {'Summoner\'s Brcr.'},
-        Legs = {'Penance Slops'},
+        Legs = {'Austere Slops'},
         Feet = {'Austere Sabots'}
     };
 
@@ -119,7 +119,7 @@ local sets = {
         Head = {'Evoker\'s Horn'},
         Neck = {'Smn. Torque'},
         Hands = {'Summoner\'s Brcr.'},
-        Legs = {'Penance Slops'},
+        Legs = {'Austere Slops'},
         Feet = {'Austere Sabots'}
     };
 
@@ -170,7 +170,7 @@ local sets = {
         Body = {'Yinyang Robe'},
         Hands = {'Zenith Mitts'},
         Ring1 = {'Evoker\'s Ring'},
-        Legs = {'Penance Slops'},
+        Legs = {'Nashira Seraweels'},
         Feet = {'Rostrum Pumps'}
     },
 
@@ -189,7 +189,7 @@ local sets = {
         --Body = 'Eerie Cloak',
         --Body = 'Errant Hpl.',
         --Hands = 'Zenith Mitts',
-        --Legs = 'Penance Slops',
+        --Legs = 'Austere Slops',
         --Feet = 'Austere Sabots',
     },
 
@@ -784,7 +784,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockHydra);
+        gFunc.LockStyle(sets.StyleLock2);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');

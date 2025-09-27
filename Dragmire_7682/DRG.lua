@@ -35,6 +35,10 @@ local sets = {
 
     },
 
+    StaffTorque_Priority = {
+        Neck = {'Temp. Torque'},
+    },
+
     Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
@@ -463,6 +467,7 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
     local party = AshitaCore:GetMemoryManager():GetParty();
     local zone = gData.GetEnvironment();
+    local eq = gData.GetEquipment();
     local myZone = party:GetMemberZone(0);
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
@@ -491,6 +496,14 @@ profile.HandleDefault = function()
         
     else
         gFunc.EquipSet(sets.Default);
+    end
+
+    if eq.Main then
+        if eq.Main.Name == 'Mercurial Pole' then
+            gFunc.Equip('Neck', 'Peacock Amulet');
+        else
+            draginclude.CheckTorque();
+        end
     end
 
     -- Engaged Section
@@ -542,7 +555,6 @@ profile.HandleDefault = function()
         else
             --gFunc.EquipSet(sets.IdleTown);
         end
-        
     end
 
     draginclude.HandleDefault();

@@ -14,15 +14,15 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Morion Tathlum'},
+        Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
-        Neck = {'Black Neckerchief'},
+        Neck = {'Holy Phial'},
         Ear1 = {'Beetle Earring +1'},
         Ear2 = {'Beetle Earring +1'},
-        Body = {'Seer\'s Tunic', 'Tarutaru Kaftan'},
+        Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
-        Ring2 = {},
+        Ring2 = {'Eremite\'s Ring'},
         Back = {'Trimmer\'s Mantle'},
         Waist = {},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
@@ -35,7 +35,7 @@ local sets = {
         Neck = {''},
         Ear1 = {''},
         Ear2 = {''},
-        Body = {''},
+        Body = {'Seer\'s Tunic'},
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
@@ -45,12 +45,22 @@ local sets = {
         Feet = {''},
     },
 
+    Weaponskill_Priority = {
+        Hands = {'Wonder Mitts'},
+    },
+
     StyleLock = {
-        Head = 'Emperor Hairpin',
-        Body = 'Seer\'s Tunic',
+        Head = '',
+        Body = 'Ryl.Ftm. Tunic',
         Hands = 'Battle Gloves',
-        Legs = 'Seer\'s Slacks',
-        Feet = 'Wonder Clomps',
+        Legs = 'Windurstian Slops',
+        Feet = 'Sandals',
+    },
+
+    StyleLockSummer = {
+        Head = 'Emperor Hairpin',
+        Body = 'Wonder Maillot +1',
+        Legs = 'Taru. Trunks +1',
     },
 
     PetReadyDefault = {
@@ -62,13 +72,17 @@ local sets = {
     },
 
     Reward_Priority = { -- MND
-        Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Food Beta'},
+        Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Neck = {'Holy Phial'},
+        Body = {'Wonder Kaftan'},
+        Ring1 = {'San d\'Orian Ring'},
+        Legs = {'Wonder Braccae'},
     },
 
     Charm_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {''},
+        Neck = {'Flower Necklace'},
         Ear1 = {''},
         Ear2 = {''},
         Body = {''},
@@ -115,7 +129,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockSummer);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
@@ -133,7 +147,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
         else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
         end
 
@@ -235,6 +249,8 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
+
+    gFunc.EquipSet(sets.Weaponskill);
 
     draginclude.HandleWeaponSkill(action);
 end

@@ -182,9 +182,9 @@ draginclude.JugPetConfig = {
     ColdbloodComo = {
         Name = 'ColdbloodComo',
         DefaultJug = 'C. Carrion Broth',
-        DefaultSTA = 'Blockhead',
+        DefaultSTA = 'Tail Blow',
         DefaultAOE = 'Fireball',
-        DefaultSpecial = 'Secretion',
+        DefaultSpecial = 'Infrasonics',
         DurationMinutes = 60,
     },
     Homunculus = {

@@ -214,7 +214,7 @@ local Utils = {
             Rage1 = 'Rock Throw',
             Rage2 = 'Rock Buster',
             Rage3 = 'Megalith Throw',
-            Rage4 = '',
+            Rage4 = 'Mountain Buster',
             AstralFlow = 'Earthen Fury',
             Ward1 = 'Earthen Ward',
             Ward2 = '',
@@ -278,7 +278,7 @@ local Utils = {
             Name = 'Fenrir',
             Rage1 = 'Moonlit Charge',
             Rage2 = 'Crescent Fang',
-            Rage3 = '',
+            Rage3 = 'Eclipse Bite',
             Rage4 = '',
             AstralFlow = 'Howling Moon',
             Ward1 = 'Lunar Cry',
@@ -338,6 +338,8 @@ function dragdisplay.Update(settings)
     LightResistance = player:GetResist(6);
     WaterResistance = player:GetResist(5);
     WindResistance = player:GetResist(2);
+    local environment = gData.GetEnvironment();
+    weather = environment.Weather;
     --PlayerStrength = player:GetStat(0);
     --PlayerDexterity = player:GetStat(1);
     --PlayerVitality = player:GetStat(2);
@@ -432,6 +434,7 @@ function dragdisplay.Initialize()
 		local display = MainLV .. Main .. '/' .. SubLV .. Sub ..'   Attk:' .. Attk .. '   Def:' .. Def;
 
         display = display .. '    Res -> ' .. 'Dark: ' .. DarkResistance .. ' | Earth: ' .. EarthResistance .. ' | Fire: ' .. FireResistance .. ' | Ice: ' .. IceResistance .. ' | Lightning: ' .. LightningResistance .. ' | Light: ' .. LightResistance .. ' | Water: ' .. WaterResistance .. ' | Wind: ' .. WindResistance;
+        display = display .. ' || Weather: ' .. weather;
 
         if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
@@ -441,6 +444,12 @@ function dragdisplay.Initialize()
             display = display .. '\n' .. SmnPet.Name .. ':   1: Assault   3: ' .. SmnPet.Rage1 .. '   4: ' .. SmnPet.Rage2 .. '   5: ' .. SmnPet.Rage3 .. '   sh5: ' .. SmnPet.Rage4 .. '   6: ' .. SmnPet.AstralFlow .. '   7: ' .. SmnPet.Ward1 .. '   Sh7: ' .. SmnPet.Ward3 .. '   8: ' .. SmnPet.Ward2 .. '   Sh8: ' .. SmnPet.Ward4 .. '   9: Retreat';
         elseif Sub == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   4: Sic   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
+        elseif Main == 'RDM' and Sub == 'BLM' then
+            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
+        elseif Main == 'RDM' and Sub == 'DRK' then
+            display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Bind 0. Sleep';
+        elseif Main == 'RDM' then
+            display = display .. '\n1. Haste 2. Refresh 3. Regen sh3. Enspell 4. Gravity sh4. Shock Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. N/A 8. N/A 9. Bind 0. Sleep';
         end
 
         dragdisplay.FontObject.text = display;

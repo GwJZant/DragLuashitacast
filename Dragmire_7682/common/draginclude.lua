@@ -784,11 +784,9 @@ function draginclude.CheckTorque()
     local skill = GetSkill();
     local torque = skillToTorque[skill];
 
-    if player.Status == 'Engaged' then
-        if torque then
-            if player.MainJobLevel >= 73 then
-                gFunc.Equip('Neck', torque);
-            end
+    if torque then
+        if player.MainJobLevel >= 73 then
+            gFunc.Equip('Neck', torque);
         end
     end
 end

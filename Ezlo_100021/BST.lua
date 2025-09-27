@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.SaberFamiliar},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.ColdbloodComo},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -28,7 +28,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {},
-        Head = {'Alumine Salade', 'Centurion\'s Visor'},
+        Head = {'Emperor Hairpin', 'Centurion\'s Visor'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
@@ -60,7 +60,7 @@ local sets = {
 
     Engaged_Priority = {
         Ammo = {},
-        Head = {},
+        Head = {'Alumine Salade'},
         Neck = {},
         Ear1 = {},
         Ear2 = {},
@@ -396,7 +396,7 @@ local sets = {
     StyleLockSummer = {
         Head = 'Emperor Hairpin',
         Body = 'Wonder Maillot +1',
-        Legs = 'Taru Trunks +1',
+        Legs = 'Taru. Trunks +1',
     },
 
     StyleLockRSE = {
@@ -556,10 +556,10 @@ profile.HandleDefault = function()
     local zone = gData.GetEnvironment();
     local pet = gData.GetPet();
     local petAction = gData.GetPetAction();
-    local player = gData.GetPlayer();
-    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
     local mainWeapon = gData.GetEquipment().Main;
     local subWeapon = gData.GetEquipment().Sub;
+    local player = gData.GetPlayer();
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     -- Evaluate my sets to account for a level sync
     if (myLevel ~= Settings.CurrentLevel) then

@@ -338,6 +338,8 @@ function dragdisplay.Update(settings)
     LightResistance = player:GetResist(6);
     WaterResistance = player:GetResist(5);
     WindResistance = player:GetResist(2);
+    local environment = gData.GetEnvironment();
+    weather = environment.Weather;
     --PlayerStrength = player:GetStat(0);
     --PlayerDexterity = player:GetStat(1);
     --PlayerVitality = player:GetStat(2);
@@ -432,6 +434,7 @@ function dragdisplay.Initialize()
 		local display = MainLV .. Main .. '/' .. SubLV .. Sub ..'   Attk:' .. Attk .. '   Def:' .. Def;
 
         display = display .. '    Res -> ' .. 'Dark: ' .. DarkResistance .. ' | Earth: ' .. EarthResistance .. ' | Fire: ' .. FireResistance .. ' | Ice: ' .. IceResistance .. ' | Lightning: ' .. LightningResistance .. ' | Light: ' .. LightResistance .. ' | Water: ' .. WaterResistance .. ' | Wind: ' .. WindResistance;
+        display = display .. ' || Weather: ' .. weather;
 
         if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';

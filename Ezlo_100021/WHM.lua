@@ -45,16 +45,38 @@ local sets = {
         Feet = {''},
     },
 
-    Weaponskill_Priority = {
-        Hands = {'Wonder Mitts'},
+    MND_Priority = { -- MND +8
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Neck = {'Holy Phial'}, -- MND +3
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Ring1 = {'San d\'Orian Ring'}, -- MND +1
+        Legs = {'Wonder Braccae'}, -- MND +2
     },
 
-    StyleLock = {
-        Head = '',
-        Body = 'Ryl.Ftm. Tunic',
-        Hands = 'Battle Gloves',
-        Legs = 'Windurstian Slops',
-        Feet = 'Sandals',
+    INT_Priority = { -- INT +4
+        Ring1 = {'Eremite\'s Ring'}, -- INT +2
+        Ring2 = {'Eremite\'s Ring'}, -- INT +2
+    },
+
+    HPDown_Priority = {
+        Ring1 = {'Ether Ring'},
+        Ring2 = {'Astral Ring'},
+    },
+
+    SpellHaste_Priority = {
+
+    },
+
+    DarkSkill_Priority = {
+
+    },
+
+    EnhancingSkill_Priority = {
+
+    },
+
+    Weaponskill_Priority = {
+        Hands = {'Wonder Mitts'},
     },
 
     StyleLockSummer = {
@@ -71,18 +93,18 @@ local sets = {
 
     },
 
-    Reward_Priority = { -- MND
+    Reward_Priority = { -- MND +7
         Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
-        Neck = {'Holy Phial'},
-        Body = {'Wonder Kaftan'},
-        Ring1 = {'San d\'Orian Ring'},
-        Legs = {'Wonder Braccae'},
+        Neck = {'Holy Phial'}, -- MND +3
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Ring1 = {'San d\'Orian Ring'}, -- MND +1
+        Legs = {'Wonder Braccae'}, -- MND +2
     },
 
     Charm_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {'Flower Necklace'},
+        Neck = {'Flower Necklace'}, -- CHR +3
         Ear1 = {''},
         Ear2 = {''},
         Body = {''},
@@ -105,6 +127,70 @@ local sets = {
 };
 
 profile.Sets = sets;
+
+local ObiTable = {
+    --Fire = "Karin Obi",
+    --Earth = "Dorin Obi",
+    --Water = "Suirin Obi",
+    --Wind = "Furin Obi",
+    --Ice = "Hyorin Obi",
+    --Thunder = "Rairin Obi",
+    --Light = "Korin Obi",
+    --Dark = "Anrin Obi"
+}
+
+local ElementWeaknessTable = {
+    Fire = "Water",
+    Ice = "Fire",
+    Wind = "Ice",
+    Earth = "Wind",
+    Thunder = "Earth",
+    Water = "Thunder",
+    Light = "Dark",
+    Dark = "Light"
+}
+
+local obiBonus = function(spellElement)
+    local environment = gData.GetEnvironment();
+    local dayElement = environment.DayElement;
+    local weatherElement = environment.WeatherElement;
+    local isDoubleWeather = string.find(environment.Weather, "x2");
+
+    local bonus = 0;
+    if (spellElement == dayElement) then
+        bonus = bonus + 10;
+    end
+
+    if (spellElement == weatherElement) then
+        if (isDoubleWeather) then
+            bonus = bonus + 25;
+        else
+            bonus = bonus + 10;
+        end
+    end
+
+    if (dayElement == ElementWeaknessTable[spellElement]) then
+        bonus = bonus - 10;
+    end
+
+    if (weatherElement == ElementWeaknessTable[spellElement]) then
+        if (isDoubleWeather) then
+            bonus = bonus - 25;
+        else
+            bonus = bonus - 10;
+        end
+    end
+
+    return bonus;
+end
+
+local equipObiIfApplicable = function(spellElement)
+    local obiBonus = obiBonus(spellElement);
+    if (obiBonus > 0) then
+        print("Obi Bonus: " .. obiBonus .. "%");
+        gFunc.Equip("waist", ObiTable[spellElement]);
+    end
+end
 
 local function HandlePetAction(PetAction)
     gFunc.EquipSet(sets.PetReadyDefault);
@@ -232,11 +318,70 @@ end
 
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
+
+    if string.contains(spell.Name, 'Cure') then
+        gFunc.EquipSet(sets.HPDown);
+    end
 end
 
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
+    local player = gData.GetPlayer();
+    local target = gData.GetActionTarget();
 
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
+    elseif spell.Name == 'Stoneskin' then
+        gFunc.EquipSet(sets.MND);
+    elseif string.contains(spell.Name, 'Spikes') then
+        gFunc.EquipSet(sets.INT);
+    elseif spell.Skill == 'Ninjutsu' then
+        gFunc.EquipSet(sets.SpellHaste);
+    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
+        if spell.Type == 'White Magic' then
+            gFunc.EquipSet(sets.MND);
+
+            equipObiIfApplicable(spell.Element);
+        elseif spell.Type == 'Black Magic' then
+            gFunc.EquipSet(sets.INT);
+
+            equipObiIfApplicable(spell.Element);
+        end
+    elseif spell.Skill == 'Enhancing Magic' then
+        if spell.Name == 'Haste' then
+            gFunc.EquipSet(sets.SpellHaste);
+        elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
+            gFunc.EquipSet(sets.EnhancingSkill);
+        end
+    elseif spell.Skill == 'Healing Magic' then
+    
+        if (not string.contains(spell.Name, 'Reraise')) and (not string.contains(spell.Name, 'Raise')) then
+            gFunc.EquipSet(sets.MND);
+        elseif string.contains(spell.Name, 'Raise') then
+            gFunc.EquipSet(sets.SpellHaste);
+        end
+    elseif spell.Skill == 'Elemental Magic' then
+        if spell.Name == 'Drown' or spell.Name == 'Frost' or spell.Name == 'Choke' or spell.Name == 'Rasp' or spell.Name == 'Shock' or spell.Name == 'Burn' then
+            gFunc.EquipSet(sets.INT);
+        else
+            gFunc.EquipSet(sets.INT);
+        end
+
+        equipObiIfApplicable(spell.Element);
+    elseif spell.Skill == 'Dark Magic' and spell.Name ~= 'Bio' then -- Bio needs zero gearswap
+
+        if spell.Name == 'Drain' or spell.Name == 'Aspir' then
+            gFunc.EquipSet(sets.DarkSkill);
+        elseif spell.Name == 'Bio II' then -- Bio needs raw Dark Skill
+            gFunc.EquipSet(sets.DarkSkill);
+        else
+            gFunc.EquipSet(sets.INT);
+        end
+
+        equipObiIfApplicable(spell.Element);
+    end
 end
 
 profile.HandlePreshot = function()

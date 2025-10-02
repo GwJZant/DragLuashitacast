@@ -23,8 +23,8 @@ local sets = {
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {'Eremite\'s Ring'},
-        Back = {'Trimmer\'s Mantle'},
-        Waist = {},
+        Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
+        Waist = {'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
         Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
@@ -45,17 +45,27 @@ local sets = {
         Feet = {''},
     },
 
-    MND_Priority = { -- MND +8
+    MND_Priority = { -- MND +16
         Ammo = {'Holy Ampulla'}, -- MND +1
         Neck = {'Holy Phial'}, -- MND +3
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'San d\'Orian Ring'}, -- MND +1
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
+        Back = {'Red Cape +1'}, -- MND +3
         Legs = {'Wonder Braccae'}, -- MND +2
     },
 
-    INT_Priority = { -- INT +4
+    INT_Priority = { -- INT +6
+        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Morion Earring'}, -- INT +1
         Ring1 = {'Eremite\'s Ring'}, -- INT +2
         Ring2 = {'Eremite\'s Ring'}, -- INT +2
+    },
+
+    MedicineRing_Priority = {
+        Ring2 = {'Medicine Ring'}, -- Cure Potency +10% while HP <= 75% and TP <= 1000
     },
 
     HPDown_Priority = {
@@ -74,12 +84,45 @@ local sets = {
     EnhancingSkill_Priority = {
 
     },
+    
+    Fire_Priority = {
+        Main = {'Fire Staff'},
+    },
+
+    Ice_Priority = {
+        Main = {'Ice Staff'},
+    },
+
+    Wind_Priority = {
+        Main = {'Wind Staff'},
+    },
+
+    Earth_Priority = {
+        Main = {'Earth Staff'},
+    },
+
+    Thunder_Priority = {
+        Main = {'Thunder Staff'},
+    },
+
+    Water_Priority = {
+        Main = {'Water Staff'},
+    },
+
+    Light_Priority = {
+        Main = {'Light Staff'},
+    },
+
+    Dark_Priority = {
+        Main = {'Dark Staff'},
+    },
 
     Weaponskill_Priority = {
         Hands = {'Wonder Mitts'},
     },
 
     StyleLockSummer = {
+        Main = 'Light Staff',
         Head = 'Emperor Hairpin',
         Body = 'Wonder Maillot +1',
         Legs = 'Taru. Trunks +1',
@@ -93,11 +136,14 @@ local sets = {
 
     },
 
-    Reward_Priority = { -- MND +7
-        Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+    Reward_Priority = { -- MND +12
+        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Neck = {'Holy Phial'}, -- MND +3
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'San d\'Orian Ring'}, -- MND +1
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
         Legs = {'Wonder Braccae'}, -- MND +2
     },
 
@@ -197,7 +243,7 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'Evasion'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field', 'Fishing'});
 end
 
 profile.OnUnload = function()
@@ -265,12 +311,11 @@ profile.HandleDefault = function()
         end
     end
 
-    -- Forward slash toggle between Default and Evasion
+    -- Forward slash toggle between NoStaffSwap and StaffSwap
     if draginclude.dragSettings.TpVariant == 1 then
 
         gFunc.EquipSet(sets.Default);
         
-
         -- Engaged Section
         if player.Status == 'Engaged' then
         
@@ -282,8 +327,17 @@ profile.HandleDefault = function()
 
         end
 
-    elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
-        
+    elseif draginclude.dragSettings.TpVariant == 2 then --StaffSwap
+        gFunc.EquipSet(sets.Default);
+
+        -- Resting Section
+        if (player.Status == 'Resting') then
+            gFunc.EquipSet(sets.Dark);
+            gFunc.EquipSet(sets.RestingMP);
+        -- Idle Section
+        else
+            gFunc.EquipSet(sets.Earth);
+        end
     end
 
     if (pet ~= nil) then
@@ -329,6 +383,28 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
     local target = gData.GetActionTarget();
 
+    if draginclude.dragSettings.TpVariant == 1 then
+        -- Don't swap weapons
+    elseif draginclude.dragSettings.TpVariant == 2 then
+        if spell.Element == 'Fire' then
+            gFunc.EquipSet(sets.Fire);
+        elseif spell.Element == 'Ice' then
+            gFunc.EquipSet(sets.Ice);
+        elseif spell.Element == 'Wind' then
+            gFunc.EquipSet(sets.Wind);
+        elseif spell.Element == 'Earth' then
+            gFunc.EquipSet(sets.Earth);
+        elseif spell.Element == 'Thunder' then
+            gFunc.EquipSet(sets.Thunder);
+        elseif spell.Element == 'Water' then
+            gFunc.EquipSet(sets.Water);
+        elseif spell.Element == 'Light' then
+            gFunc.EquipSet(sets.Light);
+        elseif spell.Element == 'Dark' then
+            gFunc.EquipSet(sets.Dark);
+        end
+    end
+
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
@@ -357,9 +433,15 @@ profile.HandleMidcast = function()
         end
     elseif spell.Skill == 'Healing Magic' then
     
-        if (not string.contains(spell.Name, 'Reraise')) and (not string.contains(spell.Name, 'Raise')) then
+        if string.contains(spell.Name, 'Cur') then
             gFunc.EquipSet(sets.MND);
-        elseif string.contains(spell.Name, 'Raise') then
+
+            if player.HPP <= 75 then
+                gFunc.EquipSet(sets.MedicineRing);
+            end
+        elseif not string.contains(string.lower(spell.Name), 'raise') then
+            gFunc.EquipSet(sets.MND);
+        else
             gFunc.EquipSet(sets.SpellHaste);
         end
     elseif spell.Skill == 'Elemental Magic' then

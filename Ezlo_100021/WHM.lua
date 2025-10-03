@@ -17,11 +17,11 @@ local sets = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
         Neck = {'Holy Phial'},
-        Ear1 = {'Beetle Earring +1'},
-        Ear2 = {'Beetle Earring +1'},
+        Ear1 = {'Geist Earring'},
+        Ear2 = {'Geist Earring'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
-        Ring1 = {'San d\'Orian Ring'},
+        Ring1 = {'Turquoise Ring', 'San d\'Orian Ring'},
         Ring2 = {'Eremite\'s Ring'},
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Life Belt'},
@@ -43,6 +43,22 @@ local sets = {
         Waist = {''},
         Legs = {''},
         Feet = {''},
+    },
+
+    MeleeEngaged_Priority = {
+        Ammo = {'Holy Ampulla', 'Morion Tathlum'},
+        Head = {'Emperor Hairpin'},
+        Neck = {'Holy Phial'},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
+        Hands = {'Battle Gloves'},
+        Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Sniper\'s Ring'},
+        Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
+        Waist = {'Life Belt'},
+        Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
+        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     MND_Priority = { -- MND +16
@@ -318,6 +334,7 @@ profile.HandleDefault = function()
         
         -- Engaged Section
         if player.Status == 'Engaged' then
+            gFunc.EquipSet(sets.MeleeEngaged);
         
         -- Resting Section
         elseif (player.Status == 'Resting') then
@@ -359,6 +376,11 @@ profile.HandleAbility = function()
         gFunc.EquipSet(sets.Reward);
     elseif string.match(ability.Name, 'Charm') then
         gFunc.LockSet(sets.Charm, 1);
+
+        -- Light Staff when in StaffMode
+        if draginclude.dragSettings.TpVariant == 2 then
+            gFunc.EquipSet(sets.Light);
+        end
     elseif string.match(ability.Name, 'Fight') then
         -- Fight set
     elseif string.match(ability.Name, 'Sic') then

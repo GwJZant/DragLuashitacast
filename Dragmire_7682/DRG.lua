@@ -39,7 +39,7 @@ local sets = {
         Neck = {'Temp. Torque'},
     },
 
-    Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
+    Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%), Sonic Belt(2%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
         Hands = {'Homam Manopolas'}, --3%
@@ -172,9 +172,9 @@ local sets = {
         Legs = {'Wyrm Brais'}, -- DEX +5
     },
 
-
     Precast_Priority = {
-
+        Ear1 = {'Loquac. Earring'},
+        Legs = {'Homam Cosciales'},
     },
 
     Midcast_Priority = { -- +HP
@@ -185,7 +185,7 @@ local sets = {
         Hands = {'Homam Manopolas'},
         Ring1 = {'Bloodbead Ring'},
         Ring2 = {'Bomb Queen Ring'},
-        Legs = {'Homam Cosciales'},
+        Legs = {'Drn. Brais +1'},
         Feet = {'Homam Gambieras'},
     },
 
@@ -378,8 +378,10 @@ local function HandlePetAction(PetAction, subjob)
 
     if string.contains(PetAction.Name, 'Healing Breath') then
         gFunc.EquipSet(sets.BreathBonusHealing);
+        gFunc.Message("Healing Breath set");
     else
         gFunc.EquipSet(sets.BreathBonusElemental);
+        gFunc.Message("Elemental Breath set");
     end
 end
 
@@ -586,6 +588,8 @@ end
 
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
+
+    gFunc.EquipSet(sets.Precast);
 end
 
 profile.HandleMidcast = function()

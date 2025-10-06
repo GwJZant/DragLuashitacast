@@ -250,19 +250,19 @@ local sets = {
         Feet = {},
     },
 
-    Stoneskin_Priority = {
+    Stoneskin_Priority = { -- MND +14
         Ammo = {},
         Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
+        Neck = {'Holy Phial'}, -- MND +3
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
         Hands = {},
-        Ring1 = {},
-        Ring2 = {},
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
         Back = {},
-        Waist = {},
-        Legs = {},
+        Waist = {'R.K. Belt +1'}, -- MND +2
+        Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {},
     },
 
@@ -386,11 +386,11 @@ local sets = {
     },
 
     StyleLockGeneric = {
-        Head = 'Alumine Salade',
+        Head = 'Emperor Hairpin',
         Body = 'Scorpion Harness',
-        Hands = 'Wonder Mitts',
+        Hands = 'Battle Gloves',
         Legs = 'Alumine Brayettes',
-        Feet = 'Wonder Sollerets',
+        Feet = 'Alumine Sollerets',
     },
 
     StyleLockSummer = {
@@ -412,36 +412,36 @@ local sets = {
     },
 
     -- Uses Relic body to remove status ailments
-    RewardSTATUS_Priority = {
+    RewardSTATUS_Priority = { -- MND +14
         Ammo = {'Pet Food Zeta','Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {'Wonder Kaftan'},
+        Neck = {'Holy Phial'}, -- MND +3
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
         Hands = {},
-        Ring1 = {},
-        Ring2 = {},
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
         Back = {},
-        Waist = {'R.K. Belt +1'},
-        Legs = {'Wonder Braccae'},
+        Waist = {'R.K. Belt +1'}, -- MND +2
+        Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Beast Gaiters'},
     },
 
     -- Uses Kirin's Osode to maximize healing, does not remove status ailments
-    RewardHP_Priority = {
+    RewardHP_Priority = { -- MND +14
         Ammo = {'Pet Food Zeta','Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {'Wonder Kaftan'},
+        Neck = {'Holy Phial'}, -- MND +3
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
         Hands = {},
-        Ring1 = {},
-        Ring2 = {},
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
         Back = {},
-        Waist = {'R.K. Belt +1'},
-        Legs = {'Wonder Braccae'},
+        Waist = {'R.K. Belt +1'}, -- MND +2
+        Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Beast Gaiters'},
     },
 
@@ -525,7 +525,7 @@ profile.LateInitialize = function()
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
-        gFunc.LockStyle(sets.StyleLockSummer);
+        gFunc.LockStyle(sets.StyleLockGeneric);
 
         --[[ Set you job macro defaults here]]
         if player.SubJob == 'NIN' then

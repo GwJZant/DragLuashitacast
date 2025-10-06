@@ -372,7 +372,7 @@ local sets = {
 
 profile.Sets = sets;
 
-local function HandlePetAction(PetAction, subjob)
+local function HandlePetAction(PetAction)
 
     gFunc.Message(PetAction.Name .. ' - ' .. PetAction.Type);
 

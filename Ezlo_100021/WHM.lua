@@ -26,16 +26,16 @@ local sets = {
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
-        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
+        Feet = {'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     RestingMP_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {''},
+        Neck = {'Checkered Scarf'}, -- HMP +1
         Ear1 = {''},
         Ear2 = {''},
-        Body = {'Seer\'s Tunic'},
+        Body = {'Seer\'s Tunic'}, -- HMP +1
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
@@ -71,13 +71,16 @@ local sets = {
         Ring2 = {'Turquoise Ring'}, -- MND +2
         Back = {'Red Cape +1'}, -- MND +3
         Legs = {'Wonder Braccae'}, -- MND +2
+        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
-    INT_Priority = { -- INT +6
+    INT_Priority = { -- INT +11
+        Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
         Ring1 = {'Eremite\'s Ring'}, -- INT +2
         Ring2 = {'Eremite\'s Ring'}, -- INT +2
+        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
     MedicineRing_Priority = {
@@ -90,15 +93,29 @@ local sets = {
     },
 
     SpellHaste_Priority = {
-
+        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DarkSkill_Priority = {
-
+    DarkSkill_Priority = { -- INT +11
+        Neck = {'Checkered Scarf'}, -- INT +2
+        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Morion Earring'}, -- INT +1
+        Ring1 = {'Eremite\'s Ring'}, -- INT +2
+        Ring2 = {'Eremite\'s Ring'}, -- INT +2
+        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
     EnhancingSkill_Priority = {
-
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Neck = {'Holy Phial'}, -- MND +3
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Ring1 = {'Turquoise Ring'}, -- MND +2
+        Ring2 = {'Turquoise Ring'}, -- MND +2
+        Back = {'Red Cape +1'}, -- MND +3
+        Legs = {'Wonder Braccae'}, -- MND +2
+        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
     
     Fire_Priority = {

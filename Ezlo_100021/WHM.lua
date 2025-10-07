@@ -21,8 +21,8 @@ local sets = {
         Ear2 = {'Geist Earring'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
-        Ring1 = {'Turquoise Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Eremite\'s Ring'},
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'},
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
@@ -49,8 +49,8 @@ local sets = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
         Neck = {'Holy Phial'},
-        Ear1 = {'Beetle Earring +1'},
-        Ear2 = {'Beetle Earring +1'},
+        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
@@ -61,25 +61,59 @@ local sets = {
         Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
-    MND_Priority = { -- MND +16
+    MND_Priority = { -- MND +18
         Ammo = {'Holy Ampulla'}, -- MND +1
         Neck = {'Holy Phial'}, -- MND +3
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Turquoise Ring'}, -- MND +2
-        Ring2 = {'Turquoise Ring'}, -- MND +2
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
-    INT_Priority = { -- INT +11
+    MNDEnfeeb_Priority = { -- MND +17 Enfeebling Skill +5
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Neck = {'Holy Phial'}, -- MND +3
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Shaman\'s Cloak', 'Wonder Kaftan'}, -- Enfeebling Skill +5
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Legs = {'Wonder Braccae'}, -- MND +2
+        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+    },
+
+    INT_Priority = { -- INT +13
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
-        Ring1 = {'Eremite\'s Ring'}, -- INT +2
-        Ring2 = {'Eremite\'s Ring'}, -- INT +2
+        Body = {'Shaman\'s Cloak'}, -- INT +4
+        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+    },
+
+    INTEnfeeb_Priority = { -- INT +17 Enfeebling Skill +5
+        Neck = {'Checkered Scarf'}, -- INT +2
+        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Morion Earring'}, -- INT +1
+        Body = {'Shaman\'s Cloak'}, -- INT +4 Enfeebling Skill +5
+        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+    },
+
+    INTElemental_Priority = { -- INT +17 Elemental Skill +5
+        Neck = {'Checkered Scarf'}, -- INT +2
+        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Morion Earring'}, -- INT +1
+        Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
+        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -96,12 +130,13 @@ local sets = {
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DarkSkill_Priority = { -- INT +11
+    DarkSkill_Priority = { -- INT +17
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
-        Ring1 = {'Eremite\'s Ring'}, -- INT +2
-        Ring2 = {'Eremite\'s Ring'}, -- INT +2
+        Body = {'Shaman\'s Cloak'}, -- INT +4
+        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -111,8 +146,8 @@ local sets = {
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Turquoise Ring'}, -- MND +2
-        Ring2 = {'Turquoise Ring'}, -- MND +2
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
@@ -161,6 +196,14 @@ local sets = {
         Legs = 'Taru. Trunks +1',
     },
 
+    StyleLockGeneric = {
+        Main = 'Light Staff',
+        Body = 'Shaman\'s Cloak',
+        Hands = 'Wonder Mitts',
+        Legs = 'Seer\'s Slacks',
+        Feet = 'Healer\'s Duckbills',
+    },
+
     PetReadyDefault = {
 
     },
@@ -169,14 +212,14 @@ local sets = {
 
     },
 
-    Reward_Priority = { -- MND +12
+    Reward_Priority = { -- MND +14
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Neck = {'Holy Phial'}, -- MND +3
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Turquoise Ring'}, -- MND +2
-        Ring2 = {'Turquoise Ring'}, -- MND +2
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Legs = {'Wonder Braccae'}, -- MND +2
     },
 
@@ -294,7 +337,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockSummer);
+        gFunc.LockStyle(sets.StyleLockGeneric);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
@@ -456,11 +499,11 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.SpellHaste);
     elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
         if spell.Type == 'White Magic' then
-            gFunc.EquipSet(sets.MND);
+            gFunc.EquipSet(sets.MNDEnfeeb);
 
             equipObiIfApplicable(spell.Element);
         elseif spell.Type == 'Black Magic' then
-            gFunc.EquipSet(sets.INT);
+            gFunc.EquipSet(sets.INTEnfeeb);
 
             equipObiIfApplicable(spell.Element);
         end
@@ -485,9 +528,9 @@ profile.HandleMidcast = function()
         end
     elseif spell.Skill == 'Elemental Magic' then
         if spell.Name == 'Drown' or spell.Name == 'Frost' or spell.Name == 'Choke' or spell.Name == 'Rasp' or spell.Name == 'Shock' or spell.Name == 'Burn' then
-            gFunc.EquipSet(sets.INT);
+            gFunc.EquipSet(sets.INTElemental);
         else
-            gFunc.EquipSet(sets.INT);
+            gFunc.EquipSet(sets.INTElemental);
         end
 
         equipObiIfApplicable(spell.Element);

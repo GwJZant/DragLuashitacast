@@ -16,7 +16,7 @@ local sets = {
     Default_Priority = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
-        Neck = {'Holy Phial'},
+        Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Geist Earring'},
         Ear2 = {'Geist Earring'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
@@ -24,7 +24,7 @@ local sets = {
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring', 'San d\'Orian Ring'},
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'},
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
-        Waist = {'Life Belt'},
+        Waist = {'Swift Belt', 'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
         Feet = {'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
     },
@@ -45,10 +45,15 @@ local sets = {
         Feet = {''},
     },
 
+    VermillionCloak = {
+        Head = 'displaced',
+        Body = 'Vermillion Cloak',
+    },
+
     MeleeEngaged_Priority = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
-        Neck = {'Holy Phial'},
+        Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
@@ -56,33 +61,35 @@ local sets = {
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
-        Waist = {'Life Belt'},
+        Waist = {'Swift Belt', 'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
         Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
-    MND_Priority = { -- MND +18
+    MND_Priority = { -- MND +21
         Ammo = {'Holy Ampulla'}, -- MND +1
-        Neck = {'Holy Phial'}, -- MND +3
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Swift Belt'},
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
-    MNDEnfeeb_Priority = { -- MND +17 Enfeebling Skill +5
+    MNDEnfeeb_Priority = { -- MND +20 Enfeebling Skill +5
         Ammo = {'Holy Ampulla'}, -- MND +1
-        Neck = {'Holy Phial'}, -- MND +3
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Shaman\'s Cloak', 'Wonder Kaftan'}, -- Enfeebling Skill +5
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Swift Belt'},
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
@@ -94,6 +101,7 @@ local sets = {
         Body = {'Shaman\'s Cloak'}, -- INT +4
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -104,6 +112,7 @@ local sets = {
         Body = {'Shaman\'s Cloak'}, -- INT +4 Enfeebling Skill +5
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -114,6 +123,7 @@ local sets = {
         Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -127,6 +137,7 @@ local sets = {
     },
 
     SpellHaste_Priority = {
+        Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -137,18 +148,20 @@ local sets = {
         Body = {'Shaman\'s Cloak'}, -- INT +4
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    EnhancingSkill_Priority = {
+    MNDEnhancingSkill_Priority = {
         Ammo = {'Holy Ampulla'}, -- MND +1
-        Neck = {'Holy Phial'}, -- MND +3
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Swift Belt'},
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
@@ -399,9 +412,15 @@ profile.HandleDefault = function()
         -- Resting Section
         elseif (player.Status == 'Resting') then
             gFunc.EquipSet(sets.RestingMP);
+
+            if Settings.CurrentLevel >= 59 then
+                gFunc.EquipSet(sets.VermillionCloak);
+            end
         -- Idle Section
         else
-
+            if Settings.CurrentLevel >= 59 then
+                gFunc.EquipSet(sets.VermillionCloak);
+            end
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --StaffSwap
@@ -410,10 +429,19 @@ profile.HandleDefault = function()
         -- Resting Section
         if (player.Status == 'Resting') then
             gFunc.EquipSet(sets.Dark);
+
+            if Settings.CurrentLevel >= 59 then
+                gFunc.EquipSet(sets.VermillionCloak);
+            end
+
             gFunc.EquipSet(sets.RestingMP);
         -- Idle Section
         else
             gFunc.EquipSet(sets.Earth);
+
+            if Settings.CurrentLevel >= 59 then
+                gFunc.EquipSet(sets.VermillionCloak);
+            end
         end
     end
 
@@ -492,7 +520,7 @@ profile.HandleMidcast = function()
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
-        gFunc.EquipSet(sets.MND);
+        gFunc.EquipSet(sets.MNDEnhancingSkill);
     elseif string.contains(spell.Name, 'Spikes') then
         gFunc.EquipSet(sets.INT);
     elseif spell.Skill == 'Ninjutsu' then
@@ -511,7 +539,7 @@ profile.HandleMidcast = function()
         if spell.Name == 'Haste' then
             gFunc.EquipSet(sets.SpellHaste);
         elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
-            gFunc.EquipSet(sets.EnhancingSkill);
+            gFunc.EquipSet(sets.MNDEnhancingSkill);
         end
     elseif spell.Skill == 'Healing Magic' then
     

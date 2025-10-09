@@ -45,6 +45,22 @@ local sets = {
         Feet = {''},
     },
 
+    RestingMPBLM_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {'Checkered Scarf'}, -- HMP +1
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {'Seer\'s Tunic'}, -- HMP +1
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {'Wizard\'s Mantle'}, -- HMP +1 when /BLM
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+
     VermillionCloak = {
         Head = 'displaced',
         Body = 'Vermillion Cloak',
@@ -136,6 +152,10 @@ local sets = {
         Ring2 = {'Astral Ring'},
     },
 
+    Precast_Priority = {
+        Waist = {'Swift Belt'}, -- Haste 4%
+    },
+
     SpellHaste_Priority = {
         Waist = {'Swift Belt'},
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
@@ -164,6 +184,14 @@ local sets = {
         Waist = {'Swift Belt'},
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+    },
+
+    CurePrecast_Priority = {
+        Feet = {'Cure Clogs'}, -- Cure Cast -15%
+    },
+
+    RuckesRung_Priority = {
+        --Main = {'Rucke\'s Rung'},
     },
     
     Fire_Priority = {
@@ -332,7 +360,7 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field'});
 end
 
 profile.OnUnload = function()
@@ -411,8 +439,12 @@ profile.HandleDefault = function()
         
         -- Resting Section
         elseif (player.Status == 'Resting') then
-            gFunc.EquipSet(sets.RestingMP);
-
+            if player.SubJob == 'BLM' then
+                gFunc.EquipSet(sets.RestingMPBLM);
+            else
+                gFunc.EquipSet(sets.RestingMP);
+            end
+            
             if Settings.CurrentLevel >= 59 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
@@ -430,11 +462,15 @@ profile.HandleDefault = function()
         if (player.Status == 'Resting') then
             gFunc.EquipSet(sets.Dark);
 
+            if player.SubJob == 'BLM' then
+                gFunc.EquipSet(sets.RestingMPBLM);
+            else
+                gFunc.EquipSet(sets.RestingMP);
+            end
+
             if Settings.CurrentLevel >= 59 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
-
-            gFunc.EquipSet(sets.RestingMP);
         -- Idle Section
         else
             gFunc.EquipSet(sets.Earth);
@@ -483,8 +519,18 @@ end
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
 
-    if string.contains(spell.Name, 'Cure') then
-        gFunc.EquipSet(sets.HPDown);
+    if draginclude.dragSettings.TpVariant == 1 then
+        -- Don't swap weapons
+    elseif draginclude.dragSettings.TpVariant == 2 then
+        if string.contains(spell.Name, 'Cure') or string.contains(spell.Name, 'Curaga') then
+            gFunc.EquipSet(sets.RuckesRung);
+        end
+    end
+
+    gFunc.EquipSet(sets.Precast);
+
+    if string.contains(spell.Name, 'Cure') or string.contains(spell.Name, 'Curaga') then
+        gFunc.EquipSet(sets.CurePrecast);
     end
 end
 
@@ -509,7 +555,11 @@ profile.HandleMidcast = function()
         elseif spell.Element == 'Water' then
             gFunc.EquipSet(sets.Water);
         elseif spell.Element == 'Light' then
-            gFunc.EquipSet(sets.Light);
+            if string.contains(spell.Name, 'Regen') then
+                gFunc.EquipSet(sets.RuckesRung);
+            else
+                gFunc.EquipSet(sets.Light);
+            end
         elseif spell.Element == 'Dark' then
             gFunc.EquipSet(sets.Dark);
         end
@@ -540,6 +590,9 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.SpellHaste);
         elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
             gFunc.EquipSet(sets.MNDEnhancingSkill);
+
+        elseif string.contains(spell.Name, 'Regen') then -- Rucke's Rung
+            gFunc.EquipSet(sets.Regen);
         end
     elseif spell.Skill == 'Healing Magic' then
     

@@ -391,7 +391,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockSummer);
+        gFunc.LockStyle(sets.StyleLock);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -547,7 +547,7 @@ profile.HandleDefault = function()
     end
 
     if (petAction ~= nil) then
-        HandlePetAction(petAction, player.SubJob);
+        HandlePetAction(petAction);
         return;
     end
 

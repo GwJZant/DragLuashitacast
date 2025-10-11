@@ -495,6 +495,7 @@ end
 profile.HandleAbility = function()
     local pet = gData.GetPet();
     local ability = gData.GetAction();
+    local target = gData.GetActionTarget();
 
     if string.match(ability.Name, 'Reward') then
         gFunc.EquipSet(sets.Reward);
@@ -509,6 +510,10 @@ profile.HandleAbility = function()
         -- Fight set
     elseif string.match(ability.Name, 'Sic') then
         -- Sic set
+    elseif string.match(ability.Name, 'Devotion') then
+        gFunc.Message(target.Name);
+        
+        AshitaCore:GetChatManager():QueueCommand(-1,'/p Using Devotion -> ' .. target.Name);
     end
 end
 
@@ -518,6 +523,8 @@ end
 
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
+    local target = gData.GetActionTarget();
+    local divineSeal = gData.GetBuffCount('Divine Seal');
 
     if draginclude.dragSettings.TpVariant == 1 then
         -- Don't swap weapons
@@ -531,6 +538,10 @@ profile.HandlePrecast = function()
 
     if string.contains(spell.Name, 'Cure') or string.contains(spell.Name, 'Curaga') then
         gFunc.EquipSet(sets.CurePrecast);
+    end
+
+    if divineSeal > 0 then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/p Using Divine Seal -> ' .. spell.Name .. ' on ' .. target.Name);
     end
 end
 

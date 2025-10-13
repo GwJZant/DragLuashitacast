@@ -82,8 +82,9 @@ local sets = {
         Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
-    MND_Priority = { -- MND +21
+    MND_Priority = { -- MND +30
         Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
@@ -91,55 +92,56 @@ local sets = {
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
-    MNDEnfeeb_Priority = { -- MND +20 Enfeebling Skill +5
+    MNDEnfeeb_Priority = { -- MND +29 Enfeebling Skill +10
         Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Shaman\'s Cloak', 'Wonder Kaftan'}, -- Enfeebling Skill +5
+        Body = {'Healer\'s Bliaut', 'Shaman\'s Cloak', 'Wonder Kaftan'}, -- Enfeebling Skill +10
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
-    INT_Priority = { -- INT +13
+    INT_Priority = { -- INT +18
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Shaman\'s Cloak'}, -- INT +4
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTEnfeeb_Priority = { -- INT +17 Enfeebling Skill +5
+    INTEnfeeb_Priority = { -- INT +22 Enfeebling Skill +10
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
-        Body = {'Shaman\'s Cloak'}, -- INT +4 Enfeebling Skill +5
+        Body = {'Healer\'s Bliaut', 'Shaman\'s Cloak'}, -- INT +4 Enfeebling Skill +10
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +17 Elemental Skill +5
+    INTElemental_Priority = { -- INT +22 Elemental Skill +5
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -157,7 +159,7 @@ local sets = {
     },
 
     SpellHaste_Priority = {
-        Waist = {'Swift Belt'},
+        Waist = {'Swift Belt'}, -- Haste +4%
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
@@ -168,12 +170,13 @@ local sets = {
         Body = {'Shaman\'s Cloak'}, -- INT +4
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    MNDEnhancingSkill_Priority = {
+    DivineSkill_Priority = { -- MND +30
         Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
@@ -181,7 +184,38 @@ local sets = {
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
-        Waist = {'Swift Belt'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
+        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Divine Skill +15
+        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+    },
+
+    Cure_Priority = { -- MND +26, Enmity -12
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Healer\'s Bliaut', 'Wonder Kaftan'}, -- Enmity -4
+        Hands = {'Healer\'s Mitts'}, -- Healing skill +15, Enmity -4
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
+        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Enmity -1
+        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+    },
+
+    MNDEnhancingSkill_Priority = {
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Wonder Kaftan'}, -- MND +1
+        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
         Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
     },
@@ -227,7 +261,7 @@ local sets = {
     },
 
     Weaponskill_Priority = {
-        Hands = {'Wonder Mitts'},
+        Hands = {'Healer\'s Mitts', 'Wonder Mitts'},
     },
 
     StyleLockSummer = {
@@ -242,6 +276,15 @@ local sets = {
         Body = 'Shaman\'s Cloak',
         Hands = 'Wonder Mitts',
         Legs = 'Seer\'s Slacks',
+        Feet = 'Healer\'s Duckbills',
+    },
+
+    StyleLockAF = {
+        Main = 'Light Staff',
+        Head = 'Healer\'s Cap',
+        Body = 'Healer\'s Bliaut',
+        Hands = 'Healer\'s Mitts',
+        Legs = 'Healer\'s Pantaln.',
         Feet = 'Healer\'s Duckbills',
     },
 
@@ -378,7 +421,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockGeneric);
+        gFunc.LockStyle(sets.StyleLockAF);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
@@ -608,13 +651,11 @@ profile.HandleMidcast = function()
     elseif spell.Skill == 'Healing Magic' then
     
         if string.contains(spell.Name, 'Cur') then
-            gFunc.EquipSet(sets.MND);
+            gFunc.EquipSet(sets.Cure);
 
             if player.HPP <= 75 then
                 gFunc.EquipSet(sets.MedicineRing);
             end
-        elseif not string.contains(string.lower(spell.Name), 'raise') then
-            gFunc.EquipSet(sets.MND);
         else
             gFunc.EquipSet(sets.SpellHaste);
         end
@@ -635,6 +676,12 @@ profile.HandleMidcast = function()
         else
             gFunc.EquipSet(sets.INT);
         end
+
+        equipObiIfApplicable(spell.Element);
+
+    elseif spell.Skill == 'Divine Magic' then
+
+        gFunc.EquipSet(sets.DivineSkill);
 
         equipObiIfApplicable(spell.Element);
     end

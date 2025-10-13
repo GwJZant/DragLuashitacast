@@ -388,7 +388,7 @@ local sets = {
     StyleLockGeneric = {
         Head = 'Emperor Hairpin',
         Body = 'Scorpion Harness',
-        Hands = 'Battle Gloves',
+        Hands = 'Beast Gloves',
         Legs = 'Alumine Brayettes',
         Feet = 'Alumine Sollerets',
     },
@@ -450,20 +450,20 @@ local sets = {
         Hands = {},
     },
 
-    Charm_Priority = {
+    Charm_Priority = { -- Charm +5, CHR +8
         Ammo = {},
         Head = {},
-        Neck = {}, -- CHR +2
+        Neck = {'Flower Necklace'}, -- CHR +3
         Ear1 = {},
         Ear2 = {},
         Body = {},
-        Hands = {},
+        Hands = {'Beast Gloves'}, -- Charm +3
         Ring1 = {},
         Ring2 = {},
         Back = {},
-        Waist = {},
+        Waist = {'R.K. Belt +1'}, -- CHR +2
         Legs = {},
-        Feet = {},
+        Feet = {'Beast Gaiters'}, -- Charm +2, CHR +3
     },
 };
 

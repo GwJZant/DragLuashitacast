@@ -12,6 +12,7 @@ local Settings = {
     },
     CurrentLevel = 0,
     TankToggle = 0, -- 0 = DPS, 1 = Parrying/Evasion
+    Acc = 0,
 };
 
 local sets = {
@@ -21,7 +22,7 @@ local sets = {
         Neck = {'Love Torque', 'Peacock Amulet',},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
-        Body = {'Wym. Mail +1', 'Elder\'s Surcoat', 'Dream Robe +1',},
+        Body = {'Homam Corazza', 'Elder\'s Surcoat', 'Dream Robe +1',},
         Hands = {'Homam Manopolas',},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
@@ -42,6 +43,16 @@ local sets = {
     Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%), Sonic Belt(2%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
+        Hands = {'Homam Manopolas'}, --3%
+        Ring2 = {'Blitz Ring'}, --1%
+        Waist = {'Swift Belt'}, --4%
+        Legs = {'Homam Cosciales'}, --3%
+        Feet = {'Homam Gambieras'}, --3%
+    },
+
+    EngagedAcc_Priority = { --18% Haste (Missing: Dusk Gloves +1(1%), Sonic Belt(2%))
+        Head = {'Ace\'s Helm'}, --4%
+        Body = {'Homam Corazza'}, -- +15 Accuracy, Triple Attack+
         Hands = {'Homam Manopolas'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
         Waist = {'Swift Belt'}, --4%
@@ -107,6 +118,7 @@ local sets = {
         Head = {'Darksteel Cap +1'}, -- PDT -2%
         Ear1 = {'Brutal Earring'},
         Ear2 = {'Ethereal Earring'},
+        Body = {'Wym. Mail +1'},
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
         Ring2 = {'Jelly Ring'}, -- PDT -5%
         Back = {'Boxer\'s Mantle'},
@@ -156,6 +168,7 @@ local sets = {
     },
 
     WeaponSkillPenta_Priority = {
+        Body = {'Homam Corazza'}, -- ACC+15
         Hands = {'Wyrm Fng.Gnt.'}, -- ACC+5
         Legs = {'Drn. Brais +1'}, -- ACC+9
         Ring2 = {'Toreador\'s Ring'}, -- ACC+7
@@ -193,7 +206,7 @@ local sets = {
     StyleLock = {
         Main = 'Gungnir',
         Head = 'Ace\'s Helm',
-        Body = 'Hecatomb Harness',
+        Body = 'Homam Corazza',
         Hands = 'Homam Manopolas',
         Legs = 'Homam Cosciales',
         Feet = 'Homam Gambieras',
@@ -272,7 +285,7 @@ local sets = {
     Jump_Priority = { -- ACC
         Head = {'Ace\'s Helm'},
         Neck = {'Peacock Amulet'},
-        Body = {'Barone Corazza'},
+        Body = {'Homam Corazza'},
         Hands = {'Hecatomb Mittens'},
         Ring2 = {'Toreador\'s Ring'},
         Waist = {'Wyrm Belt'},
@@ -283,7 +296,7 @@ local sets = {
     HighJump_Priority = { -- ACC
         Head = {'Ace\'s Helm'},
         Neck = {'Peacock Amulet'},
-        Body = {'Barone Corazza'},
+        Body = {'Homam Corazza'},
         Hands = {'Hecatomb Mittens'},
         Waist = {'Wyrm Belt'},
         Ring1 = {'Rajas Ring'},
@@ -332,7 +345,7 @@ local sets = {
         Neck = {'Love Torque'},
         Ear1 = {'Brutal Earring'},
         Ear2 = {'Beastly Earring'},
-        Body = {'Wym. Mail +1'},
+        Body = {'Homam Corazza'},
         Hands = {'Homam Manopolas'},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
@@ -432,6 +445,7 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd SteadyWing');
 
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tank /lac fwd TankToggle');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd Acc');
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -459,6 +473,15 @@ profile.HandleCommand = function(args)
         end
 
         gFunc.Message('TankToggle ' .. Settings.TankToggle);
+    elseif args[1] == 'Acc' then
+
+        if Settings.Acc == 0 then
+            Settings.Acc = 1;
+        else
+            Settings.Acc = 0;
+        end
+
+        gFunc.Message('Acc ' .. Settings.Acc);
     end
 end
 
@@ -488,18 +511,26 @@ profile.HandleDefault = function()
         end
     end
 
-    if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
-        if player.MP <= 75 then
-            gFunc.EquipSet(sets.Default);
+    -- Forward slash toggle between Default and Evasion
+    if draginclude.dragSettings.TpVariant == 1 then
+        if Settings.TankToggle == 0 then
+            gFunc.EquipSet(sets.TankDPS);
         else
-            --gFunc.EquipSet(sets.Default);
-            gFunc.EquipSet(sets.Mage);
+            gFunc.EquipSet(sets.TankStats);
         end
-        
-    else
-        gFunc.EquipSet(sets.Default);
-    end
+        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
+            if player.MP <= 75 then
+                gFunc.EquipSet(sets.Default);
+            else
+                --gFunc.EquipSet(sets.Default);
+                gFunc.EquipSet(sets.Mage);
+            end
 
+        else
+            gFunc.EquipSet(sets.Default);
+        end
+    end
+    
     if eq.Main then
         if eq.Main.Name == 'Mercurial Pole' then
             gFunc.Equip('Neck', 'Peacock Amulet');
@@ -511,8 +542,12 @@ profile.HandleDefault = function()
     -- Engaged Section
     if player.Status == 'Engaged' then
 
-        gFunc.EquipSet(sets.Engaged);
-
+        if Settings.Acc == 0 then
+            gFunc.EquipSet(sets.Engaged);
+        else
+            gFunc.EquipSet(sets.EngagedAcc);
+        end
+        
     -- Resting Section
     elseif (player.Status == 'Resting') then
 
@@ -534,10 +569,8 @@ profile.HandleDefault = function()
         end
     end
 
-    -- Forward slash toggle between Default and Evasion
-    if draginclude.dragSettings.TpVariant == 1 then
-        -- Nothing
-    elseif draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
+    
+    if draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
         --if Settings.TankToggle == 0 then
         --    gFunc.EquipSet(sets.TankDPS);
         --else

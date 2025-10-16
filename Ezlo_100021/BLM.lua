@@ -15,10 +15,10 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Morion Tathlum'},
-        Head = {'Lgn. Circlet'},
+        Head = {'Emperor Hairpin'},
         Neck = {'Black Neckerchief'},
-        Ear1 = {''},
-        Ear2 = {''},
+        Ear1 = {'Morion Earring'},
+        Ear2 = {'Morion Earring'},
         Body = {'Seer\'s Tunic'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Eremite\'s Ring'},
@@ -45,6 +45,22 @@ local sets = {
         Feet = {''},
     },
 
+    MeleeEngaged_Priority = {
+        Ammo = {'Morion Tathlum'},
+        Head = {'Emperor Hairpin'},
+        Neck = {'Holy Phial'},
+        Ear1 = {'Beetle Earring +1'},
+        Ear2 = {'Beetle Earring +1'},
+        Body = {'Seer\'s Tunic'},
+        Hands = {'Wonder Mitts'},
+        Ring1 = {'San d\'Orian Ring'},
+        Ring2 = {'Eremite\'s Ring'},
+        Back = {'Trimmer\'s Mantle'},
+        Waist = {''},
+        Legs = {'Seer\'s Slacks'},
+        Feet = {'Wonder Clomps'},
+    },
+
     StyleLock = {
         Head = '',
         Body = '',
@@ -63,19 +79,23 @@ local sets = {
 
     Reward_Priority = { -- MND
         Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Food Beta', 'Pet Food Alpha'},
+        Neck = {'Holy Phial'},
+        Body = {'Wonder Kaftan'},
+        Ring1 = {'San d\'Orian Ring'},
+        Legs = {'Wonder Braccae'},
     },
 
     Charm_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {''},
+        Neck = {'Flower Necklace'},
         Ear1 = {''},
         Ear2 = {''},
         Body = {''},
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
-        Back = {''},
+        Back = {'Trimmer\'s Mantle'},
         Waist = {''},
         Legs = {''},
         Feet = {''},
@@ -170,10 +190,9 @@ profile.HandleDefault = function()
 
         gFunc.EquipSet(sets.Default);
         
-
         -- Engaged Section
         if player.Status == 'Engaged' then
-        
+            gFunc.EquipSet(sets.MeleeEngaged);
         -- Resting Section
         elseif (player.Status == 'Resting') then
             gFunc.EquipSet(sets.RestingMP);

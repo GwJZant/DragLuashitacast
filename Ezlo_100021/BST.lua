@@ -60,7 +60,7 @@ local sets = {
 
     Engaged_Priority = {
         Ammo = {},
-        Head = {'Alumine Salade'},
+        Head = {'Patroclus\'s Helm', 'Alumine Salade'},
         Neck = {},
         Ear1 = {},
         Ear2 = {},
@@ -156,7 +156,7 @@ local sets = {
 
     WeaponSkill_Priority = { -- STR, DEX
         Ammo = {},
-        Head = {'Alumine Salade'},
+        Head = {'Patroclus\'s Helm', 'Alumine Salade'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
@@ -172,7 +172,7 @@ local sets = {
 
     WeaponSkillRampage_Priority = {
         Ammo = {},
-        Head = {'Alumine Salade'},
+        Head = {'Patroclus\'s Helm', 'Alumine Salade'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
@@ -386,7 +386,7 @@ local sets = {
     },
 
     StyleLockGeneric = {
-        Head = 'Emperor Hairpin',
+        Head = 'Patroclus\'s Helm',
         Body = 'Scorpion Harness',
         Hands = 'Beast Gloves',
         Legs = 'Alumine Brayettes',

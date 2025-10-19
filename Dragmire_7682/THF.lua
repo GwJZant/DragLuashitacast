@@ -226,6 +226,14 @@ local sets = {
         Feet = 'Hct. Leggings',
     },
 
+    StyleLockHomam = {
+        Head = 'Assassin\'s Bonnet',
+        Body = 'Hecatomb Harness',
+        Hands = 'Andvaranauts',
+        Legs = 'Homam Cosciales',
+        Feet = 'Hct. Leggings',
+    },
+
     IdleTown_Priority = {
         Neck = {'Nanaa\'s Charm'},
         Hands = {'Assassin\'s Armlets'},
@@ -295,7 +303,7 @@ local sets = {
         Body = {'Rogue\'s Vest'}, -- +20 HP
         Hands = {'Thief\'s Kote'}, -- +3 Steal
         Ring1 = {'Bomb Queen Ring'}, -- +75 HP
-        Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
+        --Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
         --Back = {'Gigant Mantle'}, -- +80 HP
         --Waist = {'Koenigs Belt'}, -- +20 HP
         Legs = {'Assassin\'s Culottes'}, -- +5 Steal

@@ -58,18 +58,18 @@ local sets = {
         Feet = {},
     },
 
-    Engaged_Priority = {
+    Engaged_Priority = { -- Haste +9%
         Ammo = {},
-        Head = {'Patroclus\'s Helm', 'Alumine Salade'},
+        Head = {'Patroclus\'s Helm', 'Alumine Salade'}, -- Haste +2%
         Neck = {},
         Ear1 = {},
         Ear2 = {},
         Body = {},
-        Hands = {},
+        Hands = {'Dusk Gloves'}, -- Haste +3%
         Ring1 = {},
         Ring2 = {},
         Back = {},
-        Waist = {'Swift Belt', 'Life Belt'},
+        Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {},
         Feet = {},
     },

@@ -231,7 +231,7 @@ local sets = {
     },
 
     StyleLockRSE = {
-        Main = 'Love Halberd',
+        Main = 'Pitchfork +1',
         Head = 'Egg Helm',
         Body = 'Elder\'s Surcoat',
         Hands = 'Elder\'s Bracers',
@@ -311,7 +311,11 @@ local sets = {
 
     Resting_Priority = {
         Body = {'Wyvern Mail'},
-        --Feet = {'Wyrm Greaves'},
+    },
+
+    RestingMage_Priority = {
+        Ear2 = {'Relaxing Earring'},
+        Body = {'Wyvern Mail'},
     },
 
     PetIdle_Priority = {
@@ -558,7 +562,11 @@ profile.HandleDefault = function()
         end
 
         -- Switch to Resting gear
-        gFunc.EquipSet(sets.Resting);
+        if player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'RDM' then
+            gFunc.EquipSet(sets.RestingMage);
+        else
+            gFunc.EquipSet(sets.Resting);
+        end
 
     -- Idle Section
     else
@@ -585,7 +593,7 @@ profile.HandleDefault = function()
     end
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        if player.SubJob == 'WHM' or player.SubJob == 'WHM' or player.SubJob == 'WHM' then
+        if player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'RDM' then
             --gFunc.EquipSet(sets.IdleTownMage);
         else
             --gFunc.EquipSet(sets.IdleTown);

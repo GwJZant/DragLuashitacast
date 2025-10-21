@@ -24,7 +24,7 @@ local sets = {
         Hands = {'Zenith Mitts', 'Elder\'s Bracers', 'Carbuncle Mitts'},
         Ring1 = {'Evoker\'s Ring', 'Astral Ring'},
         Ring2 = {'Ether Ring', 'Astral Ring'},
-        Back = {'Summoner\'s Cape', 'Trimmer\'s Mantle'},
+        Back = {'Astute Cape', 'Trimmer\'s Mantle'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Baron\'s Slops', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Elder\'s Sandals', 'Dream Boots +1'},
@@ -37,7 +37,7 @@ local sets = {
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
         Legs = {'Evoker\'s Spats'}, -- Pet Acc
-        Feet = {'Evk. Pigaches +1'} -- Pet Eva
+        Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
     },
 
     AvatarEngagedCarby_Priority = { -- Perp Down + Pet Accuracy
@@ -85,52 +85,46 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'}, -- -2
     },
 
-    PetAcc_Priority = { -- Pet Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'},
-        Neck = {'Smn. Torque'},
-        Ear2 = {'Beastly Earring'},
-        Body = {'Summoner\'s Doublet'},
-        Hands = {'Summoner\'s Brcr.'},
-        Legs = {'Evoker\'s Spats'},
-        Feet = {'Austere Sabots'}
+    PetAccBP_Priority = { -- Summoning Skill +43, Pet Accuracy
+        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
+        Body = {'Summoner\'s Doublet'}, -- Pet Crit Rate+
+        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
     };
 
-    PetAccBP_Priority = { -- Pet Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'},
-        Neck = {'Smn. Torque'},
-        Ear2 = {'Beastly Earring'},
-        Body = {'Summoner\'s Doublet'},
-        Hands = {'Summoner\'s Brcr.'},
-        Legs = {'Austere Slops'},
-        Feet = {'Austere Sabots'}
+    PetMAcc_Priority = { -- Summoning Skill +43, Pet Magic Accuracy
+        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
     };
 
-    PetMAcc_Priority = { -- Summoning Skill + Pet Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'},
-        Neck = {'Smn. Torque'},
-        Ear2 = {'Beastly Earring'},
-        Hands = {'Summoner\'s Brcr.'},
-        Ring1 = {'Evoker\'s Ring'},
-        Legs = {'Evoker\'s Spats'},
-        Feet = {'Austere Sabots'}
+    SummonSkill_Priority = { -- Summoning Skill +43
+        Head = {'Evoker\'s Horn'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Hands = {'Summoner\'s Brcr.'}, -- +10
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
     };
 
-    SummonSkill_Priority = { -- Summoning Skill
-        Head = {'Evoker\'s Horn'},
-        Neck = {'Smn. Torque'},
-        Hands = {'Summoner\'s Brcr.'},
-        Legs = {'Austere Slops'},
-        Feet = {'Austere Sabots'}
-    };
-
-    PetMAB_Priority = {
-        Head = {'Shep. Bonnet'},
-        Neck = {'Smn. Torque'},
-        Ear2 = {'Beastly Earring'},
-        Hands = {'Summoner\'s Brcr.'},
-        Ring1 = {'Evoker\'s Ring'},
-        Legs = {'Evoker\'s Spats'},
-        Feet = {'Austere Sabots'}
+    PetMAB_Priority = {-- Summoning Skill +43, Pet Magic Accuracy
+        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
     },
 
     WeaponSkillSpiritTaker_Priority = { -- INT +42, MND +23, Acc -5

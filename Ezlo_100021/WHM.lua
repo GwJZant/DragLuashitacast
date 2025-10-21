@@ -26,7 +26,7 @@ local sets = {
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Swift Belt', 'Life Belt'},
         Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
-        Feet = {'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
     RestingMP_Priority = {
@@ -94,7 +94,7 @@ local sets = {
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
     MNDEnfeeb_Priority = { -- MND +29 Enfeebling Skill +10
@@ -109,7 +109,7 @@ local sets = {
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
     INT_Priority = { -- INT +18
@@ -120,7 +120,7 @@ local sets = {
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
-        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
     INTEnfeeb_Priority = { -- INT +22 Enfeebling Skill +10
@@ -131,7 +131,7 @@ local sets = {
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
-        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
     INTElemental_Priority = { -- INT +22 Elemental Skill +5
@@ -142,7 +142,7 @@ local sets = {
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
-        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 Fast Cast+ / INT +3 SIRD 20%
     },
 
     MedicineRing_Priority = {
@@ -156,11 +156,12 @@ local sets = {
 
     Precast_Priority = {
         Waist = {'Swift Belt'}, -- Haste 4%
+        Feet = {'Rostrum Pumps'}, -- Fast Cast+
     },
 
     SpellHaste_Priority = {
         Waist = {'Swift Belt'}, -- Haste +4%
-        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- Fast Cast+ / INT +3 SIRD 20%
     },
 
     DarkSkill_Priority = { -- INT +17
@@ -171,7 +172,7 @@ local sets = {
         Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
-        Feet = {'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
     DivineSkill_Priority = { -- MND +30
@@ -186,7 +187,7 @@ local sets = {
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Divine Skill +15
-        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
     Cure_Priority = { -- MND +26, Enmity -12
@@ -202,7 +203,7 @@ local sets = {
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
         Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Enmity -1
-        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
     MNDEnhancingSkill_Priority = {
@@ -217,7 +218,7 @@ local sets = {
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
     },
 
     CurePrecast_Priority = {
@@ -304,7 +305,7 @@ local sets = {
         Body = {'Wonder Kaftan'}, -- MND +1
         Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
-        Legs = {'Wonder Braccae'}, -- MND +2
+        Legs = {'Rostrum Pumps', 'Wonder Braccae'}, -- MND +2
     },
 
     Charm_Priority = {

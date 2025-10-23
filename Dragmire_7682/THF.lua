@@ -227,11 +227,11 @@ local sets = {
     },
 
     StyleLockHomam = {
-        Head = 'Assassin\'s Bonnet',
-        Body = 'Hecatomb Harness',
-        Hands = 'Andvaranauts',
+        Head = 'President. Hairpin',
+        Body = 'Homam Corazza',
+        Hands = 'Homam Manopolas',
         Legs = 'Homam Cosciales',
-        Feet = 'Hct. Leggings',
+        Feet = 'Homam Gambieras',
     },
 
     IdleTown_Priority = {
@@ -407,7 +407,7 @@ profile.LateInitialize = function()
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockHomam);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 18');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 6');

@@ -151,8 +151,8 @@ local sets = {
 
     },
 
-    WeaponSkill_Priority = { -- STR +49, DEX +22, ATT +25
-        Ammo = {'Tiphia Sting'}, -- ATT+4, ACC+2
+    WeaponSkill_Priority = { -- STR +49, DEX +22, ATT +23
+        Ammo = {'Tiphia Sting'}, -- ATT+2, ACC+2
         Head = {'Ace\'s Helm'}, -- STR+4, ACC+7
         Neck = {'Love Torque'}, -- SKILL+7, DEX+5
         Ear1 = {'Beastly Earring',}, -- SKILL+5
@@ -180,7 +180,7 @@ local sets = {
         Neck = {'Light Gorget'},
     },
 
-    WeaponSkillGeirskogul_Priority = { -- STR +47, DEX +25, ATT +19
+    WeaponSkillGeirskogul_Priority = { -- STR +47, DEX +25, ATT +17
         Neck = {'Light Gorget'},
         Legs = {'Wyrm Brais'}, -- DEX +5
     },

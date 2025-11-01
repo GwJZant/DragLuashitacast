@@ -17,15 +17,15 @@ local sets = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
-        Ear1 = {'Geist Earring'},
-        Ear2 = {'Geist Earring'},
-        Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
-        Hands = {'Battle Gloves'},
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring', 'San d\'Orian Ring'},
+        Ear1 = {'Abyssal Earring', 'Geist Earring'},
+        Ear2 = {'Loquac. Earring', 'Geist Earring'},
+        Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
+        Hands = {'Blessed Mitts', 'Battle Gloves'},
+        Ring1 = {'Tamas Ring', 'San d\'Orian Ring'},
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'},
         Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Swift Belt', 'Life Belt'},
-        Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
+        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
     },
 
@@ -38,9 +38,9 @@ local sets = {
         Body = {'Seer\'s Tunic'}, -- HMP +1
         Hands = {''},
         Ring1 = {''},
-        Ring2 = {''},
+        Ring2 = {'Tamas Ring'}, -- Enmity -5
         Back = {''},
-        Waist = {''},
+        Waist = {'Hierarch Belt'}, -- HMP +2
         Legs = {''},
         Feet = {''},
     },
@@ -53,10 +53,10 @@ local sets = {
         Ear2 = {''},
         Body = {'Seer\'s Tunic'}, -- HMP +1
         Hands = {''},
-        Ring1 = {''},
+        Ring1 = {'Tamas Ring'}, -- Enmity -5
         Ring2 = {''},
         Back = {'Wizard\'s Mantle'}, -- HMP +1 when /BLM
-        Waist = {''},
+        Waist = {'Hierarch Belt'}, -- HMP +2
         Legs = {''},
         Feet = {''},
     },
@@ -66,80 +66,82 @@ local sets = {
         Body = 'Vermillion Cloak',
     },
 
-    MeleeEngaged_Priority = {
+    MeleeEngaged_Priority = { -- Haste +14%
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
-        Head = {'Emperor Hairpin'},
+        Head = {'Optical Hat', 'Emperor Hairpin'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
-        Hands = {'Battle Gloves'},
+        Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Rearguard Mantle', 'Trimmer\'s Mantle'},
-        Waist = {'Swift Belt', 'Life Belt'},
-        Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
-        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
+        Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
+        Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
+        Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
     },
 
-    MND_Priority = { -- MND +30
+    MND_Priority = { -- MND +52
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
-        Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
+        Legs = {'Blessed Trousers', 'Wonder Braccae'}, -- MND +6
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
-    MNDEnfeeb_Priority = { -- MND +29 Enfeebling Skill +10
+    MNDEnfeeb_Priority = { -- MND +47 Enfeebling Skill +10
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Healer\'s Bliaut', 'Shaman\'s Cloak', 'Wonder Kaftan'}, -- Enfeebling Skill +10
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
-        Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
+        Legs = {'Blessed Trousers', 'Wonder Braccae'}, -- MND +6
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
-    INT_Priority = { -- INT +18
+    INT_Priority = { -- INT +25
         Neck = {'Checkered Scarf'}, -- INT +2
-        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Shaman\'s Cloak'}, -- INT +4
-        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTEnfeeb_Priority = { -- INT +22 Enfeebling Skill +10
+    INTEnfeeb_Priority = { -- INT +21 Enfeebling Skill +10
         Neck = {'Checkered Scarf'}, -- INT +2
-        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Morion Earring'}, -- INT +1
-        Body = {'Healer\'s Bliaut', 'Shaman\'s Cloak'}, -- INT +4 Enfeebling Skill +10
-        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Body = {'Healer\'s Bliaut', 'Shaman\'s Cloak'}, -- Enfeebling Skill +10
+        Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +22 Elemental Skill +5
+    INTElemental_Priority = { -- INT +25 Elemental Skill +5
         Neck = {'Checkered Scarf'}, -- INT +2
-        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
-        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 Fast Cast+ / INT +3 SIRD 20%
@@ -149,76 +151,104 @@ local sets = {
         Ring2 = {'Medicine Ring'}, -- Cure Potency +10% while HP <= 75% and TP <= 1000
     },
 
+    MedicineEarring_Priority = {
+        Ear2 = {'Medicine Earring'}, -- Damage Taken -30% while HP <= 25% and TP <= 1000
+    },
+
     HPDown_Priority = {
         Ring1 = {'Ether Ring'},
         Ring2 = {'Astral Ring'},
     },
 
-    Precast_Priority = {
-        Waist = {'Swift Belt'}, -- Haste 4%
-        Feet = {'Rostrum Pumps'}, -- Fast Cast+
+    Precast_Priority = { -- Haste +14%
+        Ear2 = {'Loquac. Earring'},
+        Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
+        Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
+        Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
+        Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
     },
 
-    SpellHaste_Priority = {
-        Waist = {'Swift Belt'}, -- Haste +4%
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- Fast Cast+ / INT +3 SIRD 20%
+    SpellHaste_Priority = { -- Haste +14%
+        Ear2 = {'Loquac. Earring'},
+        Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
+        Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
+        Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
+        Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
     },
 
-    DarkSkill_Priority = { -- INT +17
+    DarkSkill_Priority = { -- INT +25 Dark Skill +5
         Neck = {'Checkered Scarf'}, -- INT +2
-        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2, Dark Skill +5
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Shaman\'s Cloak'}, -- INT +4
-        Ring1 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
+        Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Zircon Ring', 'Eremite\'s Ring'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DivineSkill_Priority = { -- MND +30
+    DivineSkill_Priority = { -- MND +48
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Divine Skill +15
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
-    Cure_Priority = { -- MND +26, Enmity -12
+    Cure_Priority = { -- MND +39, Enmity -18, Cure Potency +10%
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Healer\'s Bliaut', 'Wonder Kaftan'}, -- Enmity -4
+        Body = {'Noble\'s Tunic', 'Healer\'s Bliaut', 'Wonder Kaftan'}, -- Cure Potency +10%
         Hands = {'Healer\'s Mitts'}, -- Healing skill +15, Enmity -4
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5, Enmity -5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
-        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae'}, -- Enmity -1
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
+        Legs = {'Blessed Trousers', 'Healer\'s Pantaln.', 'Wonder Braccae'}, -- MND +6, Enmity -5
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enmity -1
     },
 
-    MNDEnhancingSkill_Priority = {
+    MNDEnhancingSkill_Priority = { -- MND +52, Enhancing Skill +10
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
         Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
-        Legs = {'Wonder Braccae'}, -- MND +2
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- SIRD 20%
+        Legs = {'Blessed Trousers', 'Wonder Braccae'}, -- MND +6
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enhancing Skill +10
+    },
+
+    Barspell_Priority = {
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5, Barspell+
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
+        Legs = {'Blessed Trousers', 'Wonder Braccae'}, -- MND +6
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enhancing Skill +10
     },
 
     CurePrecast_Priority = {
@@ -261,8 +291,20 @@ local sets = {
         Main = {'Dark Staff'},
     },
 
-    Weaponskill_Priority = {
-        Hands = {'Healer\'s Mitts', 'Wonder Mitts'},
+    Weaponskill_Priority = { -- Acc + 32, Attack + 10, STR +7, DEX +2
+        Ammo = {},
+        Head = {'Optical Hat'}, -- Acc +10
+        Neck = {},
+        Ear1 = {'Spike Earring'}, -- Attack +5
+        Ear2 = {'Spike Earring'}, -- Attack +5
+        Body = {'Black Cotehardie'}, -- STR +3, DEX +2
+        Hands = {'Healer\'s Mitts', }, -- STR +5
+        Ring1 = {'Toreador\'s Ring'}, -- Acc +7
+        Ring2 = {'Sniper\'s Ring'}, -- Acc +5
+        Back = {'Rearguard Mantle'}, -- STR +1
+        Waist = {'Life Belt'}, -- Acc +10
+        Legs = {'Wonder Braccae'}, -- STR +1
+        Feet = {'Wonder Clomps'}, -- STR +2
     },
 
     StyleLockSummer = {
@@ -274,10 +316,11 @@ local sets = {
 
     StyleLockGeneric = {
         Main = 'Light Staff',
-        Body = 'Shaman\'s Cloak',
-        Hands = 'Wonder Mitts',
-        Legs = 'Seer\'s Slacks',
-        Feet = 'Healer\'s Duckbills',
+        Head = 'Emperor Hairpin',
+        Body = 'Noble\'s Tunic',
+        Hands = 'Blessed Mitts',
+        Legs = 'Blessed Trousers',
+        Feet = 'Blessed Pumps',
     },
 
     StyleLockAF = {
@@ -297,15 +340,20 @@ local sets = {
 
     },
 
-    Reward_Priority = { -- MND +14
+    Reward_Priority = { -- MND +49
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
-        Neck = {'Holy Phial'}, -- MND +3
+        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Wonder Kaftan'}, -- MND +1
-        Ring1 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Hands = {'Blessed Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
-        Legs = {'Rostrum Pumps', 'Wonder Braccae'}, -- MND +2
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
+        Legs = {'Blessed Trousers', 'Wonder Braccae'}, -- MND +6
+        Feet = {'Rostrum Pumps', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +3
     },
 
     Charm_Priority = {
@@ -422,7 +470,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockAF);
+        gFunc.LockStyle(sets.StyleLockGeneric);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
@@ -489,14 +537,18 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.RestingMP);
             end
             
-            if Settings.CurrentLevel >= 59 then
+            if Settings.CurrentLevel >= 59 and Settings.CurrentLevel < 70 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
         -- Idle Section
         else
-            if Settings.CurrentLevel >= 59 then
+            if Settings.CurrentLevel >= 59 and Settings.CurrentLevel < 70 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
+        end
+
+        if player.HPP <= 25 then
+            gFunc.EquipSet(sets.MedicineEarring);
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --StaffSwap
@@ -512,16 +564,20 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.RestingMP);
             end
 
-            if Settings.CurrentLevel >= 59 then
+            if Settings.CurrentLevel >= 59 and Settings.CurrentLevel < 70 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
         -- Idle Section
         else
             gFunc.EquipSet(sets.Earth);
 
-            if Settings.CurrentLevel >= 59 then
+            if Settings.CurrentLevel >= 59 and Settings.CurrentLevel < 70 then
                 gFunc.EquipSet(sets.VermillionCloak);
             end
+        end
+
+        if player.HPP <= 25 then
+            gFunc.EquipSet(sets.MedicineEarring);
         end
     end
 
@@ -644,7 +700,7 @@ profile.HandleMidcast = function()
         if spell.Name == 'Haste' then
             gFunc.EquipSet(sets.SpellHaste);
         elseif string.contains(spell.Name, 'Bar') or spell.Name == 'Phalanx' then -- Barspells need raw Enhancing Skill
-            gFunc.EquipSet(sets.MNDEnhancingSkill);
+            gFunc.EquipSet(sets.Barspell);
 
         elseif string.contains(spell.Name, 'Regen') then -- Rucke's Rung
             gFunc.EquipSet(sets.Regen);

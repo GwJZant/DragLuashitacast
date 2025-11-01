@@ -660,13 +660,6 @@ local function HandlePetAction(PetAction)
     --There is an extra character somewhere coming through in PetAction.Name
 	local BPName = PetAction.Name;
     local target = gData.GetTarget();
-    local targetText = ''
-
-    if target ~= nil and target.Type == 'Monster' then
-        targetText = 't' -- use <t> when we're targeting something
-    else
-        targetText = 'bt' -- use <bt> when we're not targeting something
-    end
 
 	if MagicBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.PetMAB);
@@ -778,7 +771,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock2);
+        --gFunc.LockStyle(sets.StyleLock2);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
@@ -942,6 +935,8 @@ profile.HandleAbility = function()
     elseif string.match(ability.Name, 'Charm') then
         gFunc.EquipSet(sets.Charm);
     elseif string.match(ability.Type, 'Blood Pact: Rage') then
+        gFunc.EquipSet(sets.BPDelay);
+    elseif string.match(ability.Type, 'Blood Pact: Ward') then
         gFunc.EquipSet(sets.BPDelay);
     end
 end

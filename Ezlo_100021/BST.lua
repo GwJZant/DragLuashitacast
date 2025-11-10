@@ -36,7 +36,7 @@ local sets = {
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
-        Back = {'Nomad\'s Mantle'},
+        Back = {'Amemet Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae', 'Ryl.Ftm. Trousers'},
         Feet = {'Alumine Sollerets', 'Wonder Clomps', 'Btl. Leggings +1'},
@@ -60,7 +60,7 @@ local sets = {
 
     Engaged_Priority = { -- Haste +9%
         Ammo = {},
-        Head = {'Patroclus\'s Helm', 'Alumine Salade'}, -- Haste +2%
+        Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
         Neck = {},
         Ear1 = {},
         Ear2 = {},
@@ -156,7 +156,7 @@ local sets = {
 
     WeaponSkill_Priority = { -- STR, DEX
         Ammo = {},
-        Head = {'Patroclus\'s Helm', 'Alumine Salade'},
+        Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
@@ -172,7 +172,7 @@ local sets = {
 
     WeaponSkillRampage_Priority = {
         Ammo = {},
-        Head = {'Optical Hat', 'Patroclus\'s Helm', 'Alumine Salade'},
+        Head = {'Optical Hat', 'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
@@ -412,13 +412,13 @@ local sets = {
     },
 
     -- Uses Relic body to remove status ailments
-    RewardSTATUS_Priority = { -- MND +14
+    RewardSTATUS_Priority = { -- MND +13
         Ammo = {'Pet Food Zeta','Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {},
         Neck = {'Holy Phial'}, -- MND +3
         Ear2 = {'Geist Earring'}, -- MND +1
         Body = {'Wonder Kaftan'}, -- MND +1
-        Body = {'Wonder Kaftan'}, -- MND +1
+        Body = {'Monster Jackcoat', 'Wonder Kaftan'},
         Hands = {},
         Ring1 = {'Turquoise Ring'}, -- MND +2
         Ring2 = {'Turquoise Ring'}, -- MND +2
@@ -450,13 +450,13 @@ local sets = {
         Hands = {},
     },
 
-    Charm_Priority = { -- Charm +5, CHR +8
+    Charm_Priority = { -- Charm +16, CHR +12
         Ammo = {},
-        Head = {},
+        Head = {'Monster Helm'}, -- Charm +5, CHR +4
         Neck = {'Flower Necklace'}, -- CHR +3
         Ear1 = {},
         Ear2 = {},
-        Body = {},
+        Body = {'Monster Jackcoat', }, -- Charm +6
         Hands = {'Beast Gloves'}, -- Charm +3
         Ring1 = {},
         Ring2 = {},

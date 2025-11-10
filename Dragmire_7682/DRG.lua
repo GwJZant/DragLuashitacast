@@ -202,7 +202,6 @@ local sets = {
         Feet = {'Homam Gambieras'},
     },
 
-    
     StyleLock = {
         Main = 'Gungnir',
         Head = 'Ace\'s Helm',
@@ -266,16 +265,17 @@ local sets = {
         --Feet = 'Homam Gambieras',
     },
 
-    StyleLockSummer = {
+    StyleLockSummer2 = {
         Main = 'Gungnir',
-        Head = 'Snowman Cap',
-        Body = 'Goblin Suit',
+        Head = 'President. Hairpin',
+        Body = 'Elder Gilet +1',
+        Legs = 'Elder Trunks',
     },
 
     BreathBonusHealing_Priority = {
         Head = {'Wyrm Armet', 'Drachen Armet', 'Shep. Bonnet'},
         Body = {'Wyvern Mail'},
-		Hands = {'Ostrenger Mitts'},
+		Hands = {'Ostreger Mitts'},
         Legs = {'Drn. Brais +1'},
 		Feet = {'Homam Gambieras'},
     },
@@ -414,7 +414,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockSummer);
+        gFunc.LockStyle(sets.StyleLock);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then

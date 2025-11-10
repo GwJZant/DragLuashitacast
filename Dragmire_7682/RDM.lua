@@ -665,9 +665,6 @@ profile.HandleCommand = function(args)
                 spellName = 'Enwater';
             end
         end
-
-        
-
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
 
@@ -700,7 +697,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
         elseif player.SubJob == 'BLM' then
-            -- RDM Core Commands
+            -- BLM Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
@@ -715,7 +712,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         elseif player.SubJob == 'DRK' then
-            -- RDM Core Commands
+            -- DRK Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
@@ -730,7 +727,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         elseif player.SubJob == 'WHM' then
-            -- RDM Core Commands
+            -- WHM Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');

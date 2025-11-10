@@ -187,6 +187,15 @@ local sets = {
         --Feet = 'Austere Sabots',
     },
 
+    StyleLock3 = {
+        Main = 'Mercurial Pole',
+        Head = 'Nashira Turban',
+        Body = 'Yinyang Robe',
+        Hands = 'Summoner\'s Brcr.',
+        Legs = 'Nashira Seraweels',
+        Feet = 'Rostrum Pumps',
+    },
+
     StyleLockHydra = {
         Main = 'Fire Staff',
         Head = 'Hydra Cap',
@@ -771,7 +780,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        --gFunc.LockStyle(sets.StyleLock2);
+        gFunc.LockStyle(sets.StyleLock2);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');

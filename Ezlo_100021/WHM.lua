@@ -14,8 +14,8 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Holy Ampulla', 'Morion Tathlum'},
-        Head = {'Emperor Hairpin'},
+        Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
+        Head = {'Cleric\'s Cap', 'Emperor Hairpin'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Abyssal Earring', 'Geist Earring'},
         Ear2 = {'Loquac. Earring', 'Geist Earring'},
@@ -23,7 +23,7 @@ local sets = {
         Hands = {'Blessed Mitts', 'Battle Gloves'},
         Ring1 = {'Tamas Ring', 'San d\'Orian Ring'},
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'},
-        Back = {'Red Cape +1', 'Trimmer\'s Mantle'},
+        Back = {'Errant Cape', 'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Swift Belt', 'Life Belt'},
         Legs = {'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
@@ -127,7 +127,8 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTEnfeeb_Priority = { -- INT +33 Enfeebling Skill +10
+    INTEnfeeb_Priority = { -- INT +33 Enfeebling Skill +14
+        Head = {'Elite Beret'}, -- Enfeebling Skill +4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Morion Earring'}, -- INT +1
@@ -140,7 +141,8 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +37 Elemental Skill +5
+    INTElemental_Priority = { -- INT +37 Elemental Skill +9
+        Head = {'Elite Beret'}, -- Enfeebling Skill +4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Morion Earring'}, -- INT +1
@@ -211,9 +213,9 @@ local sets = {
         Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
-    Cure_Priority = { -- MND +39, Enmity -18, Cure Potency +10% (I think we actually want max Enmity- here, work on this later)
-        Ammo = {'Holy Ampulla'}, -- MND +1
-        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+    Cure_Priority = { -- MND +29, Enmity -30, Healing Skill +15, Cure Potency +10% (I think we actually want max Enmity- here, work on this later)
+        Ammo = {'Hedgehog Bomb', 'Holy Ampulla'}, -- Enmity -1
+        Head = {'Cleric\'s Cap', 'Healer\'s Cap'}, -- Enmity -4
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
@@ -221,23 +223,24 @@ local sets = {
         Hands = {'Healer\'s Mitts'}, -- Healing skill +15, Enmity -4
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5, Enmity -5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
-        Back = {'Red Cape +1'}, -- MND +3
+        Back = {'Errant Cape', 'Red Cape +1'}, -- Enmity -5
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
         Legs = {'Blessed Trousers', 'Healer\'s Pantaln.', 'Wonder Braccae'}, -- MND +6, Enmity -5
-        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enmity -1
+        Feet = {'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +3, Enmity -4
     },
 
-    MNDEnhancingSkill_Priority = { -- MND +58, Enhancing Skill +10
-        Ammo = {'Holy Ampulla'}, -- MND +1
-        Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
+    Cursna_Priority = { -- Healing Skill only
+        Hands = {'Healer\'s Mitts'}, -- Healing skill +15, Enmity -4
+    },
+
+    -- Stoneskin = Enhancing Magic Skill + 3×MND - 190
+    -- 240 + 3*(65+58=123) - 190 = 419/350
+    -- Target MND: 100 => MND +35 from gear
+    MNDEnhancingSkill_Priority = { -- MND +39, Enhancing Skill +10
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
-        Ear1 = {'Geist Earring'}, -- MND +1
-        Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Errant Hpl.', 'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +10
         Hands = {'Blessed Mitts', }, -- MND +7
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
-        Back = {'Red Cape +1'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
         Legs = {'Errant Slops', 'Blessed Trousers', 'Wonder Braccae'}, -- MND +7
         Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enhancing Skill +10
@@ -264,7 +267,7 @@ local sets = {
     },
 
     RuckesRung_Priority = {
-        --Main = {'Rucke\'s Rung'},
+        Main = {'Rucke\'s Rung'},
     },
     
     Fire_Priority = {
@@ -313,6 +316,22 @@ local sets = {
         Waist = {'Life Belt'}, -- Acc +10
         Legs = {'Wonder Braccae'}, -- STR +1
         Feet = {'Wonder Clomps'}, -- STR +2
+    },
+
+    WeaponskillHexa_Priority = { -- STR, MND
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Optical Hat'}, -- Acc +10
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
+        Ear1 = {'Minuet Earring', 'Geist Earring'}, -- STR +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Hands = {'Healer\'s Mitts', }, -- MND +7
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Life Belt'}, -- Acc +10
+        Legs = {'Blessed Trouers'}, -- MND +6
+        Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
     StyleLockSummer = {
@@ -399,7 +418,7 @@ local ObiTable = {
     --Ice = "Hyorin Obi",
     --Thunder = "Rairin Obi",
     --Light = "Korin Obi",
-    --Dark = "Anrin Obi"
+    Dark = "Anrin Obi"
 }
 
 local ElementWeaknessTable = {
@@ -468,6 +487,105 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
+    if (args[1] == 'WeaponTypeToggle') then
+        Settings.WeaponTypeToggle = not Settings.WeaponTypeToggle;
+
+        if Settings.WeaponTypeToggle then
+            gFunc.Message('WeaponTypeToggle SWORD');
+        else
+            gFunc.Message('WeaponTypeToggle DAGGER');
+        end
+    elseif (args[1] == 'pdt') then
+        Settings.PDT = not Settings.PDT;
+
+        if Settings.PDT then
+            gFunc.Message('PDT ON');
+        else
+            gFunc.Message('PDT OFF');
+        end
+    elseif (args[1] == 'Martial') then
+        Settings.MartialKnife = not Settings.MartialKnife;
+
+        if Settings.MartialKnife then
+            gFunc.Message('MartialKnife ON');
+        else
+            gFunc.Message('MartialKnife OFF');
+        end
+    elseif (args[1] == 'haste') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
+    elseif (args[1] == 'refresh') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Refresh" <stpc>');
+    elseif (args[1] == 'regen') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen" <stpc>');
+    elseif (args[1] == 'regen2') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen II" <stpc>');
+    elseif (args[1] == 'regen3') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen III" <stpc>');
+    elseif (args[1] == 'gravity') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Gravity" <stnpc>');
+    elseif (args[1] == 'stoneskin') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Stoneskin" <me>');
+    elseif (args[1] == 'silence') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Silence" <stnpc>');
+    elseif (args[1] == 'drain') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Drain" <stnpc>');
+    elseif (args[1] == 'aspir') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Aspir" <stnpc>');
+    elseif (args[1] == 'bind') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Bind" <stnpc>');
+    elseif (args[1] == 'sleepga') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleepga" <stnpc>');
+    elseif (args[1] == 'sleep') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleep" <stnpc>');
+    elseif (args[1] == 'icespikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Ice Spikes" <me>');
+    elseif (args[1] == 'blazespikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blaze Spikes" <me>');
+    elseif (args[1] == 'shockspikes') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Shock Spikes" <me>');
+    elseif (args[1] == 'phalanx') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
+    elseif (args[1] == 'blink') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blink" <me>');
+    elseif (args[1] == 'enspell') then
+        local environment = gData.GetEnvironment();
+        local dayElement = environment.DayElement;
+        local weatherElement = environment.WeatherElement;
+        local isDoubleWeather = string.find(environment.Weather, "x2");
+        local spellName = 'Enblizzard';
+
+        if isDoubleWeather or dayElement == 'Light' or dayElement == 'Dark' then
+            if weatherElement == 'Wind' then
+                spellName = 'Enaero';
+            elseif weatherElement == 'Ice' then
+                spellName = 'Enblizzard';
+            elseif weatherElement == 'Fire' then
+                spellName = 'Enfire';
+            elseif weatherElement == 'Earth' then
+                spellName = 'Enstone';
+            elseif weatherElement == 'Thunder' then
+                spellName = 'Enthunder';
+            elseif weatherElement == 'Water' then
+                spellName = 'Enwater';
+            end
+        else
+            if dayElement == 'Wind' then
+                spellName = 'Enaero';
+            elseif dayElement == 'Ice' then
+                spellName = 'Enblizzard';
+            elseif dayElement == 'Fire' then
+                spellName = 'Enfire';
+            elseif dayElement == 'Earth' then
+                spellName = 'Enstone';
+            elseif dayElement == 'Thunder' then
+                spellName = 'Enthunder';
+            elseif dayElement == 'Water' then
+                spellName = 'Enwater';
+            end
+        end
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
+    end
+
     draginclude.HandleCommand(args, sets);
     draginclude.HandleBstCoreCommands(args, nil);
 end
@@ -495,9 +613,19 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Stay ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
-        else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+        elseif player.SubJob == 'BLM' then
+            -- BLM Core Commands
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen2 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd regen3 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd drain ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         end
 
         Settings.LateInitialized.Initialized = true;
@@ -690,6 +818,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
         gFunc.EquipSet(sets.MNDEnhancingSkill);
+    elseif spell.Name == 'Cursna' then
+        gFunc.EquipSet(sets.Cursna);
     elseif string.contains(spell.Name, 'Spikes') then
         gFunc.EquipSet(sets.INT);
     elseif spell.Skill == 'Ninjutsu' then
@@ -723,6 +853,8 @@ profile.HandleMidcast = function()
             if player.HPP <= 75 then
                 gFunc.EquipSet(sets.MedicineRing);
             end
+
+            equipObiIfApplicable(spell.Element);
         else
             gFunc.EquipSet(sets.SpellHaste);
         end
@@ -766,6 +898,10 @@ profile.HandleWeaponskill = function()
     local action = gData.GetAction();
 
     gFunc.EquipSet(sets.Weaponskill);
+
+    if action.Name == 'Hexa Strike' then
+        gFunc.EquipSet(sets.WeaponskillHexa);
+    end
 
     draginclude.HandleWeaponSkill(action);
 end

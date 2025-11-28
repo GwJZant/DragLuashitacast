@@ -781,8 +781,8 @@ end
 function draginclude.CheckAketon()
     local zone = gData.GetEnvironment();
 
-    if (string.contains(zone.Area, 'Bastok') or string.contains(zone.Area, 'Metalworks')) and not string.contains(zone.Area, 'Dynamis') then
-        gFunc.Equip('Body', 'Republic Aketon');
+    if (string.contains(zone.Area, 'San d\'Oria') or string.contains(zone.Area, 'Chateau')) and not string.contains(zone.Area, 'Dynamis') then
+        gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
 

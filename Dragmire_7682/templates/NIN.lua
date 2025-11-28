@@ -1,23 +1,11 @@
 local profile = {};
-draginclude = gFunc.LoadFile('common\\draginclude.lua');
 
 local Settings = {
-    -- Default settings for jug/food preferences
-    JugPetSettings = {
-        DefaultFood = 'Pet Fd. Gamma',
-    },
     LateInitialized = {
         Initialized = false,
         TimeToUse = 0,
     },
-    StatusArmorSwaps = {
-        OpoopoNecklace = true,
-        PresidentialHairpin = true,
-    },
     CurrentLevel = 0,
-    LockTH = false,
-    LockTH2 = false,
-    LockGilfinder = false,
 };
 
 local sets = {
@@ -69,71 +57,7 @@ local sets = {
         Feet = {''},
     },
 
-    Evasion_Priority = {
-        Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
-        Waist = {},
-        Legs = {},
-        Feet = {},
-    },
-
     Engaged_Priority = {
-        Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
-        Waist = {},
-        Legs = {},
-        Feet = {},
-    },
-
-    EngagedEvasion_Priority = {
-        Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
-        Waist = {},
-        Legs = {},
-        Feet = {},
-    },
-
-    MP_Priority = {
-        Ammo = {},
-        Head = {},
-        Neck = {},
-        Ear1 = {},
-        Ear2 = {},
-        Body = {},
-        Hands = {},
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
-        Waist = {},
-        Legs = {},
-        Feet = {},
-    },
-
-    SpellHaste_Priority = {
         Ammo = {},
         Head = {},
         Neck = {},
@@ -178,7 +102,7 @@ local sets = {
     },
 
     PetAttack_Priority = {
-        Ear2 = {'Beastly Earring'},
+        
     },
 
     Reward_Priority = { -- MND
@@ -188,7 +112,7 @@ local sets = {
     Charm_Priority = {
         Ammo = {},
         Head = {},
-        Neck = {'Flower Necklace'},
+        Neck = {},
         Ear1 = {},
         Ear2 = {},
         Body = {},
@@ -217,16 +141,15 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'Evasion'}, {'None', 'Field'});
+    
 end
 
 profile.OnUnload = function()
-    draginclude.OnUnload();
+    
 end
 
 profile.HandleCommand = function(args)
-    draginclude.HandleCommand(args);
-    draginclude.HandleBstCoreCommands(args, nil);
+    
 end
 
 profile.LateInitialize = function()
@@ -237,23 +160,6 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
         gFunc.LockStyle(sets.StyleLock);
-
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-
-        --[[ Set you job macro defaults here]]
-        if player.SubJob == 'BST' then
-            -- BST Core Commands
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd Charm ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd CallBeast ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd PetSTA ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd PetAOE ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd PetSpec ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Stay ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
-        end
  
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -284,13 +190,10 @@ profile.HandleDefault = function()
         end
     end
 
-    if draginclude.dragSettings.TpVariant == 1 then
-        gFunc.EquipSet(sets.Default);
+    gFunc.EquipSet(sets.Default);
 
-    elseif draginclude.dragSettings.TpVariant == 2 then
-        gFunc.EquipSet(sets.Default);
-
-        gFunc.EquipSet(sets.Evasion);
+    if player.Status == 'Engaged' then
+        gFunc.EquipSet(sets.Engaged);
     end
 
     if (pet ~= nil) then
@@ -301,10 +204,6 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.PetAttack);
         end
     end
-
-    draginclude.HandleDefault();
-    draginclude.CheckSkillingVariant();
-    draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
 end
 
 profile.HandleAbility = function()
@@ -344,7 +243,7 @@ profile.HandleMidshot = function()
 end
 
 profile.HandleWeaponskill = function()
-
+    gFunc.EquipSet(sets.WS);
 end
 
 return profile;

@@ -281,7 +281,7 @@ local sets = {
 
     -- MND +39 (111 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*111 - 190 = 255 (350 cap) Every MND is 3 points
     Stoneskin_Priority = {
-        Main = {'Water Staff'}, -- MND +4
+        --Main = {'Water Staff'}, -- MND +4
         Head = {'Zenith Crown'}, -- MND +3
         Neck = {'Enhancing Torque'}, -- Enhancing +7
         Ear1 = {'Novia Earring'},
@@ -292,6 +292,37 @@ local sets = {
         Back = {'Rainbow Cape'}, -- MND +3
         Legs = {'Errant Slops'}, -- MND +7
         Feet = {'Rostrum Pumps'}, -- MND +3
+    },
+
+    -- MND +39, Enfeebling +7
+    EnfeeblingMND_Priority = {
+        --Main = {'Water Staff'}, -- MND +4
+        Head = {'Zenith Crown'}, -- MND +3
+        Neck = {'Enfeebling Torque'}, -- Enfeebling +7
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Loquac. Earring'},
+        Body = {'Errant Hpl.'}, -- MND +10
+        Hands = {'Devotee\'s Mitts'}, -- MND +5 
+        Ring2 = {'Sapphire Ring'}, -- MND +4
+        Back = {'Rainbow Cape'}, -- MND +3
+        Legs = {'Errant Slops'}, -- MND +7
+        Feet = {'Rostrum Pumps'}, -- MND +3
+    },
+
+    -- MND +39, Enfeebling +7
+    EnfeeblingINT_Priority = {
+        --Main = {'Water Staff'}, -- MND +4
+        Head = {'Zenith Crown'}, -- INT +3
+        Neck = {'Enfeebling Torque'}, -- Enfeebling +7
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Phantom Earring'}, -- INT +1
+        Body = {'Errant Hpl.'}, -- INT +10
+        Hands = {'Errant Cuffs'}, -- INT +5 
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3
+        Legs = {'Errant Slops'}, -- INT +7
+        Feet = {'Rostrum Pumps'}, -- INT +3
     },
 };
 
@@ -418,6 +449,70 @@ local SmnConfig = {
         },
     },
 };
+
+local ObiTable = {
+    Fire = "Karin Obi",
+    Earth = "Dorin Obi",
+    Water = "Suirin Obi",
+    Wind = "Furin Obi",
+    Ice = "Hyorin Obi",
+    Thunder = "Rairin Obi",
+    Light = "Korin Obi",
+    Dark = "Anrin Obi"
+}
+
+local ElementWeaknessTable = {
+    Fire = "Water",
+    Ice = "Fire",
+    Wind = "Ice",
+    Earth = "Wind",
+    Thunder = "Earth",
+    Water = "Thunder",
+    Light = "Dark",
+    Dark = "Light"
+}
+
+local obiBonus = function(spellElement)
+    local environment = gData.GetEnvironment();
+    local dayElement = environment.DayElement;
+    local weatherElement = environment.WeatherElement;
+    local isDoubleWeather = string.find(environment.Weather, "x2");
+
+    local bonus = 0;
+    if (spellElement == dayElement) then
+        bonus = bonus + 10;
+    end
+
+    if (spellElement == weatherElement) then
+        if (isDoubleWeather) then
+            bonus = bonus + 25;
+        else
+            bonus = bonus + 10;
+        end
+    end
+
+    if (dayElement == ElementWeaknessTable[spellElement]) then
+        bonus = bonus - 10;
+    end
+
+    if (weatherElement == ElementWeaknessTable[spellElement]) then
+        if (isDoubleWeather) then
+            bonus = bonus - 25;
+        else
+            bonus = bonus - 10;
+        end
+    end
+
+    return bonus;
+end
+
+local equipObiIfApplicable = function(spellElement)
+    local obiBonus = obiBonus(spellElement);
+    if (obiBonus > 0) then
+        print("Obi Bonus: " .. obiBonus .. "%");
+        gFunc.Equip("waist", ObiTable[spellElement]);
+    end
+end
 
 local function HandleSmnCoreCommands(args)
     local pet = gData.GetPet();
@@ -966,7 +1061,42 @@ profile.HandleMidcast = function()
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
+        if draginclude.dragSettings.TpVariant == 2 then
+            gFunc.EquipSet(sets.Water); -- Water Staff MND +4
+        end
+        
         gFunc.EquipSet(sets.Stoneskin);
+    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
+
+        if draginclude.dragSettings.TpVariant == 2 then
+            if spell.Element == 'Fire' then
+                gFunc.EquipSet(sets.Fire);
+            elseif spell.Element == 'Ice' then
+                gFunc.EquipSet(sets.Ice);
+            elseif spell.Element == 'Wind' then
+                gFunc.EquipSet(sets.Wind);
+            elseif spell.Element == 'Earth' then
+                gFunc.EquipSet(sets.Earth);
+            elseif spell.Element == 'Thunder' then
+                gFunc.EquipSet(sets.Thunder);
+            elseif spell.Element == 'Water' then
+                gFunc.EquipSet(sets.Water);
+            elseif spell.Element == 'Light' then
+                gFunc.EquipSet(sets.Light);
+            elseif spell.Element == 'Dark' then
+                gFunc.EquipSet(sets.Dark);
+            end
+        end
+
+        if spell.Type == 'White Magic' then
+            gFunc.EquipSet(sets.EnfeeblingMND);
+
+            equipObiIfApplicable(spell.Element);
+        elseif spell.Type == 'Black Magic' then
+            gFunc.EquipSet(sets.EnfeeblingINT);
+
+            equipObiIfApplicable(spell.Element);
+        end
     end
 end
 

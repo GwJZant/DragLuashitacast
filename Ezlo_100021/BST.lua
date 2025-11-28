@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.ColdbloodComo},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.MiteFamiliar},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -30,13 +30,13 @@ local sets = {
         Ammo = {},
         Head = {'Emperor Hairpin', 'Centurion\'s Visor'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear1 = {'Novia Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Spike Earring', 'Beetle Earring +1'},
         Body = {'Scorpion Harness', 'Alumine Haubert', 'Wonder Kaftan', 'Beetle Harness +1'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
-        Back = {'Amemet Mantle'},
+        Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae', 'Ryl.Ftm. Trousers'},
         Feet = {'Alumine Sollerets', 'Wonder Clomps', 'Btl. Leggings +1'},
@@ -62,7 +62,7 @@ local sets = {
         Ammo = {},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
         Neck = {},
-        Ear1 = {},
+        Ear1 = {'Spike Earring'},
         Ear2 = {},
         Body = {},
         Hands = {'Dusk Gloves'}, -- Haste +3%
@@ -602,6 +602,10 @@ profile.HandleDefault = function()
             if player.Status == 'Engaged' then
                 gFunc.EquipSet(sets.StealthEarring);
             end
+        end
+
+        if player.Status == 'Engaged' and mainWeapon.Name == 'Rune Axe' then
+            gFunc.EquipSet(sets.Gaudy);
         end
 
     -- 2 = Evasion (I never use this one)

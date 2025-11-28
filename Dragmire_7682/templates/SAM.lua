@@ -6,24 +6,24 @@ local sets = {
     },
 
     SeiganThirdEye = {
-        Head = 'HOrus\'s Helm',
+        Head = 'Horus\'s Helm',
         Body = 'Scorpion Harness',
     },
 
     Gekko = {
-        Body = 'Hct. Harness',
+        Body = 'Hecatomb Harness',
     },
 
     Ikasha = {
-        Body = 'Hct. Harness',
+        Body = 'Hecatomb Harness',
     },
 
     Yukikaze = {
-        Body = 'Hct. Harness',
+        Body = 'Hecatomb Harness',
     },
 
     WeaponSkill = {
-        Body = 'Hct. Harness',
+        Body = 'Hecatomb Harness',
     },
 };
 profile.Sets = sets;
@@ -47,8 +47,10 @@ profile.HandleDefault = function()
 
     gFunc.EquipSet(sets.TP);
 
-    if thirdEye > 0 or seigan > 0 then
-        gFunc.EquipSet(sets.SeiganThirdEye);
+    if thirdEye > 0 then
+        gFunc.EquipSet(sets.ThirdEye);
+    elseif seigan > 0 then
+        gFunc.EquipSet(sets.Seigan);
     end
 end
 

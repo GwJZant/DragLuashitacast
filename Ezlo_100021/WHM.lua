@@ -17,7 +17,7 @@ local sets = {
         Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Cleric\'s Cap', 'Emperor Hairpin'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
-        Ear1 = {'Abyssal Earring', 'Geist Earring'},
+        Ear1 = {'Novia Earring', 'Geist Earring'},
         Ear2 = {'Loquac. Earring', 'Geist Earring'},
         Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Blessed Mitts', 'Battle Gloves'},
@@ -168,12 +168,12 @@ local sets = {
         Ring2 = {'Astral Ring'},
     },
 
-    Precast_Priority = { -- Haste +14%
-        Ear2 = {'Loquac. Earring'},
+    Precast_Priority = { -- Haste +12%, Fast Cast +3%
+        Ear2 = {'Loquac. Earring'}, -- Fast Cast +1%
         Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
-        Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
+        Feet = {'Rostrum Pumps', 'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Fast Cast +2%
     },
 
     SpellHaste_Priority = { -- Haste +14%
@@ -213,13 +213,13 @@ local sets = {
         Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5
     },
 
-    Cure_Priority = { -- MND +29, Enmity -30, Healing Skill +15, Cure Potency +10% (I think we actually want max Enmity- here, work on this later)
+    Cure_Priority = { -- Enmity -50, MND +30 (Capped Enmity-)
         Ammo = {'Hedgehog Bomb', 'Holy Ampulla'}, -- Enmity -1
-        Head = {'Cleric\'s Cap', 'Healer\'s Cap'}, -- Enmity -4
+        Head = {'Raven Beret'}, -- Enmity -8
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
-        Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Noble\'s Tunic', 'Healer\'s Bliaut', 'Wonder Kaftan'}, -- Cure Potency +10%
+        Ear2 = {'Novia Earring', 'Geist Earring'}, -- Enmity -7
+        Body = {'Crow Jupon', 'Wonder Kaftan'}, -- Enmity -8
         Hands = {'Healer\'s Mitts'}, -- Healing skill +15, Enmity -4
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5, Enmity -5
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
@@ -227,6 +227,22 @@ local sets = {
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
         Legs = {'Blessed Trousers', 'Healer\'s Pantaln.', 'Wonder Braccae'}, -- MND +6, Enmity -5
         Feet = {'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +3, Enmity -4
+    },
+
+    Cure5_Priority = { -- MND +48, Enmity -15, Cure Potency +10%
+        Ammo = {'Holy Ampulla'}, -- MND +1
+        Head = {'Healer\'s Cap'}, -- MND +4
+        Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
+        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Geist Earring'}, -- MND +1
+        Body = {'Noble\'s Tunic', 'Healer\'s Bliaut', 'Wonder Kaftan'}, -- Cure Potency +10%
+        Hands = {'Blessed Mitts', 'Healer\'s Mitts'}, -- MND +7, Enmity -3
+        Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5, Enmity -5
+        Ring2 = {'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
+        Back = {'Red Cape +1'}, -- MND +3
+        Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5, Enmity -3
+        Legs = {'Errant Slops', 'Healer\'s Pantaln.', 'Wonder Braccae'}, -- MND +7, Enmity -3
+        Feet = {'Cleric\'s Duckbills', 'Healer\'s Duckbills'}, -- MND +5, Enmity -1
     },
 
     Cursna_Priority = { -- Healing Skill only
@@ -521,6 +537,8 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen II" <stpc>');
     elseif (args[1] == 'regen3') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen III" <stpc>');
+    elseif (args[1] == 'cure5') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Cure V" <stpc>');
     elseif (args[1] == 'gravity') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Gravity" <stnpc>');
     elseif (args[1] == 'stoneskin') then
@@ -537,6 +555,10 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleepga" <stnpc>');
     elseif (args[1] == 'sleep') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleep" <stnpc>');
+    elseif (args[1] == 'paralyze') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Paralyze" <stnpc>');
+    elseif (args[1] == 'slow') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Slow" <stnpc>');
     elseif (args[1] == 'icespikes') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Ice Spikes" <me>');
     elseif (args[1] == 'blazespikes') then
@@ -598,11 +620,11 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         gFunc.LockStyle(sets.StyleLockGeneric);
 
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-
             -- BST Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd Charm ');
@@ -617,8 +639,8 @@ profile.LateInitialize = function()
             -- BLM Core Commands
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd regen ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen2 ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd regen3 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen3 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd cure5 ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
@@ -626,6 +648,17 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
+        else
+            -- Generic Core Commands
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen3 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd cure5 ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd paralyze ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd slow ');
         end
 
         Settings.LateInitialized.Initialized = true;
@@ -848,13 +881,15 @@ profile.HandleMidcast = function()
     elseif spell.Skill == 'Healing Magic' then
     
         if string.contains(spell.Name, 'Cur') then
-            gFunc.EquipSet(sets.Cure);
+            if spell.Name == 'Cure V' then
+                gFunc.EquipSet(sets.Cure5);
+            else
+                gFunc.EquipSet(sets.Cure);
 
-            if player.HPP <= 75 then
-                gFunc.EquipSet(sets.MedicineRing);
+                if player.HPP <= 75 then
+                    gFunc.EquipSet(sets.MedicineRing);
+                end
             end
-
-            equipObiIfApplicable(spell.Element);
         else
             gFunc.EquipSet(sets.SpellHaste);
         end

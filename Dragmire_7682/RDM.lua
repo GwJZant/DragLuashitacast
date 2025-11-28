@@ -83,7 +83,7 @@ local sets = {
         Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
         Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
         Back = {{Name = 'Forager\'s Mantle', Priority = 0}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}}, --6% Haste
+        Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}}, --6% Haste
         Legs = {{Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}},
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
@@ -99,7 +99,7 @@ local sets = {
         Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
         Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
         Back = {{Name = 'Forager\'s Mantle', Priority = 0}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}}, --6% Haste
+        Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}}, --6% Haste
         Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}}, --2% Haste
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
@@ -188,35 +188,36 @@ local sets = {
         Feet = {'Dusk Ledelsens'}, -- HP 25+
     },
 
-    INTElementalAcc_Priority = {
-        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
-        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
-        Neck = {{Name = 'Elemental Torque', Priority = 0}},
-        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
-        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}},
-        Body = {{Name = 'Nashira Manteel', Priority = 0}},
-        Hands = {{Name = 'Errant Cuffs', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
-        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
-        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}},
-        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
+    INTElementalAcc_Priority = { -- Elemental Skill +32, Macc +5, Matk +10, INT +19
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- INT +2
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}}, -- Elemental Skill +10
+        Neck = {{Name = 'Elemental Torque', Priority = 0}}, -- Elemental Skill +7
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- Fast Cast
+        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}}, -- Matk +5
+        Body = {{Name = 'Nashira Manteel', Priority = 0}}, -- Macc +5
+        Hands = {{Name = 'Errant Cuffs', Priority = 0}}, -- INT +5
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Elemental Skill +5
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- INT +4
+        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}}, -- Elemental Skill +10
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- Matk +5
     },
 
-    INTElementalPotency_Priority = {
-        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
-        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},
-        Neck = {{Name = 'Philomath Stole', Priority = 0}},
-        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
-        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}},
-        Body = {{Name = 'Errant Hpl.', Priority = 0}},
-        Hands = {{Name = 'Zenith Mitts', Priority = 100}},
-        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
-        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
-        Legs = {{Name = 'Errant slops', Priority = 0}},
-        Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
+    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +34
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- INT +2
+        Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},-- Elemental Skill +10
+        Neck = {{Name = 'Philomath Stole', Priority = 0}}, -- INT +3
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- Fast Cast
+        Ear2 = {{Name = 'Moldavite Earring', Priority = 0}}, -- Matk +5
+        Body = {{Name = 'Errant Hpl.', Priority = 0}}, -- INT +10
+        Hands = {{Name = 'Zenith Mitts', Priority = 100}}, -- Matk +5
+        Ring1 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Elemental Skill +5
+        Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- INT +4
+        Legs = {{Name = 'Errant slops', Priority = 0}}, -- INT +7
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- Matk +5
     },
 
     INTDarkAcc_Priority = {
@@ -229,7 +230,7 @@ local sets = {
         Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
         Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
         Legs = {{Name = 'Errant slops', Priority = 0}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
@@ -243,15 +244,15 @@ local sets = {
         Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
         Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
         Legs = {{Name = 'Errant slops', Priority = 0}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
-    DarkSkill_Priority = {
+    DarkSkill_Priority = { -- Dark Skill +20
         Body = {{Name = 'Nashira Manteel', Priority = 0}}, -- +5
         Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}}, -- +10
-        Legs = {{Name = 'Zenith Slacks', Priority = 100}},
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- +5
     },
 
     MND_Priority = { -- MND +30 (95 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*95 - 190 = 351 (350 cap)
@@ -310,14 +311,15 @@ local sets = {
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
-    MNDEnhancing_Priority = {
+    MNDEnhancing_Priority = { -- Enhancing Skill +42
         Neck = {'Enhancing Torque'}, -- +7
         Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}}, -- +15
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- +5
         Legs = {'Warlock\'s Tights'}, -- +15
     },
 
     -- This set plus the Spikes set below let Blaze Spikes proc for 19 unresisted damage. Removing anything in either set now drops Blaze Spikes down to 16
-    INTEnhancing_Priority = { -- INT +39 (106 total)
+    INTEnhancing_Priority = { -- INT +36 (106 total)
         --Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Zenith Crown'}, -- INT +3
         Neck = {'Enhancing Torque'}, -- Enhancing +7
@@ -326,7 +328,7 @@ local sets = {
         Hands = {'Errant Cuffs'}, -- INT +5
         Ring1 = {'Diamond Ring'}, -- INT +4
         Ring2 = {'Diamond Ring'}, -- INT +4
-        Back = {'Rainbow Cape'}, -- INT +3
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Enhancing +5
         --Waist = {'Duelist\'s Belt'}, -- INT +4
         Legs = {'Errant Slops'}, -- INT +7
         Feet = {'Elder\'s Sandals'}, -- INT +2
@@ -353,26 +355,27 @@ local sets = {
     EnhancingSkill_Priority = {
         Neck = {'Enhancing Torque'}, -- +7
         Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}}, -- +15
+        Back = {{Name = 'Merciful Cape', Priority = 100}}, -- +5
         Legs = {'Warlock\'s Tights'}, -- +15
     },
 
     MNDHealing_Priority = {
         Ear2 = {{Name = 'Novia Earring', Priority = 0}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}},
     },
 
     SpellHaste_Priority = {
         Body = {{Name = 'Nashira Manteel', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}},
         --Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
     SpellHasteUtsu_Priority = {        
         Body = {{Name = 'Nashira Manteel', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}},
-        Waist = {{Name = 'Swift Belt', Priority = 0}},
+        Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}},
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
@@ -679,7 +682,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockTank);
+        gFunc.LockStyle(sets.StyleLockCool);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');

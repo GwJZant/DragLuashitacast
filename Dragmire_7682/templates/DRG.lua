@@ -6,7 +6,7 @@ local Settings = {
         TimeToUse = 0,
     },
     CurrentLevel = 0,
-    TpVariant = 0,
+    TpVariant = 1,
 };
 
 local sets = {
@@ -14,8 +14,8 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Wyvern Helm'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring'},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring'},
+        Ear2 = {'Beastly Earring'},
         Body = {'Barone Corazza'},
         Hands = {'Wyrm Fng.Gnt.'},
         Ring1 = {'Rajas Ring'},
@@ -34,10 +34,10 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Optical Hat'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring'},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring'},
+        Ear2 = {'Beastly Earring'},
         Body = {'Scorpion Harness'},
-        Hands = {'Dusk Gloves'}, -- Haste +3%
+        Hands = {'Homam Manopolas'}, -- Haste +3%
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring'},
         Back = {'Amemet Mantle +1'},
@@ -50,7 +50,7 @@ local sets = {
         Ammo = {'Hedgehog Bomb'},
         Head = {'Wyvern Helm'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring'},
+        Ear1 = {'Brutal Earring'},
         Ear2 = {'Ethereal Earring'},
         Body = {'Barone Corazza'},
         Hands = {'Wyrm Fng.Gnt.'},
@@ -62,16 +62,46 @@ local sets = {
         Feet = {'Drn. Greaves +1'},
     },
 
+    EngagedMage_Priority = { -- Haste +9% (Missing Ace's Helm/Homam Head/Horus Helm, Homam Body/Wyrm Mail +1, Blitz Ring, Homam Legs, Homam Feet)
+        Ammo = {'Hedgehog Bomb'},
+        Head = {'Optical Hat'},
+        Neck = {'Merman\'s Gorget'},
+        Ear1 = {'Brutal Earring'},
+        Ear2 = {'Ethereal Earring'},
+        Body = {'Scorpion Harness'},
+        Hands = {'Homam Manopolas'}, -- Haste +3%
+        Ring1 = {'Rajas Ring'},
+        Ring2 = {'Toreador\'s Ring'},
+        Back = {'Amemet Mantle +1'},
+        Waist = {'Swift Belt'}, -- Haste +4%
+        Legs = {'Drn. Brais +1'},
+        Feet = {'Dusk Ledelsens'}, -- Haste +2%
+    },
+
     Parry_Priority = {
         
     },
 
-    PDT_Priority = {
-        
+    PDT_Priority = { 
+        Head = {'Darksteel Cap'}, -- PDT -1%
+        Body = {'Gavial Mail'}, -- PDT -3%, MDT -3%
+        Hands = {'Darksteel Mittens'}, -- PDT -1%
+        Legs = {'Gavial Cuisses'}, -- PDT -3%
+        Feet = {'Gavial Greaves'}, -- PDT -2%
     },
 
     MDT_Priority = {
-        
+        Head = {'Gavial Mask'}, -- MDT -2%
+        Neck = {'Jeweled Collar'},
+        Ear1 = {'Merman\'s Earring'}, -- MDT -2%
+        Ear2 = {'Merman\'s Earring'}, -- MDT -2%
+        Body = {'Gavial Mail'}, -- PDT -3%, MDT -3%
+        Hands = {'Darksteel Mittens'}, -- PDT -1%
+        Ring1 = {'Coral Ring'}, -- MDT -3%
+        Ring2 = {'Coral Ring'}, -- MDT -3%
+        --Waist = {'Friar\'s Rope'},
+        Legs = {'Coral Cuisses +1'}, -- MDT -3%
+        Feet = {'Coral Greaves'}, -- MDT -1%
     },
 
     MP_Priority = {
@@ -86,12 +116,12 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Wyrm Helm'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring',},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring',},
+        Ear2 = {'Beastly Earring'},
         Body = {'Scorpion Harness'},
         Hands = {'Pallas\'s Bracelets'},
         Ring1 = {'Rajas Ring'},
-        Ring2 = {'Victory Ring'},
+        Ring2 = {'Flame Ring'},
         Back = {'Amemet Mantle +1'},
         Waist = {'Warwolf Belt'},
         Legs = {'Barone Cosciales'}, 
@@ -102,12 +132,12 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Wyrm Helm'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring',},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring',},
+        Ear2 = {'Beastly Earring'},
         Body = {'Scorpion Harness'},
         Hands = {'Pallas\'s Bracelets'},
         Ring1 = {'Rajas Ring'},
-        Ring2 = {'Victory Ring'},
+        Ring2 = {'Flame Ring'},
         Back = {'Amemet Mantle +1'},
         Waist = {'Warwolf Belt'},
         Legs = {'Barone Cosciales'}, 
@@ -118,12 +148,12 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Wyrm Helm'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring',},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring',},
+        Ear2 = {'Beastly Earring'},
         Body = {'Scorpion Harness'},
         Hands = {'Pallas\'s Bracelets'},
         Ring1 = {'Rajas Ring'},
-        Ring2 = {'Victory Ring'},
+        Ring2 = {'Flame Ring'},
         Back = {'Amemet Mantle +1'},
         Waist = {'Warwolf Belt'},
         Legs = {'Barone Cosciales'}, 
@@ -134,8 +164,8 @@ local sets = {
         Ammo = {'Tiphia Sting'},
         Head = {'Optical Hat'},
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Beastly Earring',},
-        Ear2 = {'Brutal Earring'},
+        Ear1 = {'Brutal Earring',},
+        Ear2 = {'Beastly Earring'},
         Body = {'Scorpion Harness'},
         Hands = {'Wyrm Fng.Gnt.'},
         Ring1 = {'Rajas Ring'},
@@ -151,7 +181,7 @@ local sets = {
     },
 
     Midcast_Priority = { -- +HP
-        Ammo = {'Happy Egg'},
+        Ammo = {''},
         Head = {'Drachen Armet'},
         Neck = {'Bloodbead Amulet'},
         Ear1 = {'Loquac. Earring'},
@@ -175,7 +205,7 @@ local sets = {
     StyleLockRelic = {
         Main = 'Love Halberd',
         Head = 'Wyrm Armet',
-        Body = 'Wyrm Mail +1',
+        Body = 'Wyrm Mail',
         Hands = 'Wyrm Fng.Gnt.',
         Legs = 'Wyrm Brais',
         Feet = 'Wyrm Greaves',
@@ -255,6 +285,7 @@ profile.Sets = sets;
 local TpVariantTable = { -- cycle through with /lac fwd tpset
     [1] = 'Default',
     [2] = 'PDT',
+    [3] = 'MDT',
 };
 
 local Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
@@ -273,7 +304,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockRelic);
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -281,7 +312,7 @@ local function LateInitialize()
 end
 
 profile.OnLoad = function()
-    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tpvariant /lac fwd TpVariant ');
 end
 
 profile.OnUnload = function()
@@ -331,23 +362,15 @@ profile.HandleDefault = function()
         end
     end
 
-    if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
-        if player.MP <= 75 then
-            gFunc.EquipSet(sets.Default);
-        else
-            --gFunc.EquipSet(sets.Default);
-            gFunc.EquipSet(sets.Mage);
-        end
-        
-    else
-        gFunc.EquipSet(sets.Default);
-    end
-
     -- Engaged Section
     if player.Status == 'Engaged' then
 
-        gFunc.EquipSet(sets.Engaged);
-
+        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
+            gFunc.EquipSet(sets.EngagedMage);
+        else
+            gFunc.EquipSet(sets.Engaged);
+        end
+        
     -- Resting Section
     elseif (player.Status == 'Resting') then
 
@@ -362,22 +385,23 @@ profile.HandleDefault = function()
 
     -- Idle Section
     else
-        gFunc.EquipSet(sets.Idle);
-
-        if pet ~= nil and pet.HPP < 100 then
-            gFunc.EquipSet(sets.PetIdle);
+        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
+            gFunc.EquipSet(sets.Mage);
+        else
+            gFunc.EquipSet(sets.Default);
         end
     end
 
-    -- Forward slash toggle between Default and Evasion
     if Settings.TpVariant == 1 then
         -- Nothing
     elseif Settings.TpVariant == 2 then --Use PDT set
         gFunc.EquipSet(sets.PDT);
+    elseif Settings.TpVariant == 3 then --Use MDT set
+        gFunc.EquipSet(sets.MDT);
     end
 
     if (petAction ~= nil) then
-        HandlePetAction(petAction, player.SubJob);
+        HandlePetAction(petAction);
         return;
     end
 end

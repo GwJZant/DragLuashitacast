@@ -77,13 +77,17 @@ local sets = {
         Legs = {'Homam Cosciales'},
     },
 
-    Evasion_Priority = {
+    Evasion_Priority = { -- Evasion + PDT
         Head = {'Optical Hat'},
         Ear1 = {'Novia Earring'},
         Ear2 = {'Ethereal Earring'},
         Body = {'Scorpion Harness'},
+        Hands = {'Dst. Mittens +1'},
+        Ring1 = {'Flame Ring'},
         Ring2 = {'Jelly Ring'},
+        Back = {'Boxer\'s Mantle'},
         Waist = {'Ryl.Kgt. Belt'},
+        Legs = {'Dst. Subligar +1'},
     },
 
     Engaged_Priority = {
@@ -271,7 +275,7 @@ local sets = {
     },
 
     Hide_Priority = {
-        Body = {'Rogue\'s Vest'},
+        --Body = {'Rogue\'s Vest'},
     },
 
     --local stealChance = 50 + stealMod * 2 + thfLevel - target:getMainLvl()
@@ -284,7 +288,7 @@ local sets = {
         Head = {'Rogue\'s Bonnet'}, -- +1 Steal +13 HP
         Ear1 = {'Physical Earring'}, -- +25 HP
         Ear2 = {'Physical Earring'}, -- +25 HP
-        Body = {'Rogue\'s Vest'}, -- +20 HP
+        --Body = {'Rogue\'s Vest'}, -- +20 HP
         Hands = {'Thief\'s Kote'}, -- +3 Steal
         Ring1 = {'Bomb Queen Ring'}, -- +75 HP
         Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
@@ -300,7 +304,7 @@ local sets = {
         Head = {'Rogue\'s Bonnet'}, -- +1 +13 HP
         Ear1 = {'Ethereal Earring'}, -- +25 HP
         --Ear2 = {'Physical Earring'}, -- +25 HP
-        Body = {'Rogue\'s Vest'}, -- +20 HP
+        --Body = {'Rogue\'s Vest'}, -- +20 HP
         Hands = {'Thief\'s Kote'}, -- +3 Steal
         Ring1 = {'Bomb Queen Ring'}, -- +75 HP
         --Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
@@ -516,9 +520,9 @@ profile.HandleDefault = function()
 
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
         if player.SubJob == 'NIN' then
-            gFunc.EquipSet(sets.IdleTownNIN);
+            --gFunc.EquipSet(sets.IdleTownNIN);
         else
-            gFunc.EquipSet(sets.IdleTown);
+            --gFunc.EquipSet(sets.IdleTown);
         end
     end
 

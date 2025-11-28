@@ -22,12 +22,12 @@ local sets = {
         Neck = {'Love Torque', 'Peacock Amulet',},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
-        Body = {'Homam Corazza', 'Elder\'s Surcoat', 'Dream Robe +1',},
+        Body = {'Wym. Mail +1', 'Elder\'s Surcoat', 'Dream Robe +1',},
         Hands = {'Homam Manopolas',},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle', 'Amemet Mantle', 'Nomad\'s Mantle',},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Drn. Brais +1', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras', 'Elder\'s Sandals'},
     },
@@ -40,22 +40,22 @@ local sets = {
         Neck = {'Temp. Torque'},
     },
 
-    Engaged_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%), Sonic Belt(2%))
+    Engaged_Priority = { --22% Haste (Missing: Dusk Gloves +1(1%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
         Hands = {'Homam Manopolas'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
-        Waist = {'Swift Belt'}, --4%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras'}, --3%
     },
 
-    EngagedAcc_Priority = { --18% Haste (Missing: Dusk Gloves +1(1%), Sonic Belt(2%))
+    EngagedAcc_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Homam Corazza'}, -- +15 Accuracy, Triple Attack+
         Hands = {'Homam Manopolas'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
-        Waist = {'Swift Belt'}, --4%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --4%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras'}, --3%
     },
@@ -71,7 +71,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Homam Cosciales', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras'},
     },
@@ -80,7 +80,7 @@ local sets = {
         Ear2 = {'Ethereal Earring'},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
     },
 
     TankDPS_Priority = {
@@ -94,7 +94,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Homam Cosciales', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras'},
     },
@@ -344,7 +344,7 @@ local sets = {
         Ring1 = {'Jelly Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Crimson Cuisses'},
         Feet = {'Homam Gambieras'},
     },
@@ -360,7 +360,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Crimson Cuisses'},
         Feet = {'Homam Gambieras'},
     },

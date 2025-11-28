@@ -34,9 +34,9 @@ local sets = {
         Hands = {'Battle Gloves'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {},
-        Back = {'Nomad\'s Mantle'},
+        Back = {'Trimmer\'s Mantle'},
         Waist = {},
-        Legs = {'Wonder Trousers', 'Ryl.Ftm. Trousers'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
         Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
     },
 

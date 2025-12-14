@@ -125,6 +125,14 @@ local Utils = {
             DefaultSpecial = 'Gloeosuccus',
             DurationMinutes = 60,
         },
+        FlytrapFamiliar = {
+            Name = 'FlytrapFamiliar',
+            DefaultJug = 'Grass Broth',
+            DefaultSTA = '',
+            DefaultAOE = 'Soporific',
+            DefaultSpecial = 'Gloeosuccus',
+            DurationMinutes = 60,
+        },
         AmbusherAllie = {
             Name = 'AmbusherAllie',
             DefaultJug = 'L. Mole Broth',
@@ -399,6 +407,8 @@ function dragdisplay.Update(settings)
             BstPet = Utils.Jugs.Homunculus;
         elseif pet.Name == 'VoraciousAudrey' then
             BstPet = Utils.Jugs.VoraciousAudrey;
+        elseif pet.Name == 'FlytrapFamiliar' then
+            BstPet = Utils.Jugs.FlytrapFamiliar;
         elseif pet.Name == 'AmbusherAllie' then
             BstPet = Utils.Jugs.AmbusherAllie;
         elseif pet.Name == 'PanzerGalahad' then

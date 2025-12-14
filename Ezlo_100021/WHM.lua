@@ -374,6 +374,15 @@ local sets = {
         Legs = 'Healer\'s Pantaln.',
         Feet = 'Healer\'s Duckbills',
     },
+    
+    StyleLockWinter = {
+        Main = 'Light Staff',
+        Head = 'Dream Hat +1',
+        Body = 'Dream Robe',
+        Hands = 'Dream Mittens +1',
+        Legs = 'Dream Trousers +1',
+        Feet = 'Dream Boots +1',
+    },
 
     PetReadyDefault = {
 
@@ -496,6 +505,8 @@ end
 
 profile.OnLoad = function()
     draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field'});
+
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
 end
 
 profile.OnUnload = function()
@@ -618,7 +629,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockGeneric);
+        gFunc.LockStyle(sets.StyleLockWinter);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');

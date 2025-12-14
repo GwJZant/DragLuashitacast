@@ -35,7 +35,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Toreador\'s Ring', 'Woodsman Ring'},
         Back = {'Boxer\'s Mantle', 'Trimmer\'s Mantle'},
-        Waist = {'Swift Belt', 'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Homam Cosciales', 'Raven Hose', 'Elder\'s Braguette'},
         Feet = {'Trotter Boots'},
     },
@@ -97,7 +97,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -109,7 +109,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -121,7 +121,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -133,7 +133,7 @@ local sets = {
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -166,7 +166,7 @@ local sets = {
         Head = {'Panther Mask'}, --2%
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Rapparee Harness'}, --4%
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
     },
@@ -468,9 +468,6 @@ profile.HandleDefault = function()
     if draginclude.dragSettings.TpVariant == 1 then
         gFunc.EquipSet(sets.Default);
 
-        if player.SubJob == 'NIN' then
-            gFunc.EquipSet(sets.DefaultNIN);
-        end
         
         if player.Status == 'Engaged' then
             if player.SubJob == 'NIN' then
@@ -485,10 +482,6 @@ profile.HandleDefault = function()
         end
     elseif draginclude.dragSettings.TpVariant == 2 then
         gFunc.EquipSet(sets.Default);
-
-        if player.SubJob == 'NIN' then
-            gFunc.EquipSet(sets.DefaultNIN);
-        end
 
         gFunc.EquipSet(sets.Evasion);
 

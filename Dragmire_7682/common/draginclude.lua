@@ -203,6 +203,14 @@ draginclude.JugPetConfig = {
         DefaultSpecial = 'Gloeosuccus',
         DurationMinutes = 60,
     },
+    FlytrapFamiliar = {
+        Name = 'FlytrapFamiliar',
+        DefaultJug = 'Grass Broth',
+        DefaultSTA = '',
+        DefaultAOE = 'Soporific',
+        DefaultSpecial = 'Gloeosuccus',
+        DurationMinutes = 60,
+    },
     AmbusherAllie = {
         Name = 'AmbusherAllie',
         DefaultJug = 'L. Mole Broth',

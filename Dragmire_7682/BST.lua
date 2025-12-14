@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.VoraciousAudrey, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.MiteFamiliar},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.VoraciousAudrey, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.FlytrapFamiliar},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -37,7 +37,7 @@ local sets = {
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring', 'Bastokan Ring'},
         Back = {'Boxer\'s Mantle',},
-        Waist = {'Swift Belt', 'Ryl.Kgt. Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Byakko\'s Haidate', 'Elder\'s Braguette'},
         Feet = {'Monster Gaiters', 'Elder\'s Sandals'},
     },
@@ -53,7 +53,7 @@ local sets = {
         Ring1 = {'Jelly Ring'},
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'},
+        Waist = {'Sonic Belt', 'Swift Belt'},
         Legs = {'Byakko\'s Haidate'},
         Feet = {'Hct. Leggings'},
     },
@@ -67,7 +67,7 @@ local sets = {
         Hands = {'Dusk Gloves'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
         Back = {'Forager\'s Mantle'},
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Byakko\'s Haidate'}, --5%
         Feet = {'Dusk Ledelsens'}, --2%
     },
@@ -123,7 +123,7 @@ local sets = {
         Feet = {},
     },
 
-    WeaponSkill_Priority = { -- Prioritize Player Accuracy and Damage; STR > ACC > DEX > ATK
+    WeaponSkill_Priority = {
         Ammo = {'Tiphia Sting',},
         Head = {'Optical Hat',},
         Neck = {'Temp. Torque', 'Peacock Amulet'},
@@ -160,7 +160,7 @@ local sets = {
         Ear2 = {'Loquac. Earring'},
         Hands = {'Dusk Gloves'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
-        Waist = {'Swift Belt'}, --6%
+        Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Byakko\'s Haidate'}, --5%
         Feet = {'Dusk Ledelsens'}, --2%
     },

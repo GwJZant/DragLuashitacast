@@ -13,6 +13,7 @@ local Settings = {
     CurrentLevel = 0,
     TankToggle = 0, -- 0 = DPS, 1 = Parrying/Evasion
     Acc = 0,
+    LockEth = false,
 };
 
 local sets = {
@@ -116,8 +117,8 @@ local sets = {
 
     PDT_Priority = {
         Head = {'Darksteel Cap +1'}, -- PDT -2%
-        Ear1 = {'Brutal Earring'},
-        Ear2 = {'Ethereal Earring'},
+        Ear1 = {'Ethereal Earring'},
+        Ear2 = {'Brutal Earring'},
         Body = {'Wym. Mail +1'},
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
         Ring2 = {'Jelly Ring'}, -- PDT -5%
@@ -193,7 +194,8 @@ local sets = {
     Midcast_Priority = { -- +HP
         Ammo = {'Happy Egg'},
         Head = {'Drachen Armet'},
-        Ear1 = {'Loquac. Earring'},
+        Ear1 = {'Ethereal Earring'},
+        Ear2 = {'Loquac. Earring'},
         Body = {'Wyrm Mail +1'},
         Hands = {'Homam Manopolas'},
         Ring1 = {'Bloodbead Ring'},
@@ -265,6 +267,15 @@ local sets = {
         --Feet = 'Homam Gambieras',
     },
 
+    StyleLockWinter = {
+        Main = 'Gungnir',
+        Head = 'Dream Hat +1',
+        Body = 'Dream Robe +1',
+        Hands = 'Dream Mittens +1',
+        Legs = 'Dream Trousers +1',
+        Feet = 'Dream Boots +1',
+    },
+
     StyleLockSummer2 = {
         Main = 'Gungnir',
         Head = 'President. Hairpin',
@@ -328,9 +339,13 @@ local sets = {
         --Body = {'Drachen Mail'},
     },
 
-    Idle_Priority = {
+    RunSpeed_Priority = {
         --Body = {'Barone Corazza'},
         Legs = {'Crimson Cuisses'},
+    },
+
+    Ethereal_Priority = {
+        Ear1 = {'Ethereal Earring'},
     },
 
     IdleTownMage_Priority = {
@@ -414,7 +429,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockWinter);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -456,6 +471,7 @@ local function LateInitialize()
 
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tank /lac fwd TankToggle');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd Acc');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /eth /lac fwd LockEth');
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -492,6 +508,15 @@ profile.HandleCommand = function(args)
         end
 
         gFunc.Message('Acc ' .. Settings.Acc);
+    elseif args[1] == 'LockEth' then
+
+        if Settings.LockEth == false then
+            Settings.LockEth = true;
+        else
+            Settings.LockEth = false;
+        end
+
+        gFunc.Message('LockEth ' .. tostring(Settings.LockEth));
     end
 end
 
@@ -557,11 +582,15 @@ profile.HandleDefault = function()
         else
             gFunc.EquipSet(sets.EngagedAcc);
         end
+
+        if Settings.LockEth then
+            gFunc.EquipSet(sets.Ethereal);
+        end
         
     -- Resting Section
     elseif (player.Status == 'Resting') then
 
-        gFunc.EquipSet(sets.Idle);
+        gFunc.EquipSet(sets.RunSpeed);
 
         if pet ~= nil and pet.HPP < 100 then
             gFunc.EquipSet(sets.PetIdle);
@@ -576,7 +605,7 @@ profile.HandleDefault = function()
 
     -- Idle Section
     else
-        gFunc.EquipSet(sets.Idle);
+        gFunc.EquipSet(sets.RunSpeed);
 
         if pet ~= nil and pet.HPP < 100 then
             gFunc.EquipSet(sets.PetIdle);
@@ -591,19 +620,15 @@ profile.HandleDefault = function()
         --    gFunc.EquipSet(sets.TankStats);
         --end
         gFunc.EquipSet(sets.PDT);
+
+        if player.Status ~= 'Engaged' then
+            gFunc.EquipSet(sets.RunSpeed);
+        end
     end
 
     if (petAction ~= nil) then
         HandlePetAction(petAction);
         return;
-    end
-
-    if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        if player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'RDM' then
-            --gFunc.EquipSet(sets.IdleTownMage);
-        else
-            --gFunc.EquipSet(sets.IdleTown);
-        end
     end
 
     draginclude.HandleDefault();

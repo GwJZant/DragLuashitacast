@@ -36,7 +36,7 @@ local sets = {
         Hands = {{Name = 'Zenith Mitts', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
         Ring1 = {{Name = 'Ether Ring', Priority = 100}, {Name = 'Astral Ring', Priority = 100}},
         Ring2 = {{Name = 'Jelly Ring', Priority = 0}},
-        Back = {{Name = 'Altruistic Cape', Priority = 100}, 'Trimmer\'s Mantle'},
+        Back = {{Name = 'Merciful Cape', Priority = 100}, 'Trimmer\'s Mantle'},
         Waist = {{Name = 'Hierarch Belt', Priority = 100}, {Name = 'Ryl. Kgt. Belt', Priority = 0}},
         Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
@@ -146,6 +146,15 @@ local sets = {
         Waist = {'Druid\'s Rope'}, -- 10%
     },
 
+    StyleLock = {
+        Main = 'Wind Staff',
+        Head = 'Nashira Turban',
+        Body = 'Nashira Manteel',
+        Hands = 'Nashira Gages',
+        Legs = 'Nashira Seraweels',
+        Feet = 'Hydra Spats',
+    },
+
     StyleLockCool = {
         Main = 'Wind Staff',
         Head = 'Zenith Crown',
@@ -162,6 +171,15 @@ local sets = {
         Hands = 'Dst. Mittens +1',
         Legs = 'Dst. Subligar +1',
         Feet = 'Dst. Leggings +1',
+    },
+
+    StyleLockWinter = {
+        Main = 'Fire Staff',
+        Head = 'Dream Hat +1',
+        Body = 'Dream Robe +1',
+        Hands = 'Dream Mittens +1',
+        Legs = 'Dream Trousers +1',
+        Feet = 'Dream Boots +1',
     },
 
     Precast_Priority = {
@@ -306,7 +324,7 @@ local sets = {
         Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
         Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Altruistic Cape', Priority = 100}{Name = 'Rainbow Cape', Priority = 100}},
+        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
         Legs = {{Name = 'Errant slops', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
@@ -632,6 +650,10 @@ profile.HandleCommand = function(args)
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
     elseif (args[1] == 'blink') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blink" <me>');
+    elseif (args[1] == 'utsusemiichi') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Utsusemi: Ichi" <me>');
+    elseif (args[1] == 'utsusemini') then
+        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Utsusemi: Ni" <me>');
     elseif (args[1] == 'enspell') then
         local environment = gData.GetEnvironment();
         local dayElement = environment.DayElement;
@@ -668,6 +690,7 @@ profile.HandleCommand = function(args)
                 spellName = 'Enwater';
             end
         end
+        
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
 
@@ -682,7 +705,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockCool);
+        gFunc.LockStyle(sets.StyleLock);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 4');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
@@ -740,6 +763,21 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
+        elseif player.SubJob == 'NIN' then
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd haste ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd refresh ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +3 /lac fwd enspell ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd gravity ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +4 /lac fwd shockspikes ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd phalanx ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd utsusemiichi ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd utsusemini ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd bind ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd sleep ');
         else
@@ -1017,7 +1055,7 @@ profile.HandleMidcast = function()
     elseif spell.Skill == 'Dark Magic' and spell.Name ~= 'Bio' then -- Bio needs zero gearswap
 
         if spell.Name == 'Drain' or spell.Name == 'Aspir' then
-            gFunc.EquipSet(sets.DarkSkill);
+            gFunc.EquipSet(sets.INTDarkAcc);
             gFunc.EquipSet(sets.OverlordsRingDrainAspir);
         elseif spell.Name == 'Bio II' then -- Bio needs raw Dark Skill
             gFunc.EquipSet(sets.DarkSkill);

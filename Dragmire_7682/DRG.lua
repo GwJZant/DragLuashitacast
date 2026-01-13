@@ -186,6 +186,22 @@ local sets = {
         Legs = {'Wyrm Brais'}, -- DEX +5
     },
 
+    WeaponSkillSpiritTaker_Priority = { -- ACC+20, INT+16, MND+6
+        Ammo = {'Phtm. Tathlum'}, -- INT+2
+        Head = {'Optical Hat'}, -- ACC+10
+        Neck = {'Peacock Amulet'}, -- ACC+10
+        Ear1 = {'Phantom Earring',}, -- INT+1
+        Ear2 = {'Brutal Earring'}, -- DA+
+        Body = {'Elder\'s Surcoat'}, -- INT+1
+        Hands = {'Elder\'s Bracers'}, -- INT+2
+        Ring1 = {'Diamond Ring'}, -- INT+4
+        Ring2 = {'Sapphire Ring'}, -- MND+4
+        Back = {},
+        Waist = {'Ryl.Kgt. Belt'}, -- INT+2, MND+2
+        Legs = {'Elder\'s Braguette'}, -- INT+2
+        Feet = {'Elder\'s Sandals'}, -- INT+2
+    },
+
     Precast_Priority = {
         Ear1 = {'Loquac. Earring'},
         Legs = {'Homam Cosciales'},
@@ -196,7 +212,7 @@ local sets = {
         Head = {'Drachen Armet'},
         Ear1 = {'Ethereal Earring'},
         Ear2 = {'Loquac. Earring'},
-        Body = {'Wyrm Mail +1'},
+        Body = {'Wym. Mail +1'},
         Hands = {'Homam Manopolas'},
         Ring1 = {'Bloodbead Ring'},
         Ring2 = {'Bomb Queen Ring'},
@@ -216,7 +232,7 @@ local sets = {
     StyleLockRelic = {
         Main = 'Love Halberd',
         Head = 'Wyrm Armet',
-        Body = 'Wyrm Mail +1',
+        Body = 'Wym. Mail +1',
         Hands = 'Wyrm Fng.Gnt.',
         Legs = 'Wyrm Brais',
         Feet = 'Wyrm Greaves',
@@ -227,7 +243,7 @@ local sets = {
         Head = 'Drachen Armet',
         Body = 'Drachen Mail',
         Hands = 'Drachen Fng. Gnt.',
-        Legs = 'Drachen Brais',
+        Legs = 'Drn. Brais +1',
         Feet = 'Drn. Greaves +1',
     },
 
@@ -296,7 +312,7 @@ local sets = {
     },
 
     CallWyvern_Priority = {
-        Body = {'Wyrm Mail +1'},
+        Body = {'Wym. Mail +1'},
     },
 
     Jump_Priority = { -- ACC
@@ -429,7 +445,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockWinter);
+        gFunc.LockStyle(sets.StyleLock);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -517,6 +533,10 @@ profile.HandleCommand = function(args)
         end
 
         gFunc.Message('LockEth ' .. tostring(Settings.LockEth));
+    elseif args[1] == 'DayCheck' then
+        local day = gData.GetEnvironment().Day;
+
+        gFunc.Message(day);
     end
 end
 
@@ -696,7 +716,6 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    local player = gData.GetPlayer();
 
     gFunc.Message(action.Name);
 
@@ -706,8 +725,10 @@ profile.HandleWeaponskill = function()
         gFunc.EquipSet(sets.WeaponSkillPenta);
     elseif action.Name == 'Geirskogul' then
         gFunc.EquipSet(sets.WeaponSkillGeirskogul);
-    elseif string.contains(action.Name, 'Wheeling') or string.contains(action.Name, 'Skewer') or string.contains(action.Name, 'Thunder') or string.contains(action.Name, 'Vorpal') then
+    elseif action.Name == 'Wheeling Thrust' or action.Name == 'Skewer' then
         gFunc.EquipSet(sets.WeaponSkillLight);
+    elseif action.Name == 'Spirit Taker' then
+        gFunc.EquipSet(sets.WeaponSkillSpiritTaker);
     end
 
     draginclude.HandleWeaponSkill(action);

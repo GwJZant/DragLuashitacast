@@ -10,7 +10,6 @@ local Settings = {
 
     },
     CurrentLevel = 0,
-    CutHP = false,
 };
 
 local sets = {
@@ -50,34 +49,6 @@ local sets = {
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
         Legs = {'Evoker\'s Spats'}, -- Pet Acc
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
-    },
-
-    MeleeEngagedAvatar_Priority = { -- 11% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
-        Ammo = {'Tiphia Sting'}, -- Acc +2, Attack +2
-        Head = {'Nashira Turban'}, -- Haste 2%
-        Neck = {'Temp. Torque'}, -- Staff Skill +7
-        Ear1 = {'Ethereal Earring'}, -- Attack +5
-        Ear2 = {'Merman\'s Earring'}, -- Attack +6
-        Body = {'Nashira Manteel'}, -- Haste 3%
-        Hands = {'Nashira Gages'}, -- Perp Down, Haste 1%
-        Ring1 = {'Evoker\'s Ring'}, -- Perp Down
-        Ring2 = {'Toreador\'s Ring'}, -- Acc +7
-        Waist = {'Swift Belt'}, -- Haste 4%, Acc +3, Attack -5
-        Legs = {'Nashira Seraweels'}, -- Haste 2%
-        Feet = {'Evk. Pigaches +1'}, -- Perp Down 
-    },
-
-    MeleeEngaged_Priority = { -- 7% Haste + Support
-        Ammo = {'Tiphia Sting'},
-        Head = {'Nashira Turban'}, -- 2%
-        Neck = {'Temp. Torque'},
-        Ear1 = {'Novia Earring'},
-        Ear2 = {'Beastly Earring'},
-        Body = {'Nashira Manteel'}, -- 3%
-        Hands = {'Nashira Gages'}, -- 1%
-        Ring2 = {'Toreador\'s Ring'},
-        Waist = {'Swift Belt'}, -- 4%
-        Legs = {'Nashira Seraweels'}, -- 2%
     },
 
     BPDelay_Priority = {
@@ -130,37 +101,6 @@ local sets = {
         Feet = {'Austere Sabots'} -- +3
     },
 
-    WeaponSkillSpiritTaker_Priority = { -- INT +42, MND +23, Acc -5
-        Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Summoner\'s Horn'}, -- INT +3
-        Neck = {'Temp. Torque'}, -- Staff Skill +7
-        Ear1 = {'Phantom Earring'}, -- INT +1
-        Ear2 = {'Brutal Earring'}, -- DA +1%
-        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
-        Hands = {'Errant Cuffs'}, -- INT +5
-        Ring1 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
-        Back = {'Rainbow Cape'}, -- INT +3, MND +3
-        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
-        Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
-    },
-
-    CutHP_Priority = { -- INT +42, MND +23, Acc -5
-        Ammo = {'Happy Egg'}, -- INT +2
-        Head = {'Nashira Turban'}, -- INT +3
-        Neck = {'Temp. Torque'}, -- Staff Skill +7
-        Ear1 = {'Beastly Earring'}, -- INT +1
-        Ear2 = {'Brutal Earring'}, -- DA +1%
-        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
-        Hands = {'Errant Cuffs'}, -- INT +5
-        Ring1 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
-        Back = {'Rainbow Cape'}, -- INT +3, MND +3
-        Waist = {'Swift Belt'},
-        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
-        Feet = {'Austere Sabots'}, -- INT +3, MND +3
-    },
-
     IdleTown_Priority = {
         Head = {'Nashira Turban'},
         Ear1 = {'Novia Earring'},
@@ -173,47 +113,11 @@ local sets = {
 
     StyleLock = {
         Main = 'Wind Staff',
-        Head = 'Nashira Turban',
-        Body = 'Nashira Manteel',
-        Hands = 'Nashira Gages',
-        Legs = 'Nashira Seraweels',
-        Feet = 'Rostrum Pumps',
-    },
-
-    StyleLock2 = {
-        Head = 'Summoner\'s Horn',
-        Body = 'Goblin Suit',
-        --Body = 'Eerie Cloak',
-        --Body = 'Errant Hpl.',
-        --Hands = 'Zenith Mitts',
-        --Legs = 'Austere Slops',
-        --Feet = 'Austere Sabots',
-    },
-
-    StyleLock3 = {
-        Main = 'Mercurial Pole',
-        Head = 'Nashira Turban',
-        Body = 'Yinyang Robe',
-        Hands = 'Summoner\'s Brcr.',
-        Legs = 'Nashira Seraweels',
-        Feet = 'Rostrum Pumps',
-    },
-
-    StyleLockHydra = {
-        Main = 'Fire Staff',
-        Head = 'Hydra Cap',
-        Body = 'Hydra Jupon',
-        Hands = 'Summoner\'s Brcr.',
-        Legs = 'Hydra Hose',
-        Feet = 'Hydra Boots',
-    },
-
-    StyleLockSummer = {
-        Head = 'Shep. Bonnet',
-        Body = 'Elder Gilet +1',
-        --Hands = 'Scp. Gauntlets',
-        Legs = 'Elder Trunks',
-        --Feet = 'Homam Gambieras',
+        Head = '',
+        Body = '',
+        Hands = '',
+        Legs = '',
+        Feet = '',
     },
 
     HMP_Priority = {
@@ -331,6 +235,17 @@ local sets = {
 };
 
 profile.Sets = sets;
+
+TpVariantTable = { -- cycle through with /lac fwd tpset
+--    [1] = 'StaffLock',
+--    [2] = 'NoStaffLock',
+};
+
+SkillingVariantTable = { -- cycle through with /lac fwd tpset
+--    [1] = 'None',
+--    [2] = 'Field',
+--    [3] = 'Fishing',
+};
 
 local SmnConfig = {
     Summons = {
@@ -837,39 +752,28 @@ local function CheckSummonersHorn()
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field', 'Fishing'});
+    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Fishing'});
 
     -- SMN Core Commands
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd Rage1 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd Rage2 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd Rage3 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd Rage4 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd AstralFlow ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd Ward1 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +7 /lac fwd Ward3 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Ward2 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
-
-    
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /cuthp /lac fwd cuthp ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd Rage1 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd Rage2 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd Rage3 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd Rage4 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd AstralFlow ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd Ward1 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +7 /lac fwd Ward3 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Ward2 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
+    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
 end
 
 profile.OnUnload = function()
-    draginclude.OnUnload();
+    
 end
 
 profile.HandleCommand = function(args)
-
-    if (args[1] == 'cuthp') then
-        Settings.CutHP = not Settings.CutHP;
-
-        gFunc.Message('CutHP ' .. tostring(Settings.CutHP));
-    end
-
-    draginclude.HandleCommand(args, sets);
     HandleSmnCoreCommands(args);
 end
 
@@ -881,15 +785,10 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         gFunc.LockStyle(sets.StyleLock);
 
-        if player.SubJob == 'THF' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-        else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 2');
-        end
+        -- Set this to your default SMN macro book
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
         
-
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
     end
@@ -902,7 +801,6 @@ profile.HandleDefault = function()
     local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
-    --local myLevel = 30;
 
     -- Determining current level for Priority EquipSet purposes
     if (myLevel ~= Settings.CurrentLevel) then
@@ -920,23 +818,7 @@ profile.HandleDefault = function()
     end
 
     -- Forward slash toggle between NoWeaponSwap and WeaponSwap
-    if draginclude.dragSettings.TpVariant == 1 then
-
-        gFunc.EquipSet(sets.Default);
-
-        -- Engaged Section
-        if player.Status == 'Engaged' then
-
-
-        -- Resting Section
-        elseif (player.Status == 'Resting') then
-            gFunc.EquipSet(sets.HMP);
-        -- Idle Section
-        else
-            
-        end
-
-    elseif draginclude.dragSettings.TpVariant == 2 then --Use weapon swaps set
+if draginclude.dragSettings.TpVariant == 1 then --Use weapon swaps set
         gFunc.EquipSet(sets.Default);
 
         -- Resting Section
@@ -966,45 +848,34 @@ profile.HandleDefault = function()
             end
         else
             gFunc.EquipSet(sets.Earth);
+        end    
+    elseif draginclude.dragSettings.TpVariant == 2 then
+
+        gFunc.EquipSet(sets.Default);
+
+        -- Engaged Section
+        if player.Status == 'Engaged' then
+
+        -- Resting Section
+        elseif (player.Status == 'Resting') then
+            gFunc.EquipSet(sets.HMP);
+        -- Idle Section
+        else
+            
         end
     end
 
     if (pet ~= nil) then
-
-        -- Update these MP values when my gear updates
-        if player.SubJob == 'BLM' then
-            if player.MP <= 973 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
-            end
-        elseif player.SubJob == 'WHM' then
-            if player.MP <= 954 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
-            end
-        elseif player.SubJob == 'RDM' then
-            if player.MP <= 935 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
-            end
-        end
 
         if (petAction ~= nil) then
             HandlePetAction(petAction);
             return;
         end
 
-        if player.Status == 'Engaged' then
-            gFunc.EquipSet(sets.MeleeEngagedAvatar);
+        if pet.Name == 'Carbuncle' then
+            gFunc.EquipSet(sets.AvatarEngagedCarby);
+        else
+            gFunc.EquipSet(sets.AvatarEngaged);
         end
 
         CheckSummonersDoublet();
@@ -1013,23 +884,7 @@ profile.HandleDefault = function()
         if pet.Name == 'Carbuncle' then
             gFunc.Equip('Hands', 'Carbuncle Mitts');
         end
-    else
-        if player.Status == 'Engaged' then
-            gFunc.EquipSet(sets.MeleeEngaged);
-        end
     end
-
-    if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        gFunc.EquipSet(sets.IdleTown);
-    end
-
-    if Settings.CutHP then
-        gFunc.EquipSet(sets.CutHP);
-    end
-
-    draginclude.HandleDefault();
-    draginclude.CheckSkillingVariant();
-    draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
 end
 
 profile.HandleAbility = function()
@@ -1064,15 +919,11 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
-    elseif spell.Name == 'Stoneskin' then
-        if draginclude.dragSettings.TpVariant == 2 then
-            gFunc.EquipSet(sets.Water); -- Water Staff MND +4
-        end
-        
+    elseif spell.Name == 'Stoneskin' then        
         gFunc.EquipSet(sets.Stoneskin);
     elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
 
-        if draginclude.dragSettings.TpVariant == 2 then
+        if draginclude.dragSettings.TpVariant == 1 then
             if spell.Element == 'Fire' then
                 gFunc.EquipSet(sets.Fire);
             elseif spell.Element == 'Ice' then
@@ -1113,11 +964,7 @@ profile.HandleMidshot = function()
 end
 
 profile.HandleWeaponskill = function()
-    local action = gData.GetAction();
-
-    if action.Name == 'Spirit Taker' then
-        gFunc.EquipSet(sets.WeaponSkillSpiritTaker);
-    end
+    -- local action = gData.GetAction();
 end
 
 return profile;

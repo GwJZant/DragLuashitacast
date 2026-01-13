@@ -15,18 +15,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
-        Head = {'Cleric\'s Cap', 'Emperor Hairpin'},
+        Head = {'Cleric\'s Cap', 'Emperor Hairpin', 'Dream Hat +1'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Novia Earring', 'Geist Earring'},
         Ear2 = {'Loquac. Earring', 'Geist Earring'},
-        Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
-        Hands = {'Blessed Mitts', 'Battle Gloves'},
+        Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
+        Hands = {'Blessed Mitts', 'Dream Mittens +1'},
         Ring1 = {'Tamas Ring', 'San d\'Orian Ring'},
         Ring2 = {'Aquamarine Ring', 'Turquoise Ring'},
         Back = {'Errant Cape', 'Red Cape +1', 'Trimmer\'s Mantle'},
         Waist = {'Swift Belt', 'Life Belt'},
-        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'},
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Tarutaru Clomps'},
+        Legs = {'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Dream Boots +1'},
     },
 
     RestingMP_Priority = {
@@ -170,7 +170,7 @@ local sets = {
 
     Precast_Priority = { -- Haste +12%, Fast Cast +3%
         Ear2 = {'Loquac. Earring'}, -- Fast Cast +1%
-        Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
+        Hands = {'Blessed Mitts'}, -- Haste +5%
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
         Feet = {'Rostrum Pumps', 'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Fast Cast +2%
@@ -178,7 +178,7 @@ local sets = {
 
     SpellHaste_Priority = { -- Haste +14%
         Ear2 = {'Loquac. Earring'},
-        Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
+        Hands = {'Blessed Mitts'}, -- Haste +5%
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
         Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
@@ -424,12 +424,12 @@ local sets = {
         Feet = {''},
     },
 
-    EXPRing = {
-        Ring1 = 'Chariot Band',
+    Sneak = {
+        Hands = 'Dream Mittens +1',
     },
 
-    Warp = {
-        Main = 'Warp Cudgel',
+    Invisible = {
+        Feet = 'Dream Boots +1',
     },
 };
 

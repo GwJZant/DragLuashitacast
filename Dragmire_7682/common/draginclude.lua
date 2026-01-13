@@ -854,6 +854,7 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     local paralyzed = false;
     local blinded = false;
     local songBuffActive = false;
+    local signet = false;
     local items = draginclude.CheckItems();
 
     if StatusArmorSwapSettings == nil then
@@ -862,7 +863,9 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
 
     -- Song buffs have IDs between 195 and 222: https://github.com/Windower/Resources/blob/master/resources_data/buffs.lua
     for _,buff in ipairs(buffs) do
-        if (buff >= 195 and buff <= 222) then
+        if buff == 253 then
+            signet = true;
+        elseif (buff >= 195 and buff <= 222) then
             songBuffActive = true;
         elseif (buff == 2) then
             asleep = true;
@@ -875,23 +878,21 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
         end
 	--Resting Section
     elseif (player.Status == 'Resting') then
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
 
-        if StatusArmorSwapSettings.PresidentialHairpin == true then
+        if signet and StatusArmorSwapSettings.PresidentialHairpin == true then
             CheckEquipPresidentialHairpin(level, items);
         end
 
 	--Idle Section
 	else
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
 
-        if StatusArmorSwapSettings.PresidentialHairpin == true then
+        if signet and StatusArmorSwapSettings.PresidentialHairpin == true then
             CheckEquipPresidentialHairpin(level, items);
         end
     end

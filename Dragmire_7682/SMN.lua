@@ -52,6 +52,18 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
+    AvatarEngagedSpirit_Priority = { -- Summoning Skill + Perp Down: 269 (Native) + 2 (Merits) + 43 (Gear) = 314
+        Head = {'Evoker\'s Horn'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
+        Hands = {'Summoner\'s Brcr.'}, -- +10
+        Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
+    },
+
     MeleeEngagedAvatar_Priority = { -- 11% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
         Ammo = {'Tiphia Sting'}, -- Acc +2, Attack +2
         Head = {'Nashira Turban'}, -- Haste 2%
@@ -970,31 +982,23 @@ profile.HandleDefault = function()
     end
 
     if (pet ~= nil) then
+        local mpThreshold = 954; --WHM Default
 
-        -- Update these MP values when my gear updates
         if player.SubJob == 'BLM' then
-            if player.MP <= 973 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
-            end
-        elseif player.SubJob == 'WHM' then
-            if player.MP <= 954 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
-            end
+            mpThreshold = 973;
         elseif player.SubJob == 'RDM' then
-            if player.MP <= 935 then
-                if pet.Name == 'Carbuncle' then
-                    gFunc.EquipSet(sets.AvatarEngagedCarby);
-                else
-                    gFunc.EquipSet(sets.AvatarEngaged);
-                end
+            mpThreshold = 935;
+        else
+            mpThreshold = 900; -- Estimated for /NIN, haven't actually compared
+        end
+
+        if player.MP <= mpThreshold then
+            if pet.Name == 'Carbuncle' then
+                gFunc.EquipSet(sets.AvatarEngagedCarby);
+            elseif string.contains(pet.Name, 'Spirit') then
+                gFunc.EquipSet(sets.AvatarEngagedSpirit);
+            else
+                gFunc.EquipSet(sets.AvatarEngaged);
             end
         end
 
@@ -1007,8 +1011,10 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.MeleeEngagedAvatar);
         end
 
-        CheckSummonersDoublet();
-        CheckSummonersHorn();
+        if not string.contains(pet.Name, 'Spirit') then -- Don't want to do these for Spirits so we can maximize our casting time reduction
+            CheckSummonersDoublet();
+            CheckSummonersHorn();
+        end
 
         if pet.Name == 'Carbuncle' then
             gFunc.Equip('Hands', 'Carbuncle Mitts');

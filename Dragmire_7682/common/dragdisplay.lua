@@ -325,11 +325,8 @@ local Utils = {
 
 function dragdisplay.Update(settings)
 	local player = AshitaCore:GetMemoryManager():GetPlayer();
-    --local modifiers = player:GetStatsModifiers():GetStrength();
 	local pet = gData.GetPet();
-
-    --gFunc.Message(modifiers);
-
+    local environment = gData.GetEnvironment();
 	local MID = player:GetMainJob();
 	local SID = player:GetSubJob();
 	Def = player:GetDefense();
@@ -346,24 +343,14 @@ function dragdisplay.Update(settings)
     LightResistance = player:GetResist(6);
     WaterResistance = player:GetResist(5);
     WindResistance = player:GetResist(2);
-    local environment = gData.GetEnvironment();
     weather = environment.Weather;
     day = environment.Day;
-    --PlayerStrength = player:GetStat(0);
-    --PlayerDexterity = player:GetStat(1);
-    --PlayerVitality = player:GetStat(2);
-    --PlayerAgility = player:GetStat(3);
-    --PlayerIntelligence = player:GetStat(4);
-    --PlayerMind = player:GetStat(5);
-    --PlayerCharisma = player:GetStat(6);
-    --PlayerStrengthMod = player:GetStatModifier(0);
-    --PlayerDexterityMod = player:GetStatModifier(1);
-    --PlayerVitalityMod = player:GetStatModifier(2);
-    --PlayerAgilityMod = player:GetStatModifier(3);
-    --PlayerIntelligenceMod = player:GetStatModifier(4);
-    --PlayerMindMod = player:GetStatModifier(5);
-    --PlayerCharismaMod = player:GetStatModifier(6);
+    drgGreedy = false;
 
+    if Main == 'DRG' and settings ~= nil then
+        drgGreedy = settings.GreedyHeal;
+    end
+    
     if pet ~= nil then
         if pet.Name == 'Carbuncle' then
             SmnPet = Utils.Summons.Carbuncle;
@@ -439,7 +426,7 @@ function dragdisplay.Unload()
 end
 
 function dragdisplay.Initialize()
-	dragdisplay.Update();
+	dragdisplay.Update(nil);
 	dragdisplay.FontObject = fonts.new(fontSettings);	
 	ashita.events.register('d3d_present', 'dragdisplay_present_cb', function ()
 		local display = MainLV .. Main .. '/' .. SubLV .. Sub ..'   Attk:' .. Attk .. '   Def:' .. Def;
@@ -449,8 +436,8 @@ function dragdisplay.Initialize()
 
         if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
-        --elseif Main == 'DRG' then
-        --    display = display .. '\n2: Jump   3: Call Wyvern   4: High Jump   5. Super Jump   9: Spirit Link   0: Steady Wing';
+        elseif Main == 'DRG' then
+            display = display .. ' || GreedyHeal: ' .. tostring(drgGreedy);
         elseif Main == 'SMN' and SmnPet ~= Utils.Summons.Empty then
             display = display .. '\n' .. SmnPet.Name .. ':   1: Assault   3: ' .. SmnPet.Rage1 .. '   4: ' .. SmnPet.Rage2 .. '   5: ' .. SmnPet.Rage3 .. '   sh5: ' .. SmnPet.Rage4 .. '   6: ' .. SmnPet.AstralFlow .. '   7: ' .. SmnPet.Ward1 .. '   Sh7: ' .. SmnPet.Ward3 .. '   8: ' .. SmnPet.Ward2 .. '   Sh8: ' .. SmnPet.Ward4 .. '   9: Retreat';
         elseif Sub == 'BST' and BstPet ~= Utils.Jugs.Empty then

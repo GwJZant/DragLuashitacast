@@ -14,7 +14,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
 	    Head = {'Emperor Hairpin'},
-	    Neck = {'Ryl.Sqr. Collar'},
+	    Neck = {'T.K. Army Collar'},
 	    Ear1 = {'Dodge Earring'},
 	    Ear2 = {'Dodge Earring'},
 	    Body = {'Scorpion Harness'},
@@ -33,7 +33,7 @@ local sets = {
 
     Evasion_Priority = {
 	    Head = {'Emperor Hairpin'},
-	    Neck = {'Ryl.Sqr. Collar'},
+	    Neck = {'T.K. Army Collar'},
 	    Ear1 = {'Dodge Earring'},
 	    Ear2 = {'Dodge Earring'},
 	    Body = {'Scorpion Harness'},
@@ -108,12 +108,14 @@ local sets = {
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
     },
 
-    Charm_Priority = { -- CHR +17 & Charm +5
-        Head = {'Panther Mask'}, -- CHR +5
-        Ear2 = {'Beastly Earring'}, -- CHR +2
-        Neck = {'Temp. Torque'}, -- CHR +5
-        Waist = {'Ryl.Kgt. Belt'}, -- CHR +2
-        Back = {'Trimmer\'s Mantle'}, -- Charm +5
+    Charm_Priority = {
+        Head = {'Ninja Hatsuburi'},
+	    Neck = {'Star Necklace'},
+	    Body = {'Savage Separates'},
+	    Ring1 = {'Hope Ring'},
+	    Ring2 = {'Hope Ring'},
+	    Back = {'Trimmer\'s Mantle'},
+	    Feet = {'Savage Gaiters'},
     },
 
     Sneak = {

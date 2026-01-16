@@ -120,7 +120,7 @@ local sets = {
         Ear2 = {'Ethereal Earring'},
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
-        Back = {'Forager\'s Mantle'},
+        Back = {'Boxer\'s Mantle'},
         Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
@@ -129,10 +129,10 @@ local sets = {
     EngagedEvasionNIN_Priority = {
         Head = {'Optical Hat'},
         Ear1 = {'Novia Earring'},
-        Ear2 = {'Stealth Earring'},
+        Ear2 = {'Ethereal Earring'},
         Hands = {'Homam Manopolas', 'Dusk Gloves'}, --3%
         Body = {'Scorpion Harness'},
-        Back = {'Forager\'s Mantle'},
+        Back = {'Boxer\'s Mantle'},
         Waist = {'Sonic Belt', 'Swift Belt'}, --6%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras', 'Dusk Ledelsens'}, --3%
@@ -225,13 +225,13 @@ local sets = {
     StyleLock = {
         Head = 'Assassin\'s Bonnet',
         Body = 'Hecatomb Harness',
-        Hands = 'Andvaranauts',
+        Hands = 'Hecatomb Mittens',
         Legs = 'Homam Cosciales',
         Feet = 'Hct. Leggings',
     },
 
     StyleLockHomam = {
-        Head = 'President. Hairpin',
+        Head = 'Darksteel Cap +1',
         Body = 'Homam Corazza',
         Hands = 'Homam Manopolas',
         Legs = 'Homam Cosciales',
@@ -411,7 +411,7 @@ profile.LateInitialize = function()
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
-        gFunc.LockStyle(sets.StyleLockHomam);
+        gFunc.LockStyle(sets.StyleLock);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 18');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 6');

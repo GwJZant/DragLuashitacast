@@ -14,11 +14,12 @@ local Settings = {
     TankToggle = 0, -- 0 = DPS, 1 = Parrying/Evasion
     Acc = 0,
     LockEth = false,
+    GreedyHeal = false,
 };
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Tiphia Sting', 'Happy Egg'},
+        Ammo = {'Fenrir\'s Stone', 'Happy Egg'},
         Head = {'Ace\'s Helm', 'Emperor Hairpin', 'Shep. Bonnet'},
         Neck = {'Love Torque', 'Peacock Amulet',},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
@@ -29,7 +30,7 @@ local sets = {
         Ring2 = {'Blitz Ring'},
         Back = {'Forager\'s Mantle', 'Amemet Mantle', 'Nomad\'s Mantle',},
         Waist = {'Sonic Belt', 'Swift Belt'},
-        Legs = {'Drn. Brais +1', 'Elder\'s Braguette'},
+        Legs = {'Homam Cosciales', 'Drn. Brais +1', 'Elder\'s Braguette'},
         Feet = {'Homam Gambieras', 'Elder\'s Sandals'},
     },
 
@@ -62,7 +63,7 @@ local sets = {
     },
 
     Mage_Priority = {
-        Ammo = {'Tiphia Sting', 'Happy Egg'},
+        Ammo = {'Fenrir\'s Stone', 'Happy Egg'},
         Head = {'Ace\'s Helm', 'Shep. Bonnet'},
         Neck = {'Love Torque', 'Peacock Amulet'},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
@@ -101,7 +102,7 @@ local sets = {
     },
 
     TankStats_Priority = {
-        Ammo = {'Happy Egg'},
+        Ammo = {'Fenrir\'s Stone', 'Happy Egg'},
         Head = {'Optical Hat'}, -- Evasion +10
         Ear1 = {'Novia Earring'}, -- Evasion +7
         Ear2 = {'Ethereal Earring'}, -- Evasion +5 Converts 3% damage to MP
@@ -152,14 +153,14 @@ local sets = {
 
     },
 
-    WeaponSkill_Priority = { -- STR +49, DEX +22, ATT +23
+    WeaponSkill_Priority = { -- STR +53, DEX +12, ATT +23
         Ammo = {'Tiphia Sting'}, -- ATT+2, ACC+2
         Head = {'Ace\'s Helm'}, -- STR+4, ACC+7
         Neck = {'Love Torque'}, -- SKILL+7, DEX+5
         Ear1 = {'Beastly Earring',}, -- SKILL+5
         Ear2 = {'Brutal Earring'}, -- DA+
         Body = {'Hecatomb Harness'}, -- STR+12, ACC+10
-        Hands = {'Hecatomb Mittens'}, -- STR+7, DEX+4
+        Hands = {'Alkyoneus\'s Brc.'}, -- STR+11, DEX-6
         Ring1 = {'Rajas Ring'}, -- STR+5, DEX+5
         Ring2 = {'Flame Ring'}, -- STR+5
         Back = {'Forager\'s Mantle'}, -- STR+3, ATT+15
@@ -183,6 +184,7 @@ local sets = {
 
     WeaponSkillGeirskogul_Priority = { -- STR +47, DEX +25, ATT +17
         Neck = {'Light Gorget'},
+        Hands = {'Hecatomb Mittens'}, -- STR+7, DEX+4
         Legs = {'Wyrm Brais'}, -- DEX +5
     },
 
@@ -207,17 +209,78 @@ local sets = {
         Legs = {'Homam Cosciales'},
     },
 
+    -- Improvements: Ajase Beads (+20 HP, Rare/EX -> NM), Desert Sash (+30 HP, 20k)
+    -- Skips (for now): Wbody (Expensive + DKP), 
+    -- Current Threshold Cap (Daytime): 999/1960 (Carbonara: 1088/2135)
+    -- Current Threshold Cap (Nighttime): 1007/1976 (Carbonara: 1097/2151)
+    -- Optimized Threshold Cap (Daytime): 1004/1970 (Carbonara: 1093/2145)
+    -- Optimized Threshold Cap (Nighttime): 1012/1986 (Carbonara: 1102/2161)
+    MidcastGreedy_Priority = { -- +HP
+        Ammo = {'Happy Egg'}, -- Good
+        Head = {'Drachen Armet'}, -- Good
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Cassie Earring'}, -- Good
+        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Body = {'Bloody Aketon'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+
+    MidcastNightGreedy_Priority = { -- +HP
+        Ammo = {'Fenrir\'s Stone'}, -- Good
+        Head = {'Drachen Armet'}, -- Good
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Cassie Earring'}, -- Good
+        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Body = {'Wym. Mail +1'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+
     Midcast_Priority = { -- +HP
-        Ammo = {'Happy Egg'},
-        Head = {'Drachen Armet'},
-        Ear1 = {'Ethereal Earring'},
-        Ear2 = {'Loquac. Earring'},
-        Body = {'Wym. Mail +1'},
-        Hands = {'Homam Manopolas'},
-        Ring1 = {'Bloodbead Ring'},
-        Ring2 = {'Bomb Queen Ring'},
-        Legs = {'Drn. Brais +1'},
-        Feet = {'Homam Gambieras'},
+        Ammo = {'Happy Egg'}, -- Good
+        Head = {'Drachen Armet'}, -- Good
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Ethereal Earring'}, -- Good
+        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Body = {'Wym. Mail +1'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+
+    MidcastNight_Priority = { -- +HP
+        Ammo = {'Fenrir\'s Stone'}, -- Good
+        Head = {'Drachen Armet'}, -- Good
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Cassie Earring'}, -- Good
+        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Body = {'Wym. Mail +1'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+
+    MidcastJustHelm_Priority = { 
+        Head = {'Drachen Armet'}, -- Good
     },
 
     StyleLock = {
@@ -488,6 +551,7 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tank /lac fwd TankToggle');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd Acc');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /eth /lac fwd LockEth');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /greedy /lac fwd GreedyToggle');
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -533,6 +597,11 @@ profile.HandleCommand = function(args)
         end
 
         gFunc.Message('LockEth ' .. tostring(Settings.LockEth));
+    elseif args[1] == 'GreedyToggle' then
+
+        Settings.GreedyHeal = not Settings.GreedyHeal;
+
+        gFunc.Message('GreedyHeal ' .. tostring(Settings.GreedyHeal));
     elseif args[1] == 'DayCheck' then
         local day = gData.GetEnvironment().Day;
 
@@ -610,8 +679,6 @@ profile.HandleDefault = function()
     -- Resting Section
     elseif (player.Status == 'Resting') then
 
-        gFunc.EquipSet(sets.RunSpeed);
-
         if pet ~= nil and pet.HPP < 100 then
             gFunc.EquipSet(sets.PetIdle);
         end
@@ -625,7 +692,9 @@ profile.HandleDefault = function()
 
     -- Idle Section
     else
-        gFunc.EquipSet(sets.RunSpeed);
+        if player.IsMoving then
+            gFunc.EquipSet(sets.RunSpeed);
+        end
 
         if pet ~= nil and pet.HPP < 100 then
             gFunc.EquipSet(sets.PetIdle);
@@ -641,7 +710,7 @@ profile.HandleDefault = function()
         --end
         gFunc.EquipSet(sets.PDT);
 
-        if player.Status ~= 'Engaged' then
+        if player.Status ~= 'Engaged' and player.IsMoving then
             gFunc.EquipSet(sets.RunSpeed);
         end
     end
@@ -651,8 +720,8 @@ profile.HandleDefault = function()
         return;
     end
 
-    draginclude.HandleDefault();
-    draginclude.CheckSkillingVariant();
+    draginclude.HandleDefault(Settings);
+    draginclude.CheckSkillingVariantCondition(player.IsMoving, sets.RunSpeed);
     draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
 end
 
@@ -685,23 +754,32 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
+    local player = gData.GetPlayer();
     local spell = gData.GetAction();
+    local time = gData.GetEnvironment().Time;
+    local hasRefresh = gData.GetBuffCount('Refresh') + gData.GetBuffCount('Ballad');
 
-    gFunc.Message(spell.Name);
+    gFunc.Message(spell.Name .. ' Greedy: ' .. tostring(Settings.GreedyHeal) .. ' Time: ' .. time);
 
-    gFunc.EquipSet(sets.Midcast);
+    gFunc.EquipSet(sets.MidcastJustHelm);
 
-    if draginclude.dragSettings.TpVariant ~= 2 then
-        if (spell.Skill == 'Ninjutsu') then
-	    	if string.contains(spell.Name, 'Utsusemi') then
-                gFunc.EquipSet(sets.Evasion);
-	    	end
-	    end
-
-        if spell.Name == 'Invisible' then
-            gFunc.EquipSet(sets.Invisible);
-        elseif spell.Name == 'Sneak' then
-            gFunc.EquipSet(sets.Sneak);
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
+    elseif string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise') or string.contains(spell.Name, 'Protect') or string.contains(spell.Name, 'Shell') then
+        gFunc.Message('Healing Breath Set SKIPPED');
+    elseif Settings.GreedyHeal or player.MP <= 57 or hasRefresh > 0 then
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.MidcastNightGreedy);
+        else
+            gFunc.EquipSet(sets.MidcastGreedy);
+        end
+    else
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.MidcastNight);
+        else
+            gFunc.EquipSet(sets.Midcast);
         end
     end
 end

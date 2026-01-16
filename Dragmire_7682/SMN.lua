@@ -11,6 +11,7 @@ local Settings = {
     },
     CurrentLevel = 0,
     CutHP = false,
+    GreedySpirit = false,
 };
 
 local sets = {
@@ -52,7 +53,10 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
-    AvatarEngagedSpirit_Priority = { -- Summoning Skill + Perp Down: 269 (Native) + 2 (Merits) + 43 (Gear) = 314
+    -- Summoning Skill + Perp Down: 269 (Native) + 4 (Merits) + 40 (Gear) = 312
+    -- Improvements: Penance Feet (+1), 2 Merits (+4), Summoning Earring (+3), Bahamut's Staff (+5) = 326
+    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(44/3) - 5 = 45 - 15 - 5 = 25s
+    AvatarEngagedSpirit_Priority = {
         Head = {'Evoker\'s Horn'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear1 = {'Beastly Earring'}, -- Pet Acc
@@ -60,7 +64,7 @@ local sets = {
         Hands = {'Summoner\'s Brcr.'}, -- +10
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
         Back = {'Astute Cape'}, -- +5
-        Legs = {'Austere Slops'}, -- +3
+        Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
         Feet = {'Austere Sabots'} -- +3
     },
 
@@ -864,9 +868,9 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
-
     
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /cuthp /lac fwd cuthp ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /spirit /lac fwd GreedySpirit ');
 end
 
 profile.OnUnload = function()
@@ -879,6 +883,10 @@ profile.HandleCommand = function(args)
         Settings.CutHP = not Settings.CutHP;
 
         gFunc.Message('CutHP ' .. tostring(Settings.CutHP));
+    elseif (args[1] == 'GreedySpirit') then
+        Settings.GreedySpirit = not Settings.GreedySpirit;
+
+        gFunc.Message('GreedySpirit ' .. tostring(Settings.GreedySpirit));
     end
 
     draginclude.HandleCommand(args, sets);
@@ -914,7 +922,6 @@ profile.HandleDefault = function()
     local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
-    --local myLevel = 30;
 
     -- Determining current level for Priority EquipSet purposes
     if (myLevel ~= Settings.CurrentLevel) then
@@ -995,7 +1002,7 @@ profile.HandleDefault = function()
         if player.MP <= mpThreshold then
             if pet.Name == 'Carbuncle' then
                 gFunc.EquipSet(sets.AvatarEngagedCarby);
-            elseif string.contains(pet.Name, 'Spirit') then
+            elseif string.contains(pet.Name, 'Spirit') and pet.Name ~= 'LightSpirit' then
                 gFunc.EquipSet(sets.AvatarEngagedSpirit);
             else
                 gFunc.EquipSet(sets.AvatarEngaged);
@@ -1011,7 +1018,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.MeleeEngagedAvatar);
         end
 
-        if not string.contains(pet.Name, 'Spirit') then -- Don't want to do these for Spirits so we can maximize our casting time reduction
+        if pet.Name == 'LightSpirit' or not string.contains(pet.Name, 'Spirit') then -- Don't want to do these for Spirits so we can maximize our casting time reduction
             CheckSummonersDoublet();
             CheckSummonersHorn();
         end

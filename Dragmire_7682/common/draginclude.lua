@@ -27,7 +27,7 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Shrimp Lure',
         Body = 'Angler\'s Tunica',
@@ -35,7 +35,7 @@ draginclude.sets = T{
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Sinking Minnow',
         Body = 'Angler\'s Tunica',
@@ -373,7 +373,7 @@ function draginclude.SetNumpadCommands()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /petinfo /lac fwd petinfo ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /fishset /lac fwd FishingVariant ');
 end
 
 function draginclude.OnUnload()
@@ -441,7 +441,7 @@ function draginclude.HandleCommand(args)
             draginclude.dragSettings.FishingVariant = 1;
         end
 
-        gFunc.Message('Skilling Set: ' .. draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant]); --display the set
+        gFunc.Message('FishingVariant Set: ' .. tostring(draginclude.dragSettings.FishingVariant)); --display the set
     elseif (args[1] == 'zoneinfo') then
         local zone = gData.GetEnvironment();
         local zoneId = AshitaCore:GetMemoryManager():GetParty():GetMemberZone(0);
@@ -844,6 +844,38 @@ function draginclude.CheckSkillingVariant()
                 gFunc.EquipSet(draginclude.sets.Fishing2);
             end
         end
+    end
+end
+
+-- Use this function in your HandleDefault if you want to override some slots under a specific condition
+-- Only current use case is Movement Speed set while player.IsMoving so I'm not slow while running
+function draginclude.CheckSkillingVariantCondition(condition, set)
+
+    if draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant] == 'Field' then
+        if draginclude.childSets.Field ~= nil then
+            gFunc.EquipSet(draginclude.childSets.Field);
+        else
+            gFunc.EquipSet(draginclude.sets.Field);
+        end
+
+    elseif draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant] == 'Fishing' then
+        if draginclude.childSets.Field ~= nil then
+            if draginclude.dragSettings.FishingVariant == 1 then
+                gFunc.EquipSet(draginclude.childSets.Fishing);
+            elseif draginclude.dragSettings.FishingVariant == 2 then
+                gFunc.EquipSet(draginclude.childSets.Fishing2);
+            end
+        else
+            if draginclude.dragSettings.FishingVariant == 1 then
+                gFunc.EquipSet(draginclude.sets.Fishing);
+            elseif draginclude.dragSettings.FishingVariant == 2 then
+                gFunc.EquipSet(draginclude.sets.Fishing2);
+            end
+        end
+    end
+
+    if condition then
+        gFunc.EquipSet(set);
     end
 end
 

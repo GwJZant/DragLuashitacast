@@ -758,6 +758,15 @@ profile.HandleMidcast = function()
     local spell = gData.GetAction();
     local time = gData.GetEnvironment().Time;
     local hasRefresh = gData.GetBuffCount('Refresh') + gData.GetBuffCount('Ballad');
+    local greedyMpCap = 0;
+
+    if player.SubJob == 'RDM' then
+        greedyMpCap = 57;
+    elseif player.SubJob == 'WHM' then
+        greedyMpCap = 76;
+    elseif player.SubJob == 'BLM' then
+        greedyMpCap = 95;
+    end
 
     gFunc.Message(spell.Name .. ' Greedy: ' .. tostring(Settings.GreedyHeal) .. ' Time: ' .. time);
 
@@ -769,7 +778,7 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise') or string.contains(spell.Name, 'Protect') or string.contains(spell.Name, 'Shell') then
         gFunc.Message('Healing Breath Set SKIPPED');
-    elseif Settings.GreedyHeal or player.MP <= 57 or hasRefresh > 0 then
+    elseif Settings.GreedyHeal or player.MP <= greedyMpCap or hasRefresh > 0 then
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNightGreedy);
         else

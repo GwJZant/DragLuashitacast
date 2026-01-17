@@ -284,19 +284,20 @@ local sets = {
     --Need: Rabbit Charm (+1 Neck)
     StealBig_Priority = { -- +11 Steal w/o Knife, +13 w/ Knife
         --Main = {'Btm. Knife'}, -- +2 Steal
-        Sub = {'Ungur Boomerang'}, -- +8 HP
+        --Sub = {'Ungur Boomerang'}, -- +8 HP
         Head = {'Rogue\'s Bonnet'}, -- +1 Steal +13 HP
-        Ear1 = {'Physical Earring'}, -- +25 HP
-        Ear2 = {'Physical Earring'}, -- +25 HP
-        --Body = {'Rogue\'s Vest'}, -- +20 HP
+        Neck = {'Shield Pendant'}, -- +20 HP
+        Ear1 = {'Cassie Earring'}, -- +50 HP
+        Ear2 = {'Bloodbead Earring'}, -- +25 HP
+        Body = {'Bloody Aketon'}, -- +70 HP
         Hands = {'Thief\'s Kote'}, -- +3 Steal
         Ring1 = {'Bomb Queen Ring'}, -- +75 HP
         Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
         Back = {'Gigant Mantle'}, -- +80 HP
-        Waist = {'Koenigs Belt'}, -- +20 HP
+        Waist = {'Powerful Rope'}, -- +20 HP
         Legs = {'Assassin\'s Culottes'}, -- +5 Steal
         Feet = {'Rogue\'s Poulaines'}, -- +2 Steal
-    }, -- 1503
+    }, -- 1703
 
     Steal_Priority = { -- +11 Steal w/o Knife, +13 w/ Knife
         --Main = {'Btm. Knife'}, -- +2 Steal
@@ -319,15 +320,16 @@ local sets = {
     },
 
     HpDown_Priority = {
-        Neck = {'Star Necklace'}, -- -15
-        --Body = {'Blue Cotehardie'}, -- -40
-        Hands = {'Thief\'s Kote'},
+        --Neck = {'Star Necklace'},
+        Ear2 = {'Stealth Earring'},
+        Body = {'Dst. Harness +1'}, 
+        Hands = {'Dst. Mittens +1'},
         Ring1 = {'Ether Ring'}, -- -35
-        Ring2 = {'Astral Ring'}, -- -25
-        Waist = {'Scouter\'s Rope'}, -- -40
-        Legs = {'Elder\'s Braguette'},
-        Feet = {'Elder\'s Sandals'},
-    }, -- 1129
+        Ring2 = {'Jelly Ring'},
+        Waist = {'Ryl.Kgt. Belt'},
+        Legs = {'Dst. Subligar +1'},
+        Feet = {'Dst. Leggings +1'},
+    }, -- 1289
 
     Warp = {
         Main = 'Warp Cudgel',

@@ -15,6 +15,10 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
+    DayCap = 962,
+    NightCap = 971,
+    GreedyDayCap = 999,
+    GreedyNightCap = 1007,
 };
 
 local sets = {
@@ -43,6 +47,7 @@ local sets = {
     },
 
     Engaged_Priority = { --22% Haste (Missing: Dusk Gloves +1(1%))
+        Ammo = {'Tiphia Sting'},
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Wym. Mail +1'}, -- +2%
         Hands = {'Homam Manopolas'}, --3%
@@ -53,6 +58,7 @@ local sets = {
     },
 
     EngagedAcc_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
+        Ammo = {'Tiphia Sting'},
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Homam Corazza'}, -- +15 Accuracy, Triple Attack+
         Hands = {'Homam Manopolas'}, --3%
@@ -118,12 +124,25 @@ local sets = {
 
     PDT_Priority = {
         Head = {'Darksteel Cap +1'}, -- PDT -2%
-        Ear1 = {'Ethereal Earring'},
-        Ear2 = {'Brutal Earring'},
-        Body = {'Wym. Mail +1'},
+        Ear1 = {'Ethereal Earring'}, -- Evasion +5, Absorb Damage as MP
+        Ear2 = {'Novia Earring'}, -- Evasion +7
+        Body = {'Wym. Mail +1'}, -- Parrying Skill +15
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
         Ring2 = {'Jelly Ring'}, -- PDT -5%
-        Back = {'Boxer\'s Mantle'},
+        Back = {'Boxer\'s Mantle'}, -- Evasion Skill +10, Parrying Skill +10
+        Legs = {'Dst. Subligar +1'}, -- PDT -3%
+        Feet = {'Dst. Leggings +1'}, -- PDT -2%
+    },
+
+    PDTNight_Priority = {
+        Ammo = {'Fenrir\'s Stone'}, -- Evasion +10
+        Head = {'Darksteel Cap +1'}, -- PDT -2%
+        Ear1 = {'Ethereal Earring'}, -- Evasion +5, Absorb Damage as MP
+        Ear2 = {'Novia Earring'}, -- Evasion +7
+        Body = {'Wym. Mail +1'}, -- Parrying Skill +15
+        Hands = {'Dst. Mittens +1'}, -- PDT -2%
+        Ring2 = {'Jelly Ring'}, -- PDT -5%
+        Back = {'Boxer\'s Mantle'}, -- Evasion Skill +10, Parrying Skill +10
         Legs = {'Dst. Subligar +1'}, -- PDT -3%
         Feet = {'Dst. Leggings +1'}, -- PDT -2%
     },
@@ -209,7 +228,7 @@ local sets = {
         Legs = {'Homam Cosciales'},
     },
 
-    -- Improvements: Ajase Beads (+20 HP, Rare/EX -> NM), Desert Sash (+30 HP, 20k)
+    -- Improvements: Ajase Beads (No HP change but save 20 MP, Rare/EX -> NM), Desert Sash (10 more HP but none in stock on AH, 20k)
     -- Skips (for now): Wbody (Expensive + DKP), 
     -- Current Threshold Cap (Daytime): 999/1960 (Carbonara: 1088/2135)
     -- Current Threshold Cap (Nighttime): 1007/1976 (Carbonara: 1097/2151)
@@ -247,6 +266,8 @@ local sets = {
         Feet = {'Homam Gambieras'}, -- Good
     },
 
+    -- Current Threshold Cap (Daytime): 962/1888 (Carbonara: 1052/2063)
+    -- Current Threshold Cap (Nighttime): 971/1904 (Carbonara: 1060/2079)
     Midcast_Priority = { -- +HP
         Ammo = {'Happy Egg'}, -- Good
         Head = {'Drachen Armet'}, -- Good
@@ -267,7 +288,7 @@ local sets = {
         Ammo = {'Fenrir\'s Stone'}, -- Good
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
-        Ear2 = {'Cassie Earring'}, -- Good
+        Ear2 = {'Ethereal Earring'}, -- Good
         Neck = {'Shield Pendant'}, -- Ajase Necklace
         Body = {'Wym. Mail +1'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
@@ -617,6 +638,7 @@ profile.HandleDefault = function()
     local party = AshitaCore:GetMemoryManager():GetParty();
     local zone = gData.GetEnvironment();
     local eq = gData.GetEquipment();
+    local time = zone.Time;
     local myZone = party:GetMemberZone(0);
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
@@ -703,12 +725,11 @@ profile.HandleDefault = function()
 
     
     if draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
-        --if Settings.TankToggle == 0 then
-        --    gFunc.EquipSet(sets.TankDPS);
-        --else
-        --    gFunc.EquipSet(sets.TankStats);
-        --end
-        gFunc.EquipSet(sets.PDT);
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.PDTNight);
+        else
+            gFunc.EquipSet(sets.PDT);
+        end
 
         if player.Status ~= 'Engaged' and player.IsMoving then
             gFunc.EquipSet(sets.RunSpeed);

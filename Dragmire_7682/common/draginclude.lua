@@ -858,6 +858,10 @@ function draginclude.CheckSkillingVariantCondition(condition, set)
             gFunc.EquipSet(draginclude.sets.Field);
         end
 
+        if condition then
+            gFunc.EquipSet(set);
+        end
+
     elseif draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant] == 'Fishing' then
         if draginclude.childSets.Field ~= nil then
             if draginclude.dragSettings.FishingVariant == 1 then
@@ -872,10 +876,10 @@ function draginclude.CheckSkillingVariantCondition(condition, set)
                 gFunc.EquipSet(draginclude.sets.Fishing2);
             end
         end
-    end
 
-    if condition then
-        gFunc.EquipSet(set);
+        if condition then
+            gFunc.EquipSet(set);
+        end
     end
 end
 
@@ -936,11 +940,11 @@ function draginclude.HandleAbility(ability);
 end
 
 function draginclude.HandleWeaponSkill(weaponSkill)
-    if weaponSkill.Name == 'Geirskogul' then    
-        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
-    else
-        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
-    end 
+    --if weaponSkill.Name == 'Geirskogul' then    
+    --    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
+    --else
+    --    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
+    --end 
 end
 
 function draginclude.HandleItem(item)

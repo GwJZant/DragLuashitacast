@@ -15,10 +15,10 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
-    DayCap = 962,
-    NightCap = 971,
-    GreedyDayCap = 999,
-    GreedyNightCap = 1007,
+    NightCap = 962,
+    DayCap = 971,
+    GreedyNightCap = 999,
+    GreedyDayCap = 1007,
 };
 
 local sets = {
@@ -693,10 +693,6 @@ profile.HandleDefault = function()
         else
             gFunc.EquipSet(sets.EngagedAcc);
         end
-
-        if Settings.LockEth then
-            gFunc.EquipSet(sets.Ethereal);
-        end
         
     -- Resting Section
     elseif (player.Status == 'Resting') then
@@ -734,6 +730,10 @@ profile.HandleDefault = function()
         if player.Status ~= 'Engaged' and player.IsMoving then
             gFunc.EquipSet(sets.RunSpeed);
         end
+    end
+
+    if Settings.LockEth then
+        gFunc.EquipSet(sets.Ethereal);
     end
 
     if (petAction ~= nil) then

@@ -15,10 +15,11 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
-    NightCap = 962,
-    DayCap = 971,
-    GreedyNightCap = 999,
-    GreedyDayCap = 1007,
+    DayCap = 962,
+    NightCap = 971,
+    GreedyDayCap = 999,
+    GreedyNightCap = 1007,
+    LockHP = false,
 };
 
 local sets = {
@@ -256,7 +257,7 @@ local sets = {
         Ear1 = {'Bloodbead Earring'}, -- Good
         Ear2 = {'Cassie Earring'}, -- Good
         Neck = {'Shield Pendant'}, -- Ajase Necklace
-        Body = {'Wym. Mail +1'}, -- Good
+        Body = {'Bloody Aketon'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
         Ring1 = {'Bloodbead Ring'}, -- Good
         Ring2 = {'Bomb Queen Ring'}, -- Good
@@ -374,6 +375,15 @@ local sets = {
         Hands = 'Dream Mittens +1',
         Legs = 'Dream Trousers +1',
         Feet = 'Dream Boots +1',
+    },
+
+    StyleLockStrange = {
+        Main = 'Gungnir',
+        Head = 'Darksteel Cap +1',
+        Body = 'Bloody Aketon',
+        Hands = 'Crimson Fng. Gnt.',
+        Legs = 'Crimson Cuisses',
+        Feet = 'Dst. Leggings +1',
     },
 
     StyleLockSummer2 = {
@@ -573,6 +583,7 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd Acc');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /eth /lac fwd LockEth');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /greedy /lac fwd GreedyToggle');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /hp /lac fwd LockHP');
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -623,6 +634,11 @@ profile.HandleCommand = function(args)
         Settings.GreedyHeal = not Settings.GreedyHeal;
 
         gFunc.Message('GreedyHeal ' .. tostring(Settings.GreedyHeal));
+    elseif args[1] == 'LockHP' then
+
+        Settings.LockHP = not Settings.LockHP;
+
+        gFunc.Message('LockHP ' .. tostring(Settings.LockHP));
     elseif args[1] == 'DayCheck' then
         local day = gData.GetEnvironment().Day;
 
@@ -732,13 +748,17 @@ profile.HandleDefault = function()
         end
     end
 
+    if (petAction ~= nil) then
+        HandlePetAction(petAction);
+        return;
+    end
+
     if Settings.LockEth then
         gFunc.EquipSet(sets.Ethereal);
     end
 
-    if (petAction ~= nil) then
-        HandlePetAction(petAction);
-        return;
+    if Settings.LockHP then
+        gFunc.EquipSet(sets.MidcastNightGreedy);
     end
 
     draginclude.HandleDefault(Settings);
@@ -794,11 +814,7 @@ profile.HandleMidcast = function()
 
     gFunc.EquipSet(sets.MidcastJustHelm);
 
-    if spell.Name == 'Invisible' then
-        gFunc.EquipSet(sets.Invisible);
-    elseif spell.Name == 'Sneak' then
-        gFunc.EquipSet(sets.Sneak);
-    elseif string.contains(spell.Name, partyPrioSpell) then
+    if string.contains(spell.Name, partyPrioSpell) then
         gFunc.Message('HP Up Set SKIPPED');
     elseif (Settings.GreedyHeal or player.MP <= greedyMpCap or hasRefresh > 0) and not (string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise')) then
         if time < 6 or time > 18 then
@@ -812,6 +828,12 @@ profile.HandleMidcast = function()
         else
             gFunc.EquipSet(sets.Midcast);
         end
+    end
+
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
     end
 end
 

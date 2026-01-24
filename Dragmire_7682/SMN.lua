@@ -473,11 +473,11 @@ local SmnConfig = {
 local ObiTable = {
     Fire = "Karin Obi",
     Earth = "Dorin Obi",
-    Water = "Suirin Obi",
+    --Water = "Suirin Obi",
     Wind = "Furin Obi",
     Ice = "Hyorin Obi",
     Thunder = "Rairin Obi",
-    Light = "Korin Obi",
+    --Light = "Korin Obi",
     Dark = "Anrin Obi"
 }
 

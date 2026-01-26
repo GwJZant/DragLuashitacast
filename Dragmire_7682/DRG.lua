@@ -15,10 +15,10 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
-    DayCap = 962,
-    NightCap = 971,
-    GreedyDayCap = 999,
-    GreedyNightCap = 1007,
+    DayCap = 971,
+    NightCap = 962,
+    GreedyDayCap = 1007,
+    GreedyNightCap = 999,
     LockHP = false,
 };
 
@@ -231,11 +231,11 @@ local sets = {
 
     -- Improvements: Ajase Beads (No HP change but save 20 MP, Rare/EX -> NM), Desert Sash (10 more HP but none in stock on AH, 20k)
     -- Skips (for now): Wbody (Expensive + DKP), 
-    -- Current Threshold Cap (Daytime): 999/1960 (Carbonara: 1088/2135)
-    -- Current Threshold Cap (Nighttime): 1007/1976 (Carbonara: 1097/2151)
-    -- Optimized Threshold Cap (Daytime): 1004/1970 (Carbonara: 1093/2145)
-    -- Optimized Threshold Cap (Nighttime): 1012/1986 (Carbonara: 1102/2161)
-    MidcastGreedy_Priority = { -- +HP
+    -- Current Threshold Cap (Nighttime): 999/1960 (Carbonara: 1097/2151)
+    -- Current Threshold Cap (Daytime): 1007/1976 (Carbonara: 1088/2135)
+    -- Optimized Threshold Cap (Nighttime): 1004/1970 (Carbonara: 1102/2161)
+    -- Optimized Threshold Cap (Daytime): 1012/1986 (Carbonara: 1093/2145)
+    MidcastNightGreedy_Priority = { -- +HP
         Ammo = {'Happy Egg'}, -- Good
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
@@ -251,7 +251,7 @@ local sets = {
         Feet = {'Homam Gambieras'}, -- Good
     },
 
-    MidcastNightGreedy_Priority = { -- +HP
+    MidcastGreedy_Priority = { -- +HP
         Ammo = {'Fenrir\'s Stone'}, -- Good
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
@@ -269,7 +269,7 @@ local sets = {
 
     -- Current Threshold Cap (Daytime): 962/1888 (Carbonara: 1052/2063)
     -- Current Threshold Cap (Nighttime): 971/1904 (Carbonara: 1060/2079)
-    Midcast_Priority = { -- +HP
+    MidcastNight_Priority = { -- +HP
         Ammo = {'Happy Egg'}, -- Good
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
@@ -285,7 +285,7 @@ local sets = {
         Feet = {'Homam Gambieras'}, -- Good
     },
 
-    MidcastNight_Priority = { -- +HP
+    Midcast_Priority = { -- +HP
         Ammo = {'Fenrir\'s Stone'}, -- Good
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
@@ -758,7 +758,11 @@ profile.HandleDefault = function()
     end
 
     if Settings.LockHP then
-        gFunc.EquipSet(sets.MidcastNightGreedy);
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.MidcastNightGreedy);
+        else
+            gFunc.EquipSet(sets.MidcastGreedy);
+        end
     end
 
     draginclude.HandleDefault(Settings);

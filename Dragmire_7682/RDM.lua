@@ -147,7 +147,7 @@ local sets = {
     },
 
     StyleLock = {
-        Main = 'Wind Staff',
+        Main = 'Auster\'s Staff',
         Head = 'Nashira Turban',
         Body = 'Nashira Manteel',
         Hands = 'Nashira Gages',
@@ -156,7 +156,7 @@ local sets = {
     },
 
     StyleLockCool = {
-        Main = 'Wind Staff',
+        Main = 'Auster\'s Staff',
         Head = 'Zenith Crown',
         Body = 'Nashira Manteel',
         Hands = 'Zenith Mitts',
@@ -174,7 +174,7 @@ local sets = {
     },
 
     StyleLockWinter = {
-        Main = 'Fire Staff',
+        Main = 'Vulcan\'s Staff',
         Head = 'Dream Hat +1',
         Body = 'Dream Robe +1',
         Hands = 'Dream Mittens +1',
@@ -407,15 +407,15 @@ local sets = {
     },
 
     Fire_Priority = {
-        Main = {'Fire Staff'},
+        Main = {'Vulcan\'s Staff'},
     },
 
     Ice_Priority = {
-        Main = {'Ice Staff'},
+        Main = {'Aquilo\'s Staff'},
     },
 
     Wind_Priority = {
-        Main = {'Wind Staff'},
+        Main = {'Auster\'s Staff'},
     },
 
     Earth_Priority = {
@@ -423,7 +423,7 @@ local sets = {
     },
 
     Thunder_Priority = {
-        Main = {'Thunder Staff'},
+        Main = {'Jupiter\'s Staff'},
     },
 
     Water_Priority = {
@@ -431,15 +431,15 @@ local sets = {
     },
 
     Light_Priority = {
-        Main = {'Light Staff'},
+        Main = {'Apollo\'s Staff'},
     },
 
     Dark_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
     },
 
     RestingMP_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
         Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
         Ear2 = {'Relaxing Earring'},
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}, {Name = 'Errant Hpl.', Priority = 0}},
@@ -458,7 +458,7 @@ local sets = {
     },
 
     WeaponSkillEvis_Priority = {
-        Neck = {'Light Gorget'},
+        Neck = {'Love Torque'},
         Waist = {'Warwolf Belt', {Name = 'Ryl.Kgt. Belt', Priority = 0}},
         Legs = {{Name = 'Duelist\'s Tights', Priority = 100}},
     },

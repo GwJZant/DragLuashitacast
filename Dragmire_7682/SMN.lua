@@ -17,7 +17,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Summoner\'s Horn', 'Evoker\'s Horn', 'Shep. Bonnet', 'Dream Hat +1'},
+        Head = {'Summoner\'s Horn', 'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
         Neck = {'Uggalepih Pendant'},
         Ear1 = {'Novia Earring', 'Phantom Earring', 'Dodge Earring'},
         Ear2 = {'Loquac. Earring', 'Geist Earring'},
@@ -38,7 +38,7 @@ local sets = {
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
-        Legs = {'Evoker\'s Spats'}, -- Pet Acc
+        Legs = {'Evk. Spats +1'}, -- Pet Acc
         Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
     },
 
@@ -49,19 +49,19 @@ local sets = {
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
-        Legs = {'Evoker\'s Spats'}, -- Pet Acc
+        Legs = {'Evk. Spats +1'}, -- Pet Acc
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
-    -- Summoning Skill + Perp Down: 269 (Native) + 4 (Merits) + 40 (Gear) = 312
+    -- Summoning Skill + Perp Down: 269 (Native) + 4 (Merits) + 42 (Gear) = 314
     -- Improvements: Penance Feet (+1), 2 Merits (+4), Summoning Earring (+3), Bahamut's Staff (+5) = 326
     -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(44/3) - 5 = 45 - 15 - 5 = 25s
     AvatarEngagedSpirit_Priority = {
-        Head = {'Evoker\'s Horn'}, -- +5
+        Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear1 = {'Beastly Earring'}, -- Pet Acc
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
-        Hands = {'Summoner\'s Brcr.'}, -- +10
+        Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
         Back = {'Astute Cape'}, -- +5
         Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
@@ -99,47 +99,47 @@ local sets = {
     BPDelay_Priority = {
         Head = {'Summoner\'s Horn'}, -- -3
         Body = {'Yinyang Robe', 'Austere Robe'}, -- -5
-        Hands = {'Summoner\'s Brcr.'}, -- -2
+        Hands = {'Smn. Bracers +1'}, -- -2
         Legs = {'Summoner\'s Spats'}, -- -2
         Feet = {'Summoner\'s Pgch.'}, -- -2
     },
 
-    PetAccBP_Priority = { -- Summoning Skill +43, Pet Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetAccBP_Priority = { -- Summoning Skill +45, Pet Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
         Body = {'Summoner\'s Doublet'}, -- Pet Crit Rate+
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    PetMAcc_Priority = { -- Summoning Skill +43, Pet Magic Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetMAcc_Priority = { -- Summoning Skill +45, Pet Magic Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    SummonSkill_Priority = { -- Summoning Skill +43
-        Head = {'Evoker\'s Horn'}, -- +5
+    SummonSkill_Priority = { -- Summoning Skill +45
+        Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10
+        Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    PetMAB_Priority = {-- Summoning Skill +43, Pet Magic Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetMAB_Priority = {-- Summoning Skill +45, Pet Magic Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
@@ -188,7 +188,7 @@ local sets = {
     },
 
     StyleLock = {
-        Main = 'Wind Staff',
+        Main = 'Auster\'s Staff',
         Head = 'Nashira Turban',
         Body = 'Nashira Manteel',
         Hands = 'Nashira Gages',
@@ -210,16 +210,16 @@ local sets = {
         Main = 'Mercurial Pole',
         Head = 'Nashira Turban',
         Body = 'Yinyang Robe',
-        Hands = 'Summoner\'s Brcr.',
+        Hands = 'Smn. Bracers +1',
         Legs = 'Nashira Seraweels',
         Feet = 'Rostrum Pumps',
     },
 
     StyleLockHydra = {
-        Main = 'Fire Staff',
+        Main = 'Vulcan\'s Staff',
         Head = 'Hydra Cap',
         Body = 'Hydra Jupon',
-        Hands = 'Summoner\'s Brcr.',
+        Hands = 'Smn. Bracers +1',
         Legs = 'Hydra Hose',
         Feet = 'Hydra Boots',
     },
@@ -251,15 +251,15 @@ local sets = {
     },
 
     Fire_Priority = {
-        Main = {'Fire Staff'},
+        Main = {'Vulcan\'s Staff'},
     },
 
     Ice_Priority = {
-        Main = {'Ice Staff'},
+        Main = {'Aquilo\'s Staff'},
     },
 
     Wind_Priority = {
-        Main = {'Wind Staff'},
+        Main = {'Auster\'s Staff'},
     },
 
     Earth_Priority = {
@@ -267,7 +267,7 @@ local sets = {
     },
 
     Thunder_Priority = {
-        Main = {'Thunder Staff'},
+        Main = {'Jupiter\'s Staff'},
     },
 
     Water_Priority = {
@@ -275,11 +275,11 @@ local sets = {
     },
 
     Light_Priority = {
-        Main = {'Light Staff'},
+        Main = {'Apollo\'s Staff'},
     },
 
     Dark_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
     },
 
     EXPRing = {
@@ -314,10 +314,10 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +39, Enfeebling +7
+    -- MND +42, Enfeebling +7
     EnfeeblingMND_Priority = {
         --Main = {'Water Staff'}, -- MND +4
-        Head = {'Zenith Crown'}, -- MND +3
+        Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
@@ -329,10 +329,10 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +39, Enfeebling +7
+    -- INT +43, Enfeebling +7
     EnfeeblingINT_Priority = {
         --Main = {'Water Staff'}, -- MND +4
-        Head = {'Zenith Crown'}, -- INT +3
+        Head = {'Evk. Horn +1'}, -- INT +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Phantom Earring'}, -- INT +1
@@ -810,6 +810,8 @@ local function CheckSummonersDoublet()
             ['Fire Spirit'] = 'Fire',
             ['Leviathan'] = 'Water',
             ['Water Spirit'] = 'Water',
+            ['Shiva'] = 'Ice',
+            ['Ice Spirit'] = 'Ice',
             ['Ramuh'] = 'Thunder',
             ['Thunder Spirit'] = 'Thunder',
             ['Fenrir'] = 'Dark',
@@ -838,6 +840,8 @@ local function CheckSummonersHorn()
             ['Fire Spirit'] = 'Fire',
             ['Leviathan'] = 'Water',
             ['Water Spirit'] = 'Water',
+            ['Shiva'] = 'Ice',
+            ['Ice Spirit'] = 'Ice',
             ['Ramuh'] = 'Thunder',
             ['Thunder Spirit'] = 'Thunder',
             ['Fenrir'] = 'Dark',

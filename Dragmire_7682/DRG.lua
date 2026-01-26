@@ -240,7 +240,7 @@ local sets = {
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
         Ear2 = {'Cassie Earring'}, -- Good
-        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Neck = {'Ajase Beads'}, -- Good
         Body = {'Bloody Aketon'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
         Ring1 = {'Bloodbead Ring'}, -- Good
@@ -256,7 +256,7 @@ local sets = {
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
         Ear2 = {'Cassie Earring'}, -- Good
-        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Neck = {'Ajase Beads'}, -- Good
         Body = {'Bloody Aketon'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
         Ring1 = {'Bloodbead Ring'}, -- Good
@@ -274,7 +274,7 @@ local sets = {
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
         Ear2 = {'Ethereal Earring'}, -- Good
-        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Neck = {'Ajase Beads'}, -- Good
         Body = {'Wym. Mail +1'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
         Ring1 = {'Bloodbead Ring'}, -- Good
@@ -290,7 +290,7 @@ local sets = {
         Head = {'Drachen Armet'}, -- Good
         Ear1 = {'Bloodbead Earring'}, -- Good
         Ear2 = {'Ethereal Earring'}, -- Good
-        Neck = {'Shield Pendant'}, -- Ajase Necklace
+        Neck = {'Ajase Beads'}, -- Good
         Body = {'Wym. Mail +1'}, -- Good
         Hands = {'Alkyoneus\'s Brc.'}, -- Good
         Ring1 = {'Bloodbead Ring'}, -- Good
@@ -803,11 +803,11 @@ profile.HandleMidcast = function()
     local greedyMpCap = 0;
 
     if player.SubJob == 'RDM' then
-        greedyMpCap = 57;
+        greedyMpCap = 77;
     elseif player.SubJob == 'WHM' then
-        greedyMpCap = 76;
+        greedyMpCap = 96;
     elseif player.SubJob == 'BLM' then
-        greedyMpCap = 95;
+        greedyMpCap = 115;
     end
 
     gFunc.Message(spell.Name .. ' Greedy: ' .. tostring(Settings.GreedyHeal) .. ' Time: ' .. time);

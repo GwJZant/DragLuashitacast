@@ -28,18 +28,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Happy Egg'},
-        Head = {'Optical Hat','Shep. Bonnet',},
+        Head = {'Optical Hat', 'Shep. Bonnet',},
         Neck = {'Temp. Torque', 'Peacock Amulet'},
         Ear1 = {'Ethereal Earring', 'Dodge Earring'},
         Ear2 = {'Novia Earring'},
         Body = {'Scorpion Harness', 'Elder\'s Surcoat',},
-        Hands = {'Monster Gloves', 'Elder\'s Bracers'},
+        Hands = {'Dst. Mittens +1', 'Elder\'s Bracers'},
         Ring1 = {'Rajas Ring'},
         Ring2 = {'Blitz Ring', 'Bastokan Ring'},
         Back = {'Boxer\'s Mantle',},
         Waist = {'Sonic Belt', 'Swift Belt'},
-        Legs = {'Byakko\'s Haidate', 'Elder\'s Braguette'},
-        Feet = {'Monster Gaiters', 'Elder\'s Sandals'},
+        Legs = {'Dst. Subligar +1', 'Elder\'s Braguette'},
+        Feet = {'Dst. Leggings +1', 'Elder\'s Sandals'},
     },
 
     IdleTown_Priority = {
@@ -239,12 +239,12 @@ local sets = {
         Feet = 'Dream Boots +1',
     },
 
-    StyleLockBeastok = {
-        Head = 'President. Hairpin',
-        Body = 'Republic Aketon',
-        Hands = 'Dusk Gloves',
-        Legs = 'Ryl.Kgt. Breeches',
-        Feet = 'Dusk Ledelsens'
+    StyleLockDarksteel = {
+        Head = 'Darksteel Cap +1',
+        Body = 'Dst. Harness +1',
+        Hands = 'Dst. Mittens +1',
+        Legs = 'Dst. Subligar +1',
+        Feet = 'Dst. Leggings +1',
     },
 
     StyleLockHydra = {
@@ -257,7 +257,7 @@ local sets = {
 
     -- Uses Relic body to remove status ailments
     RewardSTATUS_Priority = { -- MND
-        Ammo = {'Pet Food Zeta','Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         --Head = {'Beast Helm'},
         Hands = {'Ogre Gloves'},
         Body = {'Mst. Jackcoat +1'},
@@ -267,7 +267,7 @@ local sets = {
 
     -- Uses Kirin's Osode to maximize healing, does not remove status ailments
     RewardHP_Priority = { -- MND
-        Ammo = {'Pet Food Zeta', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         --Head = {'Beast Helm'},
         Hands = {'Ogre Gloves'},
         Body = {'Mst. Jackcoat +1'},
@@ -371,9 +371,9 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
         if player.SubJob ~= 'WHM' then
-            gFunc.LockStyle(sets.StyleLockGeneric);
+            gFunc.LockStyle(sets.StyleLockDarksteel);
         else
-            gFunc.LockStyle(sets.StyleLockGeneric);
+            gFunc.LockStyle(sets.StyleLockDarksteel);
         end
 
         --[[ Set you job macro defaults here]]

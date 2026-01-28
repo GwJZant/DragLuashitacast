@@ -105,7 +105,7 @@ local sets = {
     },
 
     TankStaff_Priority = { -- PDT -43% or -48%
-        --Main = {'Earth Staff'}, -- PDT -20%
+        --Main = {'Terra\'s Staff'}, -- PDT -20%
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
         Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- MP +30
@@ -165,7 +165,7 @@ local sets = {
     },
 
     StyleLockTank = {
-        Main = 'Earth Staff',
+        Main = 'Terra\'s Staff',
         Head = 'Darksteel Cap +1',
         Body = 'Dst. Harness +1',
         Hands = 'Dst. Mittens +1',
@@ -419,7 +419,7 @@ local sets = {
     },
 
     Earth_Priority = {
-        Main = {'Earth Staff'},
+        Main = {'Terra\'s Staff'},
     },
 
     Thunder_Priority = {

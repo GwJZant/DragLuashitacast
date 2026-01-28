@@ -263,7 +263,7 @@ local sets = {
     },
 
     Earth_Priority = {
-        Main = {'Earth Staff'},
+        Main = {'Terra\'s Staff'},
     },
 
     Thunder_Priority = {

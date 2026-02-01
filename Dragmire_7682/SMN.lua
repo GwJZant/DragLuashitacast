@@ -46,26 +46,39 @@ local sets = {
         Ammo = {'Hedgehog Bomb'},
         Head = {'Shep. Bonnet'}, -- Pet Acc
         Ear2 = {'Beastly Earring'}, -- Pet Acc
-        Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
+        Body = {'Yinyang Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
         Legs = {'Evk. Spats +1'}, -- Pet Acc
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
-    -- Summoning Skill + Perp Down: 269 (Native) + 4 (Merits) + 42 (Gear) = 314
-    -- Improvements: Penance Feet (+1), 2 Merits (+4), Summoning Earring (+3), Bahamut's Staff (+5) = 326
+    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 42 (Gear) = 318
+    -- Improvements: Penance Slops (+1), Summoning Earring (+3), Bahamut's Staff (+5) = 326
     -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(44/3) - 5 = 45 - 15 - 5 = 25s
     AvatarEngagedSpirit_Priority = {
         Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear1 = {'Beastly Earring'}, -- Pet Acc
-        Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
+        Body = {'Yinyang Robe'}, -- Perp Down
         Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
         Back = {'Astute Cape'}, -- +5
         Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
         Feet = {'Austere Sabots'} -- +3
+    },
+
+    -- 2 more Perp Down than other set
+    GreedyAvatarEngagedSpirit_Priority = {
+        Head = {'Evk. Horn +1'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Body = {'Yinyang Robe'}, -- Perp Down
+        Hands = {'Nashira Gages'}, -- Perp Down
+        Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
+        Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
     },
 
     MeleeEngagedAvatar_Priority = { -- 11% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
@@ -146,18 +159,18 @@ local sets = {
         Feet = {'Austere Sabots'} -- +3
     },
 
-    WeaponSkillSpiritTaker_Priority = { -- INT +42, MND +23, Acc -5
+    WeaponSkillSpiritTaker_Priority = { -- INT +30, MND +14, Staff Skill +7, Attack +6, DA +1%
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Summoner\'s Horn'}, -- INT +3
+        Head = {'Evk. Horn +1'}, -- INT +6, MND +6
         Neck = {'Temp. Torque'}, -- Staff Skill +7
-        Ear1 = {'Phantom Earring'}, -- INT +1
+        Ear1 = {'Merman\'s Earring'}, -- Attack +6
         Ear2 = {'Brutal Earring'}, -- DA +1%
-        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
+        Body = {'Elder\'s Surcoat'}, -- INT +1
         Hands = {'Errant Cuffs'}, -- INT +5
         Ring1 = {'Diamond Ring'}, -- INT +4
         Ring2 = {'Diamond Ring'}, -- INT +4
         Back = {'Rainbow Cape'}, -- INT +3, MND +3
-        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
+        Legs = {'Austere Slops'}, -- INT +2, MND +2
         Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
     },
 
@@ -993,21 +1006,21 @@ profile.HandleDefault = function()
     end
 
     if (pet ~= nil) then
-        local mpThreshold = 954; --WHM Default
+        local mpThreshold = 906; --WHM Default
 
         if player.SubJob == 'BLM' then
-            mpThreshold = 973;
-        elseif player.SubJob == 'RDM' then
-            mpThreshold = 935;
-        else
-            mpThreshold = 900; -- Estimated for /NIN, haven't actually compared
+            mpThreshold = 925;
         end
 
         if player.MP <= mpThreshold then
             if pet.Name == 'Carbuncle' then
                 gFunc.EquipSet(sets.AvatarEngagedCarby);
-            elseif string.contains(pet.Name, 'Spirit') and pet.Name ~= 'LightSpirit' then
-                gFunc.EquipSet(sets.AvatarEngagedSpirit);
+            elseif string.contains(pet.Name, 'Spirit') then
+                if Settings.GreedySpirit then
+                    gFunc.EquipSet(sets.GreedyAvatarEngagedSpirit);
+                else
+                    gFunc.EquipSet(sets.AvatarEngagedSpirit);
+                end
             else
                 gFunc.EquipSet(sets.AvatarEngaged);
             end
@@ -1022,10 +1035,8 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.MeleeEngagedAvatar);
         end
 
-        if pet.Name == 'LightSpirit' or not string.contains(pet.Name, 'Spirit') then -- Don't want to do these for Spirits so we can maximize our casting time reduction
-            CheckSummonersDoublet();
-            CheckSummonersHorn();
-        end
+        CheckSummonersDoublet();
+        CheckSummonersHorn();
 
         if pet.Name == 'Carbuncle' then
             gFunc.Equip('Hands', 'Carbuncle Mitts');

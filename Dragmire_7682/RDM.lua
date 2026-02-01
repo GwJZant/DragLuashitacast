@@ -504,11 +504,11 @@ local sets = {
         Legs = {{Name = 'Elder\'s Braguette', Priority = 100}},
     },
 
-    Sneak = {
+    Invisible = {
         Hands = 'Dream Mittens +1',
     },
 
-    Invisible = {
+    Sneak = {
         Feet = 'Dream Boots +1',
     },
 };

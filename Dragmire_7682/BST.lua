@@ -60,16 +60,16 @@ local sets = {
 
     Engaged_Priority = { -- 19% Haste (Missing: Dusk Gloves +1, Dusk Boots +1, Panther Mask +1)
         Ammo = {'Tiphia Sting'},
-        Head = {'Panther Mask'}, --2%
-        Ear1 = {'Beastly Earring', 'Dodge Earring'},
+        Head = {'Panther Mask', 'Shep. Bonnet'}, --2%
+        Ear1 = {'Beastly Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
         Body = {'Scorpion Harness'},
-        Hands = {'Dusk Gloves'}, --3%
+        Hands = {'Dusk Gloves', 'Beast Gloves'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
         Back = {'Forager\'s Mantle'},
         Waist = {'Sonic Belt', 'Swift Belt'}, --6%
-        Legs = {'Byakko\'s Haidate'}, --5%
-        Feet = {'Dusk Ledelsens'}, --2%
+        Legs = {'Byakko\'s Haidate', 'Beast Trousers'}, --5%
+        Feet = {'Dusk Ledelsens', 'Beast Gaiters'}, --2%
     },
 
     PetAcc_Priority = { -- Prioritize Pet Accuracy

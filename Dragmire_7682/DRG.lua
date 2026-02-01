@@ -15,10 +15,18 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
-    DayCap = 971,
-    NightCap = 962,
-    GreedyDayCap = 1007,
-    GreedyNightCap = 999,
+    BaseDayCap = 952,
+    BaseNightCap = 944,
+    BaseGreedyDayCap = 988,
+    BaseGreedyNightCap = 980,
+    CarbDayCap = 1039,
+    CarbNightCap = 1031,
+    CarbGreedyDayCap = 1075,
+    CarbGreedyNightCap = 1065,
+    DayCap = 952,
+    NightCap = 944,
+    GreedyDayCap = 988,
+    GreedyNightCap = 980,
     LockHP = false,
 };
 
@@ -58,12 +66,12 @@ local sets = {
         Feet = {'Homam Gambieras'}, --3%
     },
 
-    EngagedAcc_Priority = { --20% Haste (Missing: Dusk Gloves +1(1%))
+    EngagedAcc_Priority = { --19% Haste (Missing: Dusk Gloves +1(1%))
         Ammo = {'Tiphia Sting'},
         Head = {'Ace\'s Helm'}, --4%
         Body = {'Homam Corazza'}, -- +15 Accuracy, Triple Attack+
         Hands = {'Homam Manopolas'}, --3%
-        Ring2 = {'Blitz Ring'}, --1%
+        Ring2 = {'Toreador\'s Ring'}, -- +7 Accuracy
         Waist = {'Sonic Belt', 'Swift Belt'}, --4%
         Legs = {'Homam Cosciales'}, --3%
         Feet = {'Homam Gambieras'}, --3%
@@ -229,8 +237,7 @@ local sets = {
         Legs = {'Homam Cosciales'},
     },
 
-    -- Improvements: Ajase Beads (No HP change but save 20 MP, Rare/EX -> NM), Desert Sash (10 more HP but none in stock on AH, 20k)
-    -- Skips (for now): Wbody (Expensive + DKP), 
+    -- Improvements: Desert Sash (10 more HP but none in stock on AH, 20k)
     -- Current Threshold Cap (Nighttime): 999/1960 (Carbonara: 1097/2151)
     -- Current Threshold Cap (Daytime): 1007/1976 (Carbonara: 1088/2135)
     -- Optimized Threshold Cap (Nighttime): 1004/1970 (Carbonara: 1102/2161)
@@ -657,6 +664,7 @@ profile.HandleDefault = function()
     local time = zone.Time;
     local myZone = party:GetMemberZone(0);
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    local food = gData.GetBuffCount("Food");
 
     -- Determining current level for Priority EquipSet purposes
     if (myLevel ~= Settings.CurrentLevel) then
@@ -671,6 +679,18 @@ profile.HandleDefault = function()
         else
             LateInitialize();
         end
+    end
+
+    if food > 0 then
+        Settings.DayCap = Settings.CarbDayCap;
+        Settings.NightCap = Settings.CarbNightCap;
+        Settings.GreedyDayCap = Settings.CarbGreedyDayCap;
+        Settings.GreedyNightCap = Settings.CarbGreedyNightCap;
+    else
+        Settings.DayCap = Settings.BaseDayCap;
+        Settings.NightCap = Settings.BaseNightCap;
+        Settings.GreedyDayCap = Settings.BaseGreedyDayCap;
+        Settings.GreedyNightCap = Settings.BaseGreedyNightCap;
     end
 
     -- Forward slash toggle between Default and Evasion
@@ -805,6 +825,7 @@ profile.HandleMidcast = function()
     local time = gData.GetEnvironment().Time;
     local hasRefresh = gData.GetBuffCount('Refresh') + gData.GetBuffCount('Ballad');
     local greedyMpCap = 0;
+    local hpThreshold = 0;
 
     if player.SubJob == 'RDM' then
         greedyMpCap = 77;
@@ -814,18 +835,31 @@ profile.HandleMidcast = function()
         greedyMpCap = 115;
     end
 
+    if time < 6 or time > 18 then
+        hpThreshold = Settings.NightCap
+    else
+        hpThreshold = Settings.DayCap
+    end
+
     gFunc.Message(spell.Name .. ' Greedy: ' .. tostring(Settings.GreedyHeal) .. ' Time: ' .. time);
 
     gFunc.EquipSet(sets.MidcastJustHelm);
 
     if string.contains(spell.Name, partyPrioSpell) then
         gFunc.Message('HP Up Set SKIPPED');
-    elseif (Settings.GreedyHeal or player.MP <= greedyMpCap or hasRefresh > 0) and not (string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise')) then
+    elseif player.HP <= hpThreshold or string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise') then
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.MidcastNight);
+        else
+            gFunc.EquipSet(sets.Midcast);
+        end
+    elseif (Settings.GreedyHeal or player.MP <= greedyMpCap or hasRefresh > 0) then
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNightGreedy);
         else
             gFunc.EquipSet(sets.MidcastGreedy);
         end
+
     else
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNight);

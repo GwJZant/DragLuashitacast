@@ -375,6 +375,15 @@ local sets = {
         --Feet = 'Homam Gambieras',
     },
 
+    StyleLockMandy = {
+        Main = 'Gungnir',
+        Head = 'Mandra. Masque',
+        Body = 'Mandra. Suit',
+        --Hands = 'Scp. Gauntlets',
+        --Legs = 'Elder Trunks',
+        --Feet = 'Homam Gambieras',
+    },
+
     StyleLockWinter = {
         Main = 'Gungnir',
         Head = 'Dream Hat +1',
@@ -546,7 +555,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockMandy);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -824,6 +833,7 @@ profile.HandleMidcast = function()
     local partyPrioSpell = 'Barston';
     local time = gData.GetEnvironment().Time;
     local hasRefresh = gData.GetBuffCount('Refresh') + gData.GetBuffCount('Ballad');
+    local food = gData.GetBuffCount("Food");
     local greedyMpCap = 0;
     local hpThreshold = 0;
 
@@ -833,6 +843,10 @@ profile.HandleMidcast = function()
         greedyMpCap = 96;
     elseif player.SubJob == 'BLM' then
         greedyMpCap = 115;
+    end
+
+    if food > 0 then -- assumes carb for now, make a toggle sometimes for non-carb foods
+        greedyMpCap = greedyMpCap + 10
     end
 
     if time < 6 or time > 18 then

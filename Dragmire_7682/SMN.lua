@@ -19,15 +19,15 @@ local sets = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
         Head = {'Summoner\'s Horn', 'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
         Neck = {'Uggalepih Pendant'},
-        Ear1 = {'Novia Earring', 'Phantom Earring', 'Dodge Earring'},
-        Ear2 = {'Loquac. Earring', 'Geist Earring'},
+        Ear1 = {'Novia Earring', 'Phantom Earring'},
+        Ear2 = {'Loquac. Earring', 'Reraise Earring'},
         Body = {'Yinyang Robe', 'Elder\'s Surcoat', 'Seer\'s Tunic', 'Dream Robe +1'},
         Hands = {'Zenith Mitts', 'Elder\'s Bracers', 'Carbuncle Mitts'},
-        Ring1 = {'Evoker\'s Ring', 'Astral Ring'},
-        Ring2 = {'Ether Ring', 'Astral Ring'},
+        Ring1 = {'Evoker\'s Ring', 'Rajas Ring'},
+        Ring2 = {'Ether Ring'},
         Back = {'Astute Cape', 'Trimmer\'s Mantle'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
-        Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Baron\'s Slops', 'Dream Trousers +1'},
+        Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Seer\'s Slacks', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Elder\'s Sandals', 'Dream Boots +1'},
     },
 
@@ -126,6 +126,18 @@ local sets = {
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
+        Feet = {'Austere Sabots'} -- +3
+    };
+
+    PetAccBPMultiHit_Priority = { -- Summoning Skill +42, Pet Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
+        Body = {'Summoner\'s Doublet'}, -- Pet Crit Rate+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Evk. Spats +1'}, -- Avatar: Accuracy
         Feet = {'Austere Sabots'} -- +3
     };
 
@@ -312,10 +324,10 @@ local sets = {
     },
 
     -- MND +35 (107 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*107 - 190 = 243 (350 cap) Every MND is 3 points
-    -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Evoker's Horn +1 (+9 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
+    -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
     -- Kirin's Pole (+30 HP), 2 Communion Earrings (+12 HP), Mahatma Hpl. (+3 HP), Devotee's Mitts +1 (+3 HP), Mahatma Slops (+3 HP), Mahatma Pigaches (+9 HP)
     Stoneskin_Priority = {
-        Head = {'Zenith Crown'}, -- MND +3
+        Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enhancing Torque'}, -- Enhancing +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
@@ -787,7 +799,8 @@ end
 
 --Bloodpact Lists. I have flaming crush in the PhysicalBP list which may not be optimal
 local MagicBP = T{'Nether Blast', 'Meteorite','Stone II','Stone IV','Geocrush','Water II','Water IV','Grand Fall','Aero II','Aero IV','Wind Blade','Fire II','Fire IV','Meteor Strike','Burning Strike','Blizzard II','Blizzard IV','Heavenly Strike','Thunder II','Thunder IV','Thunderstorm','Thunderspark'};
-local PhysBP = T{'Poison Nails','Moonlit Charge','Somnolence','Punch','Rock Throw','Barracuda Dive','Claw','Axe Kick','Shock Strike','Camisado','Regal Scratch','Crescent Fang','Rock Buster','Tail Whip','Double Punch','Megalith Throw','Double Slap','Eclipse Bite','Flaming Crush','Mountain Buster','Spinning Dive','Predator Claws','Rush','Chaotic Strike'};
+local PhysBP = T{'Poison Nails','Moonlit Charge','Somnolence','Punch','Rock Throw','Barracuda Dive','Claw','Axe Kick','Shock Strike','Camisado','Regal Scratch','Crescent Fang','Rock Buster','Tail Whip','Double Punch','Megalith Throw','Double Slap','Eclipse Bite','Flaming Crush','Mountain Buster','Spinning Dive','Rush','Chaotic Strike'};
+local PhysBPMulti = T{'Predator Claws'};
 local BuffBP = T{'Shining Ruby','Aerial Armor','Frost Armor','Rolling Thunder','Crimson Howl','Lightning Armor','Ecliptic Growl','Glittering Ruby','Earthen Ward','Spring Water','Hastega','Noctoshield','Ecliptic Howl','Dream Shroud'};
 local DebuffBP = T{'Luncar Cry','Mewing Lullaby','Nightmare','Lunar Roar','Slowga','Ultimate Terror','Sleepga','Eerie Eye'};
 
@@ -802,6 +815,8 @@ local function HandlePetAction(PetAction)
 		gFunc.EquipSet(profile.Sets.PetMAB);
 	elseif PhysBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.PetAccBP);
+	elseif PhysBPMulti:contains(BPName) then
+		gFunc.EquipSet(profile.Sets.PetAccBPMultiHit);
 	elseif BuffBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.SummonSkill);
 	elseif DebuffBP:contains(BPName) then

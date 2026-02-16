@@ -27,18 +27,18 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
-        Ammo = 'Shrimp Lure',
-        Body = 'Angler\'s Tunica',
+        Ammo = 'Fly Lure',
+        Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing2 = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Sinking Minnow',
-        Body = 'Angler\'s Tunica',
+        Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
@@ -302,6 +302,14 @@ local function GetSkill()
 
     if (eq.Main) then
         return eq.Main.Resource.Skill;
+    end
+end
+
+local function GetRangedSkill()
+    local eq = gData.GetEquipment();
+
+    if (eq.Range) then
+        return eq.Range.Resource.Skill;
     end
 end
 

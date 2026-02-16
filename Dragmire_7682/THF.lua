@@ -18,6 +18,7 @@ local Settings = {
     CurrentLevel = 0,
     CurrentBolt = 'Crossbow Bolt',
     CurrentRanged = 'Crossbow',
+    LowHP = false,
     LockTH = false,
     LockTH2 = false,
     LockGilfinder = false,
@@ -230,6 +231,14 @@ local sets = {
         Feet = 'Hct. Leggings',
     },
 
+    StyleLockFish = {
+        Head = 'Assassin\'s Bonnet',
+        Body = 'Fisherman\'s Apron',
+        Hands = 'Angler\'s Gloves',
+        Legs = 'Angler\'s Hose',
+        Feet = 'Angler\'s Boots',
+    },
+
     StyleLockHomam = {
         Head = 'Darksteel Cap +1',
         Body = 'Homam Corazza',
@@ -270,10 +279,6 @@ local sets = {
         Legs = {'Elder\'s Braguette'}, -- CHR +2
     },
 
-    EXPRing = {
-        Ring1 = 'Chariot Band',
-    },
-
     Hide_Priority = {
         --Body = {'Rogue\'s Vest'},
     },
@@ -282,9 +287,9 @@ local sets = {
     --Against a level 75 target: 50% + StealMod chance to steal
     --Level difference of X between myself and target are +/- X to that percent chance
     --Need: Rabbit Charm (+1 Neck)
-    StealBig_Priority = { -- +11 Steal w/o Knife, +13 w/ Knife
+    -- 50+32 = 82 + levelDiff: Guaranteed Steal on targets 
+    StealBig_Priority = { -- +14 Steal w/o Knife, +16 w/ Knife
         --Main = {'Btm. Knife'}, -- +2 Steal
-        --Sub = {'Ungur Boomerang'}, -- +8 HP
         Head = {'Rogue\'s Bonnet'}, -- +1 Steal +13 HP
         Neck = {},
         Ear1 = {'Cassie Earring'}, -- +50 HP
@@ -297,20 +302,11 @@ local sets = {
         Waist = {'Powerful Rope'}, -- +20 HP
         Legs = {'Assassin\'s Culottes'}, -- +5 Steal
         Feet = {'Rogue\'s Poulaines'}, -- +2 Steal
-    }, -- 1703
+    }, -- 1268/1691
 
     Steal_Priority = { -- +11 Steal w/o Knife, +13 w/ Knife
-        --Main = {'Btm. Knife'}, -- +2 Steal
-        --Sub = {'Ungur Boomerang'}, -- +8 HP
         Head = {'Rogue\'s Bonnet'}, -- +1 +13 HP
-        Ear1 = {'Ethereal Earring'}, -- +25 HP
-        --Ear2 = {'Physical Earring'}, -- +25 HP
-        --Body = {'Rogue\'s Vest'}, -- +20 HP
         Hands = {'Thief\'s Kote'}, -- +3 Steal
-        Ring1 = {'Bomb Queen Ring'}, -- +75 HP
-        --Ring2 = {'Rogue\'s Ring'}, -- +3 Steal when < 75% HP and TP < 1000
-        --Back = {'Gigant Mantle'}, -- +80 HP
-        --Waist = {'Koenigs Belt'}, -- +20 HP
         Legs = {'Assassin\'s Culottes'}, -- +5 Steal
         Feet = {'Rogue\'s Poulaines'}, -- +2 Steal
     }, -- 1381
@@ -319,28 +315,58 @@ local sets = {
         Feet = {'Rogue\'s Poulaines'},
     },
 
-    HpDown_Priority = {
-        --Neck = {'Star Necklace'},
-        Ear2 = {'Stealth Earring'},
+    LowHP_Priority = {
+        Head = {'Optical Hat'},
+        Neck = {'Love Torque'},
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Novia Earring'},
         Body = {'Dst. Harness +1'}, 
         Hands = {'Dst. Mittens +1'},
         Ring1 = {'Ether Ring'}, -- -35
         Ring2 = {'Jelly Ring'},
-        Waist = {'Ryl.Kgt. Belt'},
+        Back = {'Boxer\'s Mantle'},
+        Waist = {'Scouter\'s Rope'}, -- -40
         Legs = {'Dst. Subligar +1'},
         Feet = {'Dst. Leggings +1'},
-    }, -- 1289
+    }, -- 1249
+
+    EnfeeblingINT_Priority = { -- Enfeebling +12, INT +22
+        Head = {'Rogue\'s Bonnet'}, -- INT +5
+        Neck = {'Enfeebling Torque'}, -- Enfeebling +7
+        Ear2 = {'Phantom Earring'}, -- INT +1
+        Body = {'Elder\'s Surcoat'}, -- INT +1
+        Hands = {'Elder\'s Bracers'}, -- INT +2
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Altruistic Cape'}, -- Enfeebling +5
+        Waist = {'Ryl.Kgt. Belt'}, -- INT +2
+        Legs = {'Elder\'s Braguette'}, -- INT +1
+        Feet = {'Elder\'s Sandals'}, -- INT +2
+    },
+
+    Dark_Priority = { -- Dark +5, INT +22
+        Head = {'Rogue\'s Bonnet'}, -- INT +5
+        Ear2 = {'Phantom Earring'}, -- INT +1
+        Body = {'Elder\'s Surcoat'}, -- INT +1
+        Hands = {'Elder\'s Bracers'}, -- INT +2
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Merciful Cape'}, -- Dark +5
+        Waist = {'Ryl.Kgt. Belt'}, -- INT +2
+        Legs = {'Elder\'s Braguette'}, -- INT +1
+        Feet = {'Elder\'s Sandals'}, -- INT +2
+    },
 
     Warp = {
         Main = 'Warp Cudgel',
     },
 
     Sneak = {
-        Hands = 'Dream Mittens +1',
-    },
-
-    Invisible = {
         Feet = 'Dream Boots +1',
+    },
+    
+    Invisible = {
+        Hands = 'Dream Mittens +1',
     },
 };
 
@@ -361,6 +387,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /th /lac fwd th ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /th2 /lac fwd th2 ');    
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /gilfinder /lac fwd gilfinder ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /lowhp /lac fwd lowhp ');
 end
 
 profile.OnUnload = function()
@@ -397,7 +424,9 @@ profile.HandleCommand = function(args)
 
         gFunc.Message('LockGilfinder ' .. tostring(Settings.LockGilfinder));
     elseif (args[1] == 'lowhp') then
-        gFunc.LockSet(sets.HpDown, 10);
+        Settings.LowHP = not Settings.LowHP
+
+        gFunc.Message("LowHP: " .. tostring(Settings.LowHP));
     elseif (args[1] == 'stealhp') then
         gFunc.LockSet(sets.Steal, 10);
     end
@@ -413,7 +442,7 @@ profile.LateInitialize = function()
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
         -- The delay in setting this is to prevent a failure to set the stylelock on first load
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockFish);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 18');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 6');
@@ -500,24 +529,12 @@ profile.HandleDefault = function()
         end
     end
 
-    --if (player.SubJob == 'BLM' or player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'SMN') and player.MP < 41 then
-        --gFunc.EquipSet(sets.BlueCotehardie);
-    --end
-
     if (pet ~= nil) then
         if (petAction ~= nil) then
             HandlePetAction(petAction);
             return;
         elseif pet.Status == 'Engaged' then
             gFunc.EquipSet(sets.PetAttack);
-        end
-    end
-
-    if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        if player.SubJob == 'NIN' then
-            --gFunc.EquipSet(sets.IdleTownNIN);
-        else
-            --gFunc.EquipSet(sets.IdleTown);
         end
     end
 
@@ -528,8 +545,8 @@ profile.HandleDefault = function()
     if Settings.LockTH or (player.Status == 'Engaged' and not isTargetTagged()) then
         gFunc.EquipSet(sets.TH);
         --gFunc.Message('TH Engaged');
-    elseif Settings.LockGilfinder then
-        gFunc.EquipSet(sets.Gilfinder);
+    elseif Settings.LowHP then
+        gFunc.EquipSet(sets.LowHP);
     end
 end
 
@@ -545,7 +562,11 @@ profile.HandleAbility = function()
     elseif string.match(ability.Name, 'Flee') then
         gFunc.EquipSet(sets.Flee);
     elseif string.match(ability.Name, 'Steal') then
-        gFunc.EquipSet(sets.Steal);
+        if Settings.LowHP then
+            gFunc.EquipSet(sets.StealBig);
+        else
+            gFunc.EquipSet(sets.Steal);
+        end        
     elseif string.match(ability.Name, 'Mug') then
 
     elseif string.match(ability.Name, 'Bully') then
@@ -575,6 +596,18 @@ profile.HandleMidcast = function()
     elseif string.contains(spell.Name, 'Utsusemi') then
         gFunc.EquipSet(sets.Evasion);
         gFunc.EquipSet(sets.SpellHaste);
+    elseif string.contains(spell.Name, 'Sleep') then
+        gFunc.EquipSet(sets.EnfeeblingINT);
+
+        if Settings.LockTH or (not isTargetTagged()) then
+            gFunc.EquipSet(sets.TH);
+        end
+    elseif spell.Name == 'Drain' or spell.Name == 'Aspir' then
+        gFunc.EquipSet(sets.Dark);
+
+        if Settings.LockTH or (not isTargetTagged()) then
+            gFunc.EquipSet(sets.TH);
+        end
     elseif Settings.LockTH or (not isTargetTagged()) then
         gFunc.EquipSet(sets.TH);
     end

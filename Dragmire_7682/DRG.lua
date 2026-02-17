@@ -819,6 +819,20 @@ end
 
 profile.HandleItem = function()
     local item = gData.GetAction();
+    local zone = gData.GetEnvironment();
+    local time = zone.Time;
+
+    if time < 6 or time > 18 then
+        gFunc.EquipSet(sets.PDTNight);
+    else
+        gFunc.EquipSet(sets.PDT);
+    end
+
+	if item.Name == 'Silent Oil' then 
+        gFunc.EquipSet(sets.Sneak);
+    elseif item.Name == 'Prism Powder' then 
+        gFunc.EquipSet(sets.Invisible);
+    end
 end
 
 profile.HandlePrecast = function()

@@ -532,6 +532,14 @@ end
 
 profile.HandleItem = function()
     local item = gData.GetAction();
+
+    gFunc.EquipSet(sets.Evasion);
+
+	if item.Name == 'Silent Oil' then 
+        gFunc.EquipSet(sets.Sneak);
+    elseif item.Name == 'Prism Powder' then 
+        gFunc.EquipSet(sets.Invisible);
+    end
 end
 
 profile.HandlePrecast = function()

@@ -137,13 +137,35 @@ local sets = {
         Feet = {{Name = 'Dst. Leggings +1', Priority = 0}}, -- PDT -2%
     },
 
-    -- Skill SIRD: 100 - [ (40 flat - level diff to the mob) * (your skill if you had it capped on the job at lvl 75 / your actual skill) then clamped to 100 if it exceeds 100 ]
-    SIRD_Priority = { -- 57% (77% w/ Aquaveil)
+    -- 4 SIRD Merits = 8%
+    -- 25% + 8% + 42% = 75% (95% w/ Aquaveil)
+    SIRDWeapons_Priority = {
         Main = {'Hermit\'s Wand'}, -- 25%
         Sub = {'Genbu\'s Shield'}, -- PDT -10%
+    },
+
+    -- 50% + 8% + 42% = 100% (120% w/ Aquaveil)
+    SIRDNINWeapons_Priority = {
+        Main = {'Hermit\'s Wand'}, -- 25%
+        Sub = {'Hermit\'s Wand'}, -- 25%
+    },
+
+    -- 42%
+    SIRD_Priority = {
         Head = {'Nashira Turban'}, -- 10%
+        Neck = {'Willpower Torque'}, -- 5%
         Body = {'Wlk. Tabard +1'}, -- 12%
         Waist = {'Druid\'s Rope'}, -- 10%
+        Feet = {'Mountain Gaiters'}, -- 5%
+    },
+
+    -- 22%
+    SIRDLow_Priority = {
+        Head = {'Nashira Turban'}, -- 10%
+        --Neck = {'Willpower Torque'}, -- 5%
+        Body = {'Wlk. Tabard +1'}, -- 12%
+        --Waist = {'Druid\'s Rope'}, -- 10%
+        --Feet = {'Mountain Gaiters'}, -- 5%
     },
 
     StyleLock = {
@@ -206,7 +228,7 @@ local sets = {
         Feet = {'Dusk Ledelsens'}, -- HP 25+
     },
 
-    INTElementalAcc_Priority = { -- Elemental Skill +32, Macc +5, Matk +10, INT +19
+    INTElementalAcc_Priority = { -- Elemental Skill +32, Macc +5, Matk +10, INT +21
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- INT +2
         Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}}, -- Elemental Skill +10
         Neck = {{Name = 'Elemental Torque', Priority = 0}}, -- Elemental Skill +7
@@ -214,15 +236,15 @@ local sets = {
         Ear2 = {{Name = 'Moldavite Earring', Priority = 0}}, -- Matk +5
         Body = {{Name = 'Nashira Manteel', Priority = 0}}, -- Macc +5
         Hands = {{Name = 'Errant Cuffs', Priority = 0}}, -- INT +5
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}}, -- INT +5
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}}, -- INT +5
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Elemental Skill +5
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- INT +4
         Legs = {{Name = 'Duelist\'s Tights', Priority = 100}}, -- Elemental Skill +10
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- Matk +5
     },
 
-    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +34
+    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +36
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- INT +2
         Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},-- Elemental Skill +10
         Neck = {{Name = 'Philomath Stole', Priority = 0}}, -- INT +3
@@ -230,8 +252,8 @@ local sets = {
         Ear2 = {{Name = 'Moldavite Earring', Priority = 0}}, -- Matk +5
         Body = {{Name = 'Errant Hpl.', Priority = 0}}, -- INT +10
         Hands = {{Name = 'Zenith Mitts', Priority = 100}}, -- Matk +5
-        Ring1 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}}, -- INT +4
+        Ring1 = {{Name = 'Snow Ring', Priority = 0}}, -- INT +5
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}}, -- INT +5
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Elemental Skill +5
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- INT +4
         Legs = {{Name = 'Errant slops', Priority = 0}}, -- INT +7
@@ -246,7 +268,8 @@ local sets = {
         Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Errant Hpl.', Priority = 0}},
         Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring1 = {{Name = 'Snow Ring', Priority = 0}},
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
         Legs = {{Name = 'Errant slops', Priority = 0}},
@@ -260,7 +283,8 @@ local sets = {
         Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Errant Hpl.', Priority = 0}},
         Hands = {{Name = 'Crimson Fng. Gnt.', Priority = 99}, {Name = 'Errant Cuffs', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring1 = {{Name = 'Snow Ring', Priority = 0}},
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
         Legs = {{Name = 'Errant slops', Priority = 0}},
@@ -273,12 +297,24 @@ local sets = {
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- +5
     },
 
-    MND_Priority = { -- MND +30 (95 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*95 - 190 = 351 (350 cap)
+    MND_Priority = { -- MND +31 (96 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*96 - 190 = 354 (350 cap)
         Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- FC
         Body = {{Name = 'Errant Hpl.', Priority = 100}}, -- MND +10
         Hands = {{Name = 'Devotee\'s Mitts', Priority = 100}}, -- MND +5
-        Ring2 = {{Name = 'Sapphire Ring', Priority = 0}}, -- MND +4
+        Ring2 = {{Name = 'Aqua Ring', Priority = 0}}, -- MND +5
+        Back = {{Name = 'Rainbow Cape', Priority = 100}}, -- MND +3
+        --Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- MND +4
+        --Legs = {{Name = 'Errant slops', Priority = 0}}, -- MND +7
+        Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- MND +5
+    },
+
+    Stoneskin_Priority = { -- MND +31 (96 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*96 - 190 = 354 (350 cap)
+        Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
+        Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- FC
+        Body = {{Name = 'Errant Hpl.', Priority = 100}}, -- MND +10
+        Hands = {{Name = 'Devotee\'s Mitts', Priority = 100}}, -- MND +5
+        Ring2 = {{Name = 'Aqua Ring', Priority = 0}}, -- MND +5
         Back = {{Name = 'Rainbow Cape', Priority = 100}}, -- MND +3
         --Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- MND +4
         --Legs = {{Name = 'Errant slops', Priority = 0}}, -- MND +7
@@ -291,7 +327,8 @@ local sets = {
         Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
         Hands = {'Devotee\'s Mitts'}, 
-        Ring2 = {'Sapphire Ring'},
+        Ring1 = {'Aqua Ring'},
+        Ring2 = {'Aqua Ring'},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
         Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
@@ -306,7 +343,8 @@ local sets = {
         Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
         Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring1 = {{Name = 'Snow Ring', Priority = 0}},
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
         Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
@@ -321,8 +359,8 @@ local sets = {
         Neck = {{Name = 'Philomath Stole', Priority = 0}},
         Body = {{Name = 'Errant Hpl.', Priority = 0}},
         Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
-        Ring1 = {{Name = 'Diamond Ring', Priority = 0}},
-        Ring2 = {{Name = 'Diamond Ring', Priority = 0}},
+        Ring1 = {{Name = 'Snow Ring', Priority = 0}},
+        Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
         Legs = {{Name = 'Errant slops', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
@@ -337,15 +375,15 @@ local sets = {
     },
 
     -- This set plus the Spikes set below let Blaze Spikes proc for 19 unresisted damage. Removing anything in either set now drops Blaze Spikes down to 16
-    INTEnhancing_Priority = { -- INT +36 (106 total)
+    INTEnhancing_Priority = { -- INT +38 (106 total)
         --Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Zenith Crown'}, -- INT +3
         Neck = {'Enhancing Torque'}, -- Enhancing +7
         Ear2 = {'Phantom Earring'}, -- INT +1
         Body = {'Errant Hpl.'}, -- INT +10
         Hands = {'Errant Cuffs'}, -- INT +5
-        Ring1 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
+        Ring1 = {'Snow Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +5
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Enhancing +5
         --Waist = {'Duelist\'s Belt'}, -- INT +4
         Legs = {'Errant Slops'}, -- INT +7
@@ -467,7 +505,8 @@ local sets = {
         Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
         Body = {{Name = 'Errant Hpl.', Priority = 0}}, -- MND +10
         Hands = {'Devotee\'s Mitts'}, -- MND +5
-        Ring2 = {'Sapphire Ring'}, -- MND +4
+        Ring1 = {'Aqua Ring'}, -- MND +5
+        Ring2 = {'Aqua Ring'}, -- MND +5
         Back = {{Name = 'Rainbow Cape', Priority = 100}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Legs = {{Name = 'Errant slops', Priority = 0}},
@@ -483,7 +522,8 @@ local sets = {
         Body = {{Name = 'Errant Hpl.', Priority = 0}},
         Hands = {'Ogre Gloves'},
         Back = {{Name = 'Rainbow Cape', Priority = 100}},
-        Ring2 = {'Sapphire Ring'},
+        Ring1 = {'Aqua Ring'},
+        Ring2 = {'Aqua Ring'},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Legs = {{Name = 'Errant slops', Priority = 0}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
@@ -944,11 +984,9 @@ profile.HandlePrecast = function()
             gFunc.EquipSet(sets.CureCheat);
         end
 
-        if Settings.PDT then
-            if (castDelay >= packetDelay) then
-                gFunc.Message('Equipping Interim ' .. castDelay);
-                gFunc.SetMidDelay(castDelay);
-            end
+        if (castDelay >= packetDelay) then
+            gFunc.Message('Equipping Interim ' .. castDelay);
+            gFunc.SetMidDelay(castDelay);
         end
     end
 end
@@ -958,6 +996,7 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
     local target = gData.GetActionTarget();
     local chainspell = gData.GetBuffCount('Chainspell');
+    local aquaveil = gData.GetBuffCount('Aquaveil');
 
     Settings.SpellElement = spell.Element;
     gFunc.Message(spell.Name .. ' ' .. spell.Skill .. ' ' .. spell.Type .. ' ' .. spell.Element);
@@ -984,11 +1023,15 @@ profile.HandleMidcast = function()
         end
     end
 
-    if chainspell == 0 and Settings.PDT then
+    if chainspell == 0 then
         if draginclude.dragSettings.TpVariant == 1 then
-            draginclude.SetupInterimEquipSet(sets.TankShield);
+            draginclude.SetupInterimEquipSet(sets.SIRD); -- 50% SIRD (70% w/ Aquaveil)
         elseif draginclude.dragSettings.TpVariant == 2 then
-            draginclude.SetupInterimEquipSet(sets.TankStaff);
+            if player.SubJob == 'NIN' then
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 100% SIRD
+            else
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 75% SIRD (95% w/ Aquaveil)
+            end
         end
     end
 
@@ -997,7 +1040,7 @@ profile.HandleMidcast = function()
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
-        gFunc.EquipSet(sets.MND);
+        gFunc.EquipSet(sets.Stoneskin);
     elseif string.contains(spell.Name, 'Spikes') then
         gFunc.EquipSet(sets.INTEnhancing);
     elseif spell.Skill == 'Ninjutsu' then

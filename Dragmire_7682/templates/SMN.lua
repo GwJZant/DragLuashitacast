@@ -1,5 +1,4 @@
 local profile = {};
-draginclude = gFunc.LoadFile('common\\draginclude.lua');
 
 local Settings = {
     LateInitialized = {
@@ -10,22 +9,26 @@ local Settings = {
 
     },
     CurrentLevel = 0,
+    CutHP = false,
+    GreedySpirit = false,
+    TpVariant = 1
 };
 
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Summoner\'s Horn', 'Evoker\'s Horn', 'Shep. Bonnet', 'Dream Hat +1'},
+        Head = {'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
         Neck = {'Uggalepih Pendant'},
-        Ear1 = {'Novia Earring', 'Phantom Earring', 'Dodge Earring'},
-        Ear2 = {'Loquac. Earring', 'Geist Earring'},
+        --Neck = {'Smn. Torque'},
+        Ear1 = {'Novia Earring', 'Phantom Earring'},
+        Ear2 = {'Loquac. Earring', 'Reraise Earring'},
         Body = {'Yinyang Robe', 'Elder\'s Surcoat', 'Seer\'s Tunic', 'Dream Robe +1'},
         Hands = {'Zenith Mitts', 'Elder\'s Bracers', 'Carbuncle Mitts'},
-        Ring1 = {'Evoker\'s Ring', 'Astral Ring'},
-        Ring2 = {'Ether Ring', 'Astral Ring'},
+        Ring1 = {'Evoker\'s Ring', 'Rajas Ring'},
+        Ring2 = {'Ether Ring'},
         Back = {'Astute Cape', 'Trimmer\'s Mantle'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
-        Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Baron\'s Slops', 'Dream Trousers +1'},
+        Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Seer\'s Slacks', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Elder\'s Sandals', 'Dream Boots +1'},
     },
 
@@ -36,7 +39,7 @@ local sets = {
         Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
-        Legs = {'Evoker\'s Spats'}, -- Pet Acc
+        Legs = {'Evk. Spats +1'}, -- Pet Acc
         Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
     },
 
@@ -44,61 +47,160 @@ local sets = {
         Ammo = {'Hedgehog Bomb'},
         Head = {'Shep. Bonnet'}, -- Pet Acc
         Ear2 = {'Beastly Earring'}, -- Pet Acc
-        Body = {'Yinyang Robe', 'Austere Robe'}, -- Perp Down
+        Body = {'Yinyang Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- Perp Down
-        Legs = {'Evoker\'s Spats'}, -- Pet Acc
+        Legs = {'Evk. Spats +1'}, -- Pet Acc
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
+    },
+
+    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 42 (Gear) = 318
+    -- Improvements: Penance Slops (+1), Summoning Earring (+3), Bahamut's Staff (+5) = 326
+    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(44/3) - 5 = 45 - 15 - 5 = 25s
+    AvatarEngagedSpirit_Priority = {
+        Head = {'Evk. Horn +1'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Body = {'Yinyang Robe'}, -- Perp Down
+        Hands = {'Smn. Bracers +1'}, -- +12
+        Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
+        Feet = {'Austere Sabots'} -- +3
+    },
+
+    -- 2 more Perp Down than other set
+    GreedyAvatarEngagedSpirit_Priority = {
+        Head = {'Evk. Horn +1'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Body = {'Yinyang Robe'}, -- Perp Down
+        Hands = {'Nashira Gages'}, -- Perp Down
+        Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
+        Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
+    },
+
+    MeleeEngagedAvatar_Priority = { -- 11% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
+        Ammo = {'Tiphia Sting'}, -- Acc +2, Attack +2
+        Head = {'Nashira Turban'}, -- Haste 2%
+        Neck = {'Temp. Torque'}, -- Staff Skill +7
+        Ear1 = {'Ethereal Earring'}, -- Attack +5
+        Ear2 = {'Merman\'s Earring'}, -- Attack +6
+        Body = {'Nashira Manteel'}, -- Haste 3%
+        Hands = {'Nashira Gages'}, -- Perp Down, Haste 1%
+        Ring1 = {'Evoker\'s Ring'}, -- Perp Down
+        Ring2 = {'Toreador\'s Ring'}, -- Acc +7
+        Waist = {'Swift Belt'}, -- Haste 4%, Acc +3, Attack -5
+        Legs = {'Nashira Seraweels'}, -- Haste 2%
+        Feet = {'Evk. Pigaches +1'}, -- Perp Down 
+    },
+
+    MeleeEngaged_Priority = { -- 7% Haste + Support
+        Ammo = {'Tiphia Sting'},
+        Head = {'Nashira Turban'}, -- 2%
+        Neck = {'Temp. Torque'},
+        Ear1 = {'Novia Earring'},
+        Ear2 = {'Beastly Earring'},
+        Body = {'Nashira Manteel'}, -- 3%
+        Hands = {'Nashira Gages'}, -- 1%
+        Ring2 = {'Toreador\'s Ring'},
+        Waist = {'Swift Belt'}, -- 4%
+        Legs = {'Nashira Seraweels'}, -- 2%
     },
 
     BPDelay_Priority = {
         Head = {'Summoner\'s Horn'}, -- -3
         Body = {'Yinyang Robe', 'Austere Robe'}, -- -5
-        Hands = {'Summoner\'s Brcr.'}, -- -2
+        Hands = {'Smn. Bracers +1'}, -- -2
         Legs = {'Summoner\'s Spats'}, -- -2
         Feet = {'Summoner\'s Pgch.'}, -- -2
     },
 
-    PetAccBP_Priority = { -- Summoning Skill +43, Pet Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetAccBP_Priority = { -- Summoning Skill +45, Pet Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
         Body = {'Summoner\'s Doublet'}, -- Pet Crit Rate+
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    PetMAcc_Priority = { -- Summoning Skill +43, Pet Magic Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetAccBPMultiHit_Priority = { -- Summoning Skill +42, Pet Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
+        Body = {'Summoner\'s Doublet'}, -- Pet Crit Rate+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
+        Ring1 = {'Evoker\'s Ring'}, -- +10
+        Back = {'Astute Cape'}, -- +5
+        Legs = {'Evk. Spats +1'}, -- Avatar: Accuracy
+        Feet = {'Austere Sabots'} -- +3
+    };
+
+    PetMAcc_Priority = { -- Summoning Skill +45, Pet Magic Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
+        Neck = {'Smn. Torque'}, -- +7
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    SummonSkill_Priority = { -- Summoning Skill +43
-        Head = {'Evoker\'s Horn'}, -- +5
+    SummonSkill_Priority = { -- Summoning Skill +45
+        Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10
+        Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
     };
 
-    PetMAB_Priority = {-- Summoning Skill +43, Pet Magic Accuracy
-        Head = {'Evoker\'s Horn', 'Shep. Bonnet'}, -- +5
+    PetMAB_Priority = {-- Summoning Skill +45, Pet Magic Accuracy
+        Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
-        Hands = {'Summoner\'s Brcr.'}, -- +10, Pet Accuracy+
+        Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
         Feet = {'Austere Sabots'} -- +3
+    },
+
+    WeaponSkillSpiritTaker_Priority = { -- INT +30, MND +14, Staff Skill +7, Attack +6, DA +1%
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Evk. Horn +1'}, -- INT +6, MND +6
+        Neck = {'Temp. Torque'}, -- Staff Skill +7
+        Ear1 = {'Merman\'s Earring'}, -- Attack +6
+        Ear2 = {'Brutal Earring'}, -- DA +1%
+        Body = {'Elder\'s Surcoat'}, -- INT +1
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Legs = {'Austere Slops'}, -- INT +2, MND +2
+        Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
+    },
+
+    CutHP_Priority = { -- INT +42, MND +23, Acc -5
+        Ammo = {'Happy Egg'}, -- INT +2
+        Head = {'Nashira Turban'}, -- INT +3
+        Neck = {'Temp. Torque'}, -- Staff Skill +7
+        Ear1 = {'Beastly Earring'}, -- INT +1
+        Ear2 = {'Brutal Earring'}, -- DA +1%
+        Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Diamond Ring'}, -- INT +4
+        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Waist = {'Swift Belt'},
+        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
+        Feet = {'Austere Sabots'}, -- INT +3, MND +3
     },
 
     IdleTown_Priority = {
@@ -112,12 +214,48 @@ local sets = {
     },
 
     StyleLock = {
-        Main = 'Wind Staff',
-        Head = '',
-        Body = '',
-        Hands = '',
-        Legs = '',
-        Feet = '',
+        Main = 'Auster\'s Staff',
+        Head = 'Nashira Turban',
+        Body = 'Nashira Manteel',
+        Hands = 'Nashira Gages',
+        Legs = 'Nashira Seraweels',
+        Feet = 'Rostrum Pumps',
+    },
+
+    StyleLock2 = {
+        Head = 'Summoner\'s Horn',
+        Body = 'Goblin Suit',
+        --Body = 'Eerie Cloak',
+        --Body = 'Errant Hpl.',
+        --Hands = 'Zenith Mitts',
+        --Legs = 'Austere Slops',
+        --Feet = 'Austere Sabots',
+    },
+
+    StyleLock3 = {
+        Main = 'Mercurial Pole',
+        Head = 'Nashira Turban',
+        Body = 'Yinyang Robe',
+        Hands = 'Smn. Bracers +1',
+        Legs = 'Nashira Seraweels',
+        Feet = 'Rostrum Pumps',
+    },
+
+    StyleLockHydra = {
+        Main = 'Vulcan\'s Staff',
+        Head = 'Hydra Cap',
+        Body = 'Hydra Jupon',
+        Hands = 'Smn. Bracers +1',
+        Legs = 'Hydra Hose',
+        Feet = 'Hydra Boots',
+    },
+
+    StyleLockSummer = {
+        Head = 'Shep. Bonnet',
+        Body = 'Elder Gilet +1',
+        --Hands = 'Scp. Gauntlets',
+        Legs = 'Elder Trunks',
+        --Feet = 'Homam Gambieras',
     },
 
     HMP_Priority = {
@@ -139,23 +277,23 @@ local sets = {
     },
 
     Fire_Priority = {
-        Main = {'Fire Staff'},
+        Main = {'Vulcan\'s Staff'},
     },
 
     Ice_Priority = {
-        Main = {'Ice Staff'},
+        Main = {'Aquilo\'s Staff'},
     },
 
     Wind_Priority = {
-        Main = {'Wind Staff'},
+        Main = {'Auster\'s Staff'},
     },
 
     Earth_Priority = {
-        Main = {'Earth Staff'},
+        Main = {'Terra\'s Staff'},
     },
 
     Thunder_Priority = {
-        Main = {'Thunder Staff'},
+        Main = {'Jupiter\'s Staff'},
     },
 
     Water_Priority = {
@@ -163,11 +301,15 @@ local sets = {
     },
 
     Light_Priority = {
-        Main = {'Light Staff'},
+        Main = {'Apollo\'s Staff'},
     },
 
     Dark_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
+    },
+
+    KirinsPole_Priority = {
+        Main = {'Kirin\'s Pole'},
     },
 
     EXPRing = {
@@ -187,10 +329,10 @@ local sets = {
     },
 
     -- MND +35 (107 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*107 - 190 = 243 (350 cap) Every MND is 3 points
-    -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Evoker's Horn +1 (+9 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
+    -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
     -- Kirin's Pole (+30 HP), 2 Communion Earrings (+12 HP), Mahatma Hpl. (+3 HP), Devotee's Mitts +1 (+3 HP), Mahatma Slops (+3 HP), Mahatma Pigaches (+9 HP)
     Stoneskin_Priority = {
-        Head = {'Zenith Crown'}, -- MND +3
+        Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enhancing Torque'}, -- Enhancing +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
@@ -202,10 +344,10 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +39, Enfeebling +7
+    -- MND +42, Enfeebling +7
     EnfeeblingMND_Priority = {
         --Main = {'Water Staff'}, -- MND +4
-        Head = {'Zenith Crown'}, -- MND +3
+        Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
@@ -217,10 +359,10 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +39, Enfeebling +7
+    -- INT +43, Enfeebling +7
     EnfeeblingINT_Priority = {
         --Main = {'Water Staff'}, -- MND +4
-        Head = {'Zenith Crown'}, -- INT +3
+        Head = {'Evk. Horn +1'}, -- INT +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Phantom Earring'}, -- INT +1
@@ -235,17 +377,6 @@ local sets = {
 };
 
 profile.Sets = sets;
-
-TpVariantTable = { -- cycle through with /lac fwd tpset
---    [1] = 'StaffLock',
---    [2] = 'NoStaffLock',
-};
-
-SkillingVariantTable = { -- cycle through with /lac fwd tpset
---    [1] = 'None',
---    [2] = 'Field',
---    [3] = 'Fishing',
-};
 
 local SmnConfig = {
     Summons = {
@@ -372,11 +503,11 @@ local SmnConfig = {
 local ObiTable = {
     Fire = "Karin Obi",
     Earth = "Dorin Obi",
-    Water = "Suirin Obi",
+    --Water = "Suirin Obi",
     Wind = "Furin Obi",
     Ice = "Hyorin Obi",
     Thunder = "Rairin Obi",
-    Light = "Korin Obi",
+    --Light = "Korin Obi",
     Dark = "Anrin Obi"
 }
 
@@ -673,7 +804,8 @@ end
 
 --Bloodpact Lists. I have flaming crush in the PhysicalBP list which may not be optimal
 local MagicBP = T{'Nether Blast', 'Meteorite','Stone II','Stone IV','Geocrush','Water II','Water IV','Grand Fall','Aero II','Aero IV','Wind Blade','Fire II','Fire IV','Meteor Strike','Burning Strike','Blizzard II','Blizzard IV','Heavenly Strike','Thunder II','Thunder IV','Thunderstorm','Thunderspark'};
-local PhysBP = T{'Poison Nails','Moonlit Charge','Somnolence','Punch','Rock Throw','Barracuda Dive','Claw','Axe Kick','Shock Strike','Camisado','Regal Scratch','Crescent Fang','Rock Buster','Tail Whip','Double Punch','Megalith Throw','Double Slap','Eclipse Bite','Flaming Crush','Mountain Buster','Spinning Dive','Predator Claws','Rush','Chaotic Strike'};
+local PhysBP = T{'Poison Nails','Moonlit Charge','Somnolence','Punch','Rock Throw','Barracuda Dive','Claw','Axe Kick','Shock Strike','Camisado','Regal Scratch','Crescent Fang','Rock Buster','Tail Whip','Double Punch','Megalith Throw','Double Slap','Eclipse Bite','Flaming Crush','Mountain Buster','Spinning Dive','Rush','Chaotic Strike'};
+local PhysBPMulti = T{'Predator Claws'};
 local BuffBP = T{'Shining Ruby','Aerial Armor','Frost Armor','Rolling Thunder','Crimson Howl','Lightning Armor','Ecliptic Growl','Glittering Ruby','Earthen Ward','Spring Water','Hastega','Noctoshield','Ecliptic Howl','Dream Shroud'};
 local DebuffBP = T{'Luncar Cry','Mewing Lullaby','Nightmare','Lunar Roar','Slowga','Ultimate Terror','Sleepga','Eerie Eye'};
 
@@ -688,6 +820,8 @@ local function HandlePetAction(PetAction)
 		gFunc.EquipSet(profile.Sets.PetMAB);
 	elseif PhysBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.PetAccBP);
+	elseif PhysBPMulti:contains(BPName) then
+		gFunc.EquipSet(profile.Sets.PetAccBPMultiHit);
 	elseif BuffBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.SummonSkill);
 	elseif DebuffBP:contains(BPName) then
@@ -709,6 +843,8 @@ local function CheckSummonersDoublet()
             ['Fire Spirit'] = 'Fire',
             ['Leviathan'] = 'Water',
             ['Water Spirit'] = 'Water',
+            ['Shiva'] = 'Ice',
+            ['Ice Spirit'] = 'Ice',
             ['Ramuh'] = 'Thunder',
             ['Thunder Spirit'] = 'Thunder',
             ['Fenrir'] = 'Dark',
@@ -737,6 +873,8 @@ local function CheckSummonersHorn()
             ['Fire Spirit'] = 'Fire',
             ['Leviathan'] = 'Water',
             ['Water Spirit'] = 'Water',
+            ['Shiva'] = 'Ice',
+            ['Ice Spirit'] = 'Ice',
             ['Ramuh'] = 'Thunder',
             ['Thunder Spirit'] = 'Thunder',
             ['Fenrir'] = 'Dark',
@@ -752,21 +890,22 @@ local function CheckSummonersHorn()
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Fishing'});
-
     -- SMN Core Commands
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd Rage1 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd Rage2 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd Rage3 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd Rage4 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd AstralFlow ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd Ward1 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +7 /lac fwd Ward3 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Ward2 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
-    -- AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd Rage1 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd Rage2 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd Rage3 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +5 /lac fwd Rage4 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd AstralFlow ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd Ward1 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +7 /lac fwd Ward3 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Ward2 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind +8 /lac fwd Ward4 ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Retreat ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Nuke ');
+    
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /cuthp /lac fwd cuthp ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /spirit /lac fwd GreedySpirit ');
 end
 
 profile.OnUnload = function()
@@ -774,6 +913,17 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
+
+    if (args[1] == 'cuthp') then
+        Settings.CutHP = not Settings.CutHP;
+
+        gFunc.Message('CutHP ' .. tostring(Settings.CutHP));
+    elseif (args[1] == 'GreedySpirit') then
+        Settings.GreedySpirit = not Settings.GreedySpirit;
+
+        gFunc.Message('GreedySpirit ' .. tostring(Settings.GreedySpirit));
+    end
+
     HandleSmnCoreCommands(args);
 end
 
@@ -785,10 +935,15 @@ profile.LateInitialize = function()
         -- Setting a Style Lock prevents the character from blinking
         gFunc.LockStyle(sets.StyleLock);
 
-        -- Set this to your default SMN macro book
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
-        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+        if player.SubJob == 'THF' then
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+        else
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 2');
+        end
         
+
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
     end
@@ -818,7 +973,23 @@ profile.HandleDefault = function()
     end
 
     -- Forward slash toggle between NoWeaponSwap and WeaponSwap
-if draginclude.dragSettings.TpVariant == 1 then --Use weapon swaps set
+    if Settings.TpVariant == 1 then
+
+        gFunc.EquipSet(sets.Default);
+
+        -- Engaged Section
+        if player.Status == 'Engaged' then
+
+
+        -- Resting Section
+        elseif (player.Status == 'Resting') then
+            gFunc.EquipSet(sets.HMP);
+        -- Idle Section
+        else
+            
+        end
+
+    elseif Settings.TpVariant == 2 then --Use weapon swaps set
         gFunc.EquipSet(sets.Default);
 
         -- Resting Section
@@ -848,34 +1019,37 @@ if draginclude.dragSettings.TpVariant == 1 then --Use weapon swaps set
             end
         else
             gFunc.EquipSet(sets.Earth);
-        end    
-    elseif draginclude.dragSettings.TpVariant == 2 then
-
-        gFunc.EquipSet(sets.Default);
-
-        -- Engaged Section
-        if player.Status == 'Engaged' then
-
-        -- Resting Section
-        elseif (player.Status == 'Resting') then
-            gFunc.EquipSet(sets.HMP);
-        -- Idle Section
-        else
-            
         end
     end
 
     if (pet ~= nil) then
+        local mpThreshold = 906; --WHM Default
+
+        if player.SubJob == 'BLM' then
+            mpThreshold = 925;
+        end
+
+        if player.MP <= mpThreshold then
+            if pet.Name == 'Carbuncle' then
+                gFunc.EquipSet(sets.AvatarEngagedCarby);
+            elseif string.contains(pet.Name, 'Spirit') then
+                if Settings.GreedySpirit then
+                    gFunc.EquipSet(sets.GreedyAvatarEngagedSpirit);
+                else
+                    gFunc.EquipSet(sets.AvatarEngagedSpirit);
+                end
+            else
+                gFunc.EquipSet(sets.AvatarEngaged);
+            end
+        end
 
         if (petAction ~= nil) then
             HandlePetAction(petAction);
             return;
         end
 
-        if pet.Name == 'Carbuncle' then
-            gFunc.EquipSet(sets.AvatarEngagedCarby);
-        else
-            gFunc.EquipSet(sets.AvatarEngaged);
+        if player.Status == 'Engaged' then
+            gFunc.EquipSet(sets.MeleeEngagedAvatar);
         end
 
         CheckSummonersDoublet();
@@ -884,6 +1058,18 @@ if draginclude.dragSettings.TpVariant == 1 then --Use weapon swaps set
         if pet.Name == 'Carbuncle' then
             gFunc.Equip('Hands', 'Carbuncle Mitts');
         end
+    else
+        if player.Status == 'Engaged' then
+            gFunc.EquipSet(sets.MeleeEngaged);
+        end
+    end
+
+    if (zone.Area ~= nil) and (towns:contains(zone.Area)) then 
+        gFunc.EquipSet(sets.IdleTown);
+    end
+
+    if Settings.CutHP then
+        gFunc.EquipSet(sets.CutHP);
     end
 end
 
@@ -906,6 +1092,12 @@ end
 
 profile.HandleItem = function()
     local item = gData.GetAction();
+
+	if item.Name == 'Silent Oil' then 
+        gFunc.EquipSet(sets.Sneak);
+    elseif item.Name == 'Prism Powder' then 
+        gFunc.EquipSet(sets.Invisible);
+    end
 end
 
 profile.HandlePrecast = function()
@@ -919,11 +1111,15 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
-    elseif spell.Name == 'Stoneskin' then        
+    elseif spell.Name == 'Stoneskin' then
+        if Settings.TpVariant == 2 then
+            gFunc.EquipSet(sets.KirinsPole); -- Kirin's Pole MND +10
+        end
+        
         gFunc.EquipSet(sets.Stoneskin);
     elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
 
-        if draginclude.dragSettings.TpVariant == 1 then
+        if Settings.TpVariant == 2 then
             if spell.Element == 'Fire' then
                 gFunc.EquipSet(sets.Fire);
             elseif spell.Element == 'Ice' then
@@ -964,7 +1160,11 @@ profile.HandleMidshot = function()
 end
 
 profile.HandleWeaponskill = function()
-    -- local action = gData.GetAction();
+    local action = gData.GetAction();
+
+    if action.Name == 'Spirit Taker' then
+        gFunc.EquipSet(sets.WeaponSkillSpiritTaker);
+    end
 end
 
 return profile;

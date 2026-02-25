@@ -134,26 +134,26 @@ local sets = {
     PDT_Priority = {
         Head = {'Darksteel Cap +1'}, -- PDT -2%
         Ear1 = {'Ethereal Earring'}, -- Evasion +5, Absorb Damage as MP
-        Ear2 = {'Novia Earring'}, -- Evasion +7
-        Body = {'Wym. Mail +1'}, -- Parrying Skill +15
+        Ear2 = {'Brutal Earring'}, -- DA
+        Body = {'Gavial Mail +1'}, -- PDT -4%, MDT -4%
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
-        Ring2 = {'Jelly Ring'}, -- PDT -5%
+        Ring2 = {'Jelly Ring'}, -- PDT -5%, MDT +5
         Back = {'Boxer\'s Mantle'}, -- Evasion Skill +10, Parrying Skill +10
-        Legs = {'Dst. Subligar +1'}, -- PDT -3%
-        Feet = {'Dst. Leggings +1'}, -- PDT -2%
+        Legs = {'Gavial Cuisses +1'}, -- PDT -4%
+        Feet = {'Gavial Greaves +1'}, -- PDT -3%
     },
 
     PDTNight_Priority = {
         Ammo = {'Fenrir\'s Stone'}, -- Evasion +10
         Head = {'Darksteel Cap +1'}, -- PDT -2%
         Ear1 = {'Ethereal Earring'}, -- Evasion +5, Absorb Damage as MP
-        Ear2 = {'Novia Earring'}, -- Evasion +7
-        Body = {'Wym. Mail +1'}, -- Parrying Skill +15
+        Ear2 = {'Brutal Earring'}, -- DA
+        Body = {'Gavial Mail +1'}, -- PDT -4%, MDT -4%
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
-        Ring2 = {'Jelly Ring'}, -- PDT -5%
+        Ring2 = {'Jelly Ring'}, -- PDT -5%, MDT +5%
         Back = {'Boxer\'s Mantle'}, -- Evasion Skill +10, Parrying Skill +10
-        Legs = {'Dst. Subligar +1'}, -- PDT -3%
-        Feet = {'Dst. Leggings +1'}, -- PDT -2%
+        Legs = {'Gavial Cuisses +1'}, -- PDT -4%
+        Feet = {'Gavial Greaves +1'}, -- PDT -3%
     },
 
     MDT_Priority = {
@@ -402,6 +402,16 @@ local sets = {
         Feet = 'Dst. Leggings +1',
     },
 
+    StyleLockFish = {
+        Range = 'Goldfish Basket',
+        Main = 'Gungnir',
+        Head = 'Ace\'s Helm',
+        Body = 'Fisherman\'s Apron',
+        Hands = 'Angler\'s Gloves',
+        Legs = 'Angler\'s Hose',
+        Feet = 'Angler\'s Boots',
+    },
+
     StyleLockSummer2 = {
         Main = 'Gungnir',
         Head = 'President. Hairpin',
@@ -555,7 +565,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockMandy);
+        gFunc.LockStyle(sets.StyleLock);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then

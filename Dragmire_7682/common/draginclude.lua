@@ -27,15 +27,15 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing2 = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
-        Ammo = 'Fly Lure',
+        Ammo = 'Minnow',
         Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
         Feet = 'Angler\'s Boots',
     },
-    Fishing2 = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Sinking Minnow',
         Body = 'Fisherman\'s Apron',

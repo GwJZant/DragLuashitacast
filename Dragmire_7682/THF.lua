@@ -22,6 +22,8 @@ local Settings = {
     LockTH = false,
     LockTH2 = false,
     LockGilfinder = false,
+    HideUsed = false,
+    HideResetTime = 0,
 };
 
 local sets = {
@@ -498,7 +500,6 @@ profile.HandleDefault = function()
 
     if draginclude.dragSettings.TpVariant == 1 then
         gFunc.EquipSet(sets.Default);
-
         
         if player.Status == 'Engaged' then
             if player.SubJob == 'NIN' then
@@ -552,6 +553,7 @@ end
 
 profile.HandleAbility = function()
     local ability = gData.GetAction();
+    local timestamp = os.time();
 
     if string.match(ability.Name, 'Reward') then
         gFunc.EquipSet(sets.Reward);

@@ -12,13 +12,15 @@ local Settings = {
     CurrentLevel = 0,
     CutHP = false,
     GreedySpirit = false,
+    FastCastValue = 0.04,
 };
 
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Summoner\'s Horn', 'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
+        Head = {'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
         Neck = {'Uggalepih Pendant'},
+        --Neck = {'Smn. Torque'},
         Ear1 = {'Novia Earring', 'Phantom Earring'},
         Ear2 = {'Loquac. Earring', 'Reraise Earring'},
         Body = {'Yinyang Robe', 'Elder\'s Surcoat', 'Seer\'s Tunic', 'Dream Robe +1'},
@@ -171,17 +173,18 @@ local sets = {
         Feet = {'Austere Sabots'} -- +3
     },
 
-    WeaponSkillSpiritTaker_Priority = { -- INT +30, MND +14, Staff Skill +7, Attack +6, DA +1%
+    WeaponSkillSpiritTaker_Priority = { -- INT +27, MND +20, Staff Skill +7, Attack +6, DA +1%, STR +7, DEX +5
         Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Evk. Horn +1'}, -- INT +6, MND +6
         Neck = {'Temp. Torque'}, -- Staff Skill +7
         Ear1 = {'Merman\'s Earring'}, -- Attack +6
-        Ear2 = {'Brutal Earring'}, -- DA +1%
+        Ear2 = {'Brutal Earring'}, -- DA +5%
         Body = {'Elder\'s Surcoat'}, -- INT +1
         Hands = {'Errant Cuffs'}, -- INT +5
-        Ring1 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
+        Ring1 = {'Rajas Ring'}, -- STR +5, DEX +5
+        Ring2 = {'Aqua Ring'}, -- MND +5, STR +2
         Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Waist = {'Druid\'s Rope'}, -- INT +1, MND +1
         Legs = {'Austere Slops'}, -- INT +2, MND +2
         Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
     },
@@ -194,12 +197,46 @@ local sets = {
         Ear2 = {'Brutal Earring'}, -- DA +1%
         Body = {'Errant Hpl.'}, -- INT +10, MND +10, DEX -7
         Hands = {'Errant Cuffs'}, -- INT +5
-        Ring1 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
+        Ring1 = {'Snow Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +5
         Back = {'Rainbow Cape'}, -- INT +3, MND +3
         Waist = {'Swift Belt'},
         Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
         Feet = {'Austere Sabots'}, -- INT +3, MND +3
+    },
+
+    Precast_Priority = {
+        Ear2 = {'Loquac. Earring'}, -- 2%
+        Feet = {'Rostrum Pumps'}, -- 2%
+    },
+
+    -- 4 SIRD Merits = 8%
+    -- 25% + 8% + 30% = 63% (83% w/ Aquaveil)
+    SIRDWeapons_Priority = {
+        Main = {'Hermit\'s Wand'}, -- 25%
+        Sub = {'Genbu\'s Shield'}, -- PDT -10%
+    },
+
+    -- 50% + 8% + 30% = 88% (108% w/ Aquaveil)
+    SIRDNINWeapons_Priority = {
+        Main = {'Hermit\'s Wand'}, -- 25%
+        Sub = {'Hermit\'s Wand'}, -- 25%
+    },
+
+    -- 30%
+    SIRD_Priority = {
+        Head = {'Nashira Turban'}, -- 10%
+        Neck = {'Willpower Torque'}, -- 5%
+        Waist = {'Druid\'s Rope'}, -- 10%
+        Feet = {'Mountain Gaiters'}, -- 5%
+    },
+
+    -- 25%
+    SIRDLow_Priority = {
+        Head = {'Nashira Turban'}, -- 10%
+        Neck = {'Willpower Torque'}, -- 5%
+        Waist = {'Druid\'s Rope'}, -- 10%
+        --Feet = {'Mountain Gaiters'}, -- 5%
     },
 
     IdleTown_Priority = {
@@ -307,6 +344,10 @@ local sets = {
         Main = {'Pluto\'s Staff'},
     },
 
+    KirinsPole_Priority = {
+        Main = {'Kirin\'s Pole'},
+    },
+
     EXPRing = {
         Ring1 = 'Chariot Band',
     },
@@ -323,48 +364,49 @@ local sets = {
         Hands = {'Dream Mittens +1'},
     },
 
-    -- MND +35 (107 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*107 - 190 = 243 (350 cap) Every MND is 3 points
+    -- MND +54 (126 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*126 - 190 = 297 (350 cap) Every MND is 3 points
     -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
-    -- Kirin's Pole (+30 HP), 2 Communion Earrings (+12 HP), Mahatma Hpl. (+3 HP), Devotee's Mitts +1 (+3 HP), Mahatma Slops (+3 HP), Mahatma Pigaches (+9 HP)
+    -- 2 Communion Earrings (+12 HP), Mahatma Hpl. (+3 HP), Devotee's Mitts +1 (+3 HP), Mahatma Slops (+3 HP), Mahatma Pigaches (+9 HP)
     Stoneskin_Priority = {
+        --Main = {'Kirin\'s Pole'}, -- MND +10
         Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enhancing Torque'}, -- Enhancing +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- MND +10
         Hands = {'Devotee\'s Mitts'}, -- MND +5 
-        Ring2 = {'Sapphire Ring'}, -- MND +4
+        Ring1 = {'Aqua Ring'}, -- MND +5
+        Ring2 = {'Aqua Ring'}, -- MND +5
         Back = {'Rainbow Cape'}, -- MND +3
         Legs = {'Errant Slops'}, -- MND +7
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +42, Enfeebling +7
+    -- MND +48, Enfeebling +7
     EnfeeblingMND_Priority = {
-        --Main = {'Water Staff'}, -- MND +4
         Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- MND +10
         Hands = {'Devotee\'s Mitts'}, -- MND +5 
-        Ring2 = {'Sapphire Ring'}, -- MND +4
+        Ring1 = {'Aqua Ring'}, -- MND +5
+        Ring2 = {'Aqua Ring'}, -- MND +5
         Back = {'Rainbow Cape'}, -- MND +3
         Legs = {'Errant Slops'}, -- MND +7
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- INT +43, Enfeebling +7
+    -- INT +45, Enfeebling +7
     EnfeeblingINT_Priority = {
-        --Main = {'Water Staff'}, -- MND +4
         Head = {'Evk. Horn +1'}, -- INT +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
         Ear1 = {'Novia Earring'},
         Ear2 = {'Phantom Earring'}, -- INT +1
         Body = {'Errant Hpl.'}, -- INT +10
         Hands = {'Errant Cuffs'}, -- INT +5 
-        Ring2 = {'Diamond Ring'}, -- INT +4
-        Ring2 = {'Diamond Ring'}, -- INT +4
+        Ring2 = {'Snow Ring'}, -- INT +4
+        Ring2 = {'Snow Ring'}, -- INT +4
         Back = {'Rainbow Cape'}, -- INT +3
         Legs = {'Errant Slops'}, -- INT +7
         Feet = {'Rostrum Pumps'}, -- INT +3
@@ -1103,11 +1145,35 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    local spell = gData.GetAction();
+    local player = gData.GetPlayer();
+    local action = gData.GetAction();
+    local target = gData.GetActionTarget();
+    local castTime = action.CastTime;
+    local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
+    local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
+    local castDelay = ((castTime * (1 - Settings.FastCastValue)) / 1000) - minimumBuffer;
+
+    gFunc.EquipSet(sets.Precast);
+
+    if (castDelay >= packetDelay) then
+        gFunc.Message('Equipping Interim ' .. castDelay);
+        gFunc.SetMidDelay(castDelay);
+    end
 end
 
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
+    local player = gData.GetPlayer();
+
+    if draginclude.dragSettings.TpVariant == 1 then
+        draginclude.SetupInterimEquipSet(sets.SIRD); -- 38% SIRD (58% w/ Aquaveil)
+    elseif draginclude.dragSettings.TpVariant == 2 then
+        if player.SubJob == 'NIN' then
+            draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 88% SIRD (108% w/ Aquaveil)
+        else
+            draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 63% SIRD (83% w/ Aquaveil)
+        end
+    end
 
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
@@ -1115,7 +1181,7 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif spell.Name == 'Stoneskin' then
         if draginclude.dragSettings.TpVariant == 2 then
-            gFunc.EquipSet(sets.Water); -- Water Staff MND +4
+            gFunc.EquipSet(sets.KirinsPole); -- Kirin's Pole MND +10
         end
         
         gFunc.EquipSet(sets.Stoneskin);

@@ -33,7 +33,7 @@ draginclude.sets = T{
         Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
-        Feet = 'Angler\'s Boots',
+        Feet = 'Waders',
     },
     Fishing = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
@@ -41,7 +41,7 @@ draginclude.sets = T{
         Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
-        Feet = 'Angler\'s Boots',
+        Feet = 'Waders',
     },
     EXPRing = { -- Set to whatever EXP Ring you have
         Ring1 = 'Chariot Band',

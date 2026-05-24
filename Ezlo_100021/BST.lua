@@ -4,10 +4,10 @@ draginclude = gFunc.LoadFile('common\\draginclude.lua');
 -- START SETTINGS
 local Settings = {
     -- Default settings for jug/food preferences
-    -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
+    -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar SaberSiravarde
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.MiteFamiliar},
+        DefaultJugs = {draginclude.JugPetConfig.SaberSiravarde, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.LullabyMelodia},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -27,19 +27,19 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {},
+        Ammo = {'Hedgehog Bomb'},
         Head = {'Emperor Hairpin', 'Centurion\'s Visor'},
-        Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
+        Neck = {'Jeweled Collar', 'Ryl.Sqr. Collar'},
         Ear1 = {'Novia Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Elusive Earring', 'Beetle Earring +1'},
         Body = {'Scorpion Harness', 'Alumine Haubert', 'Wonder Kaftan', 'Beetle Harness +1'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
-        Legs = {'Alumine Brayettes', 'Wonder Braccae', 'Ryl.Ftm. Trousers'},
-        Feet = {'Alumine Sollerets', 'Wonder Clomps', 'Btl. Leggings +1'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
+        Feet = {'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
     IdleTown_Priority = {
@@ -58,12 +58,12 @@ local sets = {
         Feet = {},
     },
 
-    Engaged_Priority = { -- Haste +9%
+    Engaged_Priority = { -- Haste +11%
         Ammo = {},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
-        Neck = {},
+        Neck = {'Merman\'s Gorget'},
         Ear1 = {'Spike Earring'},
-        Ear2 = {},
+        Ear2 = {'Spike Earring'},
         Body = {},
         Hands = {'Dusk Gloves'}, -- Haste +3%
         Ring1 = {},
@@ -155,7 +155,7 @@ local sets = {
     },
 
     WeaponSkill_Priority = { -- STR, DEX
-        Ammo = {},
+        Ammo = {'Tiphia Sting'},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
@@ -163,7 +163,7 @@ local sets = {
         Body = {'Alumine Haubert', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Sniper\'s Ring'},
+        Ring2 = {'Toreador\'s Ring', 'Sniper\'s Ring'},
         Back = {'Amemet Mantle'},
         Waist = {'R.K. Belt +1', 'Life Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae'},
@@ -171,7 +171,7 @@ local sets = {
     },
 
     WeaponSkillRampage_Priority = {
-        Ammo = {},
+        Ammo = {'Tiphia Sting'},
         Head = {'Optical Hat', 'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Spike Earring', 'Beetle Earring +1'},
@@ -179,7 +179,7 @@ local sets = {
         Body = {'Scorpion Harness', 'Wonder Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Sniper\'s Ring'},
+        Ring2 = {'Toreador\'s Ring', 'Sniper\'s Ring'},
         Back = {'Amemet Mantle'},
         Waist = {'Life Belt'},
         Legs = {'Alumine Brayettes', 'Wonder Braccae'},
@@ -247,7 +247,7 @@ local sets = {
         Back = {},
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {},
-        Feet = {},
+        Feet = {'Dusk Ledelsens'},
     },
 
     Stoneskin_Priority = { -- MND +17
@@ -389,8 +389,8 @@ local sets = {
         Head = 'Patroclus\'s Helm',
         Body = 'Scorpion Harness',
         Hands = 'Beast Gloves',
-        Legs = 'Alumine Brayettes',
-        Feet = 'Alumine Sollerets',
+        Legs = 'Ryl.Ftm. Trousers',
+        Feet = 'Suzaku\'s Sune-Ate',
     },
 
     StyleLockSummer = {

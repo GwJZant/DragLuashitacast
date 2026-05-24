@@ -27,21 +27,21 @@ draginclude.sets = T{
         Hands = 'Field Gloves',
         Feet = 'Field Boots',
     },
-    Fishing = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing2 = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
-        Ammo = 'Shrimp Lure',
-        Body = 'Angler\'s Tunica',
+        Ammo = 'Minnow',
+        Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
-        Feet = 'Angler\'s Boots',
+        Feet = 'Waders',
     },
-    Fishing2 = { -- +19 Fishing - this set is meant as a default set for fishing, equip using /fishset
+    Fishing = { -- +18 Fishing - this set is meant as a default set for fishing, equip using /fishset
         Range = 'Lu Shang\'s F. Rod',
         Ammo = 'Sinking Minnow',
-        Body = 'Angler\'s Tunica',
+        Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',
-        Feet = 'Angler\'s Boots',
+        Feet = 'Waders',
     },
     EXPRing = { -- Set to whatever EXP Ring you have
         Ring1 = 'Chariot Band',
@@ -182,9 +182,9 @@ draginclude.JugPetConfig = {
     ColdbloodComo = {
         Name = 'ColdbloodComo',
         DefaultJug = 'C. Carrion Broth',
-        DefaultSTA = 'Tail Blow',
+        DefaultSTA = 'Blockhead',
         DefaultAOE = 'Fireball',
-        DefaultSpecial = 'Infrasonics',
+        DefaultSpecial = 'Secretion',
         DurationMinutes = 60,
     },
     Homunculus = {
@@ -198,6 +198,14 @@ draginclude.JugPetConfig = {
     VoraciousAudrey = {
         Name = 'VoraciousAudrey',
         DefaultJug = 'N. Grass. Broth',
+        DefaultSTA = '',
+        DefaultAOE = 'Soporific',
+        DefaultSpecial = 'Gloeosuccus',
+        DurationMinutes = 60,
+    },
+    FlytrapFamiliar = {
+        Name = 'FlytrapFamiliar',
+        DefaultJug = 'Grass Broth',
         DefaultSTA = '',
         DefaultAOE = 'Soporific',
         DefaultSpecial = 'Gloeosuccus',
@@ -297,6 +305,14 @@ local function GetSkill()
     end
 end
 
+local function GetRangedSkill()
+    local eq = gData.GetEquipment();
+
+    if (eq.Range) then
+        return eq.Range.Resource.Skill;
+    end
+end
+
 --Used to see if a table has a value
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
@@ -344,6 +360,13 @@ function draginclude.OnLoad(sets, tpVariantTable, skillingVariantTable)
     end
 end
 
+function draginclude.SetupInterimEquipSet(set)
+    local environment = gData.GetEnvironment();
+    local action = gData.GetAction();
+
+    gFunc.InterimEquipSet(set);
+end
+
 --Binds default custom commands
 function draginclude.SetNumpadCommands()
     --send_command('bind ^f8 gs c cycle RewardMode') ctrl f8
@@ -355,9 +378,10 @@ function draginclude.SetNumpadCommands()
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd SkillingVariant ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /zoneinfo /lac fwd zoneinfo ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /petinfo /lac fwd petinfo ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
-    AshitaCore:GetChatManager():QueueCommand(-1,'/bind @NUMPAD/ /lac fwd FishingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /fishset /lac fwd FishingVariant ');
 end
 
 function draginclude.OnUnload()
@@ -425,7 +449,7 @@ function draginclude.HandleCommand(args)
             draginclude.dragSettings.FishingVariant = 1;
         end
 
-        gFunc.Message('Skilling Set: ' .. draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant]); --display the set
+        gFunc.Message('FishingVariant Set: ' .. tostring(draginclude.dragSettings.FishingVariant)); --display the set
     elseif (args[1] == 'zoneinfo') then
         local zone = gData.GetEnvironment();
         local zoneId = AshitaCore:GetMemoryManager():GetParty():GetMemberZone(0);
@@ -477,6 +501,10 @@ function draginclude.HandleCommand(args)
         local target = gData.GetTarget();
 
         gFunc.Message(target.Type);
+    elseif (args[1] == 'petinfo') then
+        local pet = gData.GetPet();
+
+        gFunc.Message(pet.Name .. ' HPP: ' .. pet.HPP .. '%');
     elseif (args[1] == 'relic') then
         draginclude.RelicCheck();
     elseif (args[1] == 'nude') then
@@ -750,16 +778,31 @@ function draginclude.CheckVirtueStone()
     end
 end
 
+function draginclude.HandlePrecast(fastCastValue)
+    local player = gData.GetPlayer();
+    local action = gData.GetAction();
+    local castTime = action.CastTime;
+    local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
+    local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
+    local castDelay = ((castTime * (1 - fastCastValue)) / 1000) - minimumBuffer;
+
+    if (player.SubJob == "RDM") then
+        fastCastValue = fastCastValue + 0.15 -- Fast Cast Trait
+    end
+
+    if (castDelay >= packetDelay) then
+        gFunc.SetMidDelay(castDelay);
+    end
+end
+
 function draginclude.CheckTorque()
     local player = gData.GetPlayer();
     local skill = GetSkill();
     local torque = skillToTorque[skill];
 
-    if player.Status == 'Engaged' then
-        if torque then
-            if player.MainJobLevel >= 73 then
-                gFunc.Equip('Neck', torque);
-            end
+    if torque then
+        if player.MainJobLevel >= 73 then
+            gFunc.Equip('Neck', torque);
         end
     end
 end
@@ -781,8 +824,8 @@ end
 function draginclude.CheckAketon()
     local zone = gData.GetEnvironment();
 
-    if (string.contains(zone.Area, 'San d\'Oria') or string.contains(zone.Area, 'Chateau')) and not string.contains(zone.Area, 'Dynamis') then
-        gFunc.Equip('Body', 'Kingdom Aketon');
+    if (string.contains(zone.Area, 'Bastok') or string.contains(zone.Area, 'Metalworks')) and not string.contains(zone.Area, 'Dynamis') then
+        gFunc.Equip('Body', 'Republic Aketon');
     end
 end
 
@@ -812,6 +855,42 @@ function draginclude.CheckSkillingVariant()
     end
 end
 
+-- Use this function in your HandleDefault if you want to override some slots under a specific condition
+-- Only current use case is Movement Speed set while player.IsMoving so I'm not slow while running
+function draginclude.CheckSkillingVariantCondition(condition, set)
+
+    if draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant] == 'Field' then
+        if draginclude.childSets.Field ~= nil then
+            gFunc.EquipSet(draginclude.childSets.Field);
+        else
+            gFunc.EquipSet(draginclude.sets.Field);
+        end
+
+        if condition then
+            gFunc.EquipSet(set);
+        end
+
+    elseif draginclude.SkillingVariantTable[draginclude.dragSettings.SkillingVariant] == 'Fishing' then
+        if draginclude.childSets.Field ~= nil then
+            if draginclude.dragSettings.FishingVariant == 1 then
+                gFunc.EquipSet(draginclude.childSets.Fishing);
+            elseif draginclude.dragSettings.FishingVariant == 2 then
+                gFunc.EquipSet(draginclude.childSets.Fishing2);
+            end
+        else
+            if draginclude.dragSettings.FishingVariant == 1 then
+                gFunc.EquipSet(draginclude.sets.Fishing);
+            elseif draginclude.dragSettings.FishingVariant == 2 then
+                gFunc.EquipSet(draginclude.sets.Fishing2);
+            end
+        end
+
+        if condition then
+            gFunc.EquipSet(set);
+        end
+    end
+end
+
 function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     local buffs = AshitaCore:GetMemoryManager():GetPlayer():GetBuffs();
     local player = gData.GetPlayer();
@@ -819,6 +898,7 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
     local paralyzed = false;
     local blinded = false;
     local songBuffActive = false;
+    local signet = false;
     local items = draginclude.CheckItems();
 
     if StatusArmorSwapSettings == nil then
@@ -827,7 +907,9 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
 
     -- Song buffs have IDs between 195 and 222: https://github.com/Windower/Resources/blob/master/resources_data/buffs.lua
     for _,buff in ipairs(buffs) do
-        if (buff >= 195 and buff <= 222) then
+        if buff == 253 then
+            signet = true;
+        elseif (buff >= 195 and buff <= 222) then
             songBuffActive = true;
         elseif (buff == 2) then
             asleep = true;
@@ -840,23 +922,21 @@ function draginclude.CheckStatusArmorSwaps(StatusArmorSwapSettings, level)
         end
 	--Resting Section
     elseif (player.Status == 'Resting') then
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
 
-        if StatusArmorSwapSettings.PresidentialHairpin == true then
+        if signet and StatusArmorSwapSettings.PresidentialHairpin == true then
             CheckEquipPresidentialHairpin(level, items);
         end
 
 	--Idle Section
 	else
-
         if StatusArmorSwapSettings.OpoopoNecklace == true then
             CheckEquipOpoOpoNecklace(level, asleep, items);
         end
 
-        if StatusArmorSwapSettings.PresidentialHairpin == true then
+        if signet and StatusArmorSwapSettings.PresidentialHairpin == true then
             CheckEquipPresidentialHairpin(level, items);
         end
     end
@@ -868,11 +948,11 @@ function draginclude.HandleAbility(ability);
 end
 
 function draginclude.HandleWeaponSkill(weaponSkill)
-    if weaponSkill.Name == 'Geirskogul' then    
-        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
-    else
-        AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
-    end 
+    --if weaponSkill.Name == 'Geirskogul' then    
+    --    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '» (Light, Distortion)');
+    --else
+    --    AshitaCore:GetChatManager():QueueCommand(1, '/p WS Used: «' .. weaponSkill.Name .. '»');
+    --end 
 end
 
 function draginclude.HandleItem(item)

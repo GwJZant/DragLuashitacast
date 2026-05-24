@@ -14,19 +14,19 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {''},
-        Head = {'Centurion\'s Visor'},
-        Neck = {''},
+        Ammo = {'Morion Tathlum'},
+        Head = {'Emperor Hairpin', 'Dream Hat +1'},
+        Neck = {'Black Neckerchief'},
         Ear1 = {'Beetle Earring +1'},
         Ear2 = {'Beetle Earring +1'},
-        Body = {'Wonder Kaftan', 'Beetle Harness +1', 'Tarutaru Kaftan'},
-        Hands = {'Battle Gloves', 'Tarutaru Mitts'},
+        Body = {'Wonder Kaftan', 'Beetle Harness +1', 'Dream Robe +1'},
+        Hands = {'Battle Gloves', 'Dream Gloves +1'},
         Ring1 = {'San d\'Orian Ring'},
         Ring2 = {'Eremite\'s Ring'},
-        Back = {'Nomad\'s Mantle'},
+        Back = {'Trimmer\'s Mantle'},
         Waist = {''},
-        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers', 'Tarutaru Braccae'},
-        Feet = {'Wonder Clomps', 'Tarutaru Clomps'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers', 'Dream Trousers +1'},
+        Feet = {'Wonder Clomps', 'Dream Boots +1'},
     },
 
     RestingMP_Priority = {
@@ -41,7 +41,7 @@ local sets = {
         Ring2 = {''},
         Back = {''},
         Waist = {''},
-        Legs = {''},
+        Legs = {'Baron\'s Slops'},
         Feet = {''},
     },
 
@@ -63,6 +63,7 @@ local sets = {
 
     Reward_Priority = { -- MND
         Ammo = {'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Food Beta', 'Pet Food Alpha'},
+
     },
 
     Charm_Priority = {
@@ -73,7 +74,7 @@ local sets = {
         Ear2 = {''},
         Body = {''},
         Hands = {''},
-        Ring1 = {''},
+        Ring1 = {'San d\'Orian Ring'},
         Ring2 = {''},
         Back = {''},
         Waist = {''},
@@ -170,7 +171,6 @@ profile.HandleDefault = function()
 
         gFunc.EquipSet(sets.Default);
         
-
         -- Engaged Section
         if player.Status == 'Engaged' then
         

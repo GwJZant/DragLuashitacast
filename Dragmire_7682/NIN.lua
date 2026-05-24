@@ -1,141 +1,232 @@
 local profile = {};
-gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua');
-gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
-draginclude = gFunc.LoadFile('common\\draginclude.lua');
 
 local Settings = {
-    -- Default settings for jug/food preferences
-    JugPetSettings = {
-        DefaultFood = 'Pet Food Beta',
-    },
     LateInitialized = {
         Initialized = false,
         TimeToUse = 0,
     },
-    StatusArmorSwaps = {
-        MelodyEarring = false,
-        BatEarring = true,
-        FlagellantsRope = true,
-        OpoopoNecklace = true,
-        FenrirsEarring = true,
-        FenrirsStone = false,
-        DuskGloves = false,
-        ShenobiRing = false,
-        GaudyHarness = false,
-    },
+    TpVariant = 1,
+    SkillingVariant = 1,
+    FishingVariant = 0,
     CurrentLevel = 0,
 };
 
 local sets = {
     Default_Priority = {
-        Head = {'Cotton Hachimaki'},
-        Neck = {'Wing Pendant'},
-        Ear1 = {'Bone Earring'}, --EVA +3
-        Ear2 = {'Bone Earring'}, --AGI +3
-        Body = {'Elder\'s Surcoat', 'Cotton Dogi'},
-        Hands = {'Elder\'s Bracers', 'Cotton Tekko'},
-        Ring1 = {'Bastokan Ring'},
-        Ring2 = {'Courage Ring'},
-        Back = {'Nomad\'s Mantle', 'Dhalmel Mantle'},
-        Waist = {'Warrior\'s Belt'},
-        Legs = {'Elder\'s Braguette', 'Cotton Sitabaki'},
-        Feet = {'Elder\'s Sandals', 'Cotton Kyahan'},
+	    Head = {'Arh. Jinpachi +1'},
+	    Neck = {'Evasion Torque'},
+	    Ear1 = {'Dodge Earring'},
+	    Ear2 = {'Dodge Earring'},
+	    Body = {'Arhat\'s Gi +1'},
+	    Hands = {'Dst. Mittens +1'},
+	    Ring1 = {'Jelly Ring'},
+	    Ring2 = {'Sattva Ring'},
+	    Back = {'Boxer\'s Mantle'},
+	    Waist = {'Koga Sarashi'},
+	    Legs = {'Dst. Subligar +1'},
+	    Feet = {'Dst. Leggings +1'},
     },
 
-    Evasion_Priority = { --EVA, AGI
-        Head = {'Cotton Hachimaki'},
-        Neck = {'Wing Pendant'},
-        Ear1 = {'Dodge Earring', 'Bone Earring'}, --EVA +3
-        Ear2 = {'Bone Earring'}, --AGI +3
-        Body = {'Elder\'s Surcoat', 'Cotton Dogi'},
-        Hands = {'Elder\'s Bracers', 'Cotton Tekko'},
-        Ring1 = {'Bastokan Ring'},
-        Ring2 = {'Courage Ring'},
-        Back = {'Nomad\'s Mantle', 'Dhalmel Mantle'},
-        Waist = {'Warrior\'s Belt'},
-        Legs = {'Elder\'s Braguette', 'Cotton Sitabaki'},
-        Feet = {'Elder\'s Sandals', 'Cotton Kyahan'},
+    FastCast_Priority = {
+        Ear2 = {'Loquac. Earring'},
+    },
+
+    Evasion_Priority = {
+	    Head = {'Emperor Hairpin'},
+	    Neck = {'Evasion Torque'},
+	    Ear1 = {'Dodge Earring'},
+	    Ear2 = {'Dodge Earring'},
+	    Body = {'Scorpion Harness'},
+	    Hands = {'Ryl.Kgt. Mufflers'},
+	    Ring1 = {'Kshama Ring No.3'},
+	    Ring2 = {'Sattva Ring'},
+	    Back = {'Jaguar Mantle'},
+	    Waist = {'Swift Belt'},
+	    Legs = {'Kingdom Trousers'},
+	    Feet = {'Fuma Kyahan'},
+    },
+
+    Engaged_Priority = {
+    	Head = {'Voyager Sallet'},
+    	Neck = {'Peacock Amulet'},
+    	Ear1 = {'Merman\'s Earring'},
+    	Ear2 = {'Merman\'s Earring'},
+    	Body = {'Haubergeon'},
+    	Hands = {'Ochiudo\'s Kote'},
+    	Ring1 = {'Toreador\'s Ring'},
+    	Ring2 = {'Toreador\'s Ring'},
+    	Back = {'Amemet Mantle +1'},
+    	Waist = {'Swift Belt'},
+    	Legs = {'Ryl.Kgt. Breeches'},
+    	Feet = {'Fuma Kyahan'},
+    },
+
+    SpellHaste_Priority = {
+        Head = {'Panther Mask +1'}, --3%
+        Hands = {'Dusk Gloves'}, --3%
+        Waist = {'Swift Belt'}, --4%
+        Legs = {'Byakko\'s Haidate'}, --6%
+        Feet = {'Fuma Kyahan'}, --2%
+    },
+
+    WS_Priority = {
+    	Head = {'Voyager Sallet'},
+    	Neck = {'Peacock Amulet'},
+    	Ear1 = {'Merman\'s Earring'},
+    	Ear2 = {'Merman\'s Earring'},
+    	Body = {'Haubergeon'},
+    	Hands = {'Ochiudo\'s Kote'},
+    	Ring1 = {'Puissance Ring'},
+    	Ring2 = {'Toreador\'s Ring'},
+    	Back = {'Amemet Mantle +1'},
+    	Waist = {'Life Belt'},
+    	Legs = {'Ryl.Kgt. Breeches'},
+    	Feet = {'Savage Gaiters'},
     },
 
     StyleLock = {
-        Head = 'Cotton Hachimaki',
-        Neck = 'Wing Pendant',
-        Ear1 = 'Bone Earring', --EVA +3
-        Ear2 = 'Bone Earring', --AGI +3
-        Body = 'Elder\'s Surcoat',
-        Hands = 'Elder\'s Bracers',
-        Ring1 = 'Bastokan Ring',
-        Ring2 = 'Courage Ring',
-        Back = 'Dhalmel Mantle',
-        Waist = 'Warrior\'s Belt',
-        Legs = 'Elder\'s Braguette',
-        Feet = 'Elder\'s Sandals',
+        Head = '',
+        Body = '',
+        Hands = '',
+        Legs = '',
+        Feet = '',
+
     },
 
-    StyleLockSkilling = {
-        Head = 'Dream Hat +1',
-        Neck = 'Spike Necklace',
-        Ear1 = 'Spike Earring',
-        Ear2 = 'Spike Earring',
-        Body = 'Dream Robe +1',
+    Fishing = {
+        Body = 'Angler\'s Tunica',
+        Hands = 'Angler\'s Gloves',
+        Legs = 'Angler\'s Hose',
+        Feet = 'Angler\'s Boots',
+    },
+    
+    Sneak = {
+        Hands = 'Dream Boots +1',
+    },
+
+ 
+    Invisible = {
+        Feet = 'Dream Mittens +1',
+
+    },
+
+    MovementSpeed_Priority = {
+        Feet = {'Ninja Kyahan'},
+    },
+
+    PetAttack_Priority = {
+        Ear2 = {'Beastly Earring'},
+    },
+
+    Reward_Priority = { -- MND
+        Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+    },
+
+    Charm_Priority = {
+        Head = {'Ninja Hatsuburi'},
+	    Neck = {'Star Necklace'},
+	    Body = {'Savage Separates'},
+	    Ring1 = {'Hope Ring'},
+	    Ring2 = {'Hope Ring'},
+	    Back = {'Trimmer\'s Mantle'},
+	    Feet = {'Savage Gaiters'},
+    },
+
+    Invisible = {
         Hands = 'Dream Mittens +1',
-        Ring1 = 'Sun Ring',
-        Ring2 = 'Sun Ring',
-        Back = 'Nomad\'s Mantle',
-        Waist = 'Swordbelt +1',
-        Legs = 'Dream Trousers + 1',
-        Feet = 'Dream Boots + 1',
     },
 
-    PetReadyDefault = {
-        
-    },
-
-    PetAttack = {
-        
-    },
-
-    Reward = { -- MND
-        Ammo = Settings.JugPetSettings.DefaultFood,
-    },
-
-    Charm = {
-        Neck = 'Flower Necklace',
-        --Waist = 'Corsette',
-        Legs = 'Elder\'s Braguette',
-    },
-
-    EXPRing = {
-        Ring1 = 'Chariot Band',
-    },
-
-    Warp = {
-        Main = 'Warp Cudgel',
+    Sneak = {
+        Feet = 'Dream Boots +1',
     },
 };
 
 profile.Sets = sets;
 
-profile.Packer = {
-    {Name = Settings.JugPetSettings.DefaultFood, Quantity = 'all'},
-    {Name = Settings.JugPetSettings.DefaultJug, Quantity = 'all'},
+TpVariantTable = { -- cycle through with /lac fwd tpset
+--    [1] = 'Default',
+--    [2] = 'Evasion',
 };
+
+SkillingVariantTable = { -- cycle through with /lac fwd tpset
+--    [1] = 'None',
+--    [2] = 'Field',
+--    [3] = 'Fishing',
+};
+
+Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
+
 
 local function HandlePetAction(PetAction)
     gFunc.EquipSet(sets.PetReadyDefault);
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'Evasion'}, {'None', 'Field', 'Fishing'});
+    tpVariantTable = {'Default', 'Evasion'};
+    skillingVariantTable = {'Default', 'Fishing'};
+
+    for k, v in pairs(tpVariantTable) do
+        TpVariantTable[k] = v;
+        print('[' .. k .. ', ' .. v .. ']');
+    end
+
+    for k, v in pairs(skillingVariantTable) do
+        SkillingVariantTable[k] = v;
+        print('[' .. k .. ', ' .. v .. ']');
+    end
+
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /tp /lac fwd TpVariant');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /skill /lac fwd SkillingVariant');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /fsh /lac fwd FishingVariant');
 end
 
 profile.OnUnload = function()
-    draginclude.OnUnload();
+    
 end
 
 profile.HandleCommand = function(args)
-    draginclude.HandleCommand(args, sets);
-    draginclude.HandleBstCoreCommands(args, nil);
+    
+    -- If forward slash is pressed
+    if (args[1] == 'TpVariant') then
+
+        -- Iterate the set index by 1
+        Settings.TpVariant = Settings.TpVariant + 1;
+
+        -- If that index we made is out of bounds of the actual set (like if it's 4 but there's only 3)
+        if (Settings.TpVariant > #TpVariantTable) then 
+
+            -- Set it back to 1
+            Settings.TpVariant = 1;
+        end
+
+        gFunc.Message('Set: ' .. TpVariantTable[Settings.TpVariant]); --display the set
+    elseif (args[1] == 'SkillingVariant') then
+
+        -- Iterate the set index by 1
+        Settings.SkillingVariant = Settings.SkillingVariant + 1;
+
+        -- If that index we made is out of bounds of the actual set (like if it's 4 but there's only 3)
+        if (Settings.SkillingVariant > #SkillingVariantTable) then
+
+            -- Set it back to 1
+            Settings.SkillingVariant = 1;
+        end
+
+        gFunc.Message('Skilling Set: ' .. SkillingVariantTable[Settings.SkillingVariant]); --display the set
+    elseif (args[1] == 'FishingVariant') then
+
+        -- Iterate the set index by 1
+        Settings.FishingVariant = Settings.FishingVariant + 1;
+
+        -- If that index we made is out of bounds of the actual set (like if it's 4 but there's only 3)
+        if (Settings.FishingVariant > 1) then
+
+            -- Set it back to 1
+            Settings.FishingVariant = 0;
+        end
+
+        gFunc.Message('Fishing Set: ' .. Settings.FishingVariant); --display the set
+    end
 end
 
 profile.LateInitialize = function()
@@ -144,29 +235,13 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
+        -- The delay in setting this is to prevent a failure to set the stylelock on first load
         gFunc.LockStyle(sets.StyleLock);
 
-        --[[ Set your job macro defaults here]]
-        if player.SubJob == 'BST' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 3');
-
-            -- BST Core Commands
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 2 /lac fwd Charm ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd CallBeast ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd PetSTA ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd PetAOE ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd PetSpec ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Stay ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
-        else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-        end
-        
-        
+        -- Set this to your default NIN macro book
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro book 5');
+        AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+ 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
     end
@@ -174,14 +249,18 @@ end
 
 profile.HandleDefault = function()
     local timestamp = os.time();
+    local zone = gData.GetEnvironment();
     local pet = gData.GetPet();
     local petAction = gData.GetPetAction();
     local player = gData.GetPlayer();
+    local time = zone.Time;
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
-        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        gFunc.Message('Syncing Gear - Lv. ' .. myLevel);
         Settings.CurrentLevel = myLevel;
+
+        gFunc.EvaluateLevels(profile.Sets, Settings.CurrentLevel);
     end
 
     if Settings.LateInitialized.Initialized == false then
@@ -192,30 +271,17 @@ profile.HandleDefault = function()
         end
     end
 
-    -- Forward slash toggle between Default and Evasion
-    if draginclude.dragSettings.TpVariant == 1 then
+    if Settings.TpVariant == 1 then -- Default
         gFunc.EquipSet(sets.Default);
 
-        -- Engaged Section
         if player.Status == 'Engaged' then
-
-            -- Switch to Evasion gear when I'm low on health
-            if player.HPP < 50 then
-                gFunc.EquipSet(sets.Evasion);
-            end
-        
-        -- Resting Section
-        elseif (player.Status == 'Resting') then
-
-            -- Switch to Evasion gear while resting to avoid getting hit
-            gFunc.EquipSet(sets.Evasion);
-
-        -- Idle Section
+            gFunc.EquipSet(sets.Engaged);
         else
-
+            if player.IsMoving and (time < 6 or time > 18) then
+                gFunc.EquipSet(sets.MovementSpeed);
+            end
         end
-
-    elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
+    elseif Settings.TpVariant == 2 then -- Evasion
         gFunc.EquipSet(sets.Evasion);
     end
 
@@ -226,48 +292,68 @@ profile.HandleDefault = function()
         end
     end
 
-    draginclude.HandleDefault();
-    draginclude.CheckSkillingVariant();
-    draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
+    if Settings.FishingVariant == 1 then
+        gFunc.EquipSet(sets.Fishing);
+    end
 end
 
 profile.HandleAbility = function()
-    local pet = gData.GetPet();
     local ability = gData.GetAction();
 
     if string.match(ability.Name, 'Reward') then
         gFunc.EquipSet(sets.Reward);
     elseif string.match(ability.Name, 'Charm') then
         gFunc.EquipSet(sets.Charm);
-    elseif string.match(ability.Name, 'Fight') then
-        -- Fight set
-    elseif string.match(ability.Name, 'Sic') then
-        -- Sic set
     end
 end
 
 profile.HandleItem = function()
-    local item = gData.GetAction();
+    --local item = gData.GetAction();
+
+    gFunc.EquipSet(sets.Evasion);
 end
 
 profile.HandlePrecast = function()
-    local spell = gData.GetAction();
+    --local spell = gData.GetAction();
+
+    gFunc.EquipSet(sets.FastCast);
 end
 
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
+
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
+    elseif string.contains(spell.Name, 'Utsusemi') then
+        gFunc.EquipSet(sets.Evasion);
+        gFunc.EquipSet(sets.SpellHaste);
+    end
 end
 
 profile.HandlePreshot = function()
-    local player = gData.GetPlayer();
+    if Settings.CurrentRanged == 'Crossbow' then
+        if Settings.CurrentBolt == 'Acid Bolt' then
+            gFunc.EquipSet(sets.AcidBolt);
+        elseif Settings.CurrentBolt == 'Bloody Bolt' then
+            gFunc.EquipSet(sets.BloodyBolt);
+        elseif Settings.CurrentBolt == 'Sleep Bolt' then
+            gFunc.EquipSet(sets.SleepBolt);
+        end
+    end
 end
 
 profile.HandleMidshot = function()
-    local player = gData.GetPlayer();
+    --local player = gData.GetPlayer();
+
+    gFunc.EquipSet(sets.Evasion);
 end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
+
+    gFunc.EquipSet(sets.WS);
 end
 
 return profile;

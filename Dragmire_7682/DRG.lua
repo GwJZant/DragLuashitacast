@@ -28,6 +28,8 @@ local Settings = {
     GreedyDayCap = 988,
     GreedyNightCap = 980,
     LockHP = false,
+    MDT = false,
+    PoisonCrabTimestamp = 0,
 };
 
 local sets = {
@@ -156,25 +158,19 @@ local sets = {
         Feet = {'Gavial Greaves +1'}, -- PDT -3%
     },
 
-    MDT_Priority = {
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Ethereal Earring'},
-    },
-
-    MP_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum'},
-        Head = {},
-        Neck = {'Rep.Mythril Medal'},
-        Ear1 = {'Beastly Earring'},
-        Ear2 = {'Phantom Earring'},
-        Body = {'Elder\'s Surcoat'},
-        Hands = {'Elder\'s Bracers'},
-        Ring1 = {'Astral Ring'},
-        Ring2 = {'Ether Ring'},
-        Back = {},
-        Waist = {},
-        Legs = {'Elder\'s Braguette'},
-        Feet = {'Elder\'s Sandals'},
+    MDT_Priority = { -- -28% MDT, +12 Elemental Skill, +2 INT, +10 Water/Fire/Lightning/Wind/Earth/Ice Affinity
+        Ammo = {'Phtm. Tathlum'}, -- +2 INT
+        Head = {'Gavial Mask +1'}, -- -3% MDT
+        Neck = {'Jeweled Collar'}, -- +10 Water/Fire/Lightning/Wind/Earth/Ice Affinity
+        Ear1 = {'Merman\'s Earring'}, -- -2% MDT
+        Ear2 = {'Merman\'s Earring'}, -- -2% MDT
+        Body = {'Gavial Mail +1'}, -- -4% MDT
+        Hands = {'Gavial Fng.Gnt. +1'}, -- -4% MDT
+        Ring1 = {'Merman\'s Ring'}, -- -4% MDT
+        Ring2 = {'Merman\'s Ring'}, -- -4% MDT
+        Back = {'Merciful Cape'}, -- +5 Elemental Skill
+        Legs = {'Coral Cuisses +1'}, -- -3% MDT
+        Feet = {'Coral Greaves +1'}, -- -2% MDT
     },
 
     Evasion_Priority = {
@@ -208,12 +204,12 @@ local sets = {
     -- Geirskogul: STR: 30% DEX: 30% 
     WeaponSkillLight_Priority = {
         Neck = {'Light Gorget'},
+        Ear2 = {'Cassie Earring'},
     },
 
-    WeaponSkillGeirskogul_Priority = { -- STR +47, DEX +25, ATT +17
+    WeaponSkillGeirskogul_Priority = { -- STR +49, DEX +20, ATT +23
         Neck = {'Light Gorget'},
         Hands = {'Hecatomb Mittens'}, -- STR+7, DEX+4
-        Legs = {'Wyrm Brais'}, -- DEX +5
     },
 
     WeaponSkillSpiritTaker_Priority = { -- ACC+20, INT+16, MND+6
@@ -321,6 +317,15 @@ local sets = {
         Feet = 'Homam Gambieras',
     },
 
+    StyleLockGavial = {
+        Main = 'Gungnir',
+        Head = 'Gavial Mask +1',
+        Body = 'Gavial Mail +1',
+        Hands = 'Gavial Fng.Gnt. +1',
+        Legs = 'Gavial Cuisses +1',
+        Feet = 'Gavial Greaves +1',
+    },
+
     StyleLockRelic = {
         Main = 'Love Halberd',
         Head = 'Wyrm Armet',
@@ -384,6 +389,15 @@ local sets = {
         --Feet = 'Homam Gambieras',
     },
 
+    StyleLockGoblin = {
+        Main = 'Gungnir',
+        Head = 'Ace\'s Helm',
+        Body = 'Goblin Suit',
+        --Hands = 'Scp. Gauntlets',
+        --Legs = 'Elder Trunks',
+        --Feet = 'Homam Gambieras',
+    },
+
     StyleLockWinter = {
         Main = 'Gungnir',
         Head = 'Dream Hat +1',
@@ -436,6 +450,7 @@ local sets = {
     },
 
     Jump_Priority = { -- ACC
+        Ammo = {'Tiphia Sting'}, -- ATT+2, ACC+2
         Head = {'Ace\'s Helm'},
         Neck = {'Peacock Amulet'},
         Body = {'Homam Corazza'},
@@ -447,6 +462,7 @@ local sets = {
     },
 
     HighJump_Priority = { -- ACC
+        Ammo = {'Tiphia Sting'}, -- ATT+2, ACC+2
         Head = {'Ace\'s Helm'},
         Neck = {'Peacock Amulet'},
         Body = {'Homam Corazza'},
@@ -565,7 +581,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockGoblin);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -610,6 +626,10 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /eth /lac fwd LockEth');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /greedy /lac fwd GreedyToggle');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /hp /lac fwd LockHP');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd MDT');
+
+        
+        AshitaCore:GetChatManager():QueueCommand(-1,'/alias /poisoncrab /lac fwd poisoncrab');
 
         Settings.LateInitialized.Initialized = true;
         gFunc.Message('LateInitialized');
@@ -665,10 +685,26 @@ profile.HandleCommand = function(args)
         Settings.LockHP = not Settings.LockHP;
 
         gFunc.Message('LockHP ' .. tostring(Settings.LockHP));
+    elseif args[1] == 'MDT' then
+
+        Settings.MDT = not Settings.MDT;
+
+        gFunc.Message('MDT ' .. tostring(Settings.MDT));
     elseif args[1] == 'DayCheck' then
         local day = gData.GetEnvironment().Day;
 
         gFunc.Message(day);
+    elseif args[1] == 'poisoncrab' then
+        local timestamp = os.time();
+
+        if Settings.PoisonCrabTimestamp == 0 then
+            Settings.PoisonCrabTimestamp = timestamp + 88;
+            gFunc.Message('Poison Crab timer for 90 seconds from now.');
+        elseif Settings.PoisonCrabTimestamp - 2 >= timestamp then
+            gFunc.Message('2Poison Crab timer for ' .. Settings.PoisonCrabTimestamp - timestamp  .. ' seconds from now.');
+        else
+            Settings.PoisonCrabTimestamp = timestamp + 90;
+        end
     end
 end
 
@@ -776,10 +812,14 @@ profile.HandleDefault = function()
 
     
     if draginclude.dragSettings.TpVariant == 2 then -- Use Tank set
-        if time < 6 or time > 18 then
-            gFunc.EquipSet(sets.PDTNight);
+        if Settings.MDT then
+            gFunc.EquipSet(sets.MDT);
         else
-            gFunc.EquipSet(sets.PDT);
+            if time < 6 or time > 18 then
+                gFunc.EquipSet(sets.PDTNight);
+            else
+                gFunc.EquipSet(sets.PDT);
+            end
         end
 
         if player.Status ~= 'Engaged' and player.IsMoving then
@@ -832,10 +872,14 @@ profile.HandleItem = function()
     local zone = gData.GetEnvironment();
     local time = zone.Time;
 
-    if time < 6 or time > 18 then
-        gFunc.EquipSet(sets.PDTNight);
+    if Settings.MDT then
+        gFunc.EquipSet(sets.MDT);
     else
-        gFunc.EquipSet(sets.PDT);
+        if time < 6 or time > 18 then
+            gFunc.EquipSet(sets.PDTNight);
+        else
+            gFunc.EquipSet(sets.PDT);
+        end
     end
 
 	if item.Name == 'Silent Oil' then 

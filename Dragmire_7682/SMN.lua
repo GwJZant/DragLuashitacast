@@ -55,13 +55,14 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
-    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 42 (Gear) = 318
-    -- Improvements: Penance Slops (+1), Summoning Earring (+3), Bahamut's Staff (+5) = 326
-    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(44/3) - 5 = 45 - 15 - 5 = 25s
+    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 42 (Gear) = 322
+    -- Improvements: Bahamut's Staff (+5) = 327
+    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(53/3) - 5 = 45 - 18 - 5 = 22s
     AvatarEngagedSpirit_Priority = {
         Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Ear2 = {'Smn. Earring'}, -- +3
         Body = {'Yinyang Robe'}, -- Perp Down
         Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
@@ -75,6 +76,7 @@ local sets = {
         Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear1 = {'Beastly Earring'}, -- Pet Acc
+        Ear2 = {'Smn. Earring'}, -- +3
         Body = {'Yinyang Robe'}, -- Perp Down
         Hands = {'Nashira Gages'}, -- Perp Down
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
@@ -83,7 +85,7 @@ local sets = {
         Feet = {'Evk. Pigaches +1'} -- Perp Down, Pet Eva
     },
 
-    MeleeEngagedAvatar_Priority = { -- 11% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
+    MeleeEngagedAvatar_Priority = { -- 12% Haste, Staff +7, Acc +12, Attack +8, Perp Down -3
         Ammo = {'Tiphia Sting'}, -- Acc +2, Attack +2
         Head = {'Nashira Turban'}, -- Haste 2%
         Neck = {'Temp. Torque'}, -- Staff Skill +7
@@ -98,7 +100,7 @@ local sets = {
         Feet = {'Evk. Pigaches +1'}, -- Perp Down 
     },
 
-    MeleeEngaged_Priority = { -- 7% Haste + Support
+    MeleeEngaged_Priority = { -- 12% Haste + Support
         Ammo = {'Tiphia Sting'},
         Head = {'Nashira Turban'}, -- 2%
         Neck = {'Temp. Torque'},
@@ -173,7 +175,7 @@ local sets = {
         Feet = {'Austere Sabots'} -- +3
     },
 
-    WeaponSkillSpiritTaker_Priority = { -- INT +27, MND +20, Staff Skill +7, Attack +6, DA +1%, STR +7, DEX +5
+    WeaponSkillSpiritTaker_Priority = { -- INT +28, MND +21, Staff Skill +7, Attack +6, DA +1%, STR +7, DEX +5
         Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Evk. Horn +1'}, -- INT +6, MND +6
         Neck = {'Temp. Torque'}, -- Staff Skill +7
@@ -183,13 +185,13 @@ local sets = {
         Hands = {'Errant Cuffs'}, -- INT +5
         Ring1 = {'Rajas Ring'}, -- STR +5, DEX +5
         Ring2 = {'Aqua Ring'}, -- MND +5, STR +2
-        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Back = {'Prism Cape'}, -- INT +4, MND +4
         Waist = {'Druid\'s Rope'}, -- INT +1, MND +1
         Legs = {'Austere Slops'}, -- INT +2, MND +2
         Feet = {'Rostrum Pumps'}, -- INT +3, MND +3
     },
 
-    CutHP_Priority = { -- INT +42, MND +23, Acc -5
+    CutHP_Priority = { -- INT +43, MND +24, Acc -5
         Ammo = {'Happy Egg'}, -- INT +2
         Head = {'Nashira Turban'}, -- INT +3
         Neck = {'Temp. Torque'}, -- Staff Skill +7
@@ -199,14 +201,24 @@ local sets = {
         Hands = {'Errant Cuffs'}, -- INT +5
         Ring1 = {'Snow Ring'}, -- INT +5
         Ring2 = {'Snow Ring'}, -- INT +5
-        Back = {'Rainbow Cape'}, -- INT +3, MND +3
+        Back = {'Prism Cape'}, -- INT +3, MND +3
         Waist = {'Swift Belt'},
-        Legs = {'Errant Slops'}, -- INT +7, MND +7, DEX -5
+        Legs = {'Mahatma Slops'}, -- INT +7, MND +7, DEX -5
         Feet = {'Austere Sabots'}, -- INT +3, MND +3
     },
 
-    Precast_Priority = {
+    Precast_Priority = { -- FC 4%
         Ear2 = {'Loquac. Earring'}, -- 2%
+        Feet = {'Rostrum Pumps'}, -- 2%
+    },
+
+    Midcast_Priority = { -- FC 4%, Haste 12%
+        Head = {'Nashira Turban'}, -- Haste 2%
+        Ear2 = {'Loquac. Earring'}, -- 2%
+        Body = {'Nashira Manteel'}, -- Haste 3%
+        Hands = {'Nashira Gages'}, -- Perp Down, Haste 1%
+        Waist = {'Swift Belt'}, -- Haste 4%, Acc +3, Attack -5
+        Legs = {'Nashira Seraweels'}, -- Haste 2%
         Feet = {'Rostrum Pumps'}, -- 2%
     },
 
@@ -364,51 +376,50 @@ local sets = {
         Hands = {'Dream Mittens +1'},
     },
 
-    -- MND +54 (126 Total): Enhancing Magic Skill + 3×MND - 190 --> 112 + 3*126 - 190 = 297 (350 cap) Every MND is 3 points
-    -- How to improve (+101 HP improvement): 2 MND +5 Rings instead of one +4 Ring (+18 HP), Ajari Necklace (+11 HP), Prism Cape (+3 HP)
-    -- 2 Communion Earrings (+12 HP), Mahatma Hpl. (+3 HP), Devotee's Mitts +1 (+3 HP), Mahatma Slops (+3 HP), Mahatma Pigaches (+9 HP)
+    -- MND +58 (131 Total): Enhancing Magic Skill + 3×MND - 190 --> 105 + 3*136 - 190 = 323 (350 cap) Every MND is 3 points
+    -- How to improve (+101 HP improvement): 1 Communion Earring (+6 HP), Mahatma Hpl. (+3 HP), Mahatma Pigaches (+9 HP)
     Stoneskin_Priority = {
         --Main = {'Kirin\'s Pole'}, -- MND +10
         Head = {'Evk. Horn +1'}, -- MND +6
-        Neck = {'Enhancing Torque'}, -- Enhancing +7
-        Ear1 = {'Novia Earring'},
+        Neck = {'Ajari Beads'}, -- MND +6
+        Ear1 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- MND +10
-        Hands = {'Devotee\'s Mitts'}, -- MND +5 
+        Hands = {'Dvt. Mitts +1'}, -- MND +5 
         Ring1 = {'Aqua Ring'}, -- MND +5
         Ring2 = {'Aqua Ring'}, -- MND +5
-        Back = {'Rainbow Cape'}, -- MND +3
-        Legs = {'Errant Slops'}, -- MND +7
+        Back = {'Prism Cape'}, -- MND +4
+        Legs = {'Mahatma Slops'}, -- MND +8
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- MND +48, Enfeebling +7
+    -- MND +37, Enfeebling +17, Macc +3
     EnfeeblingMND_Priority = {
         Head = {'Evk. Horn +1'}, -- MND +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
-        Ear1 = {'Novia Earring'},
+        Ear1 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- MND +10
-        Hands = {'Devotee\'s Mitts'}, -- MND +5 
+        Hands = {'Dvt. Mitts +1'}, -- MND +6
         Ring1 = {'Aqua Ring'}, -- MND +5
         Ring2 = {'Aqua Ring'}, -- MND +5
-        Back = {'Rainbow Cape'}, -- MND +3
-        Legs = {'Errant Slops'}, -- MND +7
+        Back = {'Altruistic Cape'}, -- Enfeebling +5
+        Legs = {'Nashira Seraweels'}, -- Enfeebling +5, Macc +3
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    -- INT +45, Enfeebling +7
+    -- INT +35, Enfeebling +17, Macc +3
     EnfeeblingINT_Priority = {
         Head = {'Evk. Horn +1'}, -- INT +6
         Neck = {'Enfeebling Torque'}, -- Enfeebling +7
-        Ear1 = {'Novia Earring'},
-        Ear2 = {'Phantom Earring'}, -- INT +1
+        Ear1 = {'Phantom Earring'}, -- INT +1
+        Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- INT +10
         Hands = {'Errant Cuffs'}, -- INT +5 
-        Ring2 = {'Snow Ring'}, -- INT +4
-        Ring2 = {'Snow Ring'}, -- INT +4
-        Back = {'Rainbow Cape'}, -- INT +3
-        Legs = {'Errant Slops'}, -- INT +7
+        Ring2 = {'Snow Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +5
+        Back = {'Altruistic Cape'}, -- Enfeebling +5
+        Legs = {'Nashira Seraweels'}, -- Enfeebling +5, Macc +3
         Feet = {'Rostrum Pumps'}, -- INT +3
     },
 };
@@ -1063,24 +1074,16 @@ profile.HandleDefault = function()
     end
 
     if (pet ~= nil) then
-        local mpThreshold = 906; --WHM Default
-
-        if player.SubJob == 'BLM' then
-            mpThreshold = 925;
-        end
-
-        if player.MP <= mpThreshold then
-            if pet.Name == 'Carbuncle' then
-                gFunc.EquipSet(sets.AvatarEngagedCarby);
-            elseif string.contains(pet.Name, 'Spirit') then
-                if Settings.GreedySpirit then
-                    gFunc.EquipSet(sets.GreedyAvatarEngagedSpirit);
-                else
-                    gFunc.EquipSet(sets.AvatarEngagedSpirit);
-                end
+        if pet.Name == 'Carbuncle' then
+            gFunc.EquipSet(sets.AvatarEngagedCarby);
+        elseif string.contains(pet.Name, 'Spirit') then
+            if Settings.GreedySpirit then
+                gFunc.EquipSet(sets.GreedyAvatarEngagedSpirit);
             else
-                gFunc.EquipSet(sets.AvatarEngaged);
+                gFunc.EquipSet(sets.AvatarEngagedSpirit);
             end
+        else
+            gFunc.EquipSet(sets.AvatarEngaged);
         end
 
         if (petAction ~= nil) then
@@ -1175,6 +1178,8 @@ profile.HandleMidcast = function()
         end
     end
 
+    gFunc.EquipSet(sets.Midcast);
+
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
@@ -1185,7 +1190,7 @@ profile.HandleMidcast = function()
         end
         
         gFunc.EquipSet(sets.Stoneskin);
-    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' )then -- Dia and Dia II need zero gearswap
+    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' ) then -- Dia and Dia II need zero gearswap
 
         if draginclude.dragSettings.TpVariant == 2 then
             if spell.Element == 'Fire' then

@@ -125,6 +125,14 @@ local Utils = {
             DefaultSpecial = 'Gloeosuccus',
             DurationMinutes = 60,
         },
+        FlytrapFamiliar = {
+            Name = 'FlytrapFamiliar',
+            DefaultJug = 'Grass Broth',
+            DefaultSTA = '',
+            DefaultAOE = 'Soporific',
+            DefaultSpecial = 'Gloeosuccus',
+            DurationMinutes = 60,
+        },
         AmbusherAllie = {
             Name = 'AmbusherAllie',
             DefaultJug = 'L. Mole Broth',
@@ -316,12 +324,11 @@ local Utils = {
 };
 
 function dragdisplay.Update(settings)
+    local zone = gData.GetEnvironment();
+    local time = zone.Time;
 	local player = AshitaCore:GetMemoryManager():GetPlayer();
-    --local modifiers = player:GetStatsModifiers():GetStrength();
 	local pet = gData.GetPet();
-
-    --gFunc.Message(modifiers);
-
+    local environment = gData.GetEnvironment();
 	local MID = player:GetMainJob();
 	local SID = player:GetSubJob();
 	Def = player:GetDefense();
@@ -338,24 +345,26 @@ function dragdisplay.Update(settings)
     LightResistance = player:GetResist(6);
     WaterResistance = player:GetResist(5);
     WindResistance = player:GetResist(2);
-    local environment = gData.GetEnvironment();
     weather = environment.Weather;
     day = environment.Day;
-    --PlayerStrength = player:GetStat(0);
-    --PlayerDexterity = player:GetStat(1);
-    --PlayerVitality = player:GetStat(2);
-    --PlayerAgility = player:GetStat(3);
-    --PlayerIntelligence = player:GetStat(4);
-    --PlayerMind = player:GetStat(5);
-    --PlayerCharisma = player:GetStat(6);
-    --PlayerStrengthMod = player:GetStatModifier(0);
-    --PlayerDexterityMod = player:GetStatModifier(1);
-    --PlayerVitalityMod = player:GetStatModifier(2);
-    --PlayerAgilityMod = player:GetStatModifier(3);
-    --PlayerIntelligenceMod = player:GetStatModifier(4);
-    --PlayerMindMod = player:GetStatModifier(5);
-    --PlayerCharismaMod = player:GetStatModifier(6);
+    drgGreedy = false;
+    lockEth = false;
+    drgHealingCap = 0;
+    drgGreedyHealingCap = 0;
 
+    if Main == 'DRG' and settings ~= nil then
+        drgGreedy = settings.GreedyHeal;
+        lockEth = settings.LockEth;
+
+        if time < 6 or time > 18 then
+            drgHealingCap = settings.NightCap;
+            drgGreedyHealingCap = settings.GreedyNightCap;
+        else
+            drgHealingCap = settings.DayCap;
+            drgGreedyHealingCap = settings.GreedyDayCap;
+        end
+    end
+    
     if pet ~= nil then
         if pet.Name == 'Carbuncle' then
             SmnPet = Utils.Summons.Carbuncle;
@@ -381,6 +390,8 @@ function dragdisplay.Update(settings)
             BstPet = Utils.Jugs.CourierCarrie;
         elseif pet.Name == 'SaberFamiliar' then
             BstPet = Utils.Jugs.SaberFamiliar;
+        elseif pet.Name == 'SaberSiravarde' then
+            BstPet = Utils.Jugs.SaberSiravarde;
         elseif pet.Name == 'MiteFamiliar' then
             BstPet = Utils.Jugs.MiteFamiliar;
         elseif pet.Name == 'KeenearedSteffi' then
@@ -399,6 +410,8 @@ function dragdisplay.Update(settings)
             BstPet = Utils.Jugs.Homunculus;
         elseif pet.Name == 'VoraciousAudrey' then
             BstPet = Utils.Jugs.VoraciousAudrey;
+        elseif pet.Name == 'FlytrapFamiliar' then
+            BstPet = Utils.Jugs.FlytrapFamiliar;
         elseif pet.Name == 'AmbusherAllie' then
             BstPet = Utils.Jugs.AmbusherAllie;
         elseif pet.Name == 'PanzerGalahad' then
@@ -429,7 +442,7 @@ function dragdisplay.Unload()
 end
 
 function dragdisplay.Initialize()
-	dragdisplay.Update();
+	dragdisplay.Update(nil);
 	dragdisplay.FontObject = fonts.new(fontSettings);	
 	ashita.events.register('d3d_present', 'dragdisplay_present_cb', function ()
 		local display = MainLV .. Main .. '/' .. SubLV .. Sub ..'   Attk:' .. Attk .. '   Def:' .. Def;
@@ -439,8 +452,8 @@ function dragdisplay.Initialize()
 
         if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
-        --elseif Main == 'DRG' then
-        --    display = display .. '\n2: Jump   3: Call Wyvern   4: High Jump   5. Super Jump   9: Spirit Link   0: Steady Wing';
+        elseif Main == 'DRG' then
+            display = display .. ' || LockEth: ' .. tostring(lockEth) .. ' GreedyHeal: ' .. tostring(drgGreedy) .. ' Caps: ' .. drgHealingCap .. '/' .. drgGreedyHealingCap .. ' (G)';
         elseif Main == 'SMN' and SmnPet ~= Utils.Summons.Empty then
             display = display .. '\n' .. SmnPet.Name .. ':   1: Assault   3: ' .. SmnPet.Rage1 .. '   4: ' .. SmnPet.Rage2 .. '   5: ' .. SmnPet.Rage3 .. '   sh5: ' .. SmnPet.Rage4 .. '   6: ' .. SmnPet.AstralFlow .. '   7: ' .. SmnPet.Ward1 .. '   Sh7: ' .. SmnPet.Ward3 .. '   8: ' .. SmnPet.Ward2 .. '   Sh8: ' .. SmnPet.Ward4 .. '   9: Retreat';
         elseif Sub == 'BST' and BstPet ~= Utils.Jugs.Empty then
@@ -449,12 +462,10 @@ function dragdisplay.Initialize()
             display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
         elseif Main == 'RDM' and Sub == 'DRK' then
             display = display .. '\n1. Haste 2. Refresh 3. Regen 4. Gravity sh4. Blaze Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Bind 0. Sleep';
+        elseif Main == 'RDM' and Sub == 'NIN' then
+            display = display .. '\n1. Haste 2. Refresh 3. Regen sh3. Enspell 4. Gravity sh4. Shock Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Utsu1 8. Utsu2 9. Bind 0. Sleep';
         elseif Main == 'RDM' then
             display = display .. '\n1. Haste 2. Refresh 3. Regen sh3. Enspell 4. Gravity sh4. Shock Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. N/A 8. N/A 9. Bind 0. Sleep';
-        elseif Main == 'WHM' and Sub == 'BLM' then
-            display = display .. '\n1. Haste 2. Regen 3. Regen III 4. Cure V 5. Stoneskin 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
-        elseif Main == 'WHM' then
-            display = display .. '\n1. Haste 2. Regen 3. Regen III 4. Cure V 5. Stoneskin 6. Silence sh6. Blink 7. Paralyze 8. Slow';
         end
 
         dragdisplay.FontObject.text = display;

@@ -19,10 +19,13 @@ local Settings = {
     CurrentLevel = 0,
     ConvertMPNuke = 50,
     ConvertMPRefresh = 105,
+    ConvertToggle = false, -- Use /mp to toggle this to disable gearswaps in HandleDefault/Precast/Midcast so I can Convert without losing MP
     WeaponTypeToggle = false, -- true = Sword | false = dagger
     MartialKnife = false,
     PDT = false,
-    FastCastValue = 0.42 -- 20% from traits 22% from gear listed in Precast set
+    SIRD = true,
+    FastCastValue = 0.42, -- 20% from traits 22% from gear listed in Precast set
+    MeleeAcc = true
 };
 
 local sets = {
@@ -36,7 +39,7 @@ local sets = {
         Hands = {{Name = 'Zenith Mitts', Priority = 100}, {Name = 'Elder\'s Bracers', Priority = 100}},
         Ring1 = {{Name = 'Ether Ring', Priority = 100}, {Name = 'Astral Ring', Priority = 100}},
         Ring2 = {{Name = 'Jelly Ring', Priority = 0}},
-        Back = {{Name = 'Merciful Cape', Priority = 100}, 'Trimmer\'s Mantle'},
+        Back = {{Name = 'Altruistic Cape', Priority = 100}, 'Trimmer\'s Mantle'},
         Waist = {{Name = 'Hierarch Belt', Priority = 100}, {Name = 'Ryl. Kgt. Belt', Priority = 0}},
         Legs = {{Name = 'Crimson Cuisses', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}, {Name = 'Elder\'s Sandals', Priority = 100}},
@@ -44,7 +47,7 @@ local sets = {
 
     Engaged_Priority = {
         Head = {{Name = 'Optical Hat', Priority = 0}},
-        Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Scorpion Harness', Priority = 0}},
+        Body = {{Name = 'Nashira Manteel', Priority = 0}, {Name = 'Scp. Harness +1', Priority = 0}},
     },
 
     MeleeWeapons_Priority = {
@@ -78,7 +81,7 @@ local sets = {
         Neck = {{Name = 'Peacock Amulet', Priority = 0}},
         Ear1 = {{Name = 'Merman\'s Earring', Priority = 0}},
         Ear2 = {{Name = 'Ethereal Earring', Priority = 0}},
-        Body = {{Name = 'Scorpion Harness', Priority = 0}},
+        Body = {{Name = 'Scp. Harness +1', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}}, --3% Haste
         Ring1 = {{Name = 'Rajas Ring', Priority = 0}},
         Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
@@ -219,11 +222,11 @@ local sets = {
 
     CureCheatUp_Priority = { -- HP Up
         Ear1 = {'Ethereal Earring'}, -- HP 15+
-        Body = {'Scorpion Harness'}, -- HP 15+
+        Body = {'Scp. Harness +1'}, -- HP 15+
         Hands = {'Dusk Gloves'}, -- HP 20+
         Ring1 = {'Bomb Queen Ring'}, -- HP 75+
         Ring2 = {'Bloodbead Ring'}, -- HP 50+
-        Back = {'Rainbow Cape'}, -- HP 9+
+        Back = {'Prism Cape'}, -- HP 10+
         Legs = {'Crimson Cuisses'}, -- HP 25+
         Feet = {'Dusk Ledelsens'}, -- HP 25+
     },
@@ -244,7 +247,7 @@ local sets = {
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- Matk +5
     },
 
-    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +36
+    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +37
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- INT +2
         Head = {{Name = 'Warlock\'s Chapeau', Priority = 100}},-- Elemental Skill +10
         Neck = {{Name = 'Philomath Stole', Priority = 0}}, -- INT +3
@@ -256,7 +259,7 @@ local sets = {
         Ring2 = {{Name = 'Snow Ring', Priority = 0}}, -- INT +5
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Elemental Skill +5
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- INT +4
-        Legs = {{Name = 'Errant slops', Priority = 0}}, -- INT +7
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}}, -- INT +8
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- Matk +5
     },
 
@@ -272,9 +275,10 @@ local sets = {
         Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
-        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
+
     INTDark_Priority = {
         Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}},
         Head = {{Name = 'Nashira Turban', Priority = 0}, {Name = 'Warlock\'s Chapeau', Priority = 100}},
@@ -287,7 +291,7 @@ local sets = {
         Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Dark Skill +5
-        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
@@ -297,41 +301,42 @@ local sets = {
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- +5
     },
 
-    MND_Priority = { -- MND +31 (96 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*96 - 190 = 354 (350 cap)
+    MND_Priority = { -- MND +32 (100 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*98 - 190 = 360 (350 cap)
         Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- FC
         Body = {{Name = 'Errant Hpl.', Priority = 100}}, -- MND +10
-        Hands = {{Name = 'Devotee\'s Mitts', Priority = 100}}, -- MND +5
+        Hands = {{Name = 'Dvt. Mitts +1', Priority = 100}}, -- MND +6
         Ring2 = {{Name = 'Aqua Ring', Priority = 0}}, -- MND +5
-        Back = {{Name = 'Rainbow Cape', Priority = 100}}, -- MND +3
+        Back = {{Name = 'Prism Cape', Priority = 100}}, -- MND +4
         --Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- MND +4
-        --Legs = {{Name = 'Errant slops', Priority = 0}}, -- MND +7
+        --Legs = {{Name = 'Mahatma Slops', Priority = 0}}, -- MND +8
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- MND +5
     },
 
-    Stoneskin_Priority = { -- MND +31 (96 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*96 - 190 = 354 (350 cap)
+    Stoneskin_Priority = { -- MND +33 (106 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*100 - 190 = 360 (350 cap)
         Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}}, -- FC
         Body = {{Name = 'Errant Hpl.', Priority = 100}}, -- MND +10
-        Hands = {{Name = 'Devotee\'s Mitts', Priority = 100}}, -- MND +5
+        Hands = {{Name = 'Dvt. Mitts +1', Priority = 100}}, -- MND +6
         Ring2 = {{Name = 'Aqua Ring', Priority = 0}}, -- MND +5
-        Back = {{Name = 'Rainbow Cape', Priority = 100}}, -- MND +3
+        Back = {{Name = 'Prism Cape', Priority = 100}}, -- MND +4
         --Waist = {{Name = 'Duelist\'s Belt', Priority = 0}}, -- MND +4
-        --Legs = {{Name = 'Errant slops', Priority = 0}}, -- MND +7
+        --Legs = {{Name = 'Mahatma Slops', Priority = 0}}, -- MND +8
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}}, -- MND +5
     },
 
     MNDEnfeeb_Priority = {
         Head = {{Name = 'Duelist\'s Chapeau', Priority = 100}},
         Ear1 = {{Name = 'Loquac. Earring', Priority = 100}},
+        Ear2 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
-        Hands = {'Devotee\'s Mitts'}, 
+        Hands = {'Dvt. Mitts +1'}, 
         Ring1 = {'Aqua Ring'},
         Ring2 = {'Aqua Ring'},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
-        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
+        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Prism Cape', Priority = 100}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
@@ -342,12 +347,12 @@ local sets = {
         Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
         Neck = {{Name = 'Enfeebling Torque', Priority = 0}},
         Body = {{Name = 'Wlk. Tabard +1', Priority = 100}},
-        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
+        Hands = {{Name = 'Errant Cuffs', Priority = 100}},
         Ring1 = {{Name = 'Snow Ring', Priority = 0}},
         Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
-        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Errant slops', Priority = 0}},
+        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Prism Cape', Priority = 100}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
@@ -358,12 +363,12 @@ local sets = {
         Ear2 = {{Name = 'Phantom Earring', Priority = 100}},
         Neck = {{Name = 'Philomath Stole', Priority = 0}},
         Body = {{Name = 'Errant Hpl.', Priority = 0}},
-        Hands = {{Name = 'Duelist\'s Gloves', Priority = 100}},
+        Hands = {{Name = 'Errant Cuffs', Priority = 100}},
         Ring1 = {{Name = 'Snow Ring', Priority = 0}},
         Ring2 = {{Name = 'Snow Ring', Priority = 0}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Rainbow Cape', Priority = 100}},
-        Legs = {{Name = 'Errant slops', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Back = {{Name = 'Altruistic Cape', Priority = 100}, {Name = 'Prism Cape', Priority = 100}},
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}, {Name = 'Elder\'s Braguette', Priority = 100}},
         Feet = {{Name = 'Elder\'s Sandals', Priority = 100}},
     },
 
@@ -386,7 +391,7 @@ local sets = {
         Ring2 = {'Snow Ring'}, -- INT +5
         Back = {{Name = 'Merciful Cape', Priority = 100}}, -- Enhancing +5
         --Waist = {'Duelist\'s Belt'}, -- INT +4
-        Legs = {'Errant Slops'}, -- INT +7
+        Legs = {'Mahatma Slops'}, -- INT +8
         Feet = {'Elder\'s Sandals'}, -- INT +2
     },
 
@@ -422,26 +427,30 @@ local sets = {
     },
 
     SpellHaste_Priority = {
+        Head = {{Name = 'Nashira Turban', Priority = 0}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}},
         Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}},
-        --Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}},
+        Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
     SpellHasteUtsu_Priority = {        
+        Head = {{Name = 'Nashira Turban', Priority = 0}},
         Body = {{Name = 'Nashira Manteel', Priority = 0}},
         Hands = {{Name = 'Dusk Gloves', Priority = 0}},
         Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}},
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}},
     },
 
 
     OverlordsRingDrainAspir_Priority = {
-        Ring1 = {{Name = 'Overlord\'s Ring', Priority = 0}}
+        Ring2 = {{Name = 'Overlord\'s Ring', Priority = 0}}
     },
 
     DilationRingRefreshHaste_Priority = {
-        Ring1 = {{Name = 'Dilation Ring', Priority = 0}},
+        Ring2 = {{Name = 'Dilation Ring', Priority = 0}},
     },
 
     Fire_Priority = {
@@ -503,13 +512,15 @@ local sets = {
 
     WSEnergySteal_Priority = { -- MND
         Head = {{Name = 'Zenith Crown', Priority = 100}}, -- MND +3
+        Neck = {'Ajari Beads'}, -- MND +6
+        Ear2 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Body = {{Name = 'Errant Hpl.', Priority = 0}}, -- MND +10
-        Hands = {'Devotee\'s Mitts'}, -- MND +5
+        Hands = {'Dvt. Mitts +1'}, -- MND +6
         Ring1 = {'Aqua Ring'}, -- MND +5
         Ring2 = {'Aqua Ring'}, -- MND +5
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Back = {{Name = 'Prism Cape', Priority = 100}},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
@@ -519,13 +530,16 @@ local sets = {
 
     Reward_Priority = { -- MND
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
+        Head = {{Name = 'Zenith Crown', Priority = 100}},
+        Neck = {'Ajari Beads'}, -- MND +6
+        Ear2 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Body = {{Name = 'Errant Hpl.', Priority = 0}},
         Hands = {'Ogre Gloves'},
-        Back = {{Name = 'Rainbow Cape', Priority = 100}},
+        Back = {{Name = 'Prism Cape', Priority = 100}},
         Ring1 = {'Aqua Ring'},
         Ring2 = {'Aqua Ring'},
         Waist = {{Name = 'Duelist\'s Belt', Priority = 0}},
-        Legs = {{Name = 'Errant slops', Priority = 0}},
+        Legs = {{Name = 'Mahatma Slops', Priority = 0}},
         Feet = {{Name = 'Dls. Boots +1', Priority = 100}},
     },
 
@@ -626,6 +640,9 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /martial /lac fwd Martial ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd pdt ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /sird /lac fwd SIRD ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mp /lac fwd ConvertToggle ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd MeleeAcc ');
 end
 
 profile.OnUnload = function()
@@ -657,6 +674,30 @@ profile.HandleCommand = function(args)
             gFunc.Message('MartialKnife ON');
         else
             gFunc.Message('MartialKnife OFF');
+        end
+    elseif (args[1] == 'SIRD') then
+        Settings.SIRD = not Settings.SIRD;
+
+        if Settings.SIRD then
+            gFunc.Message('SIRD ON');
+        else
+            gFunc.Message('SIRD OFF');
+        end
+    elseif (args[1] == 'ConvertToggle') then
+        Settings.ConvertToggle = not Settings.ConvertToggle;
+
+        if Settings.ConvertToggle then
+            gFunc.Message('ConvertToggle ON');
+        else
+            gFunc.Message('ConvertToggle OFF');
+        end
+    elseif (args[1] == 'MeleeAcc') then
+        Settings.MeleeAcc = not Settings.MeleeAcc;
+
+        if Settings.MeleeAcc then
+            gFunc.Message('MeleeAcc ON');
+        else
+            gFunc.Message('MeleeAcc OFF');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -871,8 +912,11 @@ profile.HandleDefault = function()
         elseif player.Status == 'Resting' then
             gFunc.EquipSet(sets.Resting);
         elseif player.Status == 'Engaged' then
-            --gFunc.EquipSet(sets.MeleeEngagedAcc);
-            gFunc.EquipSet(sets.MeleeEngaged);
+            if Settings.MeleeAcc then
+                gFunc.EquipSet(sets.MeleeEngagedAcc);
+            else
+                gFunc.EquipSet(sets.MeleeEngaged);
+            end            
         end
 
         if player.SubJob == 'NIN' then
@@ -884,7 +928,6 @@ profile.HandleDefault = function()
                 else
                     gFunc.EquipSet(sets.MeleeWeaponsDaggerNIN);
                 end
-                
             end
 
             if player.Status == 'Engaged' then
@@ -936,6 +979,10 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.TankStaff);
         end
     end
+
+    if Settings.ConvertToggle then
+        gFunc.EquipSet(sets.Default);
+    end
 end
 
 profile.HandleAbility = function()
@@ -952,7 +999,7 @@ profile.HandleAbility = function()
             gFunc.LockSet(sets.CharmStaff, 1);
         end
     elseif string.match(ability.Name, 'Convert') then
-        gFunc.LockSet(sets.Default, 15); -- Wear High MP set for 15 seconds so it doesn't get chopped down by gearswaps
+        --gFunc.EquipSet(sets.Default); -- Wear High MP set for 15 seconds so it doesn't get chopped down by gearswaps
     end
 end
 
@@ -984,10 +1031,16 @@ profile.HandlePrecast = function()
             gFunc.EquipSet(sets.CureCheat);
         end
 
-        if (castDelay >= packetDelay) then
-            gFunc.Message('Equipping Interim ' .. castDelay);
-            gFunc.SetMidDelay(castDelay);
+        if Settings.SIRD then
+            if (castDelay >= packetDelay) then
+                gFunc.Message('Equipping Interim ' .. castDelay);
+                gFunc.SetMidDelay(castDelay);
+            end
         end
+    end
+
+    if Settings.ConvertToggle then
+        gFunc.EquipSet(sets.Default);
     end
 end
 
@@ -1023,12 +1076,16 @@ profile.HandleMidcast = function()
         end
     end
 
-    if chainspell == 0 then
+    if chainspell == 0 and Settings.SIRD and not Settings.ConvertToggle then
         if draginclude.dragSettings.TpVariant == 1 then
             draginclude.SetupInterimEquipSet(sets.SIRD); -- 50% SIRD (70% w/ Aquaveil)
         elseif draginclude.dragSettings.TpVariant == 2 then
             if player.SubJob == 'NIN' then
-                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 100% SIRD
+                if aquaveil > 0 then
+                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 100% SIRD
+                else
+                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDNINWeapons)); -- 100% SIRD
+                end
             else
                 draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 75% SIRD (95% w/ Aquaveil)
             end
@@ -1060,7 +1117,7 @@ profile.HandleMidcast = function()
 
             local mpPercent = player.MP / (player.MaxMP + Settings.ConvertMPRefresh);
             gFunc.Message(mpPercent);
-            if mpPercent < .66 then
+            if mpPercent < .5 then
                 gFunc.EquipSet(sets.SpellHaste);
             end
 
@@ -1113,6 +1170,10 @@ profile.HandleMidcast = function()
         end
 
         equipObiIfApplicable(spell.Element);
+    end
+
+    if Settings.ConvertToggle then
+        gFunc.EquipSet(sets.Default);
     end
 end
 

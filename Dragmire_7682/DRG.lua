@@ -53,6 +53,13 @@ local sets = {
 
     },
 
+    DefaultMDT_Priority = {
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Merman\'s Earring'},
+        Ring1 = {'Merman\'s Ring'},
+        Ring2 = {'Merman\'s Ring'},
+    },
+
     StaffTorque_Priority = {
         Neck = {'Temp. Torque'},
     },
@@ -158,7 +165,7 @@ local sets = {
         Feet = {'Gavial Greaves +1'}, -- PDT -3%
     },
 
-    MDT_Priority = { -- -28% MDT, +12 Elemental Skill, +2 INT, +10 Water/Fire/Lightning/Wind/Earth/Ice Affinity
+    MDT_Priority = { -- -28% MDT, +2 INT, +10 Water/Fire/Lightning/Wind/Earth/Ice Affinity
         Ammo = {'Phtm. Tathlum'}, -- +2 INT
         Head = {'Gavial Mask +1'}, -- -3% MDT
         Neck = {'Jeweled Collar'}, -- +10 Water/Fire/Lightning/Wind/Earth/Ice Affinity
@@ -168,7 +175,7 @@ local sets = {
         Hands = {'Gavial Fng.Gnt. +1'}, -- -4% MDT
         Ring1 = {'Merman\'s Ring'}, -- -4% MDT
         Ring2 = {'Merman\'s Ring'}, -- -4% MDT
-        Back = {'Merciful Cape'}, -- +5 Elemental Skill
+        Back = {'Boxer\'s Mantle'}, 
         Legs = {'Coral Cuisses +1'}, -- -3% MDT
         Feet = {'Coral Greaves +1'}, -- -2% MDT
     },
@@ -581,7 +588,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockGoblin);
+        gFunc.LockStyle(sets.StyleLockGavial);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then

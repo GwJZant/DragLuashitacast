@@ -87,7 +87,7 @@ local sets = {
         Ring2 = {{Name = 'Toreador\'s Ring', Priority = 0}},
         Back = {{Name = 'Forager\'s Mantle', Priority = 0}},
         Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}}, --6% Haste
-        Legs = {{Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}},
+        Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}}, --2% Haste
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
     },
 
@@ -888,6 +888,7 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
     local spikes = gData.GetBuffCount('Blaze Spikes') + gData.GetBuffCount('Shock Spikes') + gData.GetBuffCount('Ice Spikes');
+    local shadows = gData.GetBuffCount('Copy Image') + gData.GetBuffCount('Copy Image (2)') + gData.GetBuffCount('Copy Image (3)') + gData.GetBuffCount('Copy Image (4+)');
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.EvaluateLevels(profile.Sets, myLevel);
@@ -941,7 +942,7 @@ profile.HandleDefault = function()
             end
         end
 
-        if spikes > 0 then
+        if spikes > 0 and shadows == 0 then
             if player.Status == 'Engaged' then
                 gFunc.EquipSet(sets.SpikesEngaged);
             else
@@ -959,7 +960,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.Earth);
         end
 
-        if spikes > 0 then
+        if spikes > 0 and shadows == 0 then
             if player.Status == 'Engaged' then
                 gFunc.EquipSet(sets.SpikesEngaged);
             else

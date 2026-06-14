@@ -123,8 +123,8 @@ draginclude.JugPetConfig = {
         DefaultSpecial = 'Roar',
         DurationMinutes = 60,
     },
-    SaberFamiliar = { --NQ Saber lv. 28
-        Name = 'SaberFamiliar',
+    TigerFamiliar = { --NQ Saber lv. 28
+        Name = 'TigerFamiliar',
         DefaultJug = 'Meat Broth',
         DefaultSTA = 'Razor Fang',
         DefaultAOE = 'Claw Cyclone',

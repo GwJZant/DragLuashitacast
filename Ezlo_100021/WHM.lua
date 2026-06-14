@@ -10,6 +10,8 @@ local Settings = {
         OpoopoNecklace = false,
     },
     CurrentLevel = 0,
+    HPUp = false,
+    MDT = true,
 };
 
 local sets = {
@@ -29,6 +31,22 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Dream Boots +1'},
     },
 
+    DefaultMDT_Priority = {
+        Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
+        Head = {'Cleric\'s Cap', 'Emperor Hairpin', 'Dream Hat +1'},
+        Neck = {'Jeweled Collar', 'Ajari Necklace', 'Holy Phial'},
+        Ear1 = {'Merman\'s Earring', 'Geist Earring'},
+        Ear2 = {'Merman\'s Earring', 'Geist Earring'},
+        Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
+        Hands = {'Coral Bangles', 'Dream Mittens +1'},
+        Ring1 = {'Merman\'s Ring', 'Tamas Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Merman\'s Ring', 'Aquamarine Ring', 'Turquoise Ring'},
+        Back = {'Hexerei Cape', 'Red Cape +1', 'Trimmer\'s Mantle'},
+        Waist = {'Penitent\'s Rope', 'Swift Belt', 'Life Belt'},
+        Legs = {'Blessed Trousers', 'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
+        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Dream Boots +1'},
+    },
+
     RestingMP_Priority = {
         Ammo = {''},
         Head = {''},
@@ -38,7 +56,7 @@ local sets = {
         Body = {'Errant Hpl.', 'Seer\'s Tunic'}, -- HMP +5
         Hands = {''},
         Ring1 = {''},
-        Ring2 = {'Tamas Ring'}, -- Enmity -5
+        Ring2 = {''}, -- Enmity -5
         Back = {''},
         Waist = {'Hierarch Belt'}, -- HMP +2
         Legs = {''},
@@ -53,7 +71,7 @@ local sets = {
         Ear2 = {''},
         Body = {'Errant Hpl.', 'Seer\'s Tunic'}, -- HMP +5
         Hands = {''},
-        Ring1 = {'Tamas Ring'}, -- Enmity -5
+        Ring1 = {''}, -- Enmity -5
         Ring2 = {''},
         Back = {'Wizard\'s Mantle'}, -- HMP +1 when /BLM
         Waist = {'Hierarch Belt'}, -- HMP +2
@@ -70,9 +88,9 @@ local sets = {
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Optical Hat', 'Emperor Hairpin'},
         Neck = {'Ajari Necklace', 'Holy Phial'},
-        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Body = {'Black Cotehardie', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
@@ -141,11 +159,11 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +38 Elemental Skill +9
+    INTElemental_Priority = { -- INT +37 Elemental Skill +12
         Head = {'Elite Beret'}, -- Enfeebling Skill +4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
-        Ear2 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Elemental Earring', 'Morion Earring'}, -- Elemental Skill +3
         Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
         Hands = {'Errant Cuffs'}, -- INT +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
@@ -166,6 +184,17 @@ local sets = {
     HPDown_Priority = {
         Ring1 = {'Ether Ring'},
         Ring2 = {'Astral Ring'},
+    },
+
+    -- Default: 766 -> 191 MP
+    -- HPUp: 915 -> 228 MP
+    HPUp_Priority = {
+        Body = {'Wonder Kaftan'}, -- HP +36
+        Hands = {'Wonder Mitts'}, -- HP +12
+        Ring2 = {'Toreador\'s Ring'}, -- HP +10
+        Waist = {'Hierarch Belt'}, -- HP +20 (I idle in Penitent's Rope)
+        Legs = {'Wonder Braccae'}, -- HP +21
+        Feet = {'Wonder Clomps'}, -- HP +50 (I idle in Rostrum Pumps which has -30)
     },
 
     Precast_Priority = { -- Haste +12%, Fast Cast +3%
@@ -197,12 +226,12 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DivineSkill_Priority = { -- MND +54
+    DivineSkill_Priority = { -- MND +53, Matk +5
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
-        Ear2 = {'Geist Earring'}, -- MND +1
+        Ear2 = {'Moldavite Earring', 'Geist Earring'}, -- Matk +5
         Body = {'Errant Hpl.', 'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +10
         Hands = {'Blessed Mitts', }, -- MND +7
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
@@ -287,35 +316,35 @@ local sets = {
     },
     
     Fire_Priority = {
-        Main = {'Fire Staff'},
+        Main = {'Vulcan\'s Staff'},
     },
 
     Ice_Priority = {
-        Main = {'Ice Staff'},
+        Main = {'Aquilo\'s Staff'},
     },
 
     Wind_Priority = {
-        Main = {'Wind Staff'},
+        Main = {'Auster\'s Staff'},
     },
 
     Earth_Priority = {
-        Main = {'Earth Staff'},
+        Main = {'Terra\'s Staff'},
     },
 
     Thunder_Priority = {
-        Main = {'Thunder Staff'},
+        Main = {'Jupiter\'s Staff'},
     },
 
     Water_Priority = {
-        Main = {'Water Staff'},
+        Main = {'Neptune\'s Staff'},
     },
 
     Light_Priority = {
-        Main = {'Light Staff'},
+        Main = {'Apollo\'s Staff'},
     },
 
     Dark_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
     },
 
     Weaponskill_Priority = { -- Acc + 32, Attack + 10, STR +7, DEX +2
@@ -351,14 +380,14 @@ local sets = {
     },
 
     StyleLockSummer = {
-        Main = 'Light Staff',
+        Main = 'Apollo\'s Staff',
         Head = 'Emperor Hairpin',
         Body = 'Wonder Maillot +1',
         Legs = 'Taru. Trunks +1',
     },
 
     StyleLockGeneric = {
-        Main = 'Light Staff',
+        Main = 'Apollo\'s Staff',
         Head = 'Emperor Hairpin',
         Body = 'Noble\'s Tunic',
         Hands = 'Blessed Mitts',
@@ -367,7 +396,7 @@ local sets = {
     },
 
     StyleLockAF = {
-        Main = 'Light Staff',
+        Main = 'Apollo\'s Staff',
         Head = 'Healer\'s Cap',
         Body = 'Healer\'s Bliaut',
         Hands = 'Healer\'s Mitts',
@@ -376,7 +405,7 @@ local sets = {
     },
     
     StyleLockWinter = {
-        Main = 'Light Staff',
+        Main = 'Apollo\'s Staff',
         Head = 'Dream Hat +1',
         Body = 'Dream Robe',
         Hands = 'Dream Mittens +1',
@@ -440,7 +469,7 @@ local ObiTable = {
     --Earth = "Dorin Obi",
     --Water = "Suirin Obi",
     --Wind = "Furin Obi",
-    --Ice = "Hyorin Obi",
+    Ice = "Hyorin Obi",
     --Thunder = "Rairin Obi",
     --Light = "Korin Obi",
     Dark = "Anrin Obi"
@@ -506,7 +535,8 @@ end
 profile.OnLoad = function()
     draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field'});
 
-    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /hpup /lac fwd hpup ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd mdt ');
 end
 
 profile.OnUnload = function()
@@ -514,29 +544,21 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
-    if (args[1] == 'WeaponTypeToggle') then
-        Settings.WeaponTypeToggle = not Settings.WeaponTypeToggle;
+    if (args[1] == 'hpup') then
+        Settings.HPUp = not Settings.HPUp;
 
-        if Settings.WeaponTypeToggle then
-            gFunc.Message('WeaponTypeToggle SWORD');
+        if Settings.HPUp then
+            gFunc.Message('HPUp ON');
         else
-            gFunc.Message('WeaponTypeToggle DAGGER');
+            gFunc.Message('HPUp OFF');
         end
-    elseif (args[1] == 'pdt') then
-        Settings.PDT = not Settings.PDT;
+    elseif (args[1] == 'mdt') then
+        Settings.MDT = not Settings.MDT;
 
-        if Settings.PDT then
-            gFunc.Message('PDT ON');
+        if Settings.MDT then
+            gFunc.Message('MDT ON');
         else
-            gFunc.Message('PDT OFF');
-        end
-    elseif (args[1] == 'Martial') then
-        Settings.MartialKnife = not Settings.MartialKnife;
-
-        if Settings.MartialKnife then
-            gFunc.Message('MartialKnife ON');
-        else
-            gFunc.Message('MartialKnife OFF');
+            gFunc.Message('MDT OFF');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -616,6 +638,7 @@ profile.HandleCommand = function(args)
                 spellName = 'Enwater';
             end
         end
+
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
 
@@ -653,8 +676,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd regen3 ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd cure5 ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd stoneskin ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd silence ');
-            AshitaCore:GetChatManager():QueueCommand(-1,'/bind +6 /lac fwd blink ');
+            AshitaCore:GetChatManager():QueueCommand(-1,'/bind 6 /lac fwd blink ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd drain ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd aspir ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd sleepga ');
@@ -703,7 +725,11 @@ profile.HandleDefault = function()
     -- Forward slash toggle between NoStaffSwap and StaffSwap
     if draginclude.dragSettings.TpVariant == 1 then
 
-        gFunc.EquipSet(sets.Default);
+        if Settings.MDT then
+            gFunc.EquipSet(sets.DefaultMDT);
+        else
+            gFunc.EquipSet(sets.Default);
+        end
         
         -- Engaged Section
         if player.Status == 'Engaged' then
@@ -726,13 +752,12 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.VermillionCloak);
             end
         end
-
-        if player.HPP <= 25 then
-            gFunc.EquipSet(sets.MedicineEarring);
-        end
-
     elseif draginclude.dragSettings.TpVariant == 2 then --StaffSwap
-        gFunc.EquipSet(sets.Default);
+        if Settings.MDT then
+            gFunc.EquipSet(sets.DefaultMDT);
+        else
+            gFunc.EquipSet(sets.Default);
+        end
 
         -- Resting Section
         if (player.Status == 'Resting') then
@@ -755,10 +780,14 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.VermillionCloak);
             end
         end
+    end
 
-        if player.HPP <= 25 then
-            gFunc.EquipSet(sets.MedicineEarring);
-        end
+    if player.HPP <= 25 then
+        gFunc.EquipSet(sets.MedicineEarring);
+    end
+
+    if Settings.HPUp then
+        gFunc.EquipSet(sets.HPUp);
     end
 
     if (pet ~= nil) then

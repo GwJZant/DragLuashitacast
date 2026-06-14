@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar SaberSiravarde
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.SaberSiravarde, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.LullabyMelodia},
+        DefaultJugs = {draginclude.JugPetConfig.SaberSiravarde, draginclude.JugPetConfig.TigerFamiliar, draginclude.JugPetConfig.LullabyMelodia},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -28,18 +28,18 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb'},
-        Head = {'Emperor Hairpin', 'Centurion\'s Visor'},
-        Neck = {'Jeweled Collar', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Novia Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Elusive Earring', 'Beetle Earring +1'},
-        Body = {'Scorpion Harness', 'Alumine Haubert', 'Wonder Kaftan', 'Beetle Harness +1'},
+        Head = {'Emperor Hairpin'},
+        Neck = {'Jeweled Collar', 'Holy Phial'},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Merman\'s Earring', 'Beetle Earring +1'},
+        Body = {'Scorpion Harness', 'Wonder Kaftan', 'Beetle Harness +1'},
         Hands = {'Battle Gloves'},
-        Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Sniper\'s Ring'},
+        Ring1 = {'Merman\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Merman\'s Ring', 'Sniper\'s Ring'},
         Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
         Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
-        Feet = {'Wonder Clomps', 'Btl. Leggings +1'},
+        Feet = {'Beast Gaiters', 'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
     IdleTown_Priority = {
@@ -62,16 +62,32 @@ local sets = {
         Ammo = {},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Spike Earring'},
-        Ear2 = {'Spike Earring'},
-        Body = {},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Body = {'Scorpion Harness'},
         Hands = {'Dusk Gloves'}, -- Haste +3%
-        Ring1 = {},
-        Ring2 = {},
-        Back = {},
+        Ring1 = {'Toreador\'s Ring'},
+        Ring2 = {'Sniper\'s Ring'},
+        Back = {'Amemet Mantle'},
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
-        Legs = {},
-        Feet = {},
+        Legs = {'Thick Breeches'},
+        Feet = {'Dusk Ledelsens', 'Wonder Clomps'}, -- Haste +2%
+    },
+
+    DT_Priority = {
+        Ammo = {'Hedgehog Bomb'},
+        --Head = {'Emperor Hairpin'},
+        Neck = {'Jeweled Collar', 'Holy Phial'},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Merman\'s Earring', 'Beetle Earring +1'},
+        Body = {'Scorpion Harness', 'Wonder Kaftan', 'Beetle Harness +1'},
+        --Hands = {'Battle Gloves'},
+        Ring1 = {'Merman\'s Ring', 'San d\'Orian Ring'},
+        Ring2 = {'Merman\'s Ring', 'Sniper\'s Ring'},
+        Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
+        --Waist = {'R.K. Belt +1', 'Swift Belt'},
+        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
+        --Feet = {'Beast Gaiters', 'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
     PetAcc_Priority = {
@@ -155,11 +171,10 @@ local sets = {
     },
 
     WeaponSkill_Priority = { -- STR, DEX
-        Ammo = {'Tiphia Sting'},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
         Body = {'Alumine Haubert', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
@@ -171,11 +186,10 @@ local sets = {
     },
 
     WeaponSkillRampage_Priority = {
-        Ammo = {'Tiphia Sting'},
         Head = {'Optical Hat', 'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
+        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
         Body = {'Scorpion Harness', 'Wonder Kaftan'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
@@ -388,9 +402,9 @@ local sets = {
     StyleLockGeneric = {
         Head = 'Patroclus\'s Helm',
         Body = 'Scorpion Harness',
-        Hands = 'Beast Gloves',
-        Legs = 'Ryl.Ftm. Trousers',
-        Feet = 'Suzaku\'s Sune-Ate',
+        Hands = 'Dusk Gloves',
+        Legs = 'Thick Breeches',
+        Feet = 'Dusk Ledelsens',
     },
 
     StyleLockSummer = {
@@ -610,15 +624,7 @@ profile.HandleDefault = function()
 
     -- 2 = Evasion (I never use this one)
     elseif draginclude.dragSettings.TpVariant == 2 then 
-        if player.SubJob == 'WHM' or player.SubJob == 'RDM' then
-            gFunc.EquipSet(sets.EvasionWHM);
-
-            if player.Status == 'Resting' then
-                gFunc.EquipSet(sets.Relaxing);
-            end
-        else
-            gFunc.EquipSet(sets.Evasion);
-        end
+        gFunc.EquipSet(sets.DT);
     end
 
     -- Check if my pet is readying a Ready/Sic move

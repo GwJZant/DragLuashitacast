@@ -14,19 +14,19 @@ local Settings = {
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Morion Tathlum'},
+        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Morion Tathlum'},
         Head = {'Emperor Hairpin', 'Dream Hat +1'},
         Neck = {'Jeweled Collar', 'Black Neckerchief'},
         Ear1 = {'Merman\'s Earring', 'Morion Earring'},
-        Ear2 = {'Merman\'s Earring', 'Morion Earring'},
-        Body = {'Mage\'s Robe', 'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
+        Ear2 = {'Merman\'s Earring', 'Moldavite Earring', 'Morion Earring'},
+        Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
         Hands = {'Coral Bangles', 'Seer\'s Mitts +1', 'Wonder Mitts', 'Dream Mittens +1'},
         Ring1 = {'Merman\'s Earing', 'Tamas Ring', 'Eremite\'s Ring'},
         Ring2 = {'Merman\'s', 'Zircon Ring', 'Eremite\'s Ring'},
         Back = {'Hexerei Cape', 'Red Cape +1', 'Rearguard Mantle'},
         Waist = {'Druid\'s Rope'},
-        Legs = {'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
-        Feet = {'Wonder Clomps', 'Dream Boots +1'},
+        Legs = {'Wizard\'s Tonban', 'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
+        Feet = {'Wizard\'s Sabots', 'Wonder Clomps', 'Dream Boots +1'},
     },
 
     RestingMP_Priority = {
@@ -45,6 +45,10 @@ local sets = {
         Feet = {''},
     },
 
+    SpellHaste_Priority = {
+        Waist = {'Swift Belt'},
+    },
+
     -- Level 59
     Vermillion = {
         Head = 'displaced',
@@ -58,7 +62,7 @@ local sets = {
     },
 
     MeleeEngaged_Priority = {
-        Ammo = {'Morion Tathlum'},
+        Ammo = {'Phtm. Tathlum', 'Morion Tathlum'},
         Head = {'Emperor Hairpin'},
         Neck = {'Holy Phial'},
         Ear1 = {'Beetle Earring +1'},
@@ -73,56 +77,73 @@ local sets = {
         Feet = {'Wonder Clomps'},
     },
 
-    INT_Priority = { -- INT +48
+    INT_Priority = { -- INT +49
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
-        Head = {'Seer\'s Crown +1'}, -- INT +3
+        Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'}, -- INT +4
         Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
-        Body = {'Errant Hpl.', 'Shaman\'s Cloak', 'Mage\'s Robe'}, -- INT +10
+        Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
         Hands = {'Errant Cuffs', 'Seer\'s Mitts +1'}, -- INT +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Back = {'Red Cape +1'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
         Legs = {'Errant Slops', 'Seer\'s Slacks'}, -- INT +3
-        Feet = {'Rostrum Pumps'}, -- INT +3
+        Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
-    INTEnfeebling_Priority = { -- INT +45, Enfeebling +4
+    INTEnfeebling_Priority = { -- INT +35, Enfeebling +14
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
         Head = {'Elite Beret', 'Seer\'s Crown +1'}, -- Enfeebling +4
         Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
-        Body = {'Errant Hpl.', 'Shaman\'s Cloak', 'Mage\'s Robe'}, -- INT +10
+        Body = {'Wizard\'s Coat', 'Shaman\'s Cloak'}, -- Enfeebling +10
         Hands = {'Errant Cuffs', 'Seer\'s Mitts +1'}, -- INT +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Back = {'Red Cape +1'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
         Legs = {'Errant Slops', 'Seer\'s Slacks'}, -- INT +3
-        Feet = {'Rostrum Pumps'}, -- INT +3
+        Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
-    INTElemental_Priority = { -- INT +47, Elemental +3
+    -- Looking for 100 INT
+    INTElemental_Priority = { -- INT +48, Elemental +3, Enmity -4
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
-        Head = {'Seer\'s Crown +1'}, -- INT +3
+        Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'}, -- INT +4
         Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
         Ear1 = {'Elemental Earring', 'Morion Earring'}, -- Elemental +3
         Ear2 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
-        Body = {'Errant Hpl.', 'Shaman\'s Cloak', 'Mage\'s Robe'}, -- INT +10
-        Hands = {'Errant Cuffs', 'Seer\'s Mitts +1'}, -- INT +5
+        Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
+        Hands = {'Errant Cuffs', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- INT +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Back = {'Red Cape +1'}, -- INT +3
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
         Legs = {'Errant Slops', 'Seer\'s Slacks'}, -- INT +3
-        Feet = {'Rostrum Pumps'}, -- INT +3
+        Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
+    },
+
+    INTDark_Priority = { -- INT +46, Dark +20, Enmity -4
+        Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
+        Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'}, -- INT +4
+        Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
+        Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2, Dark Skill +5
+        Ear2 = {'Morion Earring'}, -- INT +1
+        Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
+        Hands = {'Errant Cuffs', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- INT +5
+        Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
+        Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
+        Back = {'Red Cape +1'}, -- INT +3
+        Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
+        Legs = {'Wizard\'s Tonban', 'Seer\'s Slacks'}, -- Dark Skill +15
+        Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
     SorcererTonban_Priority = {
-        Head = 'Sorcerer\'s Tonban',
+        Head = {'Sorcerer\'s Tonban'},
     },
 
     MND_Priority = { -- MND +43, Enfeebling +4
@@ -140,13 +161,13 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
-    MNDEnfeebling_Priority = { -- MND +43, Enfeebling +4
+    MNDEnfeebling_Priority = { -- MND +33, Enfeebling +14
         Ammo = {'Hedgehog Bomb'},
         Head = {'Elite Beret'}, -- Enfeebling +4
         Neck = {'Holy Phial'}, -- MND +3
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Errant Hpl.', 'Wonder Kaftan'}, -- MND +10
+        Body = {'Wizard\'s Coat', 'Wonder Kaftan'}, -- Enfeebling +10
         Hands = {'Devotee\'s Mitts'}, -- MND +5
         Ring1 = {'Tamas Ring',}, -- MND +5
         Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise\'s Ring'}, -- MND +4
@@ -156,44 +177,48 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- MND +3
     },
 
+    Diabolos_Priority = {
+        Main = {'Diabolos\'s Pole', 'Pluto\'s Staff'},
+    },
+
     Fire_Priority = {
-        Main = {'Fire Staff'},
+        Main = {'Vulcan\'s Staff'},
     },
 
     Ice_Priority = {
-        Main = {'Ice Staff'},
+        Main = {'Aquilo\'s Staff'},
     },
 
     Wind_Priority = {
-        Main = {'Wind Staff'},
+        Main = {'Auster\'s Staff'},
     },
 
     Earth_Priority = {
-        Main = {'Earth Staff'},
+        Main = {'Terra\'s Staff'},
     },
 
     Thunder_Priority = {
-        Main = {'Thunder Staff'},
+        Main = {'Jupiter\'s Staff'},
     },
 
     Water_Priority = {
-        Main = {'Water Staff'},
+        Main = {'Neptune\'s Staff'},
     },
 
     Light_Priority = {
-        Main = {'Light Staff'},
+        Main = {'Apollo\'s Staff'},
     },
 
     Dark_Priority = {
-        Main = {'Dark Staff'},
+        Main = {'Pluto\'s Staff'},
     },
 
     StyleLock = {
-        Main = 'Dark Staff',
-        Body = 'Shaman\'s Cloak',
-        Hands = 'Seer\'s Mitts +1',
-        Legs = 'Seer\'s Slacks',
-        Feet = 'Wonder Clomps',
+        Main = 'Pluto\'s Staff',
+        Body = 'Wizard\'s Coat',
+        Hands = 'Wizard\'s Gloves',
+        Legs = 'Wizard\'s Tonban',
+        Feet = 'Wizard\'s Sabots',
     },
 
     PetReadyDefault = {
@@ -219,7 +244,7 @@ local sets = {
         Ear1 = {''},
         Ear2 = {''},
         Body = {''},
-        Hands = {''},
+        Hands = {'Wizard\'s Gloves'},
         Ring1 = {''},
         Ring2 = {''},
         Back = {'Trimmer\'s Mantle'},
@@ -244,7 +269,7 @@ local ObiTable = {
     --Earth = "Dorin Obi",
     --Water = "Suirin Obi",
     --Wind = "Furin Obi",
-    --Ice = "Hyorin Obi",
+    Ice = "Hyorin Obi",
     --Thunder = "Rairin Obi",
     --Light = "Korin Obi",
     Dark = "Anrin Obi"
@@ -260,6 +285,8 @@ local ElementWeaknessTable = {
     Light = "Dark",
     Dark = "Light"
 }
+
+local hasteSpells = T{'Stun', 'Escape', 'Warp', 'Warp II', 'Silena', 'Blindna', 'Paralyna', 'Erase', 'Regen', 'Protect', 'Protectra', 'Protect II', 'Protectra II', 'Shell', 'Shellra', 'Shell II', 'Shellra II', 'Teleport-Dem', 'Teleport-Mea', 'Teleport-Holla'};
 
 local obiBonus = function(spellElement)
     local environment = gData.GetEnvironment();
@@ -584,6 +611,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
         gFunc.EquipSet(sets.Sneak);
+    elseif hasteSpells:contains(spell.Name) then
+        gFunc.EquipSet(sets.SpellHaste);
     elseif spell.Type == 'White Magic' then
         if spell.Skill == 'Enfeebling Magic' then
             gFunc.EquipSet(sets.MNDEnfeebling);
@@ -601,6 +630,12 @@ profile.HandleMidcast = function()
             end
         elseif spell.Skill == 'Enfeebling Magic' then
             gFunc.EquipSet(sets.INTEnfeebling);
+        elseif spell.Skill == 'Dark Magic' then
+            gFunc.EquipSet(sets.INTDark);
+
+            if draginclude.dragSettings.TpVariant == 2 and (spell.Name == 'Drain' or spell.Name == 'Aspir') and weatherElement == 'Dark' then
+                gFunc.EquipSet(sets.Diabolos);
+            end
         else
             gFunc.EquipSet(sets.INT);
         end

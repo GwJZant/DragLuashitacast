@@ -45,8 +45,8 @@ local Utils = {
             DefaultSpecial = 'Roar',
             DurationMinutes = 60,
         },
-        SaberFamiliar = { --NQ Saber lv. 28
-            Name = 'SaberFamiliar',
+        TigerFamiliar = { --NQ Saber lv. 28
+            Name = 'TigerFamiliar',
             DefaultJug = 'Meat Broth',
             DefaultSTA = 'Razor Fang',
             DefaultAOE = 'Claw Cyclone',
@@ -388,8 +388,8 @@ function dragdisplay.Update(settings)
             BstPet = Utils.Jugs.LullabyMelodia;
         elseif pet.Name == 'CourierCarrie' then
             BstPet = Utils.Jugs.CourierCarrie;
-        elseif pet.Name == 'SaberFamiliar' then
-            BstPet = Utils.Jugs.SaberFamiliar;
+        elseif pet.Name == 'TigerFamiliar' then
+            BstPet = Utils.Jugs.TigerFamiliar;
         elseif pet.Name == 'SaberSiravarde' then
             BstPet = Utils.Jugs.SaberSiravarde;
         elseif pet.Name == 'MiteFamiliar' then
@@ -452,6 +452,8 @@ function dragdisplay.Initialize()
 
         if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
+        elseif Main == 'WHM' then
+            display = display .. '\n1. Haste 2. Regen 3. Regen III 4. Cure V 5. Stoneskin 6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';
         elseif Main == 'DRG' then
             display = display .. ' || LockEth: ' .. tostring(lockEth) .. ' GreedyHeal: ' .. tostring(drgGreedy) .. ' Caps: ' .. drgHealingCap .. '/' .. drgGreedyHealingCap .. ' (G)';
         elseif Main == 'SMN' and SmnPet ~= Utils.Summons.Empty then

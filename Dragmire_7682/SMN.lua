@@ -1057,13 +1057,13 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.Wind);
             elseif pet.Name == 'Ifrit' or pet.Name == 'FireSpirit' then
                 gFunc.EquipSet(sets.Fire);
-            elseif pet.Name == 'Leviathan'  or pet.Name == 'WaterSpirit' then
+            elseif pet.Name == 'Leviathan' or pet.Name == 'WaterSpirit' then
                 gFunc.EquipSet(sets.Water);
-            elseif pet.Name == 'Shiva'  or pet.Name == 'IceSpirit' then
+            elseif pet.Name == 'Shiva' or pet.Name == 'IceSpirit' then
                 gFunc.EquipSet(sets.Ice);
-            elseif pet.Name == 'Ramuh'  or pet.Name == 'ThunderSpirit' then
+            elseif pet.Name == 'Ramuh' or pet.Name == 'ThunderSpirit' then
                 gFunc.EquipSet(sets.Thunder);
-            elseif pet.Name == 'Fenrir'  or pet.Name == 'DarkSpirit' then
+            elseif pet.Name == 'Fenrir' or pet.Name == 'DarkSpirit' then
                 gFunc.EquipSet(sets.Dark);
             elseif pet.Name == 'Diabolos' then
                 gFunc.EquipSet(sets.Dark);

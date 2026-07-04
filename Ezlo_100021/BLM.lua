@@ -10,21 +10,24 @@ local Settings = {
         OpoopoNecklace = false,
     },
     CurrentLevel = 0,
+    MagicBurst = false,
+    MDT = false,
+    Enmity = false,
 };
 
 local sets = {
     Default_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Morion Tathlum'},
+        Ammo = {'Phtm. Tathlum', 'Morion Tathlum'},
         Head = {'Emperor Hairpin', 'Dream Hat +1'},
         Neck = {'Jeweled Collar', 'Black Neckerchief'},
         Ear1 = {'Merman\'s Earring', 'Morion Earring'},
         Ear2 = {'Merman\'s Earring', 'Moldavite Earring', 'Morion Earring'},
         Body = {'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
         Hands = {'Coral Bangles', 'Seer\'s Mitts +1', 'Wonder Mitts', 'Dream Mittens +1'},
-        Ring1 = {'Merman\'s Earing', 'Tamas Ring', 'Eremite\'s Ring'},
-        Ring2 = {'Merman\'s', 'Zircon Ring', 'Eremite\'s Ring'},
+        Ring1 = {'Merman\'s Ring', 'Tamas Ring', 'Eremite\'s Ring'},
+        Ring2 = {'Merman\'s Ring', 'Zircon Ring', 'Eremite\'s Ring'},
         Back = {'Hexerei Cape', 'Red Cape +1', 'Rearguard Mantle'},
-        Waist = {'Druid\'s Rope'},
+        Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
         Legs = {'Wizard\'s Tonban', 'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
         Feet = {'Wizard\'s Sabots', 'Wonder Clomps', 'Dream Boots +1'},
     },
@@ -110,14 +113,14 @@ local sets = {
     },
 
     -- Looking for 100 INT
-    INTElemental_Priority = { -- INT +48, Elemental +3, Enmity -4
+    INTElemental_Priority = { -- INT +43, Elemental +3, MAB +5, Enmity -4
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
         Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'}, -- INT +4
         Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
         Ear1 = {'Elemental Earring', 'Morion Earring'}, -- Elemental +3
         Ear2 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
-        Hands = {'Errant Cuffs', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- INT +5
+        Hands = {'Zenith Mitts', 'Errant Cuffs', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- MAB +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Back = {'Red Cape +1'}, -- INT +3
@@ -126,14 +129,29 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
-    INTDark_Priority = { -- INT +46, Dark +20, Enmity -4
+    MagicBurst_Priority = {
+        Hands = {'Sorcerer\'s Gloves'},
+    },
+
+    Enmity_Priority = { -- Enmity -29
+        Ear2 = {'Novia Earring'}, -- Enmity -7
+        Body = {'Errant Hpl.'}, -- Enmity -3
+        Hands = {'Sorcerer\'s Gloves'}, -- Enmity -2
+        Ring1 = {'Tamas Ring'}, -- Enmity -5
+        Back = {'Errant Cape'}, -- Enmity -5
+        Waist = {'Penitent\'s Rope'}, -- Enmity -3
+        Legs = {'Errant Slops'}, -- Enmity -3
+        Feet = {'Wizard\'s Sabots'}, -- Enmity -1
+    },
+
+    INTDark_Priority = { -- INT +41, Dark +30
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'}, -- INT +2
         Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'}, -- INT +4
         Neck = {'Checkered Scarf', 'Black Neckerchief'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2, Dark Skill +5
         Ear2 = {'Morion Earring'}, -- INT +1
         Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
-        Hands = {'Errant Cuffs', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- INT +5
+        Hands = {'Sorcerer\'s Gloves', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'}, -- Dark Skill +10
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Back = {'Red Cape +1'}, -- INT +3
@@ -216,8 +234,8 @@ local sets = {
     StyleLock = {
         Main = 'Pluto\'s Staff',
         Body = 'Wizard\'s Coat',
-        Hands = 'Wizard\'s Gloves',
-        Legs = 'Wizard\'s Tonban',
+        Hands = 'Sorcerer\'s Gloves',
+        Legs = 'Sorcerer\'s Tonban',
         Feet = 'Wizard\'s Sabots',
     },
 
@@ -267,11 +285,11 @@ profile.Sets = sets;
 local ObiTable = {
     --Fire = "Karin Obi",
     --Earth = "Dorin Obi",
-    --Water = "Suirin Obi",
+    Water = "Suirin Obi",
     --Wind = "Furin Obi",
     Ice = "Hyorin Obi",
-    --Thunder = "Rairin Obi",
-    --Light = "Korin Obi",
+    Thunder = "Rairin Obi",
+    Light = "Korin Obi",
     Dark = "Anrin Obi"
 }
 
@@ -336,6 +354,10 @@ end
 
 profile.OnLoad = function()
     draginclude.OnLoad(sets, {'NoStaffSwap', 'StaffSwap'}, {'None', 'Field'});
+
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd MDT ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mb /lac fwd MagicBurst ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enmity /lac fwd Enmity ');
 end
 
 profile.OnUnload = function()
@@ -343,29 +365,29 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
-    if (args[1] == 'WeaponTypeToggle') then
-        Settings.WeaponTypeToggle = not Settings.WeaponTypeToggle;
+    if (args[1] == 'MagicBurst') then
+        Settings.MagicBurst = not Settings.MagicBurst;
 
-        if Settings.WeaponTypeToggle then
-            gFunc.Message('WeaponTypeToggle SWORD');
+        if Settings.MagicBurst then
+            gFunc.Message('MagicBurst ON');
         else
-            gFunc.Message('WeaponTypeToggle DAGGER');
+            gFunc.Message('MagicBurst OFF');
         end
-    elseif (args[1] == 'pdt') then
-        Settings.PDT = not Settings.PDT;
+    elseif (args[1] == 'MDT') then
+        Settings.MDT = not Settings.MDT;
 
-        if Settings.PDT then
-            gFunc.Message('PDT ON');
+        if Settings.MDT then
+            gFunc.Message('MDT ON');
         else
-            gFunc.Message('PDT OFF');
+            gFunc.Message('MDT OFF');
         end
-    elseif (args[1] == 'Martial') then
-        Settings.MartialKnife = not Settings.MartialKnife;
+    elseif (args[1] == 'Enmity') then
+        Settings.Enmity = not Settings.Enmity;
 
-        if Settings.MartialKnife then
-            gFunc.Message('MartialKnife ON');
+        if Settings.Enmity then
+            gFunc.Message('Enmity ON');
         else
-            gFunc.Message('MartialKnife OFF');
+            gFunc.Message('Enmity OFF');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -624,6 +646,10 @@ profile.HandleMidcast = function()
     elseif spell.Type == 'Black Magic' then
         if spell.Skill == 'Elemental Magic' then
             gFunc.EquipSet(sets.INTElemental);
+
+            if Settings.MagicBurst then
+                gFunc.EquipSet(sets.MagicBurst);
+            end
 
             if spell.Element == dayElement then
                 gFunc.EquipSet(sets.SorcererTonban);

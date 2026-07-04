@@ -259,6 +259,7 @@ draginclude.dragSettings = {
     FishingVariant = 1,
     IsNude = false,
     RewardType = 'HP', -- HP/STATUS
+    FlavorToggle = false
 };
 
 draginclude.TpVariantTable = { -- cycle through with /lac fwd tpset
@@ -382,6 +383,7 @@ function draginclude.SetNumpadCommands()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /relic /lac fwd relic ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /nude /lac fwd nude ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /fishset /lac fwd FishingVariant ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /flavor /lac fwd FlavorToggle ');
 end
 
 function draginclude.OnUnload()
@@ -528,7 +530,11 @@ function draginclude.HandleCommand(args)
 
             draginclude.dragSettings.IsNude = true;
         end
-        
+    elseif args[1] == 'FlavorToggle' then
+ 
+        draginclude.dragSettings.FlavorToggle = not draginclude.dragSettings.FlavorToggle;
+ 
+        gFunc.Message('FlavorToggle ' .. tostring(draginclude.dragSettings.FlavorToggle));
     end
 end
 
@@ -823,109 +829,113 @@ end
 
 function draginclude.FlavorText(spellName)
     local target = gData.GetActionTarget();
-	local prefix = '/echo ';
+	local prefix = '/sh ';
 	
-	if string.contains(spell.Name, 'Dia') then
-		gFunc.Message(prefix .. 'Pierce through ' .. target.Name .. '\'s defense with holy light! [[' .. spellName .. ']]!');
-	elseif spellName == 'Cure' then
-		gFunc.Message(prefix .. 'Life\'s refreshing breeze, blow in energy! [[' .. spell.Name .. ']]!');
-	elseif spellName == 'Cure II' or spellName == 'Curaga' then
-		gFunc.Message(prefix .. 'Life\'s refreshing breeze, heal from the sky! [[' .. spell.Name .. ']]!');
-	elseif spellName == 'Cure III' or spellName == 'Curaga II' then
-		gFunc.Message(prefix .. 'Blessing breeze, blow in energy! [[' .. spell.Name .. ']]!');
-	elseif spellName == 'Cure IV' or spellName == 'Cure V' or spellName == 'Curaga III' or spellName == 'Curaga IV' then
-		gFunc.Message(prefix .. 'Mighty breeze, heal from the sky! [[' .. spell.Name .. ']]!');
-	elseif spellName == 'Raise' then
-		gFunc.Message(prefix .. 'Spirits of life, return us! [[' .. spellName .. ']]!');
-	elseif spellName == 'Raise II' or spellName == 'Raise III' then
-		gFunc.Message(prefix .. 'Spirits of life, give a new life to the soul! [[' .. spellName .. ']]!');
-	elseif string.contains(spellName, 'Reraise') then
-		gFunc.Message(prefix .. 'Inject life\'s energy! [[' .. spellName .. ']]!');
-	elseif string.contains(spellName, 'Regen') then
-		gFunc.Message(prefix .. 'Share lives with all things in nature... [[' .. spellName .. ']]!');
-	elseif spellName == 'Protect' or spellName == 'Protect II' or spellName == 'Protectra' or spellName == 'Protectra II' then
-		gFunc.Message(prefix .. 'Precious light, be our armor to protect us! [[' .. spellName .. ']]!');
-	elseif spellName == 'Protect III' or spellName == 'Protect IV' or spellName == 'Protectra III' or spellName == 'Protectra IV' or spellName == 'Protectra V' then
-		gFunc.Message(prefix .. 'Shining light, shield from all directions! [[' .. spellName .. ']]!');
-	elseif spellName == 'Shell' or spellName == 'Shell II' or spellName == 'Shellra' or spellName == 'Shellra II' then
-		gFunc.Message(prefix .. 'Silent light, shield from evil! [[' .. spellName .. ']]!');
-	elseif spellName == 'Shell III' or spellName == 'Shell IV' or spellName == 'Shellra III' or spellName == 'Shellra IV' or spellName == 'Shellra V' then
-		gFunc.Message(prefix .. 'Enduring light, shield from roaring magic! [[' .. spellName .. ']]!');
-	elseif spellName == 'Erase' then
-		gFunc.Message(prefix .. 'Heavenly wind, carry us to the fountain of power! [[' .. spellName .. ']]!');
-	elseif spellName == 'Holy' then
-		gFunc.Message(prefix .. 'Bright light, shine down on bloody impurity! [[' .. spellName .. ']]!');
-	elseif spellName == 'Fire' then
-		gFunc.Message(prefix .. 'Destruction of nature, gather in flame! [[' .. spellName .. ']]!');
-	elseif spellName == 'Fire II' or spellName == 'Firaga' then
-		gFunc.Message(prefix .. 'Out of the ground, raze all greenery with flame! [[' .. spellName .. ']]!');
-	elseif spellName == 'Fire III' or spellName == 'Firaga II' then
-		gFunc.Message(prefix .. 'Star fire, awake and deliver your judgement! [[' .. spellName .. ']]!');
-	elseif spellName == 'Fire IV' or spellName == 'Firaga III' then
-		gFunc.Message(prefix .. 'Smouldering flames far below, punish the wicked! [[' .. spellName .. ']]!');
-	elseif spellName == 'Blizzard' then
-		gFunc.Message(prefix .. 'Scatter your chilly sharp blades! [[' .. spellName .. ']]!');
-	elseif spellName == 'Blizzard II' or spellName == 'Blizzaga' then
-		gFunc.Message(prefix .. 'Drifting breeze, come down with fury! [[' .. spellName .. ']]!');
-	elseif spellName == 'Blizzard III' or spellName == 'Blizzaga II' then
-		gFunc.Message(prefix .. 'Freezing wind, speak of forgotten truths! [[' .. spellName .. ']]!');
-	elseif spellName == 'Blizzard IV' or spellName == 'Blizzaga III' or spellName == 'Freeze' then
-		gFunc.Message(prefix .. 'Effortless water, break your silence, attack! [[' .. spellName .. ']]!');
-	elseif spellName == 'Thunder' then
-		gFunc.Message(prefix .. 'Strip away the ground with glistening blades! [[' .. spellName .. ']]!');
-	elseif spellName == 'Thunder II' or spellName == 'Thundaga' then
-		gFunc.Message(prefix .. 'Swirling bolts, gather and strike with power! [[' .. spellName .. ']]!');
-	elseif spellName == 'Thunder III' or spellName == 'Thundaga II' then
-		gFunc.Message(prefix .. 'Heavenly bolts, bring God\'s justice! [[' .. spellName .. ']]!');
-	elseif spellName == 'Thunder IV' or spellName == 'Thundaga III' or spellName == 'Burst' then
-		gFunc.Message(prefix .. 'Angry spirits of the world strike now! [[' .. spellName .. ']]!');
-	elseif spellName == 'Flare' then
-		gFunc.Message(prefix .. 'Inscript the dark god into a rotting body! [[' .. spellName .. ']]!');
-	elseif string.contains(spellName, 'Poison') then
-		gFunc.Message(prefix .. 'Filthy blood of revenge, inject!! [[' .. spellName .. ']]!');
-	elseif string.contains(spellName, 'Sleep') and not string.contains(spellName, 'Bar') then
-		gFunc.Message(prefix .. 'Lose consciousness, wash away into the silent sea... [[' .. spellName .. ']]!');
-	elseif spellName == 'Blind' then
-		gFunc.Message(prefix .. 'All light, fall into darkness! [[' .. spellName .. ']]!');
-	elseif spellName == 'Silence' then
-		gFunc.Message(prefix .. 'Conjurors seek truth in silence! [[' .. spellName .. ']]!');
-	elseif spellName == 'Paralyze' then
-		gFunc.Message(prefix .. 'Mindless, spiritless, hear the immutable beat... [[' .. spellName .. ']]!');
-	elseif spellName == 'Drain' then
-		gFunc.Message(prefix .. 'Lost energy... raise the heartrate! [[' .. spellName .. ']]!');
-	elseif spellName == 'Aspir' then
-		gFunc.Message(prefix .. 'Guiding light, shed magic power from above! [[' .. spellName .. ']]!');
-	elseif spellName == 'Haste' then
-		gFunc.Message(prefix .. 'Layer upon layer make your mark now... [[' .. spellName .. ']]!');
-	elseif spellName == 'Slow' then
-		gFunc.Message(prefix .. 'Time, rest and give your kindness to the worthy! [[' .. spellName .. ']]!');
-	elseif spellName == 'Bind' then
-		gFunc.Message(prefix .. 'Land of all lives, suppress all rebels! [[' .. spellName .. ']]!');
-	elseif spellName == 'Carbuncle' then
-		gFunc.Message(prefix .. 'Impart light to fight our holy war! [[' .. spellName .. ']]!');
-	elseif spellName == 'Shiva' then
-		gFunc.Message(prefix .. 'Wind, fade to silence and light, give us power! [[' .. spellName .. ']]!');
-	elseif spellName == 'Ramuh' then
-		gFunc.Message(prefix .. 'Master of creation, impart thy help! [[' .. spellName .. ']]!');
-	elseif spellName == 'Ifrit' then
-		gFunc.Message(prefix .. 'King of flames, bear down upon the enemy! [[' .. spellName .. ']]!');
-	elseif spellName == 'Titan' then
-		gFunc.Message(prefix .. 'Bear down with land energy! [[' .. spellName .. ']]!');
-	elseif spellName == 'Leviathan' then
-		gFunc.Message(prefix .. 'Sea fang, attack with water\'s power! [[' .. spellName .. ']]!');
-	elseif spellName == 'Garuda' then -- Silf
-		gFunc.Message(prefix .. 'Windy god, strike enemies silent! [[' .. spellName .. ']]!');
-	elseif spellName == 'Diabolos' then -- Lich
-		gFunc.Message(prefix .. 'Death song, death door, death river awaiting! [[' .. spellName .. ']]!');
-	elseif spellName == 'Fenrir' then
-		gFunc.Message(prefix .. 'Dark-minded soul, protect us! [[' .. spellName .. ']]!');
-	elseif spellName == 'Shellbuster' then 
-		gFunc.Message(prefix .. 'Armor won\'t help the heart stay sharp! [[' .. spellName .. ']]!');
-	elseif spellName == 'Geirskogul' then -- Stasis Sword
-		gFunc.Message(prefix .. 'Life is short... Bury! [[' .. spellName .. ']]!');
-	elseif spellName == 'Spirit Taker' then -- Dark Sword
-		gFunc.Message(prefix .. 'Dead or alive... strike magic power! [[' .. spellName .. ']]!');
-	end
+    if draginclude.dragSettings.FlavorToggle then
+        if string.contains(spellName, 'Dia') then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Pierce through ' .. target.Name .. '\'s defense with holy light! [[' .. spellName .. ']]!');
+        elseif spellName == 'Cure' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Life\'s refreshing breeze, blow in energy! [[' .. spellName .. ']]!');
+        elseif spellName == 'Cure II' or spellName == 'Curaga' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Life\'s refreshing breeze, heal from the sky! [[' .. spellName .. ']]!');
+        elseif spellName == 'Cure III' or spellName == 'Curaga II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Blessing breeze, blow in energy! [[' .. spellName .. ']]!');
+        elseif spellName == 'Cure IV' or spellName == 'Cure V' or spellName == 'Curaga III' or spellName == 'Curaga IV' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Mighty breeze, heal from the sky! [[' .. spellName .. ']]!');
+        elseif spellName == 'Raise' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Spirits of life, return us! [[' .. spellName .. ']]!');
+        elseif spellName == 'Raise II' or spellName == 'Raise III' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Spirits of life, give a new life to the soul! [[' .. spellName .. ']]!');
+        elseif string.contains(spellName, 'Reraise') then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Inject life\'s energy! [[' .. spellName .. ']]!');
+        elseif string.contains(spellName, 'Regen') then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Share lives with all things in nature... [[' .. spellName .. ']]!');
+        elseif spellName == 'Protect' or spellName == 'Protect II' or spellName == 'Protectra' or spellName == 'Protectra II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Precious light, be our armor to protect us! [[' .. spellName .. ']]!');
+        elseif spellName == 'Protect III' or spellName == 'Protect IV' or spellName == 'Protectra III' or spellName == 'Protectra IV' or spellName == 'Protectra V' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Shining light, shield from all directions! [[' .. spellName .. ']]!');
+        elseif spellName == 'Shell' or spellName == 'Shell II' or spellName == 'Shellra' or spellName == 'Shellra II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Silent light, shield from evil! [[' .. spellName .. ']]!');
+        elseif spellName == 'Shell III' or spellName == 'Shell IV' or spellName == 'Shellra III' or spellName == 'Shellra IV' or spellName == 'Shellra V' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Enduring light, shield from roaring magic! [[' .. spellName .. ']]!');
+        elseif spellName == 'Erase' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Heavenly wind, carry us to the fountain of power! [[' .. spellName .. ']]!');
+        elseif spellName == 'Holy' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Bright light, shine down on bloody impurity! [[' .. spellName .. ']]!');
+        elseif spellName == 'Fire' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Destruction of nature, gather in flame! [[' .. spellName .. ']]!');
+        elseif spellName == 'Fire II' or spellName == 'Firaga' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Out of the ground, raze all greenery with flame! [[' .. spellName .. ']]!');
+        elseif spellName == 'Fire III' or spellName == 'Firaga II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Star fire, awake and deliver your judgement! [[' .. spellName .. ']]!');
+        elseif spellName == 'Fire IV' or spellName == 'Firaga III' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Smouldering flames far below, punish the wicked! [[' .. spellName .. ']]!');
+        elseif spellName == 'Blizzard' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Scatter your chilly sharp blades! [[' .. spellName .. ']]!');
+        elseif spellName == 'Blizzard II' or spellName == 'Blizzaga' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Drifting breeze, come down with fury! [[' .. spellName .. ']]!');
+        elseif spellName == 'Blizzard III' or spellName == 'Blizzaga II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Freezing wind, speak of forgotten truths! [[' .. spellName .. ']]!');
+        elseif spellName == 'Blizzard IV' or spellName == 'Blizzaga III' or spellName == 'Freeze' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Effortless water, break your silence, attack! [[' .. spellName .. ']]!');
+        elseif spellName == 'Thunder' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Strip away the ground with glistening blades! [[' .. spellName .. ']]!');
+        elseif spellName == 'Thunder II' or spellName == 'Thundaga' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Swirling bolts, gather and strike with power! [[' .. spellName .. ']]!');
+        elseif spellName == 'Thunder III' or spellName == 'Thundaga II' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Heavenly bolts, bring God\'s justice! [[' .. spellName .. ']]!');
+        elseif spellName == 'Thunder IV' or spellName == 'Thundaga III' or spellName == 'Burst' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Angry spirits of the world strike now! [[' .. spellName .. ']]!');
+        elseif spellName == 'Flare' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Inscript the dark god into a rotting body! [[' .. spellName .. ']]!');
+        elseif string.contains(spellName, 'Poison') and not spellName == 'Poisona' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Filthy blood of revenge, inject!! [[' .. spellName .. ']]!');
+        elseif string.contains(spellName, 'Sleep') and not string.contains(spellName, 'Bar') then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Lose consciousness, wash away into the silent sea... [[' .. spellName .. ']]!');
+        elseif spellName == 'Blind' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'All light, fall into darkness! [[' .. spellName .. ']]!');
+        elseif spellName == 'Silence' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Conjurors seek truth in silence! [[' .. spellName .. ']]!');
+        elseif spellName == 'Paralyze' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Mindless, spiritless, hear the immutable beat... [[' .. spellName .. ']]!');
+        elseif spellName == 'Drain' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Lost energy... raise the heartrate! [[' .. spellName .. ']]!');
+        elseif spellName == 'Aspir' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Guiding light, shed magic power from above! [[' .. spellName .. ']]!');
+        elseif spellName == 'Haste' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Layer upon layer make your mark now... [[' .. spellName .. ']]!');
+        elseif spellName == 'Slow' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Time, rest and give your kindness to the worthy! [[' .. spellName .. ']]!');
+        elseif spellName == 'Bind' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Land of all lives, suppress all rebels! [[' .. spellName .. ']]!');
+        elseif spellName == 'Carbuncle' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Impart light to fight our holy war! [[' .. spellName .. ']]!');
+        elseif spellName == 'Shiva' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Wind, fade to silence and light, give us power! [[' .. spellName .. ']]!');
+        elseif spellName == 'Ramuh' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Master of creation, impart thy help! [[' .. spellName .. ']]!');
+        elseif spellName == 'Ifrit' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'King of flames, bear down upon the enemy! [[' .. spellName .. ']]!');
+        elseif spellName == 'Titan' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Bear down with land energy! [[' .. spellName .. ']]!');
+        elseif spellName == 'Leviathan' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Sea fang, attack with water\'s power! [[' .. spellName .. ']]!');
+        elseif spellName == 'Garuda' then -- Silf
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Windy god, strike enemies silent! [[' .. spellName .. ']]!');
+        elseif spellName == 'Diabolos' then -- Lich
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Death song, death door, death river awaiting! [[' .. spellName .. ']]!');
+        elseif spellName == 'Fenrir' then
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Dark-minded soul, protect us! [[' .. spellName .. ']]!');
+        elseif spellName == 'Shell Crusher' then 
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Armor won\'t help the heart stay sharp! [[' .. spellName .. ']]!');
+        elseif spellName == 'Geirskogul' then -- Stasis Sword
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Life is short... Bury! [[' .. spellName .. ']]!');
+        elseif spellName == 'Spirit Taker' then -- Dark Sword
+            AshitaCore:GetChatManager():QueueCommand(1, prefix .. 'Dead or alive... strike magic power! [[' .. spellName .. ']]!');
+        end
+
+        draginclude.dragSettings.FlavorToggle = false;
+    end
 end
 
 function draginclude.CheckAketon()

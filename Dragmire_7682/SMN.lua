@@ -19,14 +19,14 @@ local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
         Head = {'Evk. Horn +1', 'Shep. Bonnet', 'Dream Hat +1'},
-        Neck = {'Uggalepih Pendant'},
+        Neck = {'Jeweled Collar'},
         --Neck = {'Smn. Torque'},
-        Ear1 = {'Novia Earring', 'Phantom Earring'},
+        Ear1 = {'Merman\'s Earring', 'Phantom Earring'},
         Ear2 = {'Loquac. Earring', 'Reraise Earring'},
         Body = {'Yinyang Robe', 'Elder\'s Surcoat', 'Seer\'s Tunic', 'Dream Robe +1'},
         Hands = {'Zenith Mitts', 'Elder\'s Bracers', 'Carbuncle Mitts'},
         Ring1 = {'Evoker\'s Ring', 'Rajas Ring'},
-        Ring2 = {'Ether Ring'},
+        Ring2 = {'Merman\'s Ring', 'Ether Ring'},
         Back = {'Astute Cape', 'Trimmer\'s Mantle'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Seer\'s Slacks', 'Dream Trousers +1'},
@@ -1162,6 +1162,8 @@ profile.HandlePrecast = function()
         gFunc.Message('Equipping Interim ' .. castDelay);
         gFunc.SetMidDelay(castDelay);
     end
+
+    draginclude.FlavorText(action.Name);
 end
 
 profile.HandleMidcast = function()
@@ -1234,6 +1236,8 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
+
+    draginclude.FlavorText(action.Name);
 
     if action.Name == 'Spirit Taker' then
         gFunc.EquipSet(sets.WeaponSkillSpiritTaker);

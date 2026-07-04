@@ -315,13 +315,24 @@ local sets = {
         Head = {'Drachen Armet'}, -- Good
     },
 
+    -- If 80 ≤ (Enhancing Magic Skill ÷ 3) + MND ≤ 130 : Stoneskin Strength = (2×Enhancing Magic Skill ÷ 3) + 2*MND - 60
+    -- (2*121/3) + 2*72 - 60 = 164
+    MidcastStoneskin_Priority = { -- Enhancing +12, MND +12 (72 MND + 121 Enhancing Skill)
+        Head = {'Drachen Armet'}, -- Good
+        Neck = {'Enhancing Torque'}, -- Enhancing +7
+        Ear1 = {'Communion Earring'}, -- MND +2
+        Ring1 = {'Aqua Ring'}, -- MND +5
+        Ring2 = {'Aqua Ring'}, -- MND +5
+        Back = {'Merciful Cape'}, -- Enhancing +5
+    },
+
     StyleLock = {
         Main = 'Gungnir',
         Head = 'Ace\'s Helm',
-        Body = 'Homam Corazza',
-        Hands = 'Homam Manopolas',
+        Body = 'Hecatomb Harness',
+        Hands = 'Hecatomb Mittens',
         Legs = 'Homam Cosciales',
-        Feet = 'Homam Gambieras',
+        Feet = 'Hct. Leggings',
     },
 
     StyleLockGavial = {
@@ -331,6 +342,15 @@ local sets = {
         Hands = 'Gavial Fng.Gnt. +1',
         Legs = 'Gavial Cuisses +1',
         Feet = 'Gavial Greaves +1',
+    },
+
+    StyleLockMDT = {
+        Main = 'Gungnir',
+        Head = 'Gavial Mask +1',
+        Body = 'Gavial Mail +1',
+        Hands = 'Gavial Fng.Gnt. +1',
+        Legs = 'Coral Cuisses +1',
+        Feet = 'Coral Greaves +1',
     },
 
     StyleLockRelic = {
@@ -588,7 +608,7 @@ local function LateInitialize()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockGavial);
+        gFunc.LockStyle(sets.StyleLock);
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'RDM' then
@@ -636,6 +656,7 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd MDT');
 
         
+        AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd MDT ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /poisoncrab /lac fwd poisoncrab');
 
         Settings.LateInitialized.Initialized = true;
@@ -936,6 +957,8 @@ profile.HandleMidcast = function()
 
     if string.contains(spell.Name, partyPrioSpell) then
         gFunc.Message('HP Up Set SKIPPED');
+    elseif spell.Name == 'Stoneskin' then
+        gFunc.EquipSet(sets.MidcastStoneskin);
     elseif player.HP <= hpThreshold or string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise') then
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNight);

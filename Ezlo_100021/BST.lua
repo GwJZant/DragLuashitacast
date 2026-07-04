@@ -32,13 +32,13 @@ local sets = {
         Neck = {'Jeweled Collar', 'Holy Phial'},
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Merman\'s Earring', 'Beetle Earring +1'},
-        Body = {'Scorpion Harness', 'Wonder Kaftan', 'Beetle Harness +1'},
+        Body = {'Scorpion Harness', 'Wonder Kaftan', 'Dream Robe +1'},
         Hands = {'Battle Gloves'},
         Ring1 = {'Merman\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Merman\'s Ring', 'Sniper\'s Ring'},
         Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
-        Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers'},
+        Legs = {'Wonder Braccae', 'Dream Trousers +1'},
         Feet = {'Beast Gaiters', 'Wonder Clomps', 'Btl. Leggings +1'},
     },
 
@@ -175,28 +175,28 @@ local sets = {
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Alumine Haubert', 'Wonder Kaftan'},
+        Body = {'Black Cotehardie', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Toreador\'s Ring', 'Sniper\'s Ring'},
+        Ring2 = {'Sniper\'s Ring'},
         Back = {'Amemet Mantle'},
         Waist = {'R.K. Belt +1', 'Life Belt'},
-        Legs = {'Alumine Brayettes', 'Wonder Braccae'},
+        Legs = {'Thick Breeches', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
     },
 
     WeaponSkillRampage_Priority = {
-        Head = {'Optical Hat', 'Patroclus\'s Helm', 'Emperor Hairpin'},
+        Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
         Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
         Body = {'Scorpion Harness', 'Wonder Kaftan'},
-        Hands = {'Battle Gloves'},
+        Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Toreador\'s Ring', 'Sniper\'s Ring'},
+        Ring2 = {'Sniper\'s Ring'},
         Back = {'Amemet Mantle'},
-        Waist = {'Life Belt'},
-        Legs = {'Alumine Brayettes', 'Wonder Braccae'},
+        Waist = {'R.K. Belt +1', 'Life Belt'},
+        Legs = {'Thick Breeches', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
     },
 
@@ -488,7 +488,7 @@ local function HandlePetAction(PetAction)
 end
 
 profile.OnLoad = function()
-    draginclude.OnLoad(sets, {'Default', 'PDT'}, {'None', 'Field'});
+    draginclude.OnLoad(sets, {'Default', 'MDT'}, {'None', 'Field'});
 
     -- BST Core Commands
     AshitaCore:GetChatManager():QueueCommand(-1,'/bind 1 /lac fwd PetAtk ');

@@ -120,7 +120,7 @@ profile.LateInitialize = function()
 
         --[[ Set your job macro defaults here]]
         if player.SubJob == 'BST' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 7');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
 
             -- BST Core Commands
@@ -134,7 +134,7 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
         else
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1');
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 7');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
         end
 

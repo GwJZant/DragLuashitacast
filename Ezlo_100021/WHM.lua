@@ -18,15 +18,15 @@ local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Cleric\'s Cap', 'Emperor Hairpin', 'Dream Hat +1'},
-        Neck = {'Ajari Necklace', 'Holy Phial'},
-        Ear1 = {'Novia Earring', 'Geist Earring'},
-        Ear2 = {'Loquac. Earring', 'Geist Earring'},
+        Neck = {'Ajari Necklace', 'Holy Phial', 'Black Neckerchief'},
+        Ear1 = {'Novia Earring', 'Geist Earring', 'Reraise Earring'},
+        Ear2 = {'Loquac. Earring', 'Geist Earring', 'Morion Earring'},
         Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
-        Hands = {'Blessed Mitts', 'Dream Mittens +1'},
-        Ring1 = {'Tamas Ring', 'San d\'Orian Ring'},
-        Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise Ring'},
+        Hands = {'Blessed Mitts', 'Wonder Mitts', 'Dream Mittens +1'},
+        Ring1 = {'Tamas Ring'},
+        Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise Ring', 'San d\'Orian Ring'},
         Back = {'Errant Cape', 'Red Cape +1', 'Trimmer\'s Mantle'},
-        Waist = {'Swift Belt', 'Life Belt'},
+        Waist = {'Swift Belt', 'Druid\'s Rope'},
         Legs = {'Healer\'s Pantaln.', 'Wonder Braccae', 'Seer\'s Slacks', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills', 'Wonder Clomps', 'Dream Boots +1'},
     },
@@ -34,7 +34,7 @@ local sets = {
     DefaultMDT_Priority = {
         Ammo = {'Hedgehog Bomb', 'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Cleric\'s Cap', 'Emperor Hairpin', 'Dream Hat +1'},
-        Neck = {'Jeweled Collar', 'Ajari Necklace', 'Holy Phial'},
+        Neck = {'Jeweled Collar', 'Ajari Necklace', 'Holy Phial', 'Black Neckerchief'},
         Ear1 = {'Merman\'s Earring', 'Geist Earring'},
         Ear2 = {'Merman\'s Earring', 'Geist Earring'},
         Body = {'Noble\'s Tunic', 'Wonder Kaftan', 'Seer\'s Tunic', 'Dream Robe +1'},
@@ -87,14 +87,14 @@ local sets = {
     MeleeEngaged_Priority = { -- Haste +14%
         Ammo = {'Holy Ampulla', 'Morion Tathlum'},
         Head = {'Optical Hat', 'Emperor Hairpin'},
-        Neck = {'Ajari Necklace', 'Holy Phial'},
+        --Neck = {'Ajari Necklace', 'Holy Phial'},
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Black Cotehardie', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
+        Ear2 = {'Brutal Earring', 'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Body = {'Reverend Mail', 'Black Cotehardie', 'Wonder Kaftan', 'Seer\'s Tunic', 'Tarutaru Kaftan'},
         Hands = {'Blessed Mitts', 'Battle Gloves'}, -- Haste +5%
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
-        Back = {'Rearguard Mantle', 'Trimmer\'s Mantle'},
+        Back = {'Hexerei Cape', 'Rearguard Mantle', 'Trimmer\'s Mantle'},
         Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
         Legs = {'Blessed Trousers', 'Wonder Braccae', 'Seer\'s Slacks', 'Tarutaru Braccae'}, -- Haste +3%
         Feet = {'Blessed Pumps', 'Wonder Clomps', 'Tarutaru Clomps'}, -- Haste +2%
@@ -159,13 +159,13 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +37 Elemental Skill +12
+    INTElemental_Priority = { -- INT +32 Elemental Skill +12 MAB +5
         Head = {'Elite Beret'}, -- Enfeebling Skill +4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Elemental Earring', 'Morion Earring'}, -- Elemental Skill +3
         Body = {'Shaman\'s Cloak'}, -- INT +4 Elemental Skill +5
-        Hands = {'Errant Cuffs'}, -- INT +5
+        Hands = {'Zenith Mitts', 'Errant Cuffs'}, -- MAB +5
         Ring1 = {'Tamas Ring', 'Eremite\'s Ring'}, -- INT +5
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
@@ -191,6 +191,7 @@ local sets = {
     HPUp_Priority = {
         Body = {'Wonder Kaftan'}, -- HP +36
         Hands = {'Wonder Mitts'}, -- HP +12
+        Ring1 = {'Bomb Queen Ring'}, -- HP +75
         Ring2 = {'Toreador\'s Ring'}, -- HP +10
         Waist = {'Hierarch Belt'}, -- HP +20 (I idle in Penitent's Rope)
         Legs = {'Wonder Braccae'}, -- HP +21
@@ -226,14 +227,14 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DivineSkill_Priority = { -- MND +53, Matk +5
+    DivineSkill_Priority = { -- MND +46, MAB +10
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Moldavite Earring', 'Geist Earring'}, -- Matk +5
         Body = {'Errant Hpl.', 'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +10
-        Hands = {'Blessed Mitts', }, -- MND +7
+        Hands = {'Zenith Mitts'}, -- MND +7
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise Ring'}, -- MND +4
         Back = {'Red Cape +1'}, -- MND +3
@@ -347,7 +348,7 @@ local sets = {
         Main = {'Pluto\'s Staff'},
     },
 
-    Weaponskill_Priority = { -- Acc + 32, Attack + 10, STR +7, DEX +2
+    Weaponskill_Priority = { -- Acc +32, Attack + 10, STR +7, DEX +2
         Ammo = {},
         Head = {'Optical Hat'}, -- Acc +10
         Neck = {},
@@ -369,7 +370,7 @@ local sets = {
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
         Ear1 = {'Minuet Earring', 'Geist Earring'}, -- STR +1
         Ear2 = {'Geist Earring'}, -- MND +1
-        Body = {'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +5
+        Body = {'Reverend Mail', 'Blessed Bliaut', 'Wonder Kaftan'}, -- Acc +10
         Hands = {'Healer\'s Mitts', }, -- MND +7
         Ring1 = {'Tamas Ring', 'Turquoise Ring'}, -- MND +5
         Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise Ring'}, -- MND +3
@@ -393,6 +394,15 @@ local sets = {
         Hands = 'Blessed Mitts',
         Legs = 'Blessed Trousers',
         Feet = 'Blessed Pumps',
+    },
+
+    StyleLockNIN = {
+        Main = 'Apollo\'s Staff',
+        Head = 'Optical Hat',
+        Body = 'Reverend Mail',
+        Hands = 'Coral Bangles',
+        Legs = 'Healer\'s Pantaln.',
+        Feet = 'Rostrum Pumps',
     },
 
     StyleLockAF = {
@@ -467,11 +477,11 @@ profile.Sets = sets;
 local ObiTable = {
     --Fire = "Karin Obi",
     --Earth = "Dorin Obi",
-    --Water = "Suirin Obi",
+    Water = "Suirin Obi",
     --Wind = "Furin Obi",
     Ice = "Hyorin Obi",
-    --Thunder = "Rairin Obi",
-    --Light = "Korin Obi",
+    Thunder = "Rairin Obi",
+    Light = "Korin Obi",
     Dark = "Anrin Obi"
 }
 
@@ -652,8 +662,13 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLockGeneric);
 
+        if player.SubJob == 'NIN' then
+            gFunc.LockStyle(sets.StyleLockNIN);
+        else
+            gFunc.LockStyle(sets.StyleLockNIN);
+        end
+        
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
 

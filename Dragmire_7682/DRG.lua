@@ -1012,6 +1012,7 @@ profile.HandleWeaponskill = function()
         gFunc.EquipSet(sets.WeaponSkillSpiritTaker);
     end
 
+    draginclude.FlavorText(action.Name);
     draginclude.HandleWeaponSkill(action);
 end
 

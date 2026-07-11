@@ -450,7 +450,9 @@ function dragdisplay.Initialize()
         display = display .. '    Res -> ' .. 'Dark: ' .. DarkResistance .. ' | Earth: ' .. EarthResistance .. ' | Fire: ' .. FireResistance .. ' | Ice: ' .. IceResistance .. ' | Lightning: ' .. LightningResistance .. ' | Light: ' .. LightResistance .. ' | Water: ' .. WaterResistance .. ' | Wind: ' .. WindResistance;
         display = display .. ' || Day: ' .. day .. ' | Weather: ' .. weather;
 
-        if Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
+        if Main == 'BLM' then
+            display = display .. '\n3. Regen 4. Gravity sh4. Shock Spikes 5. Stoneskin sh5. Phalanx 6. Silence sh6. Blink 7. Drain 8. Aspir 9. Sleepga sh9. Sleepga II 0. Sleep sh0. Sleep II';
+        elseif Main == 'BST' and BstPet ~= Utils.Jugs.Empty then
             display = display .. '\n' .. BstPet.Name .. ':   1: Fight   2: Charm   3: Call Beast   4: ' .. BstPet.DefaultSTA .. '   5: ' .. BstPet.DefaultAOE .. '   6: ' .. BstPet.DefaultSpecial .. '   8: Stay   9: Heel   0: RewardHP sh0: RewardSTATUS';
         elseif Main == 'WHM' then
             display = display .. '\n1. Haste 2. Regen 3. Regen III 4. Cure V 5. Stoneskin 6. Blink 7. Drain 8. Aspir 9. Sleepga 0. Sleep';

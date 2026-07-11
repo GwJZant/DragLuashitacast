@@ -23,6 +23,7 @@ local Settings = {
     WeaponTypeToggle = false, -- true = Sword | false = dagger
     MartialKnife = false,
     PDT = false,
+    MDT = false,
     SIRD = true,
     FastCastValue = 0.42, -- 20% from traits 22% from gear listed in Precast set
     MeleeAcc = true
@@ -105,6 +106,22 @@ local sets = {
         Waist = {{Name = 'Sonic Belt', Priority = 0}, {Name = 'Swift Belt', Priority = 0}}, --6% Haste
         Legs = {{Name = 'Nashira Seraweels', Priority = 0}, {Name = 'Duelist\'s Tights', Priority = 100}, {Name = 'Elder\'s Braguette', Priority = 100}}, --2% Haste
         Feet = {{Name = 'Dusk Ledelsens', Priority = 0}}, --2% Haste
+    },
+
+    MDT_Priority = { -- PDT -13% or 18%, MDT -17%
+        Ammo = {{Name = 'Phtm. Tathlum', Priority = 100}}, -- MP +10
+        Head = {{Name = 'Darksteel Cap +1', Priority = 0}}, -- PDT -2%
+        Neck = {'Jeweled Collar'},
+        Ear1 = {{Name = 'Merman\'s Earring', Priority = 100}}, -- MP +30
+        Ear2 = {{Name = 'Merman\'s Earring', Priority = 0}}, -- Convert 3% Damage to MP
+        Body = {{Name = 'Dst. Harness +1', Priority = 0}}, -- PDT -4%
+        Hands = {{Name = 'Dst. Mittens +1', Priority = 0}}, -- PDT -2%
+        Ring1 = {{Name = 'Merman\'s Ring', Priority = 100}}, -- MP +30
+        Ring2 = {{Name = 'Merman\'s Ring', Priority = 0}}, -- PDT -5%
+        Back = {{Name = 'Cheviot Cape', Priority = 0}}, -- PDT -5% or -10%
+        Waist = {{Name = 'Hierarch Belt', Priority = 100}}, -- MP +48
+        Legs = {{Name = 'Coral Cuisses +1', Priority = 0}}, -- PDT -3%
+        Feet = {{Name = 'Coral Greaves +1', Priority = 0}}, -- PDT -2%
     },
 
     TankStaff_Priority = { -- PDT -43% or -48%
@@ -639,6 +656,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /weapon /lac fwd WeaponTypeToggle ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /martial /lac fwd Martial ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd pdt ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd mdt ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /enspell /lac fwd enspell ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /sird /lac fwd SIRD ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mp /lac fwd ConvertToggle ');
@@ -666,6 +684,14 @@ profile.HandleCommand = function(args)
             gFunc.Message('PDT ON');
         else
             gFunc.Message('PDT OFF');
+        end
+    elseif (args[1] == 'mdt') then
+        Settings.MDT = not Settings.MDT;
+
+        if Settings.MDT then
+            gFunc.Message('MDT ON');
+        else
+            gFunc.Message('MDT OFF');
         end
     elseif (args[1] == 'Martial') then
         Settings.MartialKnife = not Settings.MartialKnife;
@@ -979,6 +1005,8 @@ profile.HandleDefault = function()
         elseif draginclude.dragSettings.TpVariant == 2 then
             gFunc.EquipSet(sets.TankStaff);
         end
+    elseif Settings.MDT then
+        gFunc.EquipSet(sets.MDT);
     end
 
     if Settings.ConvertToggle then

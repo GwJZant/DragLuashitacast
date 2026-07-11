@@ -16,13 +16,13 @@ local sets = {
     Default_Priority = {
         Ammo = {'Morion Tathlum'},
         Head = {'Emperor Hairpin', 'Dream Hat +1'},
-        Neck = {'Black Neckerchief'},
-        Ear1 = {'Beetle Earring +1'},
-        Ear2 = {'Beetle Earring +1'},
-        Body = {'Wonder Kaftan', 'Beetle Harness +1', 'Dream Robe +1'},
+        Neck = {'Holy Phial'},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {'Wonder Kaftan', 'Dream Robe +1'},
         Hands = {'Battle Gloves', 'Dream Gloves +1'},
         Ring1 = {'San d\'Orian Ring'},
-        Ring2 = {'Eremite\'s Ring'},
+        Ring2 = {'Tamas Ring'},
         Back = {'Trimmer\'s Mantle'},
         Waist = {''},
         Legs = {'Wonder Braccae', 'Ryl.Ftm. Trousers', 'Dream Trousers +1'},
@@ -74,20 +74,12 @@ local sets = {
         Ear2 = {''},
         Body = {''},
         Hands = {''},
-        Ring1 = {'San d\'Orian Ring'},
+        Ring1 = {''},
         Ring2 = {''},
         Back = {''},
         Waist = {''},
         Legs = {''},
         Feet = {''},
-    },
-
-    EXPRing = {
-        Ring1 = 'Chariot Band',
-    },
-
-    Warp = {
-        Main = 'Warp Cudgel',
     },
 };
 

@@ -345,7 +345,7 @@ local sets = {
     },
 
     Water_Priority = {
-        Main = {'Water Staff'},
+        Main = {'Neptune\'s Staff'},
     },
 
     Light_Priority = {
@@ -730,7 +730,7 @@ local function HandleSmnCoreCommands(args)
         elseif pet.Name == 'Ramuh' then
             AshitaCore:GetChatManager():QueueCommand(1, '/pet "' .. SmnConfig.Summons.Ramuh.Ward2 .. '" <stpc>');
         elseif pet.Name == 'Fenrir' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/pet "' .. SmnConfig.Summons.Fenrir.Ward2 .. '" <stpc>');
+            AshitaCore:GetChatManager():QueueCommand(1, '/pet "' .. SmnConfig.Summons.Fenrir.Ward2 .. '" <stnpc>');
         elseif pet.Name == 'Diabolos' then
             AshitaCore:GetChatManager():QueueCommand(1, '/pet "' .. SmnConfig.Summons.Diabolos.Ward2 .. '" <me>');
         end

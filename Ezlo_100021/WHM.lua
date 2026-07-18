@@ -176,11 +176,11 @@ local sets = {
     },
 
     MedicineRing_Priority = {
-        --Ring2 = {'Medicine Ring'}, -- Cure Potency +10% while HP <= 75% and TP <= 1000
+        Ring2 = {'Medicine Ring'}, -- Cure Potency +10% while HP <= 75% and TP <= 1000
     },
 
     MedicineEarring_Priority = {
-        --Ear2 = {'Medicine Earring'}, -- Damage Taken -30% while HP <= 25% and TP <= 1000
+        Ear2 = {'Medicine Earring'}, -- Damage Taken -30% while HP <= 25% and TP <= 1000
     },
 
     HPDown_Priority = {
@@ -228,11 +228,11 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    DivineSkill_Priority = { -- MND +46, MAB +10
+    DivineSkill_Priority = { -- MND +45, MAB +17
         Ammo = {'Holy Ampulla'}, -- MND +1
         Head = {'Healer\'s Cap'}, -- MND +4, Enmity -1
         Neck = {'Ajari Necklace', 'Holy Phial'}, -- MND +6
-        Ear1 = {'Geist Earring'}, -- MND +1
+        Ear1 = {'Novio Earring', 'Geist Earring'}, -- MAB +7
         Ear2 = {'Moldavite Earring', 'Geist Earring'}, -- Matk +5
         Body = {'Errant Hpl.', 'Blessed Bliaut', 'Wonder Kaftan'}, -- MND +10
         Hands = {'Zenith Mitts'}, -- MND +7
@@ -812,7 +812,7 @@ profile.HandleDefault = function()
         end
     end
 
-    if player.HPP <= 25 then
+    if player.HPP <= 25 and player.TP <= 1000 then
         gFunc.EquipSet(sets.MedicineEarring);
     end
 
@@ -960,7 +960,7 @@ profile.HandleMidcast = function()
             else
                 gFunc.EquipSet(sets.Cure);
 
-                if player.HPP <= 75 then
+                if player.HPP <= 75 and player.TP <= 1000 then
                     gFunc.EquipSet(sets.MedicineRing);
                 end
             end

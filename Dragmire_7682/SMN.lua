@@ -67,7 +67,7 @@ local sets = {
         Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
         Back = {'Astute Cape'}, -- +5
-        Legs = {'Summoner\'s Spats', 'Austere Slops'}, -- -5s
+        Legs = {'Summoner\'s Spats'}, -- -5s
         Feet = {'Austere Sabots'} -- +3
     },
 
@@ -209,7 +209,17 @@ local sets = {
 
     Precast_Priority = { -- FC 4%
         Ear2 = {'Loquac. Earring'}, -- 2%
-        Feet = {'Rostrum Pumps'}, -- 2%
+        Feet = {'Rostrum Pumps'}, -- -1s
+    },
+
+    PrecastSpirit_Priority = { -- FC 2%, -1s
+        Ear2 = {'Loquac. Earring'}, -- 2%
+        Feet = {'Evoker\'s Boots'}, -- 2%
+    },
+
+    PrecastAvatar_Priority = { -- FC 2%, -1s
+        Ear2 = {'Loquac. Earring'}, -- 2%
+        Feet = {'Evoker\'s Boots'}, -- -1s
     },
 
     Midcast_Priority = { -- FC 4%, Haste 12%
@@ -283,10 +293,10 @@ local sets = {
     StyleLock3 = {
         Main = 'Mercurial Pole',
         Head = 'Nashira Turban',
-        Body = 'Yinyang Robe',
-        Hands = 'Smn. Bracers +1',
-        Legs = 'Nashira Seraweels',
-        Feet = 'Rostrum Pumps',
+        Body = 'Nashira Manteel',
+        Hands = 'Zenith Mitts',
+        Legs = 'Zenith Slacks',
+        Feet = 'Evoker\'s Boots',
     },
 
     StyleLockHydra = {
@@ -984,7 +994,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLock3);
 
         if player.SubJob == 'THF' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
@@ -1155,8 +1165,15 @@ profile.HandlePrecast = function()
     local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
     local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
     local castDelay = ((castTime * (1 - Settings.FastCastValue)) / 1000) - minimumBuffer;
+    local avatars = T{'Ifrit', 'Leviathan', 'Garuda', 'Ramuh', 'Titan', 'Shiva', 'Diabolos', 'Carbuncle'};
 
-    gFunc.EquipSet(sets.Precast);
+    if string.contains(action.Name, 'Spirit') then
+        gFunc.EquipSet(sets.PrecastSpirit);
+    elseif avatars:contains(action.Name) then
+        gFunc.EquipSet(sets.PrecastAvatar);
+    else
+        gFunc.EquipSet(sets.Precast);
+    end
 
     if (castDelay >= packetDelay) then
         gFunc.Message('Equipping Interim ' .. castDelay);

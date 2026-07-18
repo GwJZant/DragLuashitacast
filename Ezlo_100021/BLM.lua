@@ -13,20 +13,22 @@ local Settings = {
     MagicBurst = false,
     MDT = false,
     Enmity = false,
+    FastCastValueRDM = 0.21,
+    FastCastValue = 0.04,
 };
 
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb'},
         Head = {'Nashira Turban', 'Emperor Hairpin', 'Dream Hat +1'},
-        Neck = {'Jeweled Collar'},
-        Ear1 = {'Merman\'s Earring'},
-        Ear2 = {'Merman\'s Earring', 'Moldavite Earring'},
+        Neck = {'Jeweled Collar', 'Holy Phial'},
+        Ear1 = {'Merman\'s Earring', 'Geist Earring'},
+        Ear2 = {'Merman\'s Earring', 'Geist Earring'},
         Body = {'Wonder Kaftan', 'Dream Robe +1'},
         Hands = {'Merman\'s Bangles', 'Wonder Mitts', 'Dream Mittens +1'},
         Ring1 = {'Merman\'s Ring', 'Tamas Ring'},
-        Ring2 = {'Merman\'s Ring'},
-        Back = {'Hexerei Cape', 'Prism Cape'},
+        Ring2 = {'Merman\'s Ring', 'San d\'Orian Ring'},
+        Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
         Legs = {'Igqira Lappas', 'Wizard\'s Tonban', 'Wonder Braccae', 'Dream Trousers +1'},
         Feet = {'Errant Pigaches', 'Wizard\'s Sabots', 'Wonder Clomps', 'Dream Boots +1'},
@@ -50,11 +52,18 @@ local sets = {
 
     SpellHaste_Priority = {
         Head = {'Nashira Turban'},
+        Body = {'Igqira Weskit'}, -- Only defining this because Black Cloak makes body empty w/ Nash Turban
         Waist = {'Swift Belt'},
     },
 
     FastCast_Priority = {
         Ear2 = {'Loquac. Earring'},
+        Feet = {'Rostrum Pumps'},
+    },
+
+    FastCastRDM_Priority = {
+        Ear2 = {'Loquac. Earring'},
+        Back = {'Warlock\'s Mantle'},
         Feet = {'Rostrum Pumps'},
     },
 
@@ -118,15 +127,45 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
-    -- Looking for 100 INT
-    INTElemental_Priority = { -- INT +34, Elemental +8, MAB +11, Enmity -4
+    -- 520 HP
+    -- Nuke set: 520/690
+    HPDown_Priority = {
+        Head = {'Emperor Hairpin'}, -- -15 HP
+        Neck = {'Checkered Scarf'}, -- -12 HP
+        Body = {'Black Cotehardie'}, -- -25 HP
+        Hands = {'Zenith Mitts'}, -- -50 HP
+        Ring1 = {'Ether Ring'}, -- -30 HP
+        Ring2 = {'Astral Ring'}, -- -25 HP
+        Back = {'Blue Cape'}, -- -15 HP
+        Waist = {'Penitent\'s Rope'}, -- -20 HP
+        Legs = {'Zenith Slacks'}, -- -50 HP
+        Feet = {'Rostrum Pumps'}, -- -30 HP
+    },
+
+    INTElemental_Priority = { -- INT +32, Elemental +5, MAB +33
         Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Demon Helm', 'Wizard\'s Petasos'}, -- INT +5
         Neck = {'Checkered Scarf'}, -- INT +2
-        Ear1 = {'Elemental Earring'}, -- Elemental +3
-        Ear2 = {'Abyssal Earring'}, -- INT +2
+        Ear1 = {'Novio Earring', 'Elemental Earring'}, -- MAB +7
+        Ear2 = {'Moldavite Earring'}, -- MAB +5
         Body = {'Igqira Weskit', 'Shaman\'s Cloak'}, -- MAB +6, Elemental +5
         Hands = {'Zenith Mitts', 'Errant Cuffs', 'Wizard\'s Gloves'}, -- MAB +5
+        Ring1 = {'Tamas Ring'}, -- INT +5
+        Ring2 = {'Sorcerer\'s Ring'}, -- MAB +10
+        Back = {'Prism Cape'}, -- INT +3
+        Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
+        Legs = {'Errant Slops'}, -- INT +7
+        Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
+    },
+
+    INTElementalDot_Priority = { -- INT +40, Elemental +8, MAB +6
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Demon Helm', 'Wizard\'s Petasos'}, -- INT +5
+        Neck = {'Checkered Scarf'}, -- INT +2
+        Ear1 = {'Abyssal Earring'}, -- INT +2
+        Ear2 = {'Elemental Earring'}, -- Elemental +3
+        Body = {'Igqira Weskit', 'Shaman\'s Cloak'}, -- MAB +6, Elemental +5
+        Hands = {'Errant Cuffs', 'Wizard\'s Gloves'}, -- INT +5
         Ring1 = {'Tamas Ring'}, -- INT +5
         Ring2 = {'Snow Ring'}, -- INT +4
         Back = {'Prism Cape'}, -- INT +3
@@ -185,7 +224,7 @@ local sets = {
     },
 
     SorcererTonban_Priority = {
-        Head = {'Sorcerer\'s Tonban'},
+        Legs = {'Sorcerer\'s Tonban'},
     },
 
     MND_Priority = { -- MND +45, Enfeebling +4
@@ -206,6 +245,7 @@ local sets = {
     MNDStoneskin_Priority = { -- MND +54, Enfeebling +4
         Main = {'Mythic Wand +1'}, -- MND +9
         Ammo = {'Hedgehog Bomb'},
+        Head = {'Nashira Turban'},
         Neck = {'Holy Phial'}, -- MND +3
         Ear1 = {'Geist Earring'}, -- MND +1
         Ear2 = {'Geist Earring'}, -- MND +1
@@ -346,6 +386,7 @@ local ElementWeaknessTable = {
 }
 
 local hasteSpells = T{'Blink', 'Escape', 'Warp', 'Warp II', 'Silena', 'Blindna', 'Paralyna', 'Erase', 'Regen', 'Protect', 'Protectra', 'Protect II', 'Protectra II', 'Shell', 'Shellra', 'Shell II', 'Shellra II', 'Teleport-Dem', 'Teleport-Mea', 'Teleport-Holla'};
+local elementalDots = T{'Burn', 'Choke', 'Shock', 'Drown', 'Rasp', 'Frost'};
 
 local obiBonus = function(spellElement)
     local environment = gData.GetEnvironment();
@@ -627,8 +668,6 @@ profile.HandleDefault = function()
         end
     end
 
-    
-
     if (pet ~= nil) then
         if (petAction ~= nil) then
             HandlePetAction(petAction);
@@ -647,11 +686,7 @@ profile.HandleAbility = function()
     if string.match(ability.Name, 'Reward') then
         gFunc.EquipSet(sets.Reward);
     elseif string.match(ability.Name, 'Charm') then
-        gFunc.LockSet(sets.Charm, 1);
-    elseif string.match(ability.Name, 'Fight') then
-        -- Fight set
-    elseif string.match(ability.Name, 'Sic') then
-        -- Sic set
+        gFunc.EquipSet(sets.Charm);
     end
 end
 
@@ -660,10 +695,28 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    local spell = gData.GetAction();
+    local player = gData.GetPlayer();
+    local action = gData.GetAction();
+    local target = gData.GetActionTarget();
+    local castTime = action.CastTime;
+    local minimumBuffer = 0.4; -- Can be lowered to 0.1 if you want
+    local packetDelay = 0.4; -- Change this to 0.4 if you do not use PacketFlow
+    local castDelay = ((castTime * (1 - Settings.FastCastValue)) / 1000) - minimumBuffer;
 
     gFunc.EquipSet(sets.FastCast);
+
+    if player.SubJob == 'RDM' then
+        gFunc.EquipSet(sets.FastCastRDM);
+
+        castDelay = ((castTime * (1 - Settings.FastCastValueRDM)) / 1000) - minimumBuffer;
+    end
+
+    if action.Skill == 'Elemental Magic' and not elementalDots:contains(action.Name) and (castDelay >= packetDelay) then
+        gFunc.Message('Equipping Interim ' .. castDelay);
+        gFunc.SetMidDelay(castDelay);
+    end
 end
+
 
 profile.HandleMidcast = function()
     local spell = gData.GetAction();
@@ -671,6 +724,10 @@ profile.HandleMidcast = function()
     local target = gData.GetActionTarget();
     local environment = gData.GetEnvironment();
     local dayElement = environment.DayElement;
+
+    if spell.Skill == 'Elemental Magic' and not elementalDots:contains(spell.Name) then
+        draginclude.SetupInterimEquipSet(sets.HPDown); -- HP Down
+    end
 
     if draginclude.dragSettings.TpVariant == 1 then
         -- Don't swap weapons
@@ -692,7 +749,7 @@ profile.HandleMidcast = function()
         elseif spell.Element == 'Dark' then
             gFunc.EquipSet(sets.Dark);
         end
-    end
+    end    
 
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
@@ -700,6 +757,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Sneak);
     elseif hasteSpells:contains(spell.Name) then
         gFunc.EquipSet(sets.SpellHaste);
+    elseif elementalDots:contains(spell.Name) then
+        gFunc.EquipSet(sets.INTElementalDot);
     elseif spell.Type == 'White Magic' then
         if spell.Skill == 'Enfeebling Magic' then
             gFunc.EquipSet(sets.MNDEnfeebling);

@@ -724,6 +724,7 @@ profile.HandleMidcast = function()
     local target = gData.GetActionTarget();
     local environment = gData.GetEnvironment();
     local dayElement = environment.DayElement;
+    local weatherElement = environment.WeatherElement;
 
     if spell.Skill == 'Elemental Magic' and not elementalDots:contains(spell.Name) then
         draginclude.SetupInterimEquipSet(sets.HPDown); -- HP Down

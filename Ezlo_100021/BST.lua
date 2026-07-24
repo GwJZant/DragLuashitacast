@@ -33,7 +33,7 @@ local sets = {
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Merman\'s Earring', 'Beetle Earring +1'},
         Body = {'Scorpion Harness', 'Wonder Kaftan', 'Dream Robe +1'},
-        Hands = {'Battle Gloves'},
+        Hands = {'Wonder Mitts'},
         Ring1 = {'Merman\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Merman\'s Ring', 'Sniper\'s Ring'},
         Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
@@ -62,15 +62,15 @@ local sets = {
         Ammo = {},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
         Neck = {'Merman\'s Gorget'},
-        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear1 = {'Merman\'s Earring', 'Geist Earring'},
+        Ear2 = {'Brutal Earring', 'Geist Earring'},
         Body = {'Scorpion Harness'},
-        Hands = {'Dusk Gloves'}, -- Haste +3%
+        Hands = {'Dusk Gloves', 'Wonder Mitts'}, -- Haste +3%
         Ring1 = {'Toreador\'s Ring'},
         Ring2 = {'Sniper\'s Ring'},
-        Back = {'Amemet Mantle'},
-        Waist = {'Swift Belt', 'Life Belt'}, -- Haste +4%
-        Legs = {'Thick Breeches'},
+        Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
+        Waist = {'Swift Belt'}, -- Haste +4%
+        Legs = {'Thick Breeches', 'Wonder Braccae'},
         Feet = {'Dusk Ledelsens', 'Wonder Clomps'}, -- Haste +2%
     },
 
@@ -172,25 +172,25 @@ local sets = {
 
     WeaponSkill_Priority = { -- STR, DEX
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
-        Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Black Cotehardie', 'Wonder Kaftan'},
+        Neck = {'Merman\'s Gorget'},
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Brutal Earring'},
+        Body = {'Hecatomb Harness', 'Black Cotehardie', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Amemet Mantle'},
-        Waist = {'R.K. Belt +1', 'Life Belt'},
+        Waist = {'R.K. Belt +1'},
         Legs = {'Thick Breeches', 'Wonder Braccae'},
         Feet = {'Wonder Clomps'},
     },
 
     WeaponSkillRampage_Priority = {
-        Head = {'Patroclus\'s Helm', 'Emperor Hairpin'},
-        Neck = {'Merman\'s Gorget', 'Ryl.Sqr. Collar'},
-        Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Scorpion Harness', 'Wonder Kaftan'},
+        Head = {'Optical Hat', 'Patroclus\'s Helm', 'Emperor Hairpin'},
+        Neck = {'Merman\'s Gorget'},
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Brutal Earring'},
+        Body = {'Hecatomb Harness', 'Scorpion Harness', 'Wonder Kaftan'},
         Hands = {'Wonder Mitts'},
         Ring1 = {'Toreador\'s Ring', 'San d\'Orian Ring'},
         Ring2 = {'Sniper\'s Ring'},
@@ -401,7 +401,15 @@ local sets = {
 
     StyleLockGeneric = {
         Head = 'Patroclus\'s Helm',
-        Body = 'Scorpion Harness',
+        Body = 'Hecatomb Harness',
+        Hands = 'Dusk Gloves',
+        Legs = 'Thick Breeches',
+        Feet = 'Dusk Ledelsens',
+    },
+
+    StyleLockGeneric2 = {
+        Head = 'Patroclus\'s Helm',
+        Body = 'Hydra Harness',
         Hands = 'Dusk Gloves',
         Legs = 'Thick Breeches',
         Feet = 'Dusk Ledelsens',
@@ -478,6 +486,14 @@ local sets = {
         Waist = {'R.K. Belt +1'}, -- CHR +2
         Legs = {},
         Feet = {'Beast Gaiters'}, -- Charm +2, CHR +3
+    },
+
+    Sneak = {
+        Hands = 'Dream Mittens +1',
+    },
+
+    Invisible = {
+        Feet = 'Dream Boots +1',
     },
 };
 

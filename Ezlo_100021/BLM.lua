@@ -34,19 +34,20 @@ local sets = {
         Feet = {'Errant Pigaches', 'Wizard\'s Sabots', 'Wonder Clomps', 'Dream Boots +1'},
     },
 
-    RestingMP_Priority = {
+    RestingMP_Priority = { -- HMP +20
+        --Main = {'Pluto\'s Staff'}, -- HMP +10
         Ammo = {''},
-        Head = {''},
-        Neck = {'Checkered Scarf'},
+        Head = {'Wzd. Petasos +1'}, -- HMP +1
+        Neck = {'Checkered Scarf'}, -- HMP +1
         Ear1 = {''},
         Ear2 = {''},
-        Body = {'Errant Hpl.'},
+        Body = {'Errant Hpl.'}, -- HMP +5
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
         Back = {''},
-        Waist = {'Hierarch Belt'},
-        Legs = {'Baron\'s Slops'},
+        Waist = {'Hierarch Belt'}, -- HMP +2
+        Legs = {'Baron\'s Slops'}, -- HMP +1
         Feet = {''},
     },
 
@@ -97,7 +98,7 @@ local sets = {
 
     INT_Priority = { -- INT +50
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Demon Helm', 'Wizard\'s Petasos'}, -- INT +4
+        Head = {'Wzd. Petasos +1'}, -- INT +5, Enmity -4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Morion Earring'}, -- INT +1
         Ear2 = {'Abyssal Earring'}, -- INT +2
@@ -142,9 +143,9 @@ local sets = {
         Feet = {'Rostrum Pumps'}, -- -30 HP
     },
 
-    INTElemental_Priority = { -- INT +32, Elemental +5, MAB +33
+    INTElemental_Priority = { -- INT +33, Elemental +5, MAB +33
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Demon Helm', 'Wizard\'s Petasos'}, -- INT +5
+        Head = {'Wzd. Petasos +1'}, -- INT +5, Enmity -4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Novio Earring', 'Elemental Earring'}, -- MAB +7
         Ear2 = {'Moldavite Earring'}, -- MAB +5
@@ -152,25 +153,28 @@ local sets = {
         Hands = {'Zenith Mitts', 'Errant Cuffs', 'Wizard\'s Gloves'}, -- MAB +5
         Ring1 = {'Tamas Ring'}, -- INT +5
         Ring2 = {'Sorcerer\'s Ring'}, -- MAB +10
-        Back = {'Prism Cape'}, -- INT +3
+        Back = {'Prism Cape'}, -- INT +4
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
         Legs = {'Errant Slops'}, -- INT +7
         Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
-    INTElementalDot_Priority = { -- INT +40, Elemental +8, MAB +6
+    -- Want 150 INT I think for max potency dot?
+    -- Current: 136 + 5 (Melon Pie +1) = 141
+    -- Missing: 3x INT Merits (INT +3), Prudence Torque (+3), Demon Helm +1 (+1), Phantom Earring +1 (+2), Mahatma Body (+1), Sorcerer's Belt (+1), Wizard Gloves +1 (-2, Elemental +15)
+    INTElementalDot_Priority = { -- INT +55, Elemental +13
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Demon Helm', 'Wizard\'s Petasos'}, -- INT +5
+        Head = {'Wzd. Petasos +1'}, -- INT +5, Enmity -4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring'}, -- INT +2
         Ear2 = {'Elemental Earring'}, -- Elemental +3
-        Body = {'Igqira Weskit', 'Shaman\'s Cloak'}, -- MAB +6, Elemental +5
+        Body = {'Errant Hpl.', 'Shaman\'s Cloak'}, -- INT +10
         Hands = {'Errant Cuffs', 'Wizard\'s Gloves'}, -- INT +5
         Ring1 = {'Tamas Ring'}, -- INT +5
-        Ring2 = {'Snow Ring'}, -- INT +4
-        Back = {'Prism Cape'}, -- INT +3
+        Ring2 = {'Snow Ring'}, -- INT +5
+        Back = {'Prism Cape'}, -- INT +4
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
-        Legs = {'Errant Slops'}, -- INT +3
+        Legs = {'Errant Slops'}, -- INT +7
         Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
     },
 
@@ -193,7 +197,7 @@ local sets = {
 
     INTDark_Priority = { -- INT +34, Dark +34, Macc +5, Haste +2%
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Nashira Turban', 'Wizard\'s Petasos'}, -- Macc +5 Haste +2%
+        Head = {'Nashira Turban'}, -- Macc +5 Haste +2%
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring'}, -- INT +2, Dark Skill +5
         Ear2 = {'Morion Earring'}, -- INT +1
@@ -209,7 +213,7 @@ local sets = {
 
     Stun_Priority = { -- INT +29, Dark +34, Macc +5, Haste +6%
         Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Head = {'Nashira Turban', 'Wizard\'s Petasos'}, -- Macc +5 Haste +2%
+        Head = {'Nashira Turban'}, -- Macc +5 Haste +2%
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring'}, -- INT +2, Dark Skill +5
         Ear2 = {'Morion Earring'}, -- INT +1
@@ -313,7 +317,7 @@ local sets = {
 
     StyleLock = {
         Main = 'Diabolos\'s Pole',
-        Head = 'Demon Helm',
+        Head = 'Wzd. Petasos +1',
         Body = 'Igqira Weskit',
         Hands = 'Merman\'s Bangles',
         Legs = 'Igqira Lappas',

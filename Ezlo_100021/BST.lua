@@ -61,7 +61,7 @@ local sets = {
     Engaged_Priority = { -- Haste +11%
         Ammo = {},
         Head = {'Patroclus\'s Helm', 'Emperor Hairpin'}, -- Haste +2%
-        Neck = {'Merman\'s Gorget'},
+        Neck = {'Temp. Torque', 'Merman\'s Gorget'},
         Ear1 = {'Merman\'s Earring', 'Geist Earring'},
         Ear2 = {'Brutal Earring', 'Geist Earring'},
         Body = {'Scorpion Harness'},
@@ -74,7 +74,7 @@ local sets = {
         Feet = {'Dusk Ledelsens', 'Wonder Clomps'}, -- Haste +2%
     },
 
-    DT_Priority = {
+    DT_Priority = { -- Commented some stuff out to preserve Haste
         Ammo = {'Hedgehog Bomb'},
         --Head = {'Emperor Hairpin'},
         Neck = {'Jeweled Collar', 'Holy Phial'},

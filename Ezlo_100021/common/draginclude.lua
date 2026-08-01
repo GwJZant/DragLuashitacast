@@ -277,14 +277,14 @@ local skillToTorque = {
 --    [2] = 'Love Torque',
 --    [3] = 'Fortitude Torque',
 --    [4] = 'Prudence Torque',
---    [5] = 'Temp. Torque',
+    [5] = 'Temp. Torque',
 --    [6] = 'Fortitude Torque',
 --    [7] = 'Justice Torque',
 --    [8] = 'Love Torque',
 --    [9] = 'Hope Torque',
 --    [10] = 'Justice Torque',
 --    [11] = 'Prudence Torque',
---    [12] = 'Temp. Torque',
+    [12] = 'Temp. Torque',
 };
 
 local virtueStoneWeapons = T{

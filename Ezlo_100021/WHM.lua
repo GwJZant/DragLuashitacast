@@ -161,8 +161,8 @@ local sets = {
         Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 SIRD 20%
     },
 
-    INTElemental_Priority = { -- INT +32 Elemental Skill +12 MAB +5
-        Head = {'Elite Beret'}, -- Enfeebling Skill +4
+    INTElemental_Priority = { -- INT +29 Elemental Skill +17 MAB +5 MACC +2
+        Head = {'Elite Beret'}, -- Elemental Skill +4
         Neck = {'Checkered Scarf'}, -- INT +2
         Ear1 = {'Abyssal Earring', 'Morion Earring'}, -- INT +2
         Ear2 = {'Elemental Earring', 'Morion Earring'}, -- Elemental Skill +3
@@ -172,7 +172,7 @@ local sets = {
         Ring2 = {'Diamond Ring', 'Zircon Ring', 'Eremite\'s Ring'}, -- INT +4
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- INT +5
         Legs = {'Errant Slops'}, -- INT +7
-        Feet = {'Rostrum Pumps', 'Healer\'s Duckbills'}, -- INT +3 Fast Cast+ / INT +3 SIRD 20%
+        Feet = {'Nashira Crackows', 'Healer\'s Duckbills'}, -- Elemental +5, Macc +2
     },
 
     MedicineRing_Priority = {
@@ -403,7 +403,7 @@ local sets = {
         Body = 'Black Cotehardie',
         Hands = 'Merman\'s Bangles',
         Legs = 'Baron\'s Slops',
-        Feet = 'Cure Clogs',
+        Feet = 'Nashira Crackows',
     },
 
     StyleLockNIN = {

@@ -614,6 +614,7 @@ local sets = {
         Ear1 = {'Loquac. Earring'}, -- FC
         Body = {'Errant Hpl.'}, -- MND +10
         Hands = {'Dvt. Mitts +1'}, -- MND +6
+        Ring1 = {'Aqua Ring'}, -- MND +5
         Ring2 = {'Aqua Ring'}, -- MND +5
         Back = {'Prism Cape'}, -- MND +4
         Legs = {'Mahatma Slops'}, -- MND +8

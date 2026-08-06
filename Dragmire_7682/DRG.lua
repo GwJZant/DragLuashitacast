@@ -195,7 +195,7 @@ local sets = {
         Ring1 = {'Rajas Ring'}, -- STR+5, DEX+5
         Ring2 = {'Flame Ring'}, -- STR+5
         Back = {'Forager\'s Mantle'}, -- STR+3, ATT+15
-        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
         Legs = {'Barone Cosciales'}, -- STR+2, ATT+6
         Feet = {'Hct. Leggings'}, --STR+6, DEX+3
     },

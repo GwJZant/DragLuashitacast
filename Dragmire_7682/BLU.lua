@@ -47,36 +47,22 @@ local Settings = {
     MDT = false,
     SIRD = true,
     FastCastValue = 0, -- 20% from traits 22% from gear listed in Precast set
-    MeleeAcc = true
+    MeleeAcc = true,
+	ConvertMPNuke = 0
 };
 
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Duelist\'s Chapeau', 'Egg Helm'},
-        Neck = {'Uggalepih Pendant', 'Peacock Amulet'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Novia Earring', 'Phantom Earring', },
-        Body = {'Wlk. Tabard +1', 'Elder\'s Surcoat'},
-        Hands = {'Zenith Mitts', 'Elder\'s Bracers'},
-        Ring1 = {'Ether Ring', 'Astral Ring'},
-        Ring2 = {'Jelly Ring'},
-        Back = {'Altruistic Cape', 'Trimmer\'s Mantle'},
-        Waist = {'Hierarch Belt', 'Ryl. Kgt. Belt'},
-        Legs = {'Crimson Cuisses', 'Elder\'s Braguette'},
-        Feet = {'Dls. Boots +1', 'Elder\'s Sandals'},
-    },
-
-    Default_Priority = {
-        Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Nashira Turban', 'Dream Hat +1'},
+        Head = {'Optical Hat', 'Dream Hat +1'},
         Neck = {'Jeweled Collar', 'Holy Phial'},
-        Ear1 = {'Merman\'s Earring', 'Geist Earring'},
-        Ear2 = {'Merman\'s Earring', 'Geist Earring'},
-        Body = {'Wonder Kaftan', 'Dream Robe +1'},
-        Hands = {'Merman\'s Bangles', 'Wonder Mitts', 'Dream Mittens +1'},
-        Ring1 = {'Merman\'s Ring', 'Tamas Ring'},
-        Ring2 = {'Merman\'s Ring', 'San d\'Orian Ring'},
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Merman\'s Earring'},
+        Body = {'Scp. Harness +1', 'Dream Robe +1'},
+        --Body = {'Mirage Jubbah', 'Scp. Harness +1', 'Dream Robe +1'},
+        Hands = {'Homam Manopolas', 'Dream Mittens +1'},
+        Ring1 = {'Merman\'s Ring', 'Ether Ring'},
+        Ring2 = {'Merman\'s Ring', 'Rajas Ring'},
         Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
         Legs = {'Igqira Lappas', 'Wizard\'s Tonban', 'Wonder Braccae', 'Dream Trousers +1'},
@@ -99,7 +85,7 @@ local sets = {
 	    Neck = {'Peacock Amulet'},
 	    Ear1 = {'Brutal Earring'},
 	    Ear2 = {'Stealth Earring'},
-	    Body = {'Homam Corazza'},
+	    Body = {'Homam Corazza', 'Scp. Harness +1'},
 	    Hands = {'Homam Manopolas'},
 	    Ring1 = {'Rajas Ring'},
 	    Ring2 = {'Toreador\'s Ring'},
@@ -126,19 +112,35 @@ local sets = {
     },
 
     MDT_Priority = { -- PDT -13% or 18%, MDT -17%
-        Ammo = {'Phtm. Tathlum'}, -- MP +10
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Darksteel Cap +1'}, -- PDT -2%
-        Neck = {'Jeweled Collar'},
-        Ear1 = {'Merman\'s Earring'}, -- MP +30
-        Ear2 = {'Merman\'s Earring'}, -- Convert 3% Damage to MP
+        Neck = {'Jeweled Collar'}, -- Res +10
+        Ear1 = {'Merman\'s Earring'}, -- MDT -2%
+        Ear2 = {'Merman\'s Earring'}, -- MDT -2%
         Body = {'Dst. Harness +1'}, -- PDT -4%
         Hands = {'Dst. Mittens +1'}, -- PDT -2%
-        Ring1 = {'Merman\'s Ring'}, -- MP +30
-        Ring2 = {'Merman\'s Ring'}, -- PDT -5%
+        Ring1 = {'Merman\'s Ring'}, -- MDT -4%
+        Ring2 = {'Merman\'s Ring'}, -- MDT -4%
         Back = {'Cheviot Cape'}, -- PDT -5% or -10%
         Waist = {'Hierarch Belt'}, -- MP +48
-        Legs = {'Coral Cuisses +1'}, -- PDT -3%
-        Feet = {'Coral Greaves +1'}, -- PDT -2%
+        Legs = {'Coral Cuisses +1'}, -- MDT -3%
+        Feet = {'Coral Greaves +1'}, -- MDT -2%
+    },
+	
+	PDT_Priority = { -- PDT -13% or 18%, MDT -17%
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Darksteel Cap +1'}, -- PDT -2%
+        Neck = {'Jeweled Collar'}, -- Res +10
+        Ear1 = {'Merman\'s Earring'}, -- MDT -2%
+        Ear2 = {'Merman\'s Earring'}, -- MDT -2%
+        Body = {'Dst. Harness +1'}, -- PDT -4%
+        Hands = {'Dst. Mittens +1'}, -- PDT -2%
+        Ring1 = {'Merman\'s Ring'}, -- MDT -4%
+        Ring2 = {'Merman\'s Ring'}, -- MDT -4%
+        Back = {'Cheviot Cape'}, -- PDT -5% or -10%
+        Waist = {'Hierarch Belt'}, -- MP +48
+        Legs = {'Coral Cuisses +1'}, -- MDT -3%
+        Feet = {'Coral Greaves +1'}, -- MDT -2%
     },
 
     -- 4 SIRD Merits = 8%
@@ -179,24 +181,6 @@ local sets = {
         Feet = 'Hydra Spats',
     },
 
-    StyleLockCool = {
-        Main = 'Auster\'s Staff',
-        Head = 'Zenith Crown',
-        Body = 'Nashira Manteel',
-        Hands = 'Zenith Mitts',
-        Legs = 'Zenith Slacks',
-        Feet = 'Dream Boots +1',
-    },
-
-    StyleLockTank = {
-        Main = 'Terra\'s Staff',
-        Head = 'Darksteel Cap +1',
-        Body = 'Dst. Harness +1',
-        Hands = 'Dst. Mittens +1',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1',
-    },
-
     StyleLockWinter = {
         Main = 'Vulcan\'s Staff',
         Head = 'Dream Hat +1',
@@ -208,69 +192,221 @@ local sets = {
 
     Precast_Priority = {
         Ear1 = {'Loquac. Earring'}, --2
+		Legs = {'Homam Cosciales'}, --2
     },
-
-    INTElementalAcc_Priority = { -- Elemental Skill +32, Macc +5, Matk +10, INT +21
-        Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Neck = {'Elemental Torque'}, -- Elemental Skill +7
-        Ear1 = {'Loquac. Earring'}, -- Fast Cast
-        Ear2 = {'Moldavite Earring'}, -- Matk +5
+	
+	-- Scales on CurrentHP
+	-- Add gear needed to preserve CurrentHP
+	BluBreath_Priority = {
+        Ammo = {'Fenrir\'s Stone'}, -- Good
+        --Head = {'Mirage Keffiyeh'},
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Ethereal Earring'}, -- Good
+        Neck = {'Ajase Beads'}, -- Good
+        Body = {'Homam Corazza'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+	
+	-- Acc, DEX, STR, Attack, Haste
+	BluPhysicalBase_Priority = { -- Acc +57, Attack +21, STR +13, DEX +10, DA +5%, TA +1%
+        Ammo = {'Tiphia Sting'}, -- Acc +2
+        Head = {'Optical Hat'}, -- Acc +10
+        Neck = {'Peacock Amulet'}, -- Acc +10
+        Ear1 = {'Brutal Earring'}, -- DA +5%
+        Ear2 = {'Merman\'s Earring'}, -- Attack +6
+        Body = {'Homam Corazza', 'Scp. Harness +1'}, -- Acc +15, TA +1%
+        Hands = {'Homam Manopolas'}, -- Acc +4
+        Ring1 = {'Rajas Ring'}, -- STR +5, DEX +5
+        Ring2 = {'Toreador\'s Ring'}, -- Acc +7
+        Back = {'Forager\'s Mantle'}, -- STR +3, Attack +15
+        Waist = {'Warwolf Belt', 'Ryl.Kgt. Belt'}, -- STR+5, DEX+5, VIT+5
+        Legs = {'Homam Cosciales'}, -- Acc +3
+        Feet = {'Homam Gambieras'}, -- Acc +3
+    },
+	
+	BluPhysical_STR_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {'Alkyoneus\'s Brc.'}, -- STR +11, DEX -6
+        Ring1 = {'Rajas Ring'}, -- STR +5, DEX +5
+        Ring2 = {'Flame Ring'}, -- STR +5
+        Back = {''},
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BluPhysical_DEX_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {'Love Torque'}, -- DEX +5
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {'Rajas Ring'}, -- STR +5, DEX +5
+        Ring2 = {''},
+        Back = {''},
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BluPhysical_VIT_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BluPhysical_AGI_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BluPhysical_CHR_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	-- Conserve MP
+	ConserveMP_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	-- BLU Skill
+	BluSkill_Priority = {
+        Ammo = {''},
+        --Head = {'Mirage Keffiyeh'}, BLU +5
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        --Body = {'Magus Jubbah'}, -- BLU +15
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	-- BLU Skill + Macc
+	-- Not sure if INT + MND are relevant; if they are, break this out into 2 sets
+	BluMagicAccuracy_Priority = {
+        Ammo = {''},
+		Head = {'Nashira Turban'}, -- Macc +5
+        --Head = {'Mirage Keffiyeh'}, BLU +5
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
         Body = {'Nashira Manteel'}, -- Macc +5
-        Hands = {'Errant Cuffs'}, -- INT +5
-        Ring2 = {'Snow Ring'}, -- INT +5
-        Ring2 = {'Snow Ring'}, -- INT +5
-        Back = {'Merciful Cape'}, -- Elemental Skill +5
+        --Body = {'Magus Jubbah'}, -- BLU +15
+        Hands = {'Nashira Gages'}, -- Macc +3
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {'Nashira Seraweels'}, -- Macc +3
+        Feet = {'Homam Gambieras'}, -- Macc +4, Haste +3%
     },
-
-    INTElementalPotency_Priority = { -- Elemental Skill +15, Matk +15, INT +37
-        Ammo = {'Phtm. Tathlum'}, -- INT +2
-        Neck = {'Philomath Stole'}, -- INT +3
-        Ear1 = {'Loquac. Earring'}, -- Fast Cast
-        Ear2 = {'Moldavite Earring'}, -- Matk +5
-        Body = {'Errant Hpl.'}, -- INT +10
-        Hands = {'Zenith Mitts'}, -- Matk +5
-        Ring1 = {'Snow Ring'}, -- INT +5
-        Ring2 = {'Snow Ring'}, -- INT +5
-        Back = {'Merciful Cape'}, -- Elemental Skill +5
-        Legs = {'Mahatma Slops'}, -- INT +8
+	
+	UglyPP_Priority = {
+        Neck = {'Uggalepih Pendant'},
     },
-
-    INTDarkAcc_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Neck = {'Philomath Stole'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Body = {'Nashira Manteel', 'Errant Hpl.'},
-        Hands = {'Crimson Fng. Gnt.', 'Errant Cuffs'},
-        Ring1 = {'Snow Ring'},
-        Ring2 = {'Snow Ring'},
-        Back = {'Merciful Cape'}, -- Dark Skill +5
-        Legs = {'Mahatma Slops'},
-        Feet = {'Elder\'s Sandals'},
+	
+	-- MAB, BLU Skill, Macc
+	BluMagical_Priority = {
+        Ammo = {''},
+		Head = {'Nashira Turban'}, -- Macc +5
+        --Head = {'Mirage Keffiyeh'}, BLU +5
+        Neck = {''},
+        Ear1 = {'Moldavite Earring'}, -- MAB +5
+        --Ear2 = {'Novio Earring'}, -- MAB +7
+        Body = {'Nashira Manteel'}, -- Macc +5
+        --Body = {'Magus Jubbah'}, -- BLU +15
+        Hands = {'Nashira Gages'}, -- Macc +3
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {'Nashira Seraweels'}, -- Macc +3
+        Feet = {'Homam Gambieras'}, -- Macc +4, Haste +3%
     },
-
-    INTDark_Priority = {
-        Ammo = {'Phtm. Tathlum'},
-        Head = {'Nashira Turban'},
-        Neck = {'Philomath Stole'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Body = {'Nashira Manteel', 'Errant Hpl.'},
-        Hands = {'Crimson Fng. Gnt.', 'Errant Cuffs'},
-        Ring1 = {'Snow Ring'},
-        Ring2 = {'Snow Ring'},
-        Back = {'Merciful Cape'}, -- Dark Skill +5
-        Legs = {'Mahatma Slops'},
-        Feet = {'Elder\'s Sandals'},
+	
+	-- BLU Skill, Macc, Fast Cast, Haste
+	BluStun_Priority = {
+        Ammo = {''},
+		Head = {'Nashira Turban'}, -- Macc +5, Haste +1%
+        --Head = {'Mirage Keffiyeh'}, BLU +5
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {'Loquac. Earring'}, -- Fast Cast
+        Body = {'Nashira Manteel'}, -- Macc +5, Haste +3%
+        --Body = {'Magus Jubbah'}, -- BLU +15
+        Hands = {'Nashira Gages'}, -- Macc +3, Haste +1%
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {'Sonic Belt'}, -- Haste +6%
+        Legs = {'Nashira Seraweels'}, -- Macc +3, Haste +2%
+        Feet = {'Homam Gambieras'}, -- Macc +4, Haste +3%
     },
-
-    DarkSkill_Priority = { -- Dark Skill +20
-        Body = {'Nashira Manteel'}, -- +5
-        Hands = {'Crimson Fng. Gnt.'}, -- +10
-        Back = {'Merciful Cape'}, -- +5
-    },
-
-    MND_Priority = { -- MND +32 (100 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*98 - 190 = 360 (350 cap)
+	
+	Cure_Priority = {
         Head = {'Zenith Crown'}, -- MND +3
         Ear1 = {'Loquac. Earring'}, -- FC
         Body = {'Errant Hpl.'}, -- MND +10
@@ -278,6 +414,199 @@ local sets = {
         Ring2 = {'Aqua Ring'}, -- MND +5
         Back = {'Prism Cape'}, -- MND +4
         Legs = {'Mahatma Slops'}, -- MND +8
+    },
+	
+	Enmity_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	WhiteWind_Priority = {
+        Ammo = {'Fenrir\'s Stone'}, -- Good
+        Head = {''},
+        Ear1 = {'Bloodbead Earring'}, -- Good
+        Ear2 = {'Ethereal Earring'}, -- Good
+        Neck = {'Ajase Beads'}, -- Good
+        Body = {'Homam Corazza'}, -- Good
+        Hands = {'Alkyoneus\'s Brc.'}, -- Good
+        Ring1 = {'Bloodbead Ring'}, -- Good
+        Ring2 = {'Bomb Queen Ring'}, -- Good
+        Back = {'Gigant Mantle'}, -- Good
+        Waist = {'Powerful Rope'}, -- Desert Sash
+        Legs = {'Homam Cosciales'}, -- Good
+        Feet = {'Homam Gambieras'}, -- Good
+    },
+	
+	BluMagical_MND_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {'Moldavite Earring'}, -- MAB +5
+        Ear2 = {'Cmn. Earring'}, -- MND +2
+        --Ear2 = {'Novio Earring'}, -- MAB +7
+        Body = {'Errant Hpl.'}, -- MND +10
+        Hands = {'Dvt. Mitts +1'}, -- MND +5 
+        Ring1 = {'Aqua Ring'}, -- MND +5
+        Ring2 = {'Aqua Ring'}, -- MND +5
+		Waist = {''},
+        Back = {'Prism Cape'}, -- MND +4
+        Legs = {'Mahatma Slops'}, -- MND +8
+        Feet = {''},
+    },
+	
+	BluMagical_CHR_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BluMagical_INT_Priority = {
+        Ammo = {'Phtm. Tathlum'}, -- INT+2
+        Head = {''},
+        Neck = {''},
+        Ear1 = {'Moldavite Earring'}, -- Macc +5
+        Ear2 = {'Phantom Earring'}, -- INT +1
+        Body = {'Errant Hpl.'}, -- INT +10
+        Hands = {'Errant Cuffs'}, -- INT +5 
+        Ring1 = {'Snow Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +5
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	WS_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	Vorpal_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	SavageBlade_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	WSAcc_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	Diffusion_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	CA_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
+    },
+	
+	BA_Priority = {
+        Ammo = {''},
+        Head = {''},
+        Neck = {''},
+        Ear1 = {''},
+        Ear2 = {''},
+        Body = {''},
+        Hands = {''},
+        Ring1 = {''},
+        Ring2 = {''},
+        Back = {''},
+        Waist = {''},
+        Legs = {''},
+        Feet = {''},
     },
 
     Stoneskin_Priority = { -- MND +33 (106 Total): Enhancing Magic Skill + 3×MND - 190 --> 256 + 3*100 - 190 = 360 (350 cap)
@@ -290,76 +619,28 @@ local sets = {
         Legs = {'Mahatma Slops'}, -- MND +8
     },
 
-    MNDEnfeeb_Priority = {
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Cmn. Earring'}, -- MND +2
-        Neck = {'Enfeebling Torque'},
-        Hands = {'Dvt. Mitts +1'}, 
-        Ring1 = {'Aqua Ring'},
-        Ring2 = {'Aqua Ring'},
-        Back = {'Altruistic Cape', 'Prism Cape'},
-        Legs = {'Nashira Seraweels', 'Mahatma Slops'},
+    SpellHaste_Priority = { -- 17%
+        Head = {'Nashira Turban'}, -- 1%
+		--Head = {'Walahra Turban'},
+        Body = {'Nashira Manteel'}, -- 3%
+		--Body = {'Denali Jacket'},
+        Hands = {'Dusk Gloves'}, -- 3%
+        Waist = {'Sonic Belt', 'Swift Belt'}, -- 6%
+        Legs = {'Nashira Seraweels'}, -- 2%
+        Feet = {'Dusk Ledelsens'}, -- 2%
+		--Feet = {'Denali Gamashes'},
     },
 
-    INTEnfeebSkill_Priority = { -- Enfeeb Skill > INT
-        Ammo = {'Phtm. Tathlum'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Neck = {'Enfeebling Torque'},
-        Hands = {'Errant Cuffs'},
-        Ring1 = {'Snow Ring'},
-        Ring2 = {'Snow Ring'},
-        Back = {'Altruistic Cape', 'Prism Cape'},
-        Legs = {'Nashira Seraweels', 'Mahatma Slops'},
-        Feet = {'Elder\'s Sandals'},
-    },
-
-    INTEnfeeb_Priority = { -- INT
-        Ammo = {'Phtm. Tathlum'},
-        Ear1 = {'Loquac. Earring'},
-        Ear2 = {'Phantom Earring'},
-        Neck = {'Philomath Stole'},
-        Body = {'Errant Hpl.'},
-        Hands = {'Errant Cuffs'},
-        Ring1 = {'Snow Ring'},
-        Ring2 = {'Snow Ring'},
-        Back = {'Altruistic Cape', 'Prism Cape'},
-        Legs = {'Mahatma Slops', 'Elder\'s Braguette'},
-        Feet = {'Elder\'s Sandals'},
-    },
-
-    EnhancingSkill_Priority = {
-        Neck = {'Enhancing Torque'}, -- +7
-        Back = {'Merciful Cape'}, -- +5
-    },
-
-    MNDHealing_Priority = {
-        Ear2 = {'Novia Earring'},
-        Body = {'Nashira Manteel'},
-        Waist = {'Sonic Belt', 'Swift Belt'},
-    },
-
-    SpellHaste_Priority = {
-        Head = {'Nashira Turban'},
-        Body = {'Nashira Manteel'},
-        Hands = {'Dusk Gloves'},
-        Waist = {'Sonic Belt', 'Swift Belt'},
-        Legs = {'Nashira Seraweels'},
-        Feet = {'Dusk Ledelsens'},
-    },
-
-    SpellHasteUtsu_Priority = {        
-        Head = {'Nashira Turban'},
-        Body = {'Nashira Manteel'},
-        Hands = {'Dusk Gloves'},
-        Waist = {'Sonic Belt', 'Swift Belt'},
-        Legs = {'Nashira Seraweels'},
-        Feet = {'Dusk Ledelsens'},
-    },
-
-
-    OverlordsRingDrainAspir_Priority = {
-        Ring2 = {'Overlord\'s Ring'}
+    SpellHasteUtsu_Priority = { -- 17%
+        Head = {'Nashira Turban'}, -- 1%
+		--Head = {'Walahra Turban'},
+        Body = {'Nashira Manteel'}, -- 3%
+		--Body = {'Denali Jacket'},
+        Hands = {'Dusk Gloves'}, -- 3%
+        Waist = {'Sonic Belt', 'Swift Belt'}, -- 6%
+        Legs = {'Nashira Seraweels'}, -- 2%
+        Feet = {'Dusk Ledelsens'}, -- 2%
+		--Feet = {'Denali Gamashes'},
     },
 
     Fire_Priority = {
@@ -397,16 +678,8 @@ local sets = {
     Resting_Priority = {
         Ear2 = {'Relaxing Earring'},
         Body = {'Errant Hpl.'},
-    },
-
-    UglyPP_Priority = {
-        Neck = {'Uggalepih Pendant'},
-    },
-
-    WeaponSkillEvis_Priority = {
-        Neck = {'Love Torque'},
-        Waist = {'Warwolf Belt', 'Ryl.Kgt. Belt'},
-        Legs = {'Duelist\'s Tights'},
+		Waist = {'Hierarch Belt'},
+		--Legs = {'Baron\'s Slops'},
     },
 
     StealthEarring_Priority = {
@@ -419,7 +692,7 @@ local sets = {
         Neck = {'Ajari Beads'}, -- MND +6
         Ear2 = {'Cmn. Earring'}, -- MND +2
         Body = {'Errant Hpl.'},
-        Hands = {'Ogre Gloves'},
+        Hands = {''},
         Back = {'Prism Cape'},
         Ring1 = {'Aqua Ring'},
         Ring2 = {'Aqua Ring'},
@@ -804,22 +1077,22 @@ profile.HandleMidcast = function()
         end
     end
 
-    if chainspell == 0 and Settings.SIRD and not Settings.ConvertToggle then
-        if draginclude.dragSettings.TpVariant == 1 then
-            draginclude.SetupInterimEquipSet(sets.SIRD); -- 50% SIRD (70% w/ Aquaveil)
-        elseif draginclude.dragSettings.TpVariant == 2 then
-            if player.SubJob == 'NIN' then
-                if aquaveil > 0 then
-                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons));
-                else
-                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDNINWeapons));
-                end
+    if draginclude.dragSettings.TpVariant == 1 then
+        draginclude.SetupInterimEquipSet(sets.SIRD); -- 50% SIRD (70% w/ Aquaveil)
+    elseif draginclude.dragSettings.TpVariant == 2 then
+        if player.SubJob == 'NIN' then
+            if aquaveil > 0 then
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons));
             else
-                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons));
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDNINWeapons));
             end
+        else
+            draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons));
         end
     end
 
+    gFunc.EquipSet(sets.SpellHaste);
+	
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);
     elseif spell.Name == 'Sneak' then
@@ -828,64 +1101,79 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Stoneskin);
     elseif spell.Skill == 'Ninjutsu' then
         gFunc.EquipSet(sets.SpellHasteUtsu);
-    elseif (BluMagBreath:contains(action.Name)) then
-        gFunc.EquipSet('BluBreath')
+    elseif (BluMagBreath:contains(spell.Name)) then
+        gFunc.EquipSet(sets.BluBreath)
 
         equipObiIfApplicable(spell.Element);
     elseif (BluMagPhys:contains(spell.Name)) then
-        gcmelee.EquipBluPhysical()
+        gFunc.EquipSet(sets.BluPhysicalBase);
+		
         if (BluPhysSTR:contains(spell.Name)) then 
-            gFunc.EquipSet('BluPhysical_STR')
+            gFunc.EquipSet(sets.BluPhysical_STR);
         elseif (BluPhysDEX:contains(spell.Name)) then 
-            gFunc.EquipSet('BluPhysical_DEX')
+            gFunc.EquipSet(sets.BluPhysical_DEX);
         elseif (BluPhysVIT:contains(spell.Name)) then 
-            gFunc.EquipSet('BluPhysical_VIT')
+            gFunc.EquipSet(sets.BluPhysical_VIT);
         elseif (BluPhysAGI:contains(spell.Name)) then 
-            gFunc.EquipSet('BluPhysical_AGI')
+            gFunc.EquipSet(sets.BluPhysical_AGI);
         elseif (BluPhysCHR:contains(spell.Name)) then 
-            gFunc.EquipSet('BluPhysical_CHR')
+            gFunc.EquipSet(sets.BluPhysical_CHR);
         end
+		
+		if (ca >= 1) then 
+            gFunc.EquipSet(sets.CA); 
+		end
     elseif (spell.Skill == 'Blue Magic') then
         if (BluMagBuff:contains(spell.Name)) then
-            gFunc.EquipSet('CMP') -- non-skill-scaling buffs (Refueling, Plasma Charge, etc.)
+            gFunc.EquipSet(sets.ConserveMP); -- non-skill-scaling buffs (Refueling, Plasma Charge, etc.)
+			
+			if (diff >= 1) then 
+                gFunc.EquipSet(sets.Diffusion); 
+            end
         elseif (BluMagSkill:contains(spell.Name)) then
-            gFunc.EquipSet('BluSkill') -- skill-scaling buffs/defenses (e.g. Zephyr Mantle)
+            gFunc.EquipSet(sets.BluSkill); -- skill-scaling buffs/defenses (e.g. Zephyr Mantle)
+			
+			if (diff >= 1) then 
+                gFunc.EquipSet(sets.Diffusion); 
+            end
         elseif (BluMagDebuff:contains(spell.Name)) then
-            gFunc.EquipSet('BluMagicAccuracy')
+            gFunc.EquipSet(sets.BluMagicAccuracy);
         else
-            gFunc.EquipSet('BluMagical')
+            gFunc.EquipSet(sets.BluMagical);
 
             if (BluMagStun:contains(spell.Name)) then 
-                gFunc.EquipSet('BluStun')
+                gFunc.EquipSet(sets.BluStun);
             elseif (BluMagCure:contains(spell.Name)) then 
-                gFunc.EquipSet('Cure')
+                gFunc.EquipSet(sets.Cure);
             elseif (BluMagEnmity:contains(spell.Name)) then 
-                gFunc.EquipSet('Enmity')
+                gFunc.EquipSet(sets.Enmity);
             elseif (spell.Name == 'White Wind') then 
-                gFunc.EquipSet('WhiteWind')
+                gFunc.EquipSet(sets.WhiteWind);
             else
                 -- Generic magic-damage nuke (including Everyone's Grudge/Tenebral Crush, which used to
                 -- get a dedicated BluDark set - now just fall through to their stat-mod classification
                 -- like everything else): layer the stat-specific subset on top of BluMagical. INT is
                 -- the default for anything not explicitly MND/CHR/INT-classified above.
                 if (BluMagMND:contains(spell.Name)) then 
-                    gFunc.EquipSet('BluMagical_MND')
+                    gFunc.EquipSet(sets.BluMagical_MND);
                 elseif (BluMagCHR:contains(spell.Name)) then 
-                    gFunc.EquipSet('BluMagical_CHR')
+                    gFunc.EquipSet(sets.BluMagical_CHR);
                 elseif (BluMagINT:contains(spell.Name)) then 
-                    gFunc.EquipSet('BluMagical_INT')
+                    gFunc.EquipSet(sets.BluMagical_INT);
                 else 
-                    gFunc.EquipSet('BluMagical_INT') -- unclassified spells still default to INT
+                    gFunc.EquipSet(sets.BluMagical_INT); -- unclassified spells still default to INT
                 end
+				
+				-- If I ever put on Convert gear, I need to account for it!!!
+				if spell.MpAftercast <= (.50 * (player.MaxMP - Settings.ConvertMPNuke + 20)) then
+					gFunc.Message('UglyPP Pendant going on.');
+					gFunc.EquipSet(sets.UglyPP);
+				end
             end
-
-            if (ca >= 1) then 
-                gFunc.EquipSet('Ca') end
+			
             if (ba >= 1) then 
-                gFunc.EquipSet('Ba') end
-            if (diff >= 1) then 
-                gFunc.EquipSet('Diffusion') 
-            end
+                gFunc.EquipSet(sets.BA);
+			end
         end
 
         equipObiIfApplicable(spell.Element);
@@ -908,14 +1196,14 @@ profile.HandleWeaponskill = function()
 
     gFunc.EquipSet(sets.WS);
 
-    if (ws.Name == 'Vorpal Blade') then
+    if (action.Name == 'Vorpal Blade') then
         gFunc.EquipSet(sets.Vorpal);
-    elseif (ws.Name == 'Savage Blade') then
+    elseif (action.Name == 'Savage Blade') then
         gFunc.EquipSet(sets.SavageBlade);
     end
 
-    if (gcdisplay.GetCycle('TP') == 'HighAcc') then
-        gFunc.EquipSet('Ws_HighAcc')
+    if (Settings.MeleeAcc) then
+        gFunc.EquipSet(sets.WSAcc);
     end
 
     draginclude.HandleWeaponSkill(action);

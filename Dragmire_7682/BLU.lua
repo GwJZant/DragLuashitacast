@@ -1053,6 +1053,7 @@ profile.HandleMidcast = function()
     local diff = gData.GetBuffCount('Diffusion');
     local ca = gData.GetBuffCount('Chain Affinity');
     local ba = gData.GetBuffCount('Burst Affinity');
+	local aquaveil = gData.GetBuffCount('Aquaveil');
 
     Settings.SpellElement = spell.Element;
     gFunc.Message(spell.Name .. ' ' .. spell.Skill .. ' ' .. spell.Type .. ' ' .. spell.Element);
@@ -1165,7 +1166,7 @@ profile.HandleMidcast = function()
                 end
 				
 				-- If I ever put on Convert gear, I need to account for it!!!
-				if spell.MpAftercast <= (.50 * (player.MaxMP - Settings.ConvertMPNuke + 20)) then
+				if ((player.MP - spell.MpCost) / player.MaxMP) < .51 then
 					gFunc.Message('UglyPP Pendant going on.');
 					gFunc.EquipSet(sets.UglyPP);
 				end

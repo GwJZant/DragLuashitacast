@@ -51,10 +51,12 @@ local sets = {
         Feet = {''},
     },
 
-    SpellHaste_Priority = {
-        Head = {'Nashira Turban'},
+    SpellHaste_Priority = { -- 9% Haste
+        Head = {'Nashira Turban'}, -- 2%
         Body = {'Igqira Weskit'}, -- Only defining this because Black Cloak makes body empty w/ Nash Turban
-        Waist = {'Swift Belt'},
+        Legs = {'Nashira Seraweels'}, -- 2%
+        Waist = {'Swift Belt'}, -- 4%
+        Feet = {'Nashira Crackows'}, -- 1%
     },
 
     FastCast_Priority = {
@@ -126,6 +128,22 @@ local sets = {
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
         Legs = {'Igqira Lappas'}, -- Enfeebling +10
         Feet = {'Rostrum Pumps', 'Wizard\'s Sabots'}, -- INT +3
+    },
+
+    Bind_Priority = { -- INT +27, Enfeebling +22, Macc +10, Haste +5%
+        Ammo = {'Phtm. Tathlum'}, -- INT +2
+        Head = {'Nashira Turban', 'Elite Beret'}, -- Haste +2%, Macc +5
+        Neck = {'Enfeebling Torque', 'Checkered Scarf'}, -- Enfeebling +7
+        Ear1 = {'Morion Earring'}, -- INT +1
+        Ear2 = {'Abyssal Earring'}, -- INT +2
+        Body = {'Wizard\'s Coat', 'Shaman\'s Cloak'}, -- Enfeebling +10
+        Hands = {'Errant Cuffs'}, -- INT +5
+        Ring1 = {'Tamas Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +4
+        Back = {'Prism Cape'}, -- INT +3
+        Waist = {'Penitent\'s Rope', 'Druid\'s Rope'}, -- INT +5
+        Legs = {'Nashira Seraweels'}, -- Enfeebling +5, Macc +3, Haste +2%
+        Feet = {'Nashira Crackows', 'Wizard\'s Sabots'}, -- Macc +2, Haste +1%
     },
 
     -- 520 HP
@@ -211,7 +229,7 @@ local sets = {
         Feet = {'Igqira Huaraches', 'Wizard\'s Sabots'}, -- Dark +4
     },
 
-    Stun_Priority = { -- INT +29, Dark +34, Macc +5, Haste +6%
+    Stun_Priority = { -- INT +29, Dark +15, Macc +7, Haste +9%
         Ammo = {'Phtm. Tathlum'}, -- INT +2
         Head = {'Nashira Turban'}, -- Macc +5 Haste +2%
         Neck = {'Checkered Scarf'}, -- INT +2
@@ -223,8 +241,8 @@ local sets = {
         Ring2 = {'Snow Ring'}, -- INT +4
         Back = {'Prism Cape'}, -- INT +3
         Waist = {'Swift Belt', 'Druid\'s Rope'}, -- Haste +4%
-        Legs = {'Wizard\'s Tonban'}, -- Dark Skill +15
-        Feet = {'Igqira Huaraches', 'Wizard\'s Sabots'}, -- Dark +4
+        Legs = {'Nashira Seraweels', 'Wizard\'s Tonban'}, -- Haste +2%
+        Feet = {'Nashira Crackows', 'Wizard\'s Sabots'}, -- Haste +1%, Macc +2
     },
 
     SorcererTonban_Priority = {
@@ -320,7 +338,7 @@ local sets = {
         Head = 'Wzd. Petasos +1',
         Body = 'Igqira Weskit',
         Hands = 'Merman\'s Bangles',
-        Legs = 'Igqira Lappas',
+        Legs = 'Nashira Seraweels',
         Feet = 'Igqira Huaraches',
     },
 
@@ -790,7 +808,11 @@ profile.HandleMidcast = function()
                 gFunc.EquipSet(sets.SorcererTonban);
             end
         elseif spell.Skill == 'Enfeebling Magic' then
-            gFunc.EquipSet(sets.INTEnfeebling);
+            if spell.Name == 'Bind' then
+                gFunc.EquipSet(sets.Bind);
+            else
+                gFunc.EquipSet(sets.INTEnfeebling);
+            end
         elseif spell.Skill == 'Dark Magic' then
             gFunc.EquipSet(sets.INTDark);
 

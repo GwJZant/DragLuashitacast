@@ -426,7 +426,7 @@ local sets = {
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- INT +10
         Hands = {'Errant Cuffs'}, -- INT +5 
-        Ring1 = {'Snow Ring'}, -- INT +5
+        Ring2 = {'Snow Ring'}, -- INT +5
         Ring2 = {'Snow Ring'}, -- INT +5
         Back = {'Altruistic Cape'}, -- Enfeebling +5
         Legs = {'Nashira Seraweels'}, -- Enfeebling +5, Macc +3
@@ -1190,14 +1190,18 @@ profile.HandleMidcast = function()
     if draginclude.dragSettings.TpVariant == 1 then
         draginclude.SetupInterimEquipSet(sets.SIRD); -- 38% SIRD (58% w/ Aquaveil)
     elseif draginclude.dragSettings.TpVariant == 2 then
-        if player.SubJob == 'NIN' then
-            draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 88% SIRD (108% w/ Aquaveil)
-        else
-            draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 63% SIRD (83% w/ Aquaveil)
+        if spell.Skill ~= 'Singing' then
+            if player.SubJob == 'NIN' then
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 88% SIRD (108% w/ Aquaveil)
+            else
+                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 63% SIRD (83% w/ Aquaveil)
+            end
         end
     end
 
-    gFunc.EquipSet(sets.Midcast);
+    if spell.Skill ~= 'Singing' then
+        gFunc.EquipSet(sets.Midcast);
+    end
 
     if spell.Name == 'Invisible' then
         gFunc.EquipSet(sets.Invisible);

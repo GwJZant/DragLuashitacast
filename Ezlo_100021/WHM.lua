@@ -305,7 +305,7 @@ local sets = {
         Ring2 = {'Sapphire Ring', 'Aquamarine Ring', 'Turquoise Ring'}, -- MND +4
         Back = {'Prism Cape'}, -- MND +3
         Waist = {'Penitent\'s Rope', 'Swift Belt'}, -- MND +5
-        Legs = {'Errant Slops', 'Blessed Trousers', 'Wonder Braccae'}, -- MND +7
+        Legs = {'Cleric\'s Pantaln.', 'Wonder Braccae'}, -- Elemental Resistance +20
         Feet = {'Cleric\'s Duckbills', 'Blessed Pumps', 'Healer\'s Duckbills'}, -- MND +5, Enhancing Skill +10
     },
 
@@ -407,11 +407,11 @@ local sets = {
     },
 
     StyleLockNIN = {
-        Main = 'Apollo\'s Staff',
+        Main = 'Rucke\'s Rung',
         Head = 'Optical Hat',
         Body = 'Reverend Mail',
         Hands = 'Merman\'s Bangles',
-        Legs = 'Healer\'s Pantaln.',
+        Legs = 'Blessed Trousers',
         Feet = 'Rostrum Pumps',
     },
 
@@ -676,7 +676,7 @@ profile.LateInitialize = function()
         if player.SubJob == 'NIN' then
             gFunc.LockStyle(sets.StyleLockNIN);
         else
-            gFunc.LockStyle(sets.StyleLockGeneric2);
+            gFunc.LockStyle(sets.StyleLockNIN);
         end
         
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');

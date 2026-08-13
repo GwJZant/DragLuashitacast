@@ -195,7 +195,7 @@ local sets = {
         Ring1 = {'Rajas Ring'}, -- STR+5, DEX+5
         Ring2 = {'Flame Ring'}, -- STR+5
         Back = {'Forager\'s Mantle'}, -- STR+3, ATT+15
-        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
+        Waist = {'Warwolf Belt'}, -- STR+5, DEX+5
         Legs = {'Barone Cosciales'}, -- STR+2, ATT+6
         Feet = {'Hct. Leggings'}, --STR+6, DEX+3
     },
@@ -476,6 +476,10 @@ local sets = {
         Body = {'Wym. Mail +1'},
     },
 
+    Angon_Priority = {
+        Ammo = {'Angon'},
+    },
+
     Jump_Priority = { -- ACC
         Ammo = {'Tiphia Sting'}, -- ATT+2, ACC+2
         Head = {'Ace\'s Helm'},
@@ -622,14 +626,10 @@ local function LateInitialize()
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 15');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 4');
             gFunc.Message('THF Macro Book');
-        elseif player.SubJob == 'WAR' then
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro book 15');
-            AshitaCore:GetChatManager():QueueCommand(1, '/macro set 5');
-            gFunc.Message('WAR Macro Book');
-        elseif player.SubJob == 'NIN' then
+        elseif player.SubJob == 'BLU' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 15');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 6');
-            gFunc.Message('NIN Macro Book');
+            gFunc.Message('BLU Macro Book');
         elseif player.SubJob == 'SAM' then
             AshitaCore:GetChatManager():QueueCommand(1, '/macro book 15');
             AshitaCore:GetChatManager():QueueCommand(1, '/macro set 7');
@@ -645,6 +645,7 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 3 /lac fwd CallWyvern ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 4 /lac fwd HighJump ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 5 /lac fwd SuperJump ');
+        AshitaCore:GetChatManager():QueueCommand(-1,'/bind 7 /lac fwd Angon ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd SpiritLink ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd SteadyWing');
 
@@ -654,7 +655,6 @@ local function LateInitialize()
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /greedy /lac fwd GreedyToggle');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /hp /lac fwd LockHP');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd MDT');
-
         
         AshitaCore:GetChatManager():QueueCommand(-1,'/bind @\\ /lac fwd MDT ');
         AshitaCore:GetChatManager():QueueCommand(-1,'/alias /poisoncrab /lac fwd poisoncrab');
@@ -783,7 +783,7 @@ profile.HandleDefault = function()
         else
             gFunc.EquipSet(sets.TankStats);
         end
-        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' then
+        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' or player.SubJob == 'BLU' then
             if player.MP <= 75 then
                 gFunc.EquipSet(sets.Default);
             else
@@ -821,7 +821,7 @@ profile.HandleDefault = function()
         end
 
         -- Switch to Resting gear
-        if player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'RDM' then
+        if player.SubJob == 'WHM' or player.SubJob == 'RDM' or player.SubJob == 'BLM' or player.SubJob == 'BLU' then
             gFunc.EquipSet(sets.RestingMage);
         else
             gFunc.EquipSet(sets.Resting);
@@ -886,10 +886,10 @@ profile.HandleAbility = function()
         gFunc.EquipSet(sets.HighJump);
     elseif string.match(ability.Name, 'Jump') then
         gFunc.EquipSet(sets.Jump);
+    elseif string.match(ability.Name, 'Angon') then
+        gFunc.EquipSet(sets.Angon);
     elseif string.match(ability.Name, 'Ancient Circle') then
         gFunc.EquipSet(sets.AncientCircle);
-    elseif string.match(ability.Name, 'Spirit Link') then
-        gFunc.EquipSet(sets.Resting);
     elseif string.match(ability.Name, 'Charm') then
         gFunc.LockSet(sets.Charm, 1);
     end
@@ -939,9 +939,11 @@ profile.HandleMidcast = function()
         greedyMpCap = 96;
     elseif player.SubJob == 'BLM' then
         greedyMpCap = 115;
+    elseif player.SubJob == 'BLU' then -- Update this when 75BLU
+        greedyMpCap = 71;
     end
 
-    if food > 0 then -- assumes carb for now, make a toggle sometimes for non-carb foods
+    if food > 0 then -- assumes carb for now, make a toggle sometime for non-carb foods
         greedyMpCap = greedyMpCap + 10
     end
 
@@ -955,7 +957,7 @@ profile.HandleMidcast = function()
 
     gFunc.EquipSet(sets.MidcastJustHelm);
 
-    if string.contains(spell.Name, partyPrioSpell) then
+    if string.contains(spell.Name, partyPrioSpell) or player.HP <= 700 then
         gFunc.Message('HP Up Set SKIPPED');
     elseif spell.Name == 'Stoneskin' then
         gFunc.EquipSet(sets.MidcastStoneskin);

@@ -54,19 +54,19 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
-        Head = {'Optical Hat', 'Dream Hat +1'},
+        Head = {'Optical Hat', 'Emperor Hairpin', 'Faceguard', 'Dream Hat +1'},
         Neck = {'Jeweled Collar', 'Holy Phial'},
         Ear1 = {'Merman\'s Earring'},
         Ear2 = {'Merman\'s Earring'},
-        Body = {'Scp. Harness +1', 'Dream Robe +1'},
+        Body = {'Scp. Harness +1', 'Elder\'s Surcoat', 'Scale Mail', 'Dream Robe +1'},
         --Body = {'Mirage Jubbah', 'Scp. Harness +1', 'Dream Robe +1'},
-        Hands = {'Homam Manopolas', 'Dream Mittens +1'},
-        Ring1 = {'Merman\'s Ring', 'Ether Ring'},
+        Hands = {'Homam Manopolas', 'Elder\'s Bracers', 'Scale Fng. Gnt.', 'Dream Mittens +1'},
+        Ring1 = {'Merman\'s Ring', 'Ether Ring', 'Astral Ring'},
         Ring2 = {'Merman\'s Ring', 'Rajas Ring'},
         Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
-        Legs = {'Igqira Lappas', 'Wizard\'s Tonban', 'Wonder Braccae', 'Dream Trousers +1'},
-        Feet = {'Errant Pigaches', 'Wizard\'s Sabots', 'Wonder Clomps', 'Dream Boots +1'},
+        Legs = {'Igqira Lappas', 'Elder\'s Braguette', 'Scale Cuisses', 'Dream Trousers +1'},
+        Feet = {'Errant Pigaches', 'Elder\'s Sandals', 'Scale Greaves', 'Dream Boots +1'},
     },
 
     MeleeWeapons_Priority = {
@@ -81,7 +81,7 @@ local sets = {
 
     MeleeEngagedAcc_Priority = {
 	    Ammo = {'Tiphia Sting'},
-	    Head = {'Homam Zucchetto'},
+	    Head = {'Nashira Turban'},
 	    Neck = {'Peacock Amulet'},
 	    Ear1 = {'Brutal Earring'},
 	    Ear2 = {'Stealth Earring'},
@@ -190,6 +190,14 @@ local sets = {
         Feet = 'Dream Boots +1',
     },
 
+    StyleLockBLU = {
+        Head = 'Emperor Hairpin',
+        Body = 'Scale Mail',
+        Hands = 'Elder\'s Bracers',
+        Legs = 'Elder\'s Braguette',
+        Feet = 'Elder\'s Sandals',
+    },
+
     Precast_Priority = {
         Ear1 = {'Loquac. Earring'}, --2
 		Legs = {'Homam Cosciales'}, --2
@@ -243,7 +251,7 @@ local sets = {
         Back = {''},
         Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
         Legs = {''},
-        Feet = {''},
+        Feet = {'Rutter Sabatons'}, -- STR +3, VIT +2, Attack +5
     },
 	
 	BluPhysical_DEX_Priority = {
@@ -275,7 +283,7 @@ local sets = {
         Back = {''},
         Waist = {'Warwolf Belt'}, -- STR+5, DEX+5, VIT+5
         Legs = {''},
-        Feet = {''},
+        Feet = {'Rutter Sabatons'}, -- STR +3, VIT +2, Attack +5
     },
 	
 	BluPhysical_AGI_Priority = {
@@ -297,7 +305,7 @@ local sets = {
 	BluPhysical_CHR_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {''},
+        Neck = {'Temp. Torque'}, -- CHR +5
         Ear1 = {''},
         Ear2 = {''},
         Body = {''},
@@ -510,7 +518,7 @@ local sets = {
         Back = {''},
         Waist = {''},
         Legs = {''},
-        Feet = {''},
+        Feet = {'Rutter Sabatons'}, -- STR +3, VIT +2, Attack +5
     },
 	
 	Vorpal_Priority = {
@@ -531,7 +539,7 @@ local sets = {
 	
 	SavageBlade_Priority = {
         Ammo = {''},
-        Head = {''},
+        Head = {'Light Gorget'},
         Neck = {''},
         Ear1 = {''},
         Ear2 = {''},
@@ -701,7 +709,7 @@ local sets = {
     },
 
     Charm_Priority = {
-        Body = {'Elder\'s Surcoat',},
+        Body = {'Elder\'s Surcoat'},
         Back = {'Trimmer\'s Mantle'},
         Legs = {'Elder\'s Braguette'},
     },
@@ -924,7 +932,7 @@ profile.LateInitialize = function()
 
     if timestamp >= Settings.LateInitialized.TimeToUse then
         -- Setting a Style Lock prevents the character from blinking
-        gFunc.LockStyle(sets.StyleLock);
+        gFunc.LockStyle(sets.StyleLockBLU);
 
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 19');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');

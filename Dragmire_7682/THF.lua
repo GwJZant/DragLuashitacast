@@ -234,7 +234,7 @@ local sets = {
     },
 
     StyleLockFish = {
-        Head = 'Assassin\'s Bonnet',
+        Head = 'Eld. Bone Hairpin',
         Body = 'Fisherman\'s Apron',
         Hands = 'Angler\'s Gloves',
         Legs = 'Angler\'s Hose',

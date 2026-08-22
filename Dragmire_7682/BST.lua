@@ -7,7 +7,7 @@ local Settings = {
     -- LullabyMelodia SaberFamiliar CourierCarrie MiteFamiliar
     JugPetSettings = {
         -- This toggle configures which jugs the 'JugChange' command will loop through
-        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.VoraciousAudrey, draginclude.JugPetConfig.CourierCarrie, draginclude.JugPetConfig.FlytrapFamiliar},
+        DefaultJugs = {draginclude.JugPetConfig.LullabyMelodia, draginclude.JugPetConfig.LifedrinkerLars, draginclude.JugPetConfig.CourierCarrie},
         CurrentJug = 1,
     },
     -- Settings used for a delay initilization of macro books and style locking since those aren't always populated the moment you load a Lua file
@@ -30,16 +30,16 @@ local sets = {
         Ammo = {'Fenrir\'s Stone', 'Happy Egg'},
         Head = {'Optical Hat', 'Shep. Bonnet',},
         Neck = {'Temp. Torque', 'Peacock Amulet'},
-        Ear1 = {'Ethereal Earring', 'Bloodbead Earring'},
-        Ear2 = {'Novia Earring', 'Cassie Earring'},
-        Body = {'Scorpion Harness', 'Elder\'s Surcoat',},
+        Ear1 = {'Merman\'s Earring', 'Bloodbead Earring'},
+        Ear2 = {'Merman\'s Earring', 'Cassie Earring'},
+        Body = {'Scp. Harness +1', 'Elder\'s Surcoat',},
         Hands = {'Dst. Mittens +1', 'Elder\'s Bracers'},
-        Ring1 = {'Rajas Ring'},
-        Ring2 = {'Blitz Ring', 'Bastokan Ring'},
+        Ring1 = {'Merman\'s Ring', 'Rajas Ring'},
+        Ring2 = {'Merman\'s Ring', 'Bastokan Ring'},
         Back = {'Boxer\'s Mantle', 'Trimmer\'s Mantle'},
         Waist = {'Sonic Belt', 'Swift Belt'},
-        Legs = {'Dst. Subligar +1', 'Elder\'s Braguette'},
-        Feet = {'Dst. Leggings +1', 'Elder\'s Sandals'},
+        Legs = {'Coral Cuisses +1', 'Elder\'s Braguette'},
+        Feet = {'Coral Greaves +1', 'Elder\'s Sandals'},
     },
 
     IdleTown_Priority = {
@@ -63,7 +63,7 @@ local sets = {
         Head = {'Panther Mask', 'Shep. Bonnet'}, --2%
         Ear1 = {'Beastly Earring'},
         Ear2 = {'Brutal Earring', 'Merman\'s Earring'},
-        Body = {'Scorpion Harness'},
+        Body = {'Scp. Harness +1'},
         Hands = {'Dusk Gloves', 'Beast Gloves'}, --3%
         Ring2 = {'Blitz Ring'}, --1%
         Back = {'Forager\'s Mantle'},
@@ -496,7 +496,7 @@ profile.HandleDefault = function()
 
     -- Put town gear on
     if (zone.Area ~= nil) and (draginclude.Towns:contains(zone.Area)) then 
-        gFunc.EquipSet(sets.IdleTown);
+        --gFunc.EquipSet(sets.IdleTown);
     end
 
     draginclude.HandleDefault(Settings.JugPetSettings);

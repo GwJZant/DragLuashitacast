@@ -619,6 +619,8 @@ function draginclude.HandleDrgCoreCommands(args)
         AshitaCore:GetChatManager():QueueCommand(1, '/ja "Spirit Link" <me>');
     elseif (args[1] == 'SteadyWing') then
         AshitaCore:GetChatManager():QueueCommand(1, '/pet "Steady Wing" <me>');
+    elseif (args[1] == 'Angon') then
+        AshitaCore:GetChatManager():QueueCommand(1, '/pet "Angon" <stnpc>');
     end
 end
 

@@ -7,7 +7,7 @@ local Settings = {
         TimeToUse = 0,
     },
     StatusArmorSwaps = {
-        OpoopoNecklace = true,
+        OpoopoNecklace = false,
         PresidentialHairpin = true,
     },
     CurrentLevel = 0,
@@ -939,8 +939,8 @@ profile.HandleMidcast = function()
         greedyMpCap = 96;
     elseif player.SubJob == 'BLM' then
         greedyMpCap = 115;
-    elseif player.SubJob == 'BLU' then -- Update this when 75BLU
-        greedyMpCap = 71;
+    elseif player.SubJob == 'BLU' then
+        greedyMpCap = 82;
     end
 
     if food > 0 then -- assumes carb for now, make a toggle sometime for non-carb foods

@@ -55,18 +55,18 @@ local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb', 'Phtm. Tathlum', 'Fortune Egg'},
         Head = {'Optical Hat', 'Emperor Hairpin', 'Faceguard', 'Dream Hat +1'},
-        Neck = {'Jeweled Collar', 'Holy Phial'},
+        Neck = {'Jeweled Collar', 'Ajase Beads'},
         Ear1 = {'Merman\'s Earring'},
-        Ear2 = {'Merman\'s Earring'},
-        Body = {'Scp. Harness +1', 'Elder\'s Surcoat', 'Scale Mail', 'Dream Robe +1'},
+        Ear2 = {'Merman\'s Earring', 'Bloodbead Earring'},
+        Body = {'Scp. Harness +1', 'Elder\'s Surcoat', 'Dream Robe +1'},
         --Body = {'Mirage Jubbah', 'Scp. Harness +1', 'Dream Robe +1'},
-        Hands = {'Homam Manopolas', 'Elder\'s Bracers', 'Scale Fng. Gnt.', 'Dream Mittens +1'},
-        Ring1 = {'Merman\'s Ring', 'Ether Ring', 'Astral Ring'},
-        Ring2 = {'Merman\'s Ring', 'Rajas Ring'},
+        Hands = {'Homam Manopolas', 'Elder\'s Bracers', 'Dream Mittens +1'},
+        Ring1 = {'Merman\'s Ring', 'Rajas Ring'},
+        Ring2 = {'Merman\'s Ring', 'Ether Ring', 'Astral Ring'},
         Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
-        Legs = {'Igqira Lappas', 'Elder\'s Braguette', 'Scale Cuisses', 'Dream Trousers +1'},
-        Feet = {'Errant Pigaches', 'Elder\'s Sandals', 'Scale Greaves', 'Dream Boots +1'},
+        Legs = {'Igqira Lappas', 'Elder\'s Braguette', 'Dream Trousers +1'},
+        Feet = {'Errant Pigaches', 'Mountain Gaiters', 'Elder\'s Sandals', 'Dream Boots +1'},
     },
 
     MeleeWeapons_Priority = {
@@ -192,7 +192,7 @@ local sets = {
 
     StyleLockBLU = {
         Head = 'Emperor Hairpin',
-        Body = 'Scale Mail',
+        Body = 'Elder\'s Surcoat',
         Hands = 'Elder\'s Bracers',
         Legs = 'Elder\'s Braguette',
         Feet = 'Elder\'s Sandals',
@@ -698,10 +698,10 @@ local sets = {
     Reward_Priority = { -- MND
         Ammo = {'Pet Food Zeta', 'Pet Fd. Epsilon', 'Pet Food Delta', 'Pet Fd. Gamma', 'Pet Food Beta', 'Pet Food Alpha'},
         Head = {'Zenith Crown'},
-        Neck = {'Ajari Beads'}, -- MND +6
+        Neck = {},
         Ear2 = {'Cmn. Earring'}, -- MND +2
         Body = {'Errant Hpl.'},
-        Hands = {''},
+        Hands = {'Dvt. Mitts +1'}, -- MND +6
         Back = {'Prism Cape'},
         Ring1 = {'Aqua Ring'},
         Ring2 = {'Aqua Ring'},
@@ -980,11 +980,7 @@ profile.HandleDefault = function()
     gFunc.EquipSet(sets.Default);
 
     if draginclude.dragSettings.TpVariant == 1 then
-        if Settings.Acc then
-            gFunc.EquipSet(sets.MeleeEngagedAcc);
-        else
-            gFunc.EquipSet(sets.MeleeEngaged);
-        end
+
     elseif draginclude.dragSettings.TpVariant == 2 then
         gFunc.EquipSet(sets.Earth);
     end
@@ -994,6 +990,12 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.MeleeWeaponsNIN);
         else
             gFunc.EquipSet(sets.MeleeWeapons);
+        end
+
+        if Settings.Acc then
+            gFunc.EquipSet(sets.MeleeEngagedAcc);
+        else
+            gFunc.EquipSet(sets.MeleeEngaged);
         end
     elseif player.Status == 'Resting' then
         gFunc.EquipSet(sets.Resting);

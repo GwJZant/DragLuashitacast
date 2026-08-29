@@ -66,7 +66,7 @@ local sets = {
         Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
         Legs = {'Igqira Lappas', 'Elder\'s Braguette', 'Dream Trousers +1'},
-        Feet = {'Errant Pigaches', 'Mountain Gaiters', 'Elder\'s Sandals', 'Dream Boots +1'},
+        Feet = {'Errant Pigaches', 'Magus Charuqs', 'Mountain Gaiters', 'Elder\'s Sandals', 'Dream Boots +1'},
     },
 
     MeleeWeapons_Priority = {
@@ -90,7 +90,7 @@ local sets = {
 	    Ring1 = {'Rajas Ring'},
 	    Ring2 = {'Toreador\'s Ring'},
 	    Back = {'Forager\'s Mantle'},
-	    Waist = {'Sonic Belt'},
+	    Waist = {'Sonic Belt', 'Swift Belt'},
 	    Legs = {'Homam Cosciales'},
 	    Feet = {'Homam Gambieras'},
     },
@@ -106,7 +106,7 @@ local sets = {
 	    Ring1 = {'Rajas Ring'},
 	    Ring2 = {'Toreador\'s Ring'},
 	    Back = {'Forager\'s Mantle'},
-	    Waist = {'Sonic Belt'},
+	    Waist = {'Sonic Belt', 'Swift Belt'},
 	    Legs = {'Homam Cosciales'},
 	    Feet = {'Homam Gambieras'},
     },
@@ -195,7 +195,7 @@ local sets = {
         Body = 'Elder\'s Surcoat',
         Hands = 'Elder\'s Bracers',
         Legs = 'Elder\'s Braguette',
-        Feet = 'Elder\'s Sandals',
+        Feet = 'Magus Charuqs',
     },
 
     Precast_Priority = {

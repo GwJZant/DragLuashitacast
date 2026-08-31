@@ -48,7 +48,8 @@ local Settings = {
     SIRD = true,
     FastCastValue = 0, -- 20% from traits 22% from gear listed in Precast set
     MeleeAcc = true,
-	ConvertMPNuke = 0
+	ConvertMPNuke = 0,
+    Learn = false,
 };
 
 local sets = {
@@ -60,10 +61,10 @@ local sets = {
         Ear2 = {'Merman\'s Earring', 'Bloodbead Earring'},
         Body = {'Scp. Harness +1', 'Elder\'s Surcoat', 'Dream Robe +1'},
         --Body = {'Mirage Jubbah', 'Scp. Harness +1', 'Dream Robe +1'},
-        Hands = {'Homam Manopolas', 'Elder\'s Bracers', 'Dream Mittens +1'},
+        Hands = {'Homam Manopolas', 'Magus Bazubands', 'Elder\'s Bracers', 'Dream Mittens +1'},
         Ring1 = {'Merman\'s Ring', 'Rajas Ring'},
         Ring2 = {'Merman\'s Ring', 'Ether Ring', 'Astral Ring'},
-        Back = {'Hexerei Cape', 'Trimmer\'s Mantle'},
+        Back = {'Cheviot Cape', 'Trimmer\'s Mantle'},
         Waist = {'Penitent\'s Rope', 'Druid\'s Rope'},
         Legs = {'Igqira Lappas', 'Elder\'s Braguette', 'Dream Trousers +1'},
         Feet = {'Errant Pigaches', 'Magus Charuqs', 'Mountain Gaiters', 'Elder\'s Sandals', 'Dream Boots +1'},
@@ -143,6 +144,11 @@ local sets = {
         Feet = {'Coral Greaves +1'}, -- MDT -2%
     },
 
+    Vermillion = {
+        Head = 'displaced',
+        Body = 'Vermillion Cloak',
+    },
+
     -- 4 SIRD Merits = 8%
     -- 25% + 8% + 42% = 75% (95% w/ Aquaveil)
     SIRDWeapons_Priority = {
@@ -192,8 +198,9 @@ local sets = {
 
     StyleLockBLU = {
         Head = 'Emperor Hairpin',
-        Body = 'Elder\'s Surcoat',
-        Hands = 'Elder\'s Bracers',
+        Body = 'Vermillion Cloak',
+        --Body = 'Scp. Harness +1',
+        --Hands = 'Magus Bazubands',
         Legs = 'Elder\'s Braguette',
         Feet = 'Magus Charuqs',
     },
@@ -305,16 +312,16 @@ local sets = {
 	BluPhysical_CHR_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {'Temp. Torque'}, -- CHR +5
+        Neck = {'Temp. Torque', 'Star Necklace'}, -- CHR +5
         Ear1 = {''},
         Ear2 = {''},
-        Body = {''},
+        Body = {'Elder\'s Surcoat'},
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
         Back = {''},
-        Waist = {''},
-        Legs = {''},
+        Waist = {'Druid\'s Rope'},
+        Legs = {'Elder\'s Braguette'},
         Feet = {''},
     },
 	
@@ -476,16 +483,16 @@ local sets = {
 	BluMagical_CHR_Priority = {
         Ammo = {''},
         Head = {''},
-        Neck = {''},
+        Neck = {'Temp. Torque', 'Star Necklace'}, -- CHR +5
         Ear1 = {''},
         Ear2 = {''},
-        Body = {''},
+        Body = {'Elder\'s Surcoat'},
         Hands = {''},
         Ring1 = {''},
         Ring2 = {''},
         Back = {''},
-        Waist = {''},
-        Legs = {''},
+        Waist = {'Druid\'s Rope'},
+        Legs = {'Elder\'s Braguette'},
         Feet = {''},
     },
 	
@@ -709,9 +716,15 @@ local sets = {
     },
 
     Charm_Priority = {
+        Neck = {'Star Necklace'},
         Body = {'Elder\'s Surcoat'},
         Back = {'Trimmer\'s Mantle'},
+        Waist = {'Druid\'s Rope'},
         Legs = {'Elder\'s Braguette'},
+    },
+
+    Learn_Priority = {
+        Hands = {'Magus Bazubands'},
     },
 
     Invisible = {
@@ -797,6 +810,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd mdt ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /sird /lac fwd SIRD ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /acc /lac fwd MeleeAcc ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /learn /lac fwd Learn ');
 end
 
 profile.OnUnload = function()
@@ -844,6 +858,14 @@ profile.HandleCommand = function(args)
             gFunc.Message('MeleeAcc ON');
         else
             gFunc.Message('MeleeAcc OFF');
+        end
+    elseif (args[1] == 'Learn') then
+        Settings.Learn = not Settings.Learn;
+
+        if Settings.Learn then
+            gFunc.Message('It\'s time to LEARN!');
+        else
+            gFunc.Message('I am DONE Learning!');
         end
     elseif (args[1] == 'haste') then
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
@@ -999,6 +1021,8 @@ profile.HandleDefault = function()
         end
     elseif player.Status == 'Resting' then
         gFunc.EquipSet(sets.Resting);
+    else
+        gFunc.EquipSet(sets.Vermillion);
     end
 
     if (pet ~= nil) then
@@ -1010,7 +1034,9 @@ profile.HandleDefault = function()
 
     draginclude.HandleDefault();
 
-    if Settings.MDT then
+    if Settings.Learn then
+        gFunc.EquipSet(sets.Learn);
+    elseif Settings.MDT then
         gFunc.EquipSet(sets.MDT);
     elseif Settings.PDT then
         gFunc.EquipSet(sets.PDT);

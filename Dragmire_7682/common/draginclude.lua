@@ -274,7 +274,7 @@ draginclude.SkillingVariantTable = { -- cycle through with /lac fwd tpset
 };
 
 local skillToTorque = {
---    [1] = 'Faith Torque',
+    [1] = 'Faith Torque',
     [2] = 'Love Torque',
 --    [3] = 'Fortitude Torque',
 --    [4] = 'Prudence Torque',
@@ -540,7 +540,7 @@ end
 
 function draginclude.HandleBstCoreCommands(args, defaultJug)
     if (args[1] == 'PetAtk') then
-        AshitaCore:GetChatManager():QueueCommand(1, '/ja "Fight" <t>');
+        AshitaCore:GetChatManager():QueueCommand(1, '/ja "Fight" <stnpc>');
     elseif (args[1] == 'Charm') then
         AshitaCore:GetChatManager():QueueCommand(1, '/ja "Charm" <stnpc>');
     elseif (args[1] == 'CallBeast') then

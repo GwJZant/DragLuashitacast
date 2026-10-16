@@ -28,7 +28,7 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb'},
-        Head = {'Emperor Hairpin'},
+        Head = {'Optical Hat', 'Raven Beret'},
         Neck = {'Jeweled Collar', 'Holy Phial'},
         Ear1 = {'Merman\'s Earring', 'Spike Earring', 'Beetle Earring +1'},
         Ear2 = {'Merman\'s Earring', 'Beetle Earring +1'},
@@ -39,7 +39,7 @@ local sets = {
         Back = {'Amemet Mantle', 'Trimmer\'s Mantle'},
         Waist = {'R.K. Belt +1', 'Swift Belt'},
         Legs = {'Wonder Braccae', 'Dream Trousers +1'},
-        Feet = {'Beast Gaiters', 'Wonder Clomps', 'Btl. Leggings +1'},
+        Feet = {'Monster Gaiters', 'Wonder Clomps',},
     },
 
     IdleTown_Priority = {

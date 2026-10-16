@@ -13,6 +13,10 @@ local Settings = {
     CutHP = false,
     GreedySpirit = false,
     FastCastValue = 0.04,
+    MDT = false, -- /mdt
+    PDT = false, -- /pdt
+    DT = false,
+    SpellSwap = true, -- Use this for if you don't want to gear swap while casting /swap
 };
 
 local sets = {
@@ -31,6 +35,19 @@ local sets = {
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Zenith Slacks', 'Elder\'s Braguette', 'Seer\'s Slacks', 'Dream Trousers +1'},
         Feet = {'Rostrum Pumps', 'Elder\'s Sandals', 'Dream Boots +1'},
+    },
+
+    MDT_Priority = {
+        Neck = {'Jeweled Collar'},
+        Ear1 = {'Merman\'s Earring'},
+        Ear2 = {'Merman\'s Earring'},
+        Ring1 = {'Merman\'s Ring'},
+        Ring2 = {'Merman\'s Ring'},
+    },
+
+    PDT_Priority = {
+        Ring2 = {'Jelly Ring'},
+        Back = {'Cheviot Cape'},
     },
 
     AvatarEngaged_Priority = { -- Perp Down + Pet Accuracy
@@ -55,9 +72,9 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'} -- Pet Eva
     },
 
-    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 42 (Gear) = 322
-    -- Improvements: Bahamut's Staff (+5) = 327
-    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(53/3) - 5 = 45 - 18 - 5 = 22s
+    -- Summoning Skill + Perp Down: 269 (Native) + 8 (Merits) + 44 (Gear) = 324
+    -- Improvements: Bahamut's Staff (+5) = 329
+    -- 45 - ceil( Skill Over Cap / 3) = 45 - ceil(55/3) - 5 = 45 - 18 - 5 = 22s
     AvatarEngagedSpirit_Priority = {
         Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
@@ -68,7 +85,7 @@ local sets = {
         Ring1 = {'Evoker\'s Ring'}, -- +10, Perp Down
         Back = {'Astute Cape'}, -- +5
         Legs = {'Summoner\'s Spats'}, -- -5s
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     },
 
     -- 2 more Perp Down than other set
@@ -121,7 +138,7 @@ local sets = {
         Feet = {'Summoner\'s Pgch.'}, -- -2
     },
 
-    PetAccBP_Priority = { -- Summoning Skill +45, Pet Accuracy
+    PetAccBP_Priority = { -- Summoning Skill +47, Pet Accuracy
         Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
@@ -130,10 +147,10 @@ local sets = {
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     };
 
-    PetAccBPMultiHit_Priority = { -- Summoning Skill +42, Pet Accuracy
+    PetAccBPMultiHit_Priority = { -- Summoning Skill +44, Pet Accuracy
         Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Ear2 = {'Beastly Earring'}, -- Pet Accuracy+
@@ -142,37 +159,37 @@ local sets = {
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Evk. Spats +1'}, -- Avatar: Accuracy
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     };
 
-    PetMAcc_Priority = { -- Summoning Skill +45, Pet Magic Accuracy
+    PetMAcc_Priority = { -- Summoning Skill +47, Pet Magic Accuracy
         Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     };
 
-    SummonSkill_Priority = { -- Summoning Skill +45
+    SummonSkill_Priority = { -- Summoning Skill +47
         Head = {'Evk. Horn +1'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Hands = {'Smn. Bracers +1'}, -- +12
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     };
 
-    PetMAB_Priority = {-- Summoning Skill +45, Pet Magic Accuracy
+    PetMAB_Priority = {-- Summoning Skill +47, Pet Magic Accuracy
         Head = {'Evk. Horn +1', 'Shep. Bonnet'}, -- +5
         Neck = {'Smn. Torque'}, -- +7
         Hands = {'Smn. Bracers +1'}, -- +12, Pet Accuracy+
         Ring1 = {'Evoker\'s Ring'}, -- +10
         Back = {'Astute Cape'}, -- +5
         Legs = {'Austere Slops'}, -- +3
-        Feet = {'Austere Sabots'} -- +3
+        Feet = {'Nashira Crackows'} -- +5
     },
 
     WeaponSkillSpiritTaker_Priority = { -- INT +28, MND +21, Staff Skill +7, Attack +6, DA +1%, STR +7, DEX +5
@@ -204,7 +221,7 @@ local sets = {
         Back = {'Prism Cape'}, -- INT +3, MND +3
         Waist = {'Swift Belt'},
         Legs = {'Mahatma Slops'}, -- INT +7, MND +7, DEX -5
-        Feet = {'Austere Sabots'}, -- INT +3, MND +3
+        Feet = {'Nashira Crackows'}, -- INT +3, MND +3
     },
 
     Precast_Priority = { -- FC 4%
@@ -287,7 +304,7 @@ local sets = {
         --Body = 'Errant Hpl.',
         --Hands = 'Zenith Mitts',
         --Legs = 'Austere Slops',
-        --Feet = 'Austere Sabots',
+        --Feet = 'Nashira Crackows',
     },
 
     StyleLock3 = {
@@ -386,12 +403,12 @@ local sets = {
         Hands = {'Dream Mittens +1'},
     },
 
-    -- MND +58 (131 Total): Enhancing Magic Skill + 3×MND - 190 --> 105 + 3*136 - 190 = 323 (350 cap) Every MND is 3 points
-    -- How to improve (+101 HP improvement): 1 Communion Earring (+6 HP), Mahatma Hpl. (+3 HP), Mahatma Pigaches (+9 HP)
+    -- MND +57 (131 Total): Enhancing Magic Skill + 3×MND - 190 --> 105 + 3*136 - 190 = 320 (350 cap) Every MND is 3 points
+    -- How to improve (+101 HP improvement): 1 Communion Earring (+6 HP), Mahatma Hpl. (+3 HP), Mahatma Pigaches (+9 HP), Ajari Beads (+3)
     Stoneskin_Priority = {
         --Main = {'Kirin\'s Pole'}, -- MND +10
         Head = {'Evk. Horn +1'}, -- MND +6
-        Neck = {'Ajari Beads'}, -- MND +6
+        Neck = {'Faith Torque'}, -- MND +5
         Ear1 = {{Name = 'Cmn. Earring', Priority = 0}}, -- MND +2
         Ear2 = {'Loquac. Earring'},
         Body = {'Errant Hpl.'}, -- MND +10
@@ -966,6 +983,10 @@ profile.OnLoad = function()
     
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /cuthp /lac fwd cuthp ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /spirit /lac fwd GreedySpirit ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /mdt /lac fwd MDT ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /pdt /lac fwd PDT ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /dt /lac fwd DT ');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /swap /lac fwd SpellSwap ');
 end
 
 profile.OnUnload = function()
@@ -982,6 +1003,22 @@ profile.HandleCommand = function(args)
         Settings.GreedySpirit = not Settings.GreedySpirit;
 
         gFunc.Message('GreedySpirit ' .. tostring(Settings.GreedySpirit));
+    elseif (args[1] == 'MDT') then
+        Settings.MDT = not Settings.MDT;
+
+        gFunc.Message('MDT ' .. tostring(Settings.MDT));
+    elseif (args[1] == 'PDT') then
+        Settings.PDT = not Settings.PDT;
+
+        gFunc.Message('PDT ' .. tostring(Settings.PDT));
+    elseif (args[1] == 'DT') then
+        Settings.DT = not Settings.DT;
+
+        gFunc.Message('DT ' .. tostring(Settings.DT));
+    elseif (args[1] == 'SpellSwap') then
+        Settings.SpellSwap = not Settings.SpellSwap;
+
+        gFunc.Message('SpellSwap ' .. tostring(Settings.SpellSwap));
     end
 
     draginclude.HandleCommand(args, sets);
@@ -1125,6 +1162,15 @@ profile.HandleDefault = function()
         gFunc.EquipSet(sets.CutHP);
     end
 
+    if Settings.MDT then
+        gFunc.EquipSet(sets.MDT);
+    elseif Settings.PDT then
+        gFunc.EquipSet(sets.PDT);
+    elseif Settings.DT then
+        gFunc.EquipSet(sets.PDT);
+        gFunc.EquipSet(sets.MDT);
+    end
+
     draginclude.HandleDefault();
     draginclude.CheckSkillingVariant();
     draginclude.CheckStatusArmorSwaps(Settings.StatusArmorSwaps, Settings.CurrentLevel);
@@ -1172,7 +1218,9 @@ profile.HandlePrecast = function()
     elseif avatars:contains(action.Name) then
         gFunc.EquipSet(sets.PrecastAvatar);
     else
-        gFunc.EquipSet(sets.Precast);
+        if Settings.SpellSwap then
+            gFunc.EquipSet(sets.Precast);
+        end
     end
 
     if (castDelay >= packetDelay) then
@@ -1187,62 +1235,64 @@ profile.HandleMidcast = function()
     local spell = gData.GetAction();
     local player = gData.GetPlayer();
 
-    if draginclude.dragSettings.TpVariant == 1 then
-        draginclude.SetupInterimEquipSet(sets.SIRD); -- 38% SIRD (58% w/ Aquaveil)
-    elseif draginclude.dragSettings.TpVariant == 2 then
+    if Settings.SpellSwap then
+        if draginclude.dragSettings.TpVariant == 1 then
+            draginclude.SetupInterimEquipSet(sets.SIRD); -- 38% SIRD (58% w/ Aquaveil)
+        elseif draginclude.dragSettings.TpVariant == 2 then
+            if spell.Skill ~= 'Singing' then
+                if player.SubJob == 'NIN' then
+                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 88% SIRD (108% w/ Aquaveil)
+                else
+                    draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 63% SIRD (83% w/ Aquaveil)
+                end
+            end
+        end
+
         if spell.Skill ~= 'Singing' then
-            if player.SubJob == 'NIN' then
-                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRDLow, sets.SIRDNINWeapons)); -- 88% SIRD (108% w/ Aquaveil)
-            else
-                draginclude.SetupInterimEquipSet(gFunc.Combine(sets.SIRD, sets.SIRDWeapons)); -- 63% SIRD (83% w/ Aquaveil)
+            gFunc.EquipSet(sets.Midcast);
+        end
+
+        if spell.Name == 'Invisible' then
+            gFunc.EquipSet(sets.Invisible);
+        elseif spell.Name == 'Sneak' then
+            gFunc.EquipSet(sets.Sneak);
+        elseif spell.Name == 'Stoneskin' then
+            if draginclude.dragSettings.TpVariant == 2 then
+                gFunc.EquipSet(sets.KirinsPole); -- Kirin's Pole MND +10
             end
-        end
-    end
+            
+            gFunc.EquipSet(sets.Stoneskin);
+        elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' ) then -- Dia and Dia II need zero gearswap
 
-    if spell.Skill ~= 'Singing' then
-        gFunc.EquipSet(sets.Midcast);
-    end
-
-    if spell.Name == 'Invisible' then
-        gFunc.EquipSet(sets.Invisible);
-    elseif spell.Name == 'Sneak' then
-        gFunc.EquipSet(sets.Sneak);
-    elseif spell.Name == 'Stoneskin' then
-        if draginclude.dragSettings.TpVariant == 2 then
-            gFunc.EquipSet(sets.KirinsPole); -- Kirin's Pole MND +10
-        end
-        
-        gFunc.EquipSet(sets.Stoneskin);
-    elseif spell.Skill == 'Enfeebling Magic' and not string.contains(spell.Name, 'Dia' ) then -- Dia and Dia II need zero gearswap
-
-        if draginclude.dragSettings.TpVariant == 2 then
-            if spell.Element == 'Fire' then
-                gFunc.EquipSet(sets.Fire);
-            elseif spell.Element == 'Ice' then
-                gFunc.EquipSet(sets.Ice);
-            elseif spell.Element == 'Wind' then
-                gFunc.EquipSet(sets.Wind);
-            elseif spell.Element == 'Earth' then
-                gFunc.EquipSet(sets.Earth);
-            elseif spell.Element == 'Thunder' then
-                gFunc.EquipSet(sets.Thunder);
-            elseif spell.Element == 'Water' then
-                gFunc.EquipSet(sets.Water);
-            elseif spell.Element == 'Light' then
-                gFunc.EquipSet(sets.Light);
-            elseif spell.Element == 'Dark' then
-                gFunc.EquipSet(sets.Dark);
+            if draginclude.dragSettings.TpVariant == 2 then
+                if spell.Element == 'Fire' then
+                    gFunc.EquipSet(sets.Fire);
+                elseif spell.Element == 'Ice' then
+                    gFunc.EquipSet(sets.Ice);
+                elseif spell.Element == 'Wind' then
+                    gFunc.EquipSet(sets.Wind);
+                elseif spell.Element == 'Earth' then
+                    gFunc.EquipSet(sets.Earth);
+                elseif spell.Element == 'Thunder' then
+                    gFunc.EquipSet(sets.Thunder);
+                elseif spell.Element == 'Water' then
+                    gFunc.EquipSet(sets.Water);
+                elseif spell.Element == 'Light' then
+                    gFunc.EquipSet(sets.Light);
+                elseif spell.Element == 'Dark' then
+                    gFunc.EquipSet(sets.Dark);
+                end
             end
-        end
 
-        if spell.Type == 'White Magic' then
-            gFunc.EquipSet(sets.EnfeeblingMND);
+            if spell.Type == 'White Magic' then
+                gFunc.EquipSet(sets.EnfeeblingMND);
 
-            equipObiIfApplicable(spell.Element);
-        elseif spell.Type == 'Black Magic' then
-            gFunc.EquipSet(sets.EnfeeblingINT);
+                equipObiIfApplicable(spell.Element);
+            elseif spell.Type == 'Black Magic' then
+                gFunc.EquipSet(sets.EnfeeblingINT);
 
-            equipObiIfApplicable(spell.Element);
+                equipObiIfApplicable(spell.Element);
+            end
         end
     end
 end

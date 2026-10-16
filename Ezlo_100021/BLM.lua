@@ -20,11 +20,11 @@ local Settings = {
 local sets = {
     Default_Priority = {
         Ammo = {'Hedgehog Bomb'},
-        Head = {'Nashira Turban', 'Emperor Hairpin', 'Dream Hat +1'},
+        Head = {'Igqira Tiara', 'Emperor Hairpin', 'Dream Hat +1'},
         Neck = {'Jeweled Collar', 'Holy Phial'},
         Ear1 = {'Merman\'s Earring', 'Geist Earring'},
         Ear2 = {'Merman\'s Earring', 'Geist Earring'},
-        Body = {'Wonder Kaftan', 'Dream Robe +1'},
+        Body = {'Sorcerer\'s Coat', 'Wonder Kaftan', 'Dream Robe +1'},
         Hands = {'Merman\'s Bangles', 'Wonder Mitts', 'Dream Mittens +1'},
         Ring1 = {'Merman\'s Ring', 'Tamas Ring'},
         Ring2 = {'Merman\'s Ring', 'San d\'Orian Ring'},
@@ -339,7 +339,7 @@ local sets = {
         Body = 'Igqira Weskit',
         Hands = 'Merman\'s Bangles',
         Legs = 'Nashira Seraweels',
-        Feet = 'Igqira Huaraches',
+        Feet = 'Nashira Crackows',
     },
 
     PetReadyDefault = {
@@ -665,9 +665,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.RestingMP);
         -- Idle Section
         else
-            if player.Status ~= 'Engaged' and Settings.CurrentLevel >= 68 then
-                gFunc.EquipSet(sets.BlackCloak);
-            end
+            gFunc.EquipSet(sets.Idle);
         end
 
     elseif draginclude.dragSettings.TpVariant == 2 then --Use default set
@@ -682,10 +680,6 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.RestingMP);
         -- Idle Section
         else
-            if player.Status ~= 'Engaged' and Settings.CurrentLevel >= 68 then
-                gFunc.EquipSet(sets.BlackCloak);
-            end
-            
             gFunc.EquipSet(sets.Earth);
         end
     end

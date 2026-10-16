@@ -1,13 +1,16 @@
 local profile = {};
 draginclude = gFunc.LoadFile('common\\draginclude.lua');
 
+-- Non-Greedy Threshold Cap (Nighttime): 974/1910 (Carbonara: 1063/2085)
+-- Non-Greedy Threshold Cap (Daytime): 978/1919 (Carbonara: 1067/2094)
+-- Greedy Threshold Cap (Nighttime): 1010/1982 (Carbonara: 1100/2157)
+-- Greedy Threshold Cap (Daytime): 1015/1991 (Carbonara: 1104/2166)
 local Settings = {
     LateInitialized = {
         Initialized = false,
         TimeToUse = 0,
     },
     StatusArmorSwaps = {
-        OpoopoNecklace = false,
         PresidentialHairpin = true,
     },
     CurrentLevel = 0,
@@ -15,18 +18,18 @@ local Settings = {
     Acc = 0,
     LockEth = false,
     GreedyHeal = false,
-    BaseDayCap = 952,
-    BaseNightCap = 944,
-    BaseGreedyDayCap = 988,
-    BaseGreedyNightCap = 980,
-    CarbDayCap = 1039,
-    CarbNightCap = 1031,
-    CarbGreedyDayCap = 1075,
-    CarbGreedyNightCap = 1065,
-    DayCap = 952,
-    NightCap = 944,
-    GreedyDayCap = 988,
-    GreedyNightCap = 980,
+    BaseDayCap = 978,
+    BaseNightCap = 974,
+    BaseGreedyDayCap = 1015,
+    BaseGreedyNightCap = 1010,
+    CarbDayCap = 1067,
+    CarbNightCap = 1063,
+    CarbGreedyDayCap = 1104,
+    CarbGreedyNightCap = 1100,
+    DayCap = 978,
+    NightCap = 974,
+    GreedyDayCap = 1015,
+    GreedyNightCap = 1010,
     LockHP = false,
     MDT = false,
     PoisonCrabTimestamp = 0,
@@ -240,11 +243,8 @@ local sets = {
         Legs = {'Homam Cosciales'},
     },
 
-    -- Improvements: Desert Sash (10 more HP but none in stock on AH, 20k)
-    -- Current Threshold Cap (Nighttime): 999/1960 (Carbonara: 1097/2151)
-    -- Current Threshold Cap (Daytime): 1007/1976 (Carbonara: 1088/2135)
-    -- Optimized Threshold Cap (Nighttime): 1004/1970 (Carbonara: 1102/2161)
-    -- Optimized Threshold Cap (Daytime): 1012/1986 (Carbonara: 1093/2145)
+    -- Greedy Threshold Cap (Nighttime): 1010/1982 (Carbonara: 1100/2157)
+    -- CurGreedyrent Threshold Cap (Daytime): 1015/1991 (Carbonara: 1104/2166)
     MidcastNightGreedy_Priority = { -- +HP
         Ammo = {'Happy Egg'}, -- Good
         Head = {'Drachen Armet'}, -- Good
@@ -256,7 +256,7 @@ local sets = {
         Ring1 = {'Bloodbead Ring'}, -- Good
         Ring2 = {'Bomb Queen Ring'}, -- Good
         Back = {'Gigant Mantle'}, -- Good
-        Waist = {'Powerful Rope'}, -- Desert Sash
+        Waist = {'Desert Sash'}, -- Good
         Legs = {'Homam Cosciales'}, -- Good
         Feet = {'Homam Gambieras'}, -- Good
     },
@@ -272,13 +272,13 @@ local sets = {
         Ring1 = {'Bloodbead Ring'}, -- Good
         Ring2 = {'Bomb Queen Ring'}, -- Good
         Back = {'Gigant Mantle'}, -- Good
-        Waist = {'Powerful Rope'}, -- Desert Sash
+        Waist = {'Desert Sash'}, -- Good
         Legs = {'Homam Cosciales'}, -- Good
         Feet = {'Homam Gambieras'}, -- Good
     },
 
-    -- Current Threshold Cap (Daytime): 962/1888 (Carbonara: 1052/2063)
-    -- Current Threshold Cap (Nighttime): 971/1904 (Carbonara: 1060/2079)
+    -- Non-Greedy Threshold Cap (Nighttime): 974/1910 (Carbonara: 1063/2085)
+    -- Non-Greedy Threshold Cap (Daytime): 978/1919 (Carbonara: 1067/2094)
     MidcastNight_Priority = { -- +HP
         Ammo = {'Happy Egg'}, -- Good
         Head = {'Drachen Armet'}, -- Good
@@ -290,7 +290,7 @@ local sets = {
         Ring1 = {'Bloodbead Ring'}, -- Good
         Ring2 = {'Bomb Queen Ring'}, -- Good
         Back = {'Gigant Mantle'}, -- Good
-        Waist = {'Powerful Rope'}, -- Desert Sash
+        Waist = {'Desert Sash'}, -- Good
         Legs = {'Homam Cosciales'}, -- Good
         Feet = {'Homam Gambieras'}, -- Good
     },
@@ -306,7 +306,7 @@ local sets = {
         Ring1 = {'Bloodbead Ring'}, -- Good
         Ring2 = {'Bomb Queen Ring'}, -- Good
         Back = {'Gigant Mantle'}, -- Good
-        Waist = {'Powerful Rope'}, -- Desert Sash
+        Waist = {'Desert Sash'}, -- Good
         Legs = {'Homam Cosciales'}, -- Good
         Feet = {'Homam Gambieras'}, -- Good
     },
@@ -316,10 +316,10 @@ local sets = {
     },
 
     -- If 80 ≤ (Enhancing Magic Skill ÷ 3) + MND ≤ 130 : Stoneskin Strength = (2×Enhancing Magic Skill ÷ 3) + 2*MND - 60
-    -- (2*121/3) + 2*72 - 60 = 164
+    -- (2*114/3) + 2*77 - 60 = 164
     MidcastStoneskin_Priority = { -- Enhancing +12, MND +12 (72 MND + 121 Enhancing Skill)
         Head = {'Drachen Armet'}, -- Good
-        Neck = {'Enhancing Torque'}, -- Enhancing +7
+        Neck = {'Faith Torque'}, -- MND +5
         Ear1 = {'Communion Earring'}, -- MND +2
         Ring1 = {'Aqua Ring'}, -- MND +5
         Ring2 = {'Aqua Ring'}, -- MND +5
@@ -461,7 +461,7 @@ local sets = {
     },
 
     BreathBonusHealing_Priority = {
-        Head = {'Wyrm Armet', 'Drachen Armet', 'Shep. Bonnet'},
+        Head = {'Wyrm Armet'},
         Body = {'Wyvern Mail'},
 		Hands = {'Ostreger Mitts'},
         Legs = {'Drn. Brais +1'},
@@ -469,7 +469,7 @@ local sets = {
     },
 
     BreathBonusElemental_Priority = {
-        Head = {'Wyrm Armet', 'Drachen Armet', 'Shep. Bonnet'},
+        Head = {'Wyrm Armet'},
     },
 
     CallWyvern_Priority = {
@@ -940,7 +940,7 @@ profile.HandleMidcast = function()
     elseif player.SubJob == 'BLM' then
         greedyMpCap = 115;
     elseif player.SubJob == 'BLU' then
-        greedyMpCap = 82;
+        greedyMpCap = 57;
     end
 
     if food > 0 then -- assumes carb for now, make a toggle sometime for non-carb foods
@@ -955,37 +955,30 @@ profile.HandleMidcast = function()
 
     gFunc.Message(spell.Name .. ' Greedy: ' .. tostring(Settings.GreedyHeal) .. ' Time: ' .. time);
 
+    local partyPrioSpells = T{'Barstone', 'Barstonra', 'Protect', 'Protect II', 'Shell', 'Shell II', 'Teleport-Dem', 'Teleport-Mea', 'Teleport-Holla', 'Reraise', 'Raise'};
+
     gFunc.EquipSet(sets.MidcastJustHelm);
 
-    if string.contains(spell.Name, partyPrioSpell) or player.HP <= 700 then
+    if spell.Name == 'Invisible' then
+        gFunc.EquipSet(sets.Invisible);
+    elseif spell.Name == 'Sneak' then
+        gFunc.EquipSet(sets.Sneak);
+    elseif partyPrioSpells:contains(spell.Name) or player.HP <= 700 then
         gFunc.Message('HP Up Set SKIPPED');
-    elseif spell.Name == 'Stoneskin' then
+    elseif spell.Name == 'Stoneskin' or spell.Name == 'Metallic Body' then
         gFunc.EquipSet(sets.MidcastStoneskin);
-    elseif player.HP <= hpThreshold or string.contains(spell.Name, 'Teleport') or string.contains(string.lower(spell.Name), 'raise') then
-        if time < 6 or time > 18 then
-            gFunc.EquipSet(sets.MidcastNight);
-        else
-            gFunc.EquipSet(sets.Midcast);
-        end
     elseif (Settings.GreedyHeal or player.MP <= greedyMpCap or hasRefresh > 0) then
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNightGreedy);
         else
             gFunc.EquipSet(sets.MidcastGreedy);
         end
-
     else
         if time < 6 or time > 18 then
             gFunc.EquipSet(sets.MidcastNight);
         else
             gFunc.EquipSet(sets.Midcast);
         end
-    end
-
-    if spell.Name == 'Invisible' then
-        gFunc.EquipSet(sets.Invisible);
-    elseif spell.Name == 'Sneak' then
-        gFunc.EquipSet(sets.Sneak);
     end
 end
 

@@ -928,78 +928,6 @@ profile.HandleCommand = function(args)
         end
 
         gFunc.Message('BreathLock ' .. tostring(Settings.BreathLock));
-    elseif (args[1] == 'haste') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Haste" <stpc>');
-    elseif (args[1] == 'refresh') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Refresh" <stpc>');
-    elseif (args[1] == 'regen') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Regen" <stpc>');
-    elseif (args[1] == 'gravity') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Gravity" <stnpc>');
-    elseif (args[1] == 'stoneskin') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Stoneskin" <me>');
-    elseif (args[1] == 'silence') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Silence" <stnpc>');
-    elseif (args[1] == 'drain') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Drain" <stnpc>');
-    elseif (args[1] == 'aspir') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Aspir" <stnpc>');
-    elseif (args[1] == 'bind') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Bind" <stnpc>');
-    elseif (args[1] == 'sleepga') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleepga" <stnpc>');
-    elseif (args[1] == 'sleep') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Sleep" <stnpc>');
-    elseif (args[1] == 'icespikes') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Ice Spikes" <me>');
-    elseif (args[1] == 'blazespikes') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blaze Spikes" <me>');
-    elseif (args[1] == 'shockspikes') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Shock Spikes" <me>');
-    elseif (args[1] == 'phalanx') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Phalanx" <me>');
-    elseif (args[1] == 'blink') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Blink" <me>');
-    elseif (args[1] == 'utsusemiichi') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Utsusemi: Ichi" <me>');
-    elseif (args[1] == 'utsusemini') then
-        AshitaCore:GetChatManager():QueueCommand(-1,'/ma "Utsusemi: Ni" <me>');
-    elseif (args[1] == 'enspell') then
-        local environment = gData.GetEnvironment();
-        local dayElement = environment.DayElement;
-        local weatherElement = environment.WeatherElement;
-        local isDoubleWeather = string.find(environment.Weather, "x2");
-        local spellName = 'Enblizzard';
-
-        if isDoubleWeather or dayElement == 'Light' or dayElement == 'Dark' then
-            if weatherElement == 'Wind' then
-                spellName = 'Enaero';
-            elseif weatherElement == 'Ice' then
-                spellName = 'Enblizzard';
-            elseif weatherElement == 'Fire' then
-                spellName = 'Enfire';
-            elseif weatherElement == 'Earth' then
-                spellName = 'Enstone';
-            elseif weatherElement == 'Thunder' then
-                spellName = 'Enthunder';
-            elseif weatherElement == 'Water' then
-                spellName = 'Enwater';
-            end
-        else
-            if dayElement == 'Wind' then
-                spellName = 'Enaero';
-            elseif dayElement == 'Ice' then
-                spellName = 'Enblizzard';
-            elseif dayElement == 'Fire' then
-                spellName = 'Enfire';
-            elseif dayElement == 'Earth' then
-                spellName = 'Enstone';
-            elseif dayElement == 'Thunder' then
-                spellName = 'Enthunder';
-            elseif dayElement == 'Water' then
-                spellName = 'Enwater';
-            end
-        end
         
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
     end
@@ -1007,6 +935,7 @@ profile.HandleCommand = function(args)
     draginclude.HandleCommand(args, sets);
     draginclude.HandleBstCoreCommands(args, nil);
     draginclude.HandleDrgCoreCommands(args);
+    draginclude.HandleBluCoreCommands(args);
 end
 
 profile.LateInitialize = function()

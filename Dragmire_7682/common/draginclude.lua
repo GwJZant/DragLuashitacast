@@ -624,6 +624,222 @@ function draginclude.HandleDrgCoreCommands(args)
     end
 end
 
+function draginclude.HandleBluCoreCommands(args)
+    if (args[1] == 'Pollen') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Pollen" <me>');
+	elseif (args[1] == 'Sandspin') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sandspin" <stpc>');
+	elseif (args[1] == 'FootKick') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Foot Kick" <stnpc>');
+	elseif (args[1] == 'SproutSmack') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sprout Smack" <stnpc>');
+	elseif (args[1] == 'WildOats') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Wild Oats" <stnpc>');
+	elseif (args[1] == 'PowerAttack') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Power Attack" <stnpc>');
+	elseif (args[1] == 'Cocoon') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Cocoon" <me>');
+	elseif (args[1] == 'MetallicBody') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Metallic Body" <me>');
+	elseif (args[1] == 'Queasyshroom') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Queasyshroom" <stnpc>');
+	elseif (args[1] == 'BattleDance') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Battle Dance" <stnpc>');
+	elseif (args[1] == 'FeatherStorm') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Feather Storm" <stnpc>');
+	elseif (args[1] == 'HeadButt') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Head Butt" <stnpc>');
+	elseif (args[1] == 'HealingBreeze') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Healing Breeze" <me>');
+	elseif (args[1] == 'SheepSong') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sheep Song" <stnpc>');
+	elseif (args[1] == 'Helldive') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Helldive" <stnpc>');
+	elseif (args[1] == 'CursedSphere') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Cursed Sphere" <stnpc>');
+	elseif (args[1] == 'Blastbomb') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Blastbomb" <stnpc>');
+	elseif (args[1] == 'Bludgeon') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Bludgeon" <stnpc>');
+	elseif (args[1] == 'BloodDrain') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Blood Drain" <stnpc>');
+	elseif (args[1] == 'ClawCyclone') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Claw Cyclone" <stnpc>');
+	elseif (args[1] == 'PoisonBreath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Poison Breath" <stnpc>');
+	elseif (args[1] == 'Soporific') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Soporific" <stnpc>');
+	elseif (args[1] == 'Screwdriver') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Screwdriver" <stnpc>');
+	elseif (args[1] == 'BombToss') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Bomb Toss" <stnpc>');
+	elseif (args[1] == 'VanityDive') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Vanity Dive" <stnpc>');
+	elseif (args[1] == 'GrandSlam') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Grand Slam" <stnpc>');
+	elseif (args[1] == 'WildCarrot') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Wild Carrot" <stpc>');
+	elseif (args[1] == 'ChaoticEye') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Chaotic Eye" <stnpc>');
+	elseif (args[1] == 'SoundBlast') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sound Blast" <stnpc>');
+	elseif (args[1] == 'DeathRay') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Death Ray" <stnpc>');
+	elseif (args[1] == 'SmiteofRage') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Smite of Rage" <stnpc>');
+	elseif (args[1] == 'EmptyThrash') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Empty Thrash" <stnpc>');
+	elseif (args[1] == 'Digest') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Digest" <stnpc>');
+	elseif (args[1] == 'PineconeBomb') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Pinecone Bomb" <stnpc>');
+	elseif (args[1] == 'BlankGaze') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Blank Gaze" <stnpc>');
+	elseif (args[1] == 'Occultation') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Occultation" <me>');
+	elseif (args[1] == 'JetStream') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Jet Stream" <stnpc>');
+	elseif (args[1] == 'Uppercut') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Uppercut" <stnpc>');
+	elseif (args[1] == 'MysteriousLight') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Mysterious Light" <stnpc>');
+	elseif (args[1] == 'TerrorTouch') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Terror Touch" <stnpc>');
+	elseif (args[1] == 'MPDrainkiss') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "MP Drainkiss" <stnpc>');
+	elseif (args[1] == 'AuroralDrape') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Auroral Drape" <stnpc>');
+	elseif (args[1] == 'VenomShell') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Venom Shell" <stnpc>');
+	elseif (args[1] == 'StinkingGas') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Stinking Gas" <stnpc>');
+	elseif (args[1] == 'Blitzstrahl') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Blitzstrahl" <stnpc>');
+	elseif (args[1] == 'MandibularBite') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Mandibular Bite" <stnpc>');
+	elseif (args[1] == 'AwfulEye') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Awful Eye" <stnpc>');
+	elseif (args[1] == 'GeistWall') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Geist Wall" <stnpc>');
+	elseif (args[1] == 'MagnetiteCloud') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Magnetite Cloud" <stnpc>');
+	elseif (args[1] == 'Jettatura') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Jettatura" <stnpc>');
+	elseif (args[1] == 'BloodSaber') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Blood Saber" <stnpc>');
+	elseif (args[1] == 'Refueling') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Refueling" <me>');
+	elseif (args[1] == 'SickleSlash') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sickle Slash" <stnpc>');
+	elseif (args[1] == 'IceBreak') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Ice Break" <stnpc>');
+	elseif (args[1] == 'Self-Destruct') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Self-Destruct" <stnpc>');
+	elseif (args[1] == 'FrightfulRoar') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Frightful Roar" <stnpc>');
+	elseif (args[1] == 'ColdWave') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Cold Wave" <stnpc>');
+	elseif (args[1] == 'FilamentedHold') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Filamented Hold" <stnpc>');
+	elseif (args[1] == 'HecatombWave') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Hecatomb Wave" <stnpc>');
+	elseif (args[1] == 'Quad.Continuum') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Quad. Continuum" <stnpc>');
+	elseif (args[1] == 'RadiantBreath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Radiant Breath" <stnpc>');
+	elseif (args[1] == 'FeatherBarrier') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Feather Barrier" <me>');
+	elseif (args[1] == 'WindsofPromy.') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Winds of Promy." <me>');
+	elseif (args[1] == 'LightofPenance') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Light of Penance" <stnpc>');
+	elseif (args[1] == 'FlyingHipPress') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Flying Hip Press" <stnpc>');
+	elseif (args[1] == 'MagicFruit') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Magic Fruit" <stnpc>');
+	elseif (args[1] == 'DimensionalDeath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Dimensional Death" <stnpc>');
+	elseif (args[1] == 'DeathScissors') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Death Scissors" <stnpc>');
+	elseif (args[1] == 'EyesOnMe') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Eyes On Me" <stnpc>');
+	elseif (args[1] == 'BadBreath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Bad Breath" <stnpc>');
+	elseif (args[1] == 'Maelstrom') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Maelstrom" <stnpc>');
+	elseif (args[1] == '1000Needles') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "1000 Needles" <stnpc>');
+	elseif (args[1] == 'MementoMori') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Memento Mori" <me>');
+	elseif (args[1] == 'BodySlam') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Body Slam" <stnpc>');
+	elseif (args[1] == 'HydroShot') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Hydro Shot" <stnpc>');
+	elseif (args[1] == 'Frypan') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Frypan" <stnpc>');
+	elseif (args[1] == 'FreneticRip') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Frenetic Rip" <stnpc>');
+	elseif (args[1] == 'SpinalCleave') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Spinal Cleave" <stnpc>');
+	elseif (args[1] == 'VoraciousTrunk') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Voracious Trunk" <stnpc>');
+	elseif (args[1] == 'FeatherTickle') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Feather Tickle" <stnpc>');
+	elseif (args[1] == 'Yawn') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Yawn" <stnpc>');
+	elseif (args[1] == 'Infrasonics') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Infrasonics" <stnpc>');
+	elseif (args[1] == 'ZephyrMantle') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Zephyr Mantle" <me>');
+	elseif (args[1] == 'Sandspray') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Sandspray" <stnpc>');
+	elseif (args[1] == 'FrostBreath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Frost Breath" <stnpc>');
+	elseif (args[1] == 'Diamondhide') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Diamondhide" <me>');
+	elseif (args[1] == 'Enervation') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Enervation" <stnpc>');
+	elseif (args[1] == 'Firespit') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Firespit" <stnpc>');
+	elseif (args[1] == 'Warm-Up') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Warm-Up" <me>');
+	elseif (args[1] == 'TailSlap') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Tail Slap" <stnpc>');
+	elseif (args[1] == 'HystericBarrage') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Hysteric Barrage" <stnpc>');
+	elseif (args[1] == 'Cannonball') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Cannonball" <stnpc>');
+	elseif (args[1] == 'Amplification') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Amplification" <me>');
+	elseif (args[1] == 'HeatBreath') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Heat Breath" <stnpc>');
+	elseif (args[1] == 'Lowing') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Lowing" <stnpc>');
+	elseif (args[1] == 'SalineCoat') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Saline Coat" <me>');
+	elseif (args[1] == 'Disseverment') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Disseverment" <stnpc>');
+	elseif (args[1] == 'TemporalShift') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Temporal Shift" <stnpc>');
+	elseif (args[1] == 'RamCharge') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Ram Charge" <stnpc>');
+	elseif (args[1] == 'MindBlast') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Mind Blast" <stnpc>');
+	elseif (args[1] == 'ActinicBurst') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Actinic Burst" <stnpc>');
+	elseif (args[1] == 'ReactorCool') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Reactor Cool" <me>');
+	elseif (args[1] == 'MagicHammer') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Magic Hammer" <stnpc>');
+	elseif (args[1] == 'Exuviation') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Exuviation" <me>');
+	elseif (args[1] == 'PlasmaCharge') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Plasma Charge" <me>');
+	elseif (args[1] == 'VerticalCleave') then
+		AshitaCore:GetChatManager():QueueCommand(-1, '/ma "Vertical Cleave" <stnpc>');
+	end
+end
+
 --Iterates all valid items, passing them through the items table
 function draginclude.CheckItems()
     local items = {};

@@ -854,6 +854,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /learn /lac fwd Learn ');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /eth /lac fwd LockEth');
     AshitaCore:GetChatManager():QueueCommand(-1,'/alias /hp /lac fwd BreathLock');
+    AshitaCore:GetChatManager():QueueCommand(-1,'/alias /blu /lac fwd BLU');
 end
 
 profile.OnUnload = function()
@@ -930,6 +931,10 @@ profile.HandleCommand = function(args)
         gFunc.Message('BreathLock ' .. tostring(Settings.BreathLock));
         
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
+	elseif args[1] == 'blu' then
+		local filename = args[2] or 'BLU';
+		
+		LoadBluSetFromFile(filename .. '.txt');
     end
 
     draginclude.HandleCommand(args, sets);
@@ -961,6 +966,8 @@ profile.LateInitialize = function()
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 8 /lac fwd Stay ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 9 /lac fwd Heel ');
             AshitaCore:GetChatManager():QueueCommand(-1,'/bind 0 /lac fwd Reward ');
+		else
+			LoadBluSetFromFile('blu.txt');
         end
 
 
@@ -1019,7 +1026,6 @@ profile.HandleDefault = function()
     end
 
     draginclude.HandleDefault();
-
     
     if Settings.MDT then
         gFunc.EquipSet(sets.MDT);
@@ -1252,6 +1258,45 @@ profile.HandleWeaponskill = function()
     end
 
     draginclude.HandleWeaponSkill(action);
+end
+
+local function LoadBluSetFromFile(filePath)
+    -- Determine full path or relative path from Ashita root folder
+    local fullPath = AshitaCore:GetInstallPath() .. '\\config\\addons\\blusets\\' .. filePath;
+    local file, err = io.open(fullPath, "r");
+
+    if not file then
+        -- Fallback: try opening as a direct relative path
+        file, err = io.open(filePath, "r");
+    end
+
+    if not file then
+        gFunc.Message('[BLU] Could not open file: ' .. tostring(filePath));
+        return;
+    end
+
+    local spellIndex = 1;
+    for line in file:lines() do
+        -- Trim whitespace and carriage returns
+        local spellName = line:match("^%s*(.-)%s*$");
+
+        -- Ignore empty lines and comment lines starting with # or --
+        if #spellName > 0 and not spellName:match("^#") and not spellName:match("^%-%-") then
+            -- Maps keys 1-9 to index 1-9, and 0 to index 10
+            local key = tostring(spellIndex % 10);
+
+            -- Create the binding command
+            local command = string.format('/bind %s /ma "%s" <t>', key, spellName);
+            AshitaCore:GetChatManager():QueueCommand(-1, command);
+
+            gFunc.Message(string.format('[BLU Set] Bound [%s] -> %s', key, spellName));
+
+            spellIndex = spellIndex + 1;
+            if spellIndex > 10 then break end -- Stops after key '0' (10 spells)
+        end
+    end
+
+    file:close();
 end
 
 return profile;

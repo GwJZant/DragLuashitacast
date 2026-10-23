@@ -932,9 +932,10 @@ profile.HandleCommand = function(args)
         
         AshitaCore:GetChatManager():QueueCommand(-1,'/ma ' .. spellName .. ' <me>');
 	elseif args[1] == 'blu' then
-		local filename = args[2] or 'BLU';
+		local filename = args[2] or 'blu';
 		
 		LoadBluSetFromFile(filename .. '.txt');
+		AshitaCore:GetChatManager():QueueCommand(-1,'/blusets load ' .. filename);
     end
 
     draginclude.HandleCommand(args, sets);
